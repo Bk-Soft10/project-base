@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="web.datepicker">
+        <t t-set="placeholder" t-value="widget.getParent().node and widget.getParent().node.attrs.placeholder"/>
+        <t t-set="datepickerID" t-value="_.uniqueId('datepicker')"/>
+        <div class="o_datepicker" aria-atomic="true" t-att-id="datepickerID" data-target-input="nearest">
+            <input type="text"
+                class="o_datepicker_input o_input datetimepicker-input"
+                t-att-name="widget.name"
+                t-att-placeholder="placeholder"
+                t-attf-data-target="##{datepickerID}"/>
+            <span class="o_datepicker_button"/>
+            <span class="o_datepicker_button"/>
+            <input type="text"
+                   class="o_hijri o_input mt4"
+                   t-att-name="widget.name"
+                   t-att-placeholder="placeholder"/>
+            <span class="o_datepicker_button o_hijri_datepicker_button"/>
+        </div>
+    </t>
+</templates>

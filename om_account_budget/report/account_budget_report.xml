@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <report
+            id="action_report_crossovered_budget" 
+            model="crossovered.budget" 
+            string="Budgets"
+            report_type="qweb-pdf"
+            name="om_account_budget.report_crossoveredbudget"
+            file="om_account_budget.report_crossoveredbudget"
+            menu="False"
+        />
+        
+        <report
+            id="action_report_budget" 
+            model="account.budget.post" 
+            string="Budget"
+            report_type="qweb-pdf"
+            name="om_account_budget.report_budget"
+            file="om_account_budget.report_budget"
+            menu="False"
+        />
+        
+        <report 
+            id="action_report_analytic_account_budget" 
+            model="account.analytic.account" 
+            string="Budgets"
+            report_type="qweb-pdf"
+            name="om_account_budget.report_analyticaccountbudget"
+            file="om_account_budget.report_analyticaccountbudget"
+            menu="False"
+        />
+    </data>
+</odoo>
