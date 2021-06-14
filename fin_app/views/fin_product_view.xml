@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="fin_product_veiw" model ="ir.ui.view">
+        <field name="name">fin_product</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type ="xml" >
+            <field name="categ_id" position="after">
+                <field name="product_model" widget="many2many_tags" attrs="{'invisible': ['|', ('categ_id', '=', False), ('type', '!=', 'product')]}"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

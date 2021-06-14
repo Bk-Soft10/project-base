@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="wiz_order_report_form" model="ir.ui.view">
+        <field name="name">wiz_payment_update.form</field>
+        <field name="model">wiz.fin.order.report</field>
+        <field name="arch" type="xml">
+            <form string="Order Report">
+                <!-- <separator string="Order Report"/> -->
+                <group col="4">
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="report_type"/>
+                    <field name="state"/>
+                </group>
+                <group colspan="4">
+                    <field name="partner_ids" widget="many2many_tags" options="{'no_create':True,'no_quick_create':True,'no_create_edit':True}"/>
+                </group>
+                <footer>
+                    <button name="print_report" string="Print" type="object" class="oe_highlight"/>
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+        
+    <!-- Action for invoice payment edit-->
+    <record id="action_wiz_order_report" model="ir.actions.act_window">
+        <field name="name">Order Report</field>
+        <field name="res_model">wiz.fin.order.report</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem  id="menu_fin_report" name="Report" parent="menu_fin_order_root" groups="fin_app.group_fin_sale_mang,fin_app.group_fin_pur_mang,fin_app.group_fin_acc_mang" sequence="9"/>
+
+    <menuitem  id="menu_fin_report_order" name="Order Report" parent="menu_fin_report" groups="fin_app.group_fin_sale_mang,fin_app.group_fin_pur_mang,fin_app.group_fin_acc_mang" action="action_wiz_order_report" sequence="9"/>
+</odoo>

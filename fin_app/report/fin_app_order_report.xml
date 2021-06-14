@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="fin_app_order_report" >
+    <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+            <t t-foreach="docs" t-as="o">
+                <div class="page">
+
+                    <!-- <center><h3><b><span t-field="o.partner_id"/></b></h3></center> -->
+                    <center><h4><b><span t-field="o.date_from"/> - <span t-field="o.date_to"/></b></h4></center>
+                    <!-- <t t-if="o.report_type in ('out_invoice','in_invoice','out_refund','in_refund')">
+                            <br/>
+                        <center><h4><b>General Information</b></h4></center>
+                        <table class="table table-condensed table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Partner</th>
+                                    <th>Total Invoice</th>
+                                    <th>Total Payment</th>
+                                    <th>Total Sale</th>
+                                    <th>Total Purchase</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="get_invoice_data(o)" t-as="acc">
+                                    <td><span t-field="acc.number"/></td>
+                                    <td><span t-field="acc.partner_id"/></td>
+                                    <td><span t-field="acc.amount_untaxed"/></td>
+                                    <td><span t-field="acc.amount_tax"/></td>
+                                    <td><span t-field="acc.amount_total"/></td>
+                                    <td><span t-field="acc.residual"/></td>
+                                    <td><span t-field="acc.currency_id"/></td>
+                                    <td><span t-field="acc.state"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </t> -->
+                    <br/>
+                    <t t-if="o.report_type in ('out_invoice','in_invoice','out_refund','in_refund')">
+                        <center><h4><b>Invoices Information</b></h4></center>
+                        <table class="table table-condensed table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>No</th>
+                                    <th>Partner</th>
+                                    <th>Untaxed Amount</th>
+                                    <th>Tax</th>
+                                    <th>Total</th>
+                                    <th>Amount Due</th>
+                                    <th>Currency</th>
+                                    <th>State</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="get_invoice_data(o)" t-as="acc">
+                                    <td><span t-field="acc.date"/></td>
+                                    <td><span t-field="acc.number"/></td>
+                                    <td><span t-field="acc.partner_id"/></td>
+                                    <td><span t-field="acc.amount_untaxed"/></td>
+                                    <td><span t-field="acc.amount_tax"/></td>
+                                    <td><span t-field="acc.amount_total"/></td>
+                                    <td><span t-field="acc.residual"/></td>
+                                    <td><span t-field="acc.currency_id"/></td>
+                                    <td><span t-field="acc.state"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </t>
+                    <br/>
+                    <t t-if="o.report_type in ('posted','sent','reconciled')">
+                        <center><h4><b>Payments Information</b></h4></center>
+                        <table class="table table-condensed table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Partner</th>
+                                    <th>Payment Type</th>
+                                    <th>Payment Journal</th>
+                                    <th>Amount</th>
+                                    <th>Currency</th>
+                                    <th>State</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="get_payment_data(o)" t-as="pay">
+                                    <td><span t-field="pay.payment_date"/></td>
+                                    <td><span t-field="pay.partner_id"/></td>
+                                    <td><span t-field="pay.payment_type"/></td>
+                                    <td><span t-field="pay.journal_id"/></td>
+                                    <td><span t-field="pay.amount"/></td>
+                                    <td><span t-field="pay.currency_id"/></td>
+                                    <td><span t-field="pay.state"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </t>
+                <t t-if="o.report_type == 'sale'">
+                    <br/>
+                    <center><h4><b>Sale Information</b></h4></center>
+                    <table class="table table-condensed table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>No</th>
+                                <th>Partner</th>
+                                <th>Untaxed Amount</th>
+                                <th>Tax</th>
+                                <th>Total</th>
+                                <th>Currency</th>
+                                <th>State</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="get_sale_data(o)" t-as="sale">
+                                <td><span t-field="sale.date_order"/></td>
+                                <td><span t-field="sale.name"/></td>
+                                <td><span t-field="sale.partner_id"/></td>
+                                <td><span t-field="sale.amount_untaxed"/></td>
+                                <td><span t-field="sale.amount_tax"/></td>
+                                <td><span t-field="sale.amount_total"/></td>
+                                <td><span t-field="sale.currency_id"/></td>
+                                <td><span t-field="sale.state"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </t>
+
+                <t t-if="o.report_type =='purchase'">
+                    <br/>
+                    <center><h4><b>Purchase Information</b></h4></center>
+                    <table class="table table-condensed table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>No</th>
+                                <th>Partner</th>
+                                <th>Untaxed Amount</th>
+                                <th>Tax</th>
+                                <th>Total</th>
+                                <th>Currency</th>
+                                <th>State</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="get_purchase_data(o)" t-as="buy">
+                                <td><span t-field="buy.date_order"/></td>
+                                <td><span t-field="buy.name"/></td>
+                                <td><span t-field="buy.partner_id"/></td>
+                                <td><span t-field="buy.amount_untaxed"/></td>
+                                <td><span t-field="buy.amount_tax"/></td>
+                                <td><span t-field="buy.amount_total"/></td>
+                                <td><span t-field="buy.currency_id"/></td>
+                                <td><span t-field="buy.state"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </t>
+
+                    <p class="text-right"><strong>Authorized signature</strong></p>
+
+                </div>
+
+
+                
+
+
+
+
+
+                </t>
+        </t>
+              
+    </t>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	      
+
+
+</template>
+</odoo>

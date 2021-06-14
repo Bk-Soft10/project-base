@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <data>
+        <report 
+            id="action_fin_report_order_app"
+            string="Order Report"
+            model="wiz.fin.order.report" 
+            report_type="qweb-pdf"
+            name="fin_app.fin_app_order_report"
+            file="fin_app.fin_app_order_report"
+        />
+    </data>
+    <data>
+        <report
+            id="action_report_saleorder_app"
+            string="Delivery Report"
+            model="sale.order"
+            report_type="qweb-pdf"
+            name="fin_app.report_saleorder_app"
+            print_report_name="(object.state in ('draft', 'sent') and 'Quotation Contract - %s' % (object.name)) or 'Order Contract - %s' % (object.name)"
+        />
+    </data>
+
+</odoo>

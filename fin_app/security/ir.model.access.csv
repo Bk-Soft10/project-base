@@ -1,0 +1,104 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_fin_user_dev,fin.user.dev,fin_app.model_fin_user,fin_app.group_fin_dev,1,1,1,0
+access_fin_product_model_dev,fin.product.model.dev,fin_app.model_fin_product_model,fin_app.group_fin_dev,1,1,1,1
+access_ir_ui_menu_dev,ir.ui.menu.dev,base.model_ir_ui_menu,fin_app.group_fin_dev,1,1,1,1
+access_ir_ui_view_dev,ir.ui.view.dev,base.model_ir_ui_view,fin_app.group_fin_dev,1,1,1,1
+access_ir_ui_view_custom_dev,ir.ui.view.custom.dev,base.model_ir_ui_view_custom,fin_app.group_fin_dev,1,1,1,1
+access_ir_filters_dev,ir.filters.dev,base.model_ir_filters,fin_app.group_fin_dev,1,1,1,1
+access_ir_actions_actions_dev,ir.actions.actions.dev,base.model_ir_actions_actions,fin_app.group_fin_dev,1,1,1,1
+access_ir_actions_act_window_dev,ir.actions.act_window.dev,base.model_ir_actions_act_window,fin_app.group_fin_dev,1,1,1,1
+access_ir_actions_server_dev,ir.actions.server.dev,base.model_ir_actions_server,fin_app.group_fin_dev,1,1,1,1
+access_ir_model_dev,ir.model.dev,base.model_ir_model,fin_app.group_fin_dev,1,1,1,1
+access_ir_model_fields_dev,ir.model.fields.dev,base.model_ir_model_fields,fin_app.group_fin_dev,1,1,1,1
+access_ir_model_constraint_dev,ir.model.constraint.dev,base.model_ir_model_constraint,fin_app.group_fin_dev,1,1,1,1
+access_ir_model_relation_dev,ir.model.relation.dev,base.model_ir_model_relation,fin_app.group_fin_dev,1,1,1,1
+access_ir_attachment_dev,ir.attachment.dev,base.model_ir_attachment,fin_app.group_fin_dev,1,1,1,1
+access_ir_model_data_dev,ir.model.data.dev,base.model_ir_model_data,fin_app.group_fin_dev,1,1,1,1
+access_ir_model_access_dev,ir.model.access.dev,base.model_ir_model_access,fin_app.group_fin_dev,1,1,1,1
+access_ir_rule_dev,ir.rule.dev,base.model_ir_rule,fin_app.group_fin_dev,1,1,1,1
+access_ir_config_parameter_dev,ir.config_parameter.dev,base.model_ir_config_parameter,fin_app.group_fin_dev,1,1,1,1
+access_ir_property_dev,ir.property.dev,base.model_ir_property,fin_app.group_fin_dev,1,1,1,1
+access_ir_logging_dev,ir.logging.dev,base.model_ir_logging,fin_app.group_fin_dev,1,1,1,1
+access_ir_cron_dev,ir.cron.dev,base.model_ir_cron,fin_app.group_fin_dev,1,1,1,1
+access_ir_mail_server_dev,ir.mail.server.dev,base.model_ir_mail_server,fin_app.group_fin_dev,1,1,1,1
+access_ir_module_category_dev,ir.module.category.dev,base.model_ir_module_category,fin_app.group_fin_dev,1,1,1,1
+access_res_groups_dev,res.groups.dev,base.model_res_groups,fin_app.group_fin_dev,1,1,1,1
+access_res_users_dev,res.users.dev,base.model_res_users,fin_app.group_fin_dev,1,1,1,1
+access_res_company_dev,res.company.dev,base.model_res_company,fin_app.group_fin_dev,1,1,1,1
+access_res_partner_dev,res.partner.dev,base.model_res_partner,fin_app.group_fin_dev,1,1,1,1
+access_res_bank_dev,res.bank.dev,base.model_res_bank,fin_app.group_fin_dev,1,1,1,1
+access_res_partner_bank_dev,res.partner.bank.dev,base.model_res_partner_bank,fin_app.group_fin_dev,1,1,1,1
+access_res_country_dev,res.country.dev,base.model_res_country,fin_app.group_fin_dev,1,1,1,1
+access_ir_module_dev,res.module.dev,base.model_ir_module_module,fin_app.group_fin_dev,1,1,1,1
+access_account_payment_term_dev,account.payment.term.dev,account.model_account_payment_term,fin_app.group_fin_dev,1,1,1,1
+access_account_payment_term_line_dev,account.payment.term.line.dev,account.model_account_payment_term_line,fin_app.group_fin_dev,1,1,1,1
+access_account_account_type_manager_dev,account.account.type.dev,account.model_account_account_type,fin_app.group_fin_dev,1,1,1,1
+access_account_tax_internal_user_dev,account.tax internal user.dev,account.model_account_tax,fin_app.group_fin_dev,1,1,1,1
+access_account_account_manager_dev,account.account.dev,account.model_account_account,fin_app.group_fin_dev,1,1,1,1
+access_account_account_template_dev,account.account.template.dev,account.model_account_account_template,fin_app.group_fin_dev,1,1,1,1
+access_account_chart_template_dev,account.chart.template.dev,account.model_account_chart_template,fin_app.group_fin_dev,1,1,1,1
+access_account_tax_template_dev,account.tax.template.dev,account.model_account_tax_template,fin_app.group_fin_dev,1,1,1,1
+access_account_bank_statement_dev,account.bank.statement.group.invoice.dev,account.model_account_bank_statement,fin_app.group_fin_dev,1,1,1,1
+access_account_bank_statement_line_dev,account.bank.statement.line.dev,account.model_account_bank_statement_line,fin_app.group_fin_dev,1,1,1,1
+access_account_analytic_line_manager_dev,account.analytic.line manager.dev,account.model_account_analytic_line,fin_app.group_fin_dev,1,1,1,1
+access_account_analytic_account_dev,account.analytic.account.dev,analytic.model_account_analytic_account,fin_app.group_fin_dev,1,1,1,1
+access_account_analytic_line_dev,access_account_analytic_line.dev,analytic.model_account_analytic_line,fin_app.group_fin_dev,1,1,1,1
+access_account_analytic_tag_dev,access_account_analytic_tag.dev,analytic.model_account_analytic_tag,fin_app.group_fin_dev,1,1,1,1
+access_account_move_uinvoice_dev,account.move.dev,account.model_account_move,fin_app.group_fin_dev,1,1,1,1
+access_account_move_line_uinvoice_dev,account.move.line invoice.dev,account.model_account_move_line,fin_app.group_fin_dev,1,1,1,1
+access_account_journal_manager_dev,account.journal.dev,account.model_account_journal,fin_app.group_fin_dev,1,1,1,1
+access_account_fiscal_position_product_man_dev,account.fiscal.position account.man.dev,account.model_account_fiscal_position,fin_app.group_fin_dev,1,1,1,1
+access_account_fiscal_position_tax_product_man_dev,account.fiscal.position.tax account.man.dev,account.model_account_fiscal_position_tax,fin_app.group_fin_dev,1,1,1,1
+access_account_fiscal_position_account_product_man_dev,account.fiscal.position account.man.dev,account.model_account_fiscal_position_account,fin_app.group_fin_dev,1,1,1,1
+access_account_fiscal_position_template_dev,account.fiscal.position.template.dev,account.model_account_fiscal_position_template,fin_app.group_fin_dev,1,1,1,1
+access_account_fiscal_position_tax_template_dev,account.fiscal.position.tax.template.dev,account.model_account_fiscal_position_tax_template,fin_app.group_fin_dev,1,1,1,1
+access_account_fiscal_position_account_template_dev,account.fiscal.position.account.template.dev,account.model_account_fiscal_position_account_template,fin_app.group_fin_dev,1,1,1,1
+access_account_account_tag_dev,account.account.tag.dev,account.model_account_account_tag,fin_app.group_fin_dev,1,1,1,1
+access_account_partial_reconcile_group_invoice_dev,account.partial.reconcile.group.invoice.dev,account.model_account_partial_reconcile,fin_app.group_fin_dev,1,1,1,1
+access_account_payment_dev,account.payment.dev,account.model_account_payment,fin_app.group_fin_dev,1,1,1,1
+access_account_payment_method_dev,account.payment.method.dev,account.model_account_payment_method,fin_app.group_fin_dev,1,1,1,1
+access_account_cashbox_dev,account.bank.statement.cashbox.dev,account.model_account_bank_statement_cashbox,fin_app.group_fin_dev,1,1,1,1
+access_account_cashbox_line_dev,account.bank.statement.cashbox.line.dev,account.model_account_cashbox_line,fin_app.group_fin_dev,1,1,1,1
+access_account_tax_group_dev,account.tax.group.dev,account.model_account_tax_group,fin_app.group_fin_dev,1,1,1,1
+access_product_uom_categ_dev,product.uom.categ.dev,uom.model_uom_category,fin_app.group_fin_dev,1,1,1,1
+access_product_uom_dev,product.uom.dev,uom.model_uom_uom,fin_app.group_fin_dev,1,1,1,1
+access_product_packaging_dev,product.packaging.dev,product.model_product_packaging,fin_app.group_fin_dev,1,1,1,1
+access_product_supplierinfo_dev,product.supplierinfo.dev,product.model_product_supplierinfo,fin_app.group_fin_dev,1,1,1,1
+access_product_pricelist_item_dev,product.pricelist.item.dev,product.model_product_pricelist_item,fin_app.group_fin_dev,1,1,1,1
+access_product_pricelist_partner_dev,product.pricelist partner manager.dev,product.model_product_pricelist,fin_app.group_fin_dev,1,1,1,1
+access_product_template_sale_manager_dev,product.template salemanager.dev,product.model_product_template,fin_app.group_fin_dev,1,1,1,1
+access_product_product_sale_manager_dev,product.product salemanager.dev,product.model_product_product,fin_app.group_fin_dev,1,1,1,1
+access_product_category_sale_manager_dev,product.category salemanager.dev,product.model_product_category,fin_app.group_fin_dev,1,1,1,1
+access_product_attribute_sale_manager_dev,product.attribute manager.dev,product.model_product_attribute,fin_app.group_fin_dev,1,1,1,1
+access_product_attribute_value_sale_manager_dev,product.attribute manager value.dev,product.model_product_attribute_value,fin_app.group_fin_dev,1,1,1,1
+access_stock_warehouse_manager_dev,stock.warehouse.manager.dev,stock.model_stock_warehouse,fin_app.group_fin_dev,1,1,1,1
+access_stock_location_manager_dev,stock.location.manager.dev,stock.model_stock_location,fin_app.group_fin_dev,1,1,1,1
+access_stock_picking_manager_dev,stock.picking manager.dev,stock.model_stock_picking,fin_app.group_fin_dev,1,1,1,1
+access_stock_picking_type_manager_dev,stock.picking.type manager.dev,stock.model_stock_picking_type,fin_app.group_fin_dev,1,1,1,1
+access_stock_production_lot_dev,stock.production.lot.dev,stock.model_stock_production_lot,fin_app.group_fin_dev,1,1,1,1
+access_stock_move_manager_dev,stock.move manager.dev,stock.model_stock_move,fin_app.group_fin_dev,1,1,1,1
+access_stock_inventory_manager_dev,stock.inventory manager.dev,stock.model_stock_inventory,fin_app.group_fin_dev,1,1,1,1
+access_stock_inventory_line_manager_dev,stock.inventory.line manager.dev,stock.model_stock_inventory_line,fin_app.group_fin_dev,1,1,1,1
+access_stock_location_stock_manager_dev,stock.location stock manager.dev,stock.model_stock_location,fin_app.group_fin_dev,1,1,1,1
+access_stock_warehouse_orderpoint_system_dev,stock.warehouse.orderpoint system.dev,stock.model_stock_warehouse_orderpoint,fin_app.group_fin_dev,1,1,1,1
+access_stock_quant_manager_dev,stock.quant manager.dev,stock.model_stock_quant,fin_app.group_fin_dev,1,1,1,1
+access_stock_quant_package_stock_manager_dev,stock.quant.package stock manager.dev,stock.model_stock_quant_package,fin_app.group_fin_dev,1,1,1,1
+access_stock_removal_all_dev,product.removal all users.dev,stock.model_product_removal,fin_app.group_fin_dev,1,1,1,1
+access_crm_team_manager_dev,crm.team.manager_dev,sales_team.model_crm_team,fin_app.group_fin_dev,1,1,1,1
+access_sale_order_dev,sale.order.dev,sale.model_sale_order,fin_app.group_fin_dev,1,1,1,1
+access_sale_order_line_dev,sale.order.line.dev,sale.model_sale_order_line,fin_app.group_fin_dev,1,1,1,1
+access_sale_report_salesman_dev,sale.report.dev,sale.model_sale_report,fin_app.group_fin_dev,1,1,1,1
+access_bus_bus_dev,bus.bus public.dev,bus.model_bus_bus,fin_app.group_fin_dev,1,1,1,1
+access_bus_presence_dev,bus.presence.dev,bus.model_bus_presence,fin_app.group_fin_dev,1,1,1,1
+access_purchase_order_manager_dev,purchase.order.dev,purchase.model_purchase_order,fin_app.group_fin_dev,1,1,1,1
+access_purchase_order_line_manager_dev,purchase.order.line manager.dev,purchase.model_purchase_order_line,fin_app.group_fin_dev,1,1,1,1
+access_report_purchase_order_dev,purchase.report.dev,purchase.model_purchase_report,fin_app.group_fin_dev,1,1,1,1
+access_hr_account_analytic_line_employee_dev,account.account.analytic.line employee,account.model_account_analytic_line,fin_app.group_fin_dev,1,1,1,1
+access_account_analytic_account_manager_dev,account.analytic.account,analytic.model_account_analytic_account,fin_app.group_fin_dev,1,1,1,1
+access_resource_calendar_leaves_user_dev,resource.calendar.leaves user,resource.model_resource_calendar_leaves,fin_app.group_fin_dev,1,1,1,1
+access_mail_alias_dev,mail.alias,mail.model_mail_alias,fin_app.group_fin_dev,1,1,1,1
+access_stock_move_pos_user,stock.move pos_user,stock.model_stock_move,fin_app.group_fin_dev,1,1,1,1
+access_account_journal_pos_user,account.journal pos_user,account.model_account_journal,fin_app.group_fin_dev,1,1,1,1
+access_account_payment_method_pos_user,account.payment.method pos_user,account.model_account_payment_method,fin_app.group_fin_dev,1,1,1,1
+access_account_bank_statement_manager,account.bank.statement manager,account.model_account_bank_statement,fin_app.group_fin_dev,1,1,1,1
+access_account_bank_statement_line,account.bank.statement.line,account.model_account_bank_statement_line,fin_app.group_fin_dev,1,1,1,1

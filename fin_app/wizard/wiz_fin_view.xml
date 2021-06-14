@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="wiz_product_update_form" model="ir.ui.view">
+        <field name="name">wiz_product_update.form</field>
+        <field name="model">wiz.product.update.price</field>
+        <field name="arch" type="xml">
+            <form string="Product Price">
+                <separator string="Edit Payment with Invoice Data"/>
+                <group colspan="4">
+                    <field name="has_all"/>
+                    <field name="product_ids" options="{'no_create':True,'no_quick_create':True,'no_create_edit':True}" attrs="{'invisible': [('has_all', '!=', False)]}"/>
+                </group>
+                <group col="4">
+                    <field name="type_inv"/>
+                    <field name="price_add"/>
+                </group>
+                <footer>
+                    <button name="save_update" string="Save" type="object" class="oe_highlight"/>
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+        
+    <!-- Action for invoice payment edit-->
+    <record id="action_wiz_product_update" model="ir.actions.act_window">
+        <field name="name">Product Price</field>
+        <field name="res_model">wiz.product.update.price</field>
+        <field name="binding_model_id" ref="product.model_product_product"/>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!--<act_window
+        id="action_wiz_product_update_inv"
+        name="Update Product Price"
+        res_model="wiz.product.update.price"
+        binding_model_id="product.product"
+        view_mode="form"
+        target="new" />-->
+</odoo>
