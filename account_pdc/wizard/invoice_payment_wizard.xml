@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+       <record id="view_account_payment_invoice_form_inherit" model="ir.ui.view">
+        <field name="name">account.payment.invoice.form.inherit</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_invoice_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='communication']" position="after">
+                <separator string="Check Information" attrs="{'invisible': [('is_check_journal','=', False)]}"/><br/>
+                        <field name="check_ref" attrs="{'invisible': [('is_check_journal','=', False)], 'required': [('is_check_journal','=', True)], 'readonly': [('state','!=','draft')]}"/>
+                        <field name="check_date" attrs="{'invisible': [('is_check_journal','=', False)], 'required': [('is_check_journal','=', True)],'readonly': [('state','!=','draft')]}"/>
+                        <field name="check_journal_id" widget="selection" attrs="{'invisible': [('is_check_journal','=', False)], 'readonly': [('state','!=','draft')]}"/>
+                        <field name="is_check_journal" invisible="1"/>
+            </xpath>
+        </field>
+       </record>
+    </data>
+</odoo>
