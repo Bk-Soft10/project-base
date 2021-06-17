@@ -198,9 +198,14 @@
         <menuitem  id="menu_fin_acc_ord_sale" name="Sales" parent="menu_fin_ord_acc" groups="fin_app.group_fin_acc_mang,fin_app.group_fin_sale_mang" sequence="4"/>
         <menuitem  id="menu_fin_acc_ord_sale_cust_inv" name="Customer Invoices" action="account.action_move_out_invoice_type" parent="menu_fin_acc_ord_sale" groups="fin_app.group_fin_acc_mang,fin_app.group_fin_sale_mang" sequence="1"/>
         <menuitem  id="menu_fin_acc_ord_sale_paym" name="Payments" action="account.action_account_payments" parent="menu_fin_acc_ord_sale" groups="fin_app.group_fin_acc_mang,fin_app.group_fin_sale_mang" sequence="2"/>
+
+        <menuitem action="account_pdc.action_pdc_tree" id="fin_menu_action_pdc_tree1" parent="menu_fin_acc_ord_sale" sequence="21"/>
+
         <menuitem  id="menu_fin_ord_acc_purch" name="Purchases" parent="menu_fin_ord_acc" groups="fin_app.group_fin_acc_mang,fin_app.group_fin_pur_mang" sequence="6"/>
         <menuitem  id="menu_fin_acc_ord_purch_bills" name="Vendor Bills" action="account.action_move_in_invoice_type" parent="menu_fin_ord_acc_purch" groups="fin_app.group_fin_acc_mang,fin_app.group_fin_pur_mang" sequence="1"/>
         <menuitem  id="menu_fin_acc_ord_purch_paym" name="Payments" action="account.action_account_payments_payable" parent="menu_fin_ord_acc_purch" groups="fin_app.group_fin_acc_mang,fin_app.group_fin_pur_mang" sequence="2"/>
+
+        <menuitem action="account_pdc.action_pdc_tree1" id="fin_menu_action_pdc_tree2" parent="menu_fin_ord_acc_purch" sequence="21"/>
 
         <menuitem  id="menu_fin_ord_acc_adv" name="Accounting Data" parent="menu_fin_ord_acc" groups="fin_app.group_fin_acc_mang" sequence="8"/>
         <menuitem  id="menu_fin_acc_ord_adv_journal_item" name="Journal Items" action="account.action_account_moves_all_a" parent="menu_fin_ord_acc_adv" groups="fin_app.group_fin_acc_mang" sequence="1"/>

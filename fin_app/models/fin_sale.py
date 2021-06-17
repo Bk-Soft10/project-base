@@ -18,10 +18,11 @@ class sale_order(models.Model):
 		super(sale_order, self).action_confirm()
 		auto_pick_so = self.env['ir.config_parameter'].sudo().get_param('fin_app.auto_pick_so')
 		if auto_pick_so:
-			for rec_pick in self.mapped('picking_ids'):
-				rec_pick.sudo().action_confirm()
-				rec_pick.sudo().action_assign()
-				rec_pick.sudo().button_validate()
+			# for rec_pick in self.mapped('picking_ids'):
+			# 	rec_pick.sudo().action_confirm()
+			# 	rec_pick.sudo().action_assign()
+			# 	rec_pick.sudo().button_validate()
+				# ## comment lines ###
 				# wiz = self.env['stock.immediate.transfer']
 				# wiz_id = wiz.create({'pick_ids':[(4,rec_pick.id)]})
 				# wiz_id.process()
@@ -38,18 +39,19 @@ class sale_order(models.Model):
 class sale_order_line(models.Model):
 	_inherit = 'sale.order.line'
 
-	categ_id = fields.Many2one('product.category', string='Product Category')
-	product_model = fields.Many2one('fin.product.model', string='Product Model')
-
-	@api.onchange('categ_id', 'product_model')
-	def _get_product_domain_fin(self):
-		for rec in self:
-			product_recs = False
-			if rec.categ_id:
-				domain_lst = [('categ_id', '=', rec.categ_id.id)]
-				product_recs = self.env['product.product'].search(domain_lst) or False
-				if rec.product_model and product_recs:
-					product_recs = product_recs.filtered(lambda pro: rec.product_model.id in pro.product_model.ids) or False
-				if product_recs:
-					return {'domain': {'product_id': [('id', 'in', product_recs.ids)]}}
-			return {'domain': {'product_id': [('id', '=', 0)]}}
+	product_uom_qty = fields.Integer(string='Quantity', required=True, default=1)
+	# categ_id = fields.Many2one('product.category', string='Product Category')
+	# product_model = fields.Many2one('fin.product.model', string='Product Model')
+	#
+	# @api.onchange('categ_id', 'product_model')
+	# def _get_product_domain_fin(self):
+	# 	for rec in self:
+	# 		product_recs = False
+	# 		if rec.categ_id:
+	# 			domain_lst = [('categ_id', '=', rec.categ_id.id)]
+	# 			product_recs = self.env['product.product'].search(domain_lst) or False
+	# 			if rec.product_model and product_recs:
+	# 				product_recs = product_recs.filtered(lambda pro: rec.product_model.id in pro.product_model.ids) or False
+	# 			if product_recs:
+	# 				return {'domain': {'product_id': [('id', 'in', product_recs.ids)]}}
+	# 		return {'domain': {'product_id': [('id', '=', 0)]}}

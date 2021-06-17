@@ -8,30 +8,26 @@ from odoo.tools.float_utils import float_round, float_compare
 #################################################################################################################
 
 #################################################################################################################
-# inherit the purchase.order model
+# inherit the stock.move model
 #################################################################################################################
 
-class purchase_order(models.Model):
-	_inherit = "purchase.order"
+class stock_move(models.Model):
+	_inherit = "stock.move"
 
-	def button_confirm(self):
-		super(purchase_order, self).button_confirm()
-		auto_pick_po = self.env['ir.config_parameter'].sudo().get_param('fin_app.auto_pick_po')
-		if auto_pick_po:
-			for rec_pick in self.mapped('picking_ids'):
-				rec_pick.sudo().action_confirm()
-				rec_pick.sudo().action_assign()
-				rec_pick.sudo().button_validate()
-				wiz = self.env['stock.immediate.transfer']
-				wiz_id = wiz.create({'pick_ids': [(4, rec_pick.id)]})
-				wiz_id.process()
-			return self.sudo().action_view_invoice()
+	product_uom_qty = fields.Integer('Initial Demand', digits='Product Unit of Measure', default=0, required=True, states={'done': [('readonly', True)]},
+									 help="This is the quantity of products from an inventory "
+									 "point of view. For moves in the state 'done', this is the "
+									 "quantity of products that were actually moved. For other "
+									 "moves, this is the quantity of product that is planned to "
+									 "be moved. Lowering this quantity does not generate a "
+									 "backorder. Changing this quantity on assigned moves affects "
+									 "the product reservation, and should be done with care.")
 
 #################################################################################################################
-# inherit the purchase.order.line model
+# inherit the stock.move.line model
 #################################################################################################################
 
-class purchase_order_line(models.Model):
-	_inherit = "purchase.order.line"
+class stock_move_line(models.Model):
+	_inherit = "stock.move.line"
 
-	product_uom_qty = fields.Integer(string='Quantity', digits='Product Unit of Measure', required=True)
+	product_uom_qty = fields.Integer('Reserved', digits='Product Unit of Measure', required=True)

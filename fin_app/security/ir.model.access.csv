@@ -1,6 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_fin_user_dev,fin.user.dev,fin_app.model_fin_user,fin_app.group_fin_dev,1,1,1,0
-access_fin_product_model_dev,fin.product.model.dev,fin_app.model_fin_product_model,fin_app.group_fin_dev,1,1,1,1
 access_ir_ui_menu_dev,ir.ui.menu.dev,base.model_ir_ui_menu,fin_app.group_fin_dev,1,1,1,1
 access_ir_ui_view_dev,ir.ui.view.dev,base.model_ir_ui_view,fin_app.group_fin_dev,1,1,1,1
 access_ir_ui_view_custom_dev,ir.ui.view.custom.dev,base.model_ir_ui_view_custom,fin_app.group_fin_dev,1,1,1,1
