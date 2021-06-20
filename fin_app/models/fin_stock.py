@@ -30,4 +30,5 @@ class stock_move(models.Model):
 class stock_move_line(models.Model):
 	_inherit = "stock.move.line"
 
-	product_uom_qty = fields.Integer('Reserved', digits='Product Unit of Measure', required=True)
+	# product_uom_qty = fields.Integer('Reserved', required=True)
+	qty_done = fields.Integer('Done')

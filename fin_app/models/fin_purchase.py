@@ -34,4 +34,4 @@ class purchase_order(models.Model):
 class purchase_order_line(models.Model):
 	_inherit = "purchase.order.line"
 
-	product_uom_qty = fields.Integer(string='Quantity', digits='Product Unit of Measure', required=True)
+	product_qty = fields.Integer(string='Quantity', required=True)
