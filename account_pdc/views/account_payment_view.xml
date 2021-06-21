@@ -7,6 +7,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='communication']" position="after">
                 <separator string="Check Information" attrs="{'invisible': [('is_check_journal','=', False)]}"/><br/>
+                        <field name="check_note" attrs="{'invisible': [('is_check_journal','=', False)], 'required': [('is_check_journal','=', True)], 'readonly': [('state','!=','draft')]}"/>
                         <field name="check_ref" attrs="{'invisible': [('is_check_journal','=', False)], 'required': [('is_check_journal','=', True)], 'readonly': [('state','!=','draft')]}"/>
                         <field name="check_date" attrs="{'invisible': [('is_check_journal','=', False)], 'required': [('is_check_journal','=', True)],'readonly': [('state','!=','draft')]}"/>
                         <field name="check_journal_id" widget="selection"
