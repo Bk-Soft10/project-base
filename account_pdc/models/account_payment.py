@@ -12,6 +12,7 @@ class account_payment(models.Model):
 
     check_ref = fields.Char('Reference')
     check_date = fields.Date('Maturity Date')
+    check_note = fields.Char('about Check')
     check_journal_id = fields.Many2one('account.journal', 'Clearing Journal', domain=[('type', 'in', ('bank', 'cash')), ('is_check_journal','!=', True)])
     is_check_journal = fields.Boolean(related='journal_id.is_check_journal')
     # active = fields.Boolean()
@@ -38,6 +39,7 @@ class account_payment(models.Model):
                 PDC.create({
                     'name': rec.check_ref,
                     'maturity_date': rec.check_date,
+                    'check_note': rec.check_note,
                     'journal_id': rec.check_journal_id.id if rec.check_journal_id else False,
                     'type': 'customer' if rec.payment_type == 'inbound' else 'vendor',
                     'payment_id': rec.id,

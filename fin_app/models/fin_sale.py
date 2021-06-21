@@ -30,7 +30,8 @@ class sale_order(models.Model):
 				rec_line.product_id.sudo().write({'invoice_policy': 'order'})
 			wiz = self.env['sale.advance.payment.inv']
 			wiz_id = wiz.with_context(active_ids=self.ids).create({'advance_payment_method': 'delivered'})
-			return wiz_id.with_context(open_invoices=True).create_invoices()
+			# return wiz_id.with_context(open_invoices=True).create_invoices()
+			return wiz_id.create_invoices()
 
 #################################################################################################################
 # inherit the sale.order.line model

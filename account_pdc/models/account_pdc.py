@@ -10,6 +10,7 @@ class AccountPDC(models.Model):
     _order = 'maturity_date desc'
 
     name = fields.Char('Reference')
+    check_note = fields.Char('about Check')
     type = fields.Selection([('customer','Customer'),('vendor','Vendor')])
     maturity_date = fields.Date('Maturity Date')
     partner_id = fields.Many2one('res.partner', 'Partner')
@@ -95,4 +96,6 @@ class AccountPDC(models.Model):
 
         self.payment_id.state = 'draft'
         self.move_id = reverse_id
+        self.payment_id.cancel()
+        self.move_id.button_cancel()
         self.state = "reject"
