@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <report
+                id="action_account_report"
+                model="wiz.account.report.app"
+                string="Account Move Report"
+                report_type="qweb-pdf"
+                name="app_report.view_account_report"
+                file="app_report.view_account_report"
+                />
+
+        <report
+                id="action_stock_report"
+                model="wiz.stock.report.app"
+                string="Stock Move Report"
+                report_type="qweb-pdf"
+                name="app_report.view_stock_report"
+                file="app_report.view_stock_report"
+                />
+
+        <report
+                id="action_so_report"
+                model="wiz.so.report.app"
+                string="Sale Order Report"
+                report_type="qweb-pdf"
+                name="app_report.view_so_report"
+                file="app_report.view_so_report"
+                />
+
+        <report
+                id="action_po_report"
+                model="wiz.po.report.app"
+                string="Purchase Order Report"
+                report_type="qweb-pdf"
+                name="app_report.view_po_report"
+                file="app_report.view_po_report"
+                />
+    </data>
+
+</odoo>
