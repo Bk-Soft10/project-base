@@ -24,6 +24,7 @@ class WizSoReport(models.TransientModel):
     group_by = fields.Selection([
         ('product', 'Products'),
         ('partner', 'Customers'),
+        ('user', 'Sale Person'),
     ], string='Group By', required=True, default='product')
     report_type = fields.Selection([
         ('pdf', 'PDF'),
