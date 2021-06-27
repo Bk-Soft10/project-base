@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-06-21 13:02+0000\n"
-"PO-Revision-Date: 2021-06-21 16:56+0300\n"
+"PO-Revision-Date: 2021-06-27 21:01+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -25,37 +25,37 @@ msgstr "معلومات الفواتير"
 #. module: fin_app
 #: model_terms:ir.ui.view,arch_db:fin_app.fin_app_order_report
 msgid "<b>Payments Information</b>"
-msgstr ""
+msgstr "معلومات الدفعيات"
 
 #. module: fin_app
 #: model_terms:ir.ui.view,arch_db:fin_app.fin_app_order_report
 msgid "<b>Purchase Information</b>"
-msgstr ""
+msgstr "معلومات المشتريات"
 
 #. module: fin_app
 #: model_terms:ir.ui.view,arch_db:fin_app.fin_app_order_report
 msgid "<b>Sale Information</b>"
-msgstr ""
+msgstr "معلومات البيع"
 
 #. module: fin_app
 #: model_terms:ir.ui.view,arch_db:fin_app.app_sale_report
 msgid "<span>Pro-Forma Invoice # </span>"
-msgstr ""
+msgstr "<span>فاتورة مبدئية # </span>"
 
 #. module: fin_app
 #: model_terms:ir.ui.view,arch_db:fin_app.fin_app_order_report
 msgid "<strong>Authorized signature</strong>"
-msgstr ""
+msgstr "التوقيع"
 
 #. module: fin_app
 #: model_terms:ir.ui.view,arch_db:fin_app.app_sale_report
 msgid "<strong>Date Ordered:</strong>"
-msgstr ""
+msgstr "تاريخ الطلب"
 
 #. module: fin_app
 #: model_terms:ir.ui.view,arch_db:fin_app.app_sale_report
 msgid "<strong>Expiration Date:</strong>"
-msgstr ""
+msgstr "تاريخ الصلاحية"
 
 #. module: fin_app
 #: model_terms:ir.ui.view,arch_db:fin_app.app_sale_report
@@ -65,27 +65,27 @@ msgstr ""
 #. module: fin_app
 #: model_terms:ir.ui.view,arch_db:fin_app.app_sale_report
 msgid "<strong>Payment Terms:</strong>"
-msgstr ""
+msgstr "شروط الدفع"
 
 #. module: fin_app
 #: model_terms:ir.ui.view,arch_db:fin_app.app_sale_report
 msgid "<strong>Quotation Date:</strong>"
-msgstr ""
+msgstr "تاريخ الاسعار"
 
 #. module: fin_app
 #: model_terms:ir.ui.view,arch_db:fin_app.app_sale_report
 msgid "<strong>Salesperson:</strong>"
-msgstr ""
+msgstr "مسؤول المبيعات"
 
 #. module: fin_app
 #: model_terms:ir.ui.view,arch_db:fin_app.app_sale_report
 msgid "<strong>Shipping address:</strong>"
-msgstr ""
+msgstr "عنوان التوصيل"
 
 #. module: fin_app
 #: model_terms:ir.ui.view,arch_db:fin_app.app_sale_report
 msgid "<strong>Signature</strong>"
-msgstr ""
+msgstr "التوقيع"
 
 #. module: fin_app
 #: model:ir.model.fields,field_description:fin_app.field_fin_user__group_id
@@ -97,22 +97,22 @@ msgstr ""
 #: model:ir.ui.menu,name:fin_app.menu_fin_acc_conf_acc
 #: model:ir.ui.menu,name:fin_app.menu_fin_ord_acc
 msgid "Accounting"
-msgstr ""
+msgstr "الحسابات"
 
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_ord_acc_adv
 msgid "Accounting Data"
-msgstr ""
+msgstr "البيانات المحاسبية"
 
 #. module: fin_app
 #: model:res.groups,name:fin_app.group_fin_acc_mang
 msgid "Accounting Management"
-msgstr ""
+msgstr "مدير الحسابات"
 
 #. module: fin_app
 #: model_terms:ir.ui.view,arch_db:fin_app.fin_user_view_form
 msgid "Active"
-msgstr ""
+msgstr "نشط"
 
 #. module: fin_app
 #: model:res.groups,name:fin_app.group_fin_mang
@@ -132,57 +132,57 @@ msgstr ""
 #. module: fin_app
 #: model:ir.model.fields,field_description:fin_app.field_wiz_product_update_price__has_all
 msgid "All Product"
-msgstr ""
+msgstr "كل المنتجات"
 
 #. module: fin_app
 #: model_terms:ir.ui.view,arch_db:fin_app.fin_app_order_report
 msgid "Amount"
-msgstr ""
+msgstr " الكمية"
 
 #. module: fin_app
 #: model_terms:ir.ui.view,arch_db:fin_app.fin_app_order_report
 msgid "Amount Due"
-msgstr ""
+msgstr "المبلغ المستحق"
 
 #. module: fin_app
 #: model:ir.model.fields,field_description:fin_app.field_res_config_settings__auto_pick_po
 msgid "Auto Picking (PO)"
-msgstr ""
+msgstr "لانتقاء التلقائي (PO)"
 
 #. module: fin_app
 #: model:ir.model.fields,field_description:fin_app.field_res_config_settings__auto_pick_so
 msgid "Auto Picking (SO)"
-msgstr ""
+msgstr "الانتقاء التلقائي (SO)"
 
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_acc_conf_acc_bkac
 msgid "Bank Accounts"
-msgstr ""
+msgstr "الحسابات بنكية"
 
 #. module: fin_app
 #: model:ir.model.fields,field_description:fin_app.field_wiz_product_update_price__type_inv
 msgid "Change Type"
-msgstr ""
+msgstr "نوع التغيير"
 
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_acc_ord_adv_chart_acc
 msgid "Chart of Accounts"
-msgstr ""
+msgstr "فئة الحسابات"
 
 #. module: fin_app
 #: model_terms:ir.ui.view,arch_db:fin_app.res_config_settings_view_form
 msgid "Check if checked automatic Picking for (PO)"
-msgstr ""
+msgstr "تحقق مما إذا تم تحديد الانتقاء التلقائي لـ (PO"
 
 #. module: fin_app
 #: model_terms:ir.ui.view,arch_db:fin_app.res_config_settings_view_form
 msgid "Check if checked automatic Picking for (SO)"
-msgstr ""
+msgstr "تحقق مما إذا تم تحديد الانتقاء التلقائي لـ (SO)"
 
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_company
 msgid "Company"
-msgstr ""
+msgstr "شركة"
 
 #. module: fin_app
 #: model:ir.model,name:fin_app.model_res_config_settings
@@ -192,12 +192,12 @@ msgstr "ضبط الإعدادات"
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_config_root
 msgid "Configration"
-msgstr ""
+msgstr "إعدادات"
 
 #. module: fin_app
 #: model:ir.model.fields.selection,name:fin_app.selection__wiz_fin_order_report__state__confirm
 msgid "Confirmed"
-msgstr ""
+msgstr "مؤكد"
 
 #. module: fin_app
 #: model:ir.model.fields,field_description:fin_app.field_fin_user__created
@@ -226,37 +226,37 @@ msgstr ""
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_acc_conf_mc_c
 msgid "Currencies"
-msgstr ""
+msgstr "العملات"
 
 #. module: fin_app
 #: model_terms:ir.ui.view,arch_db:fin_app.fin_app_order_report
 msgid "Currency"
-msgstr ""
+msgstr "عملة"
 
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_order_data_cust
 msgid "Customer"
-msgstr ""
+msgstr "عميل"
 
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_acc_ord_sale_cust_inv
 msgid "Customer Invoices"
-msgstr ""
+msgstr "فواتير العملاء"
 
 #. module: fin_app
 #: model:ir.model.fields.selection,name:fin_app.selection__wiz_fin_order_report__report_type__inbound
 msgid "Customer Payments"
-msgstr ""
+msgstr "دفعيات العملاء"
 
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_order_data
 msgid "Data"
-msgstr ""
+msgstr "البيانات"
 
 #. module: fin_app
 #: model_terms:ir.ui.view,arch_db:fin_app.fin_app_order_report
 msgid "Date"
-msgstr ""
+msgstr "تاريخ"
 
 #. module: fin_app
 #: model:ir.model.fields,field_description:fin_app.field_fin_user__display_name
@@ -264,7 +264,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:fin_app.field_wiz_fin_order_report__display_name
 #: model:ir.model.fields,field_description:fin_app.field_wiz_product_update_price__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "اسم العرض"
 
 #. module: fin_app
 #: model:ir.model.fields,field_description:fin_app.field_stock_move_line__qty_done
@@ -279,34 +279,34 @@ msgstr ""
 #. module: fin_app
 #: model:ir.model.fields,field_description:fin_app.field_wiz_fin_order_report__date_from
 msgid "F-Date"
-msgstr ""
+msgstr "من"
 
 #. module: fin_app
 #: model:ir.module.category,name:fin_app.module_category_fin
 #: model:ir.ui.menu,name:fin_app.menu_fin_app_conf
 #: model_terms:ir.ui.view,arch_db:fin_app.res_config_settings_view_form
 msgid "Fin App"
-msgstr ""
+msgstr "تطبيق Fin"
 
 #. module: fin_app
 #: model:res.groups,name:fin_app.group_fin_dev_hide
 msgid "Fin App Hide"
-msgstr ""
+msgstr "إخفاء تطبيق Fin"
 
 #. module: fin_app
 #: model:res.groups,name:fin_app.group_fin_dev
 msgid "Fin App Share"
-msgstr ""
+msgstr "Fin مشاركة التطبيق"
 
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_acc_conf_acc_fpos
 msgid "Fiscal Positions"
-msgstr ""
+msgstr "المناصب المالية"
 
 #. module: fin_app
 #: model:ir.model.fields.selection,name:fin_app.selection__wiz_product_update_price__type_inv__fix
 msgid "Fix Price"
-msgstr ""
+msgstr "سعر ثابت"
 
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_genral
@@ -316,7 +316,7 @@ msgstr ""
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_app_fin_hide
 msgid "Hide menu"
-msgstr ""
+msgstr "إخفاء القائمة"
 
 #. module: fin_app
 #: model:ir.model.fields,field_description:fin_app.field_fin_user__id
@@ -329,7 +329,7 @@ msgstr ""
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.fin_menu_action_pdc_tree1
 msgid "Inbound PDCs"
-msgstr ""
+msgstr "شيكات العملاء"
 
 #. module: fin_app
 #: model:ir.model.fields,field_description:fin_app.field_stock_move__product_uom_qty
@@ -339,12 +339,12 @@ msgstr "الكمية المبدئية"
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_sale_inv
 msgid "Invoices"
-msgstr ""
+msgstr "الفواتير"
 
 #. module: fin_app
 #: model_terms:ir.ui.view,arch_db:fin_app.app_sale_report
 msgid "Invoicing address:"
-msgstr ""
+msgstr "عنوان الفواتير"
 
 #. module: fin_app
 #: model_terms:ir.ui.view,arch_db:fin_app.app_sale_report
@@ -354,22 +354,22 @@ msgstr ""
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_acc_ord_adv_journal_entries
 msgid "Journal Entries"
-msgstr ""
+msgstr "قيود اليومية"
 
 #. module: fin_app
 #: model:ir.model,name:fin_app.model_account_move_line
 msgid "Journal Item"
-msgstr "عنصر اليومية"
+msgstr "عناصر اليومية"
 
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_acc_ord_adv_journal_item
 msgid "Journal Items"
-msgstr ""
+msgstr "عناصر اليومية"
 
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_acc_conf_acc_jor
 msgid "Journals"
-msgstr ""
+msgstr "اليوميات"
 
 #. module: fin_app
 #: model:ir.model.fields,field_description:fin_app.field_fin_user____last_update
@@ -396,12 +396,12 @@ msgstr ""
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_stock_conf_manag_location
 msgid "Locations"
-msgstr ""
+msgstr "المواقع"
 
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_acc_conf_manag
 msgid "Management"
-msgstr ""
+msgstr "الادارة"
 
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_acc_conf_mc
@@ -411,12 +411,12 @@ msgstr ""
 #. module: fin_app
 #: model:ir.model.fields,field_description:fin_app.field_fin_user__name
 msgid "Name"
-msgstr ""
+msgstr "الاسم"
 
 #. module: fin_app
 #: model_terms:ir.ui.view,arch_db:fin_app.fin_app_order_report
 msgid "No"
-msgstr ""
+msgstr "معرف"
 
 #. module: fin_app
 #. openerp-web
@@ -429,27 +429,27 @@ msgstr "يمكنك استخدام الأعداد الطبيعية فقط."
 #: model:ir.ui.menu,name:fin_app.menu_fin_order
 #: model_terms:ir.ui.view,arch_db:fin_app.view_partners_form_app_fin
 msgid "Order"
-msgstr ""
+msgstr "الطلب"
 
 #. module: fin_app
 #: model_terms:ir.ui.view,arch_db:fin_app.app_sale_report
 msgid "Order #"
-msgstr ""
+msgstr "طلب"
 
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_order_root
 msgid "Orders Management"
-msgstr ""
+msgstr "إدارة الطلبات"
 
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.fin_menu_action_pdc_tree2
 msgid "Outbound PDCs"
-msgstr ""
+msgstr "شيكات الموردين"
 
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_acc_ord_overview
 msgid "Overview"
-msgstr ""
+msgstr "ملخص"
 
 #. module: fin_app
 #: model:ir.model.fields,field_description:fin_app.field_wiz_fin_order_report__partner_ids
@@ -460,28 +460,28 @@ msgstr ""
 #. module: fin_app
 #: model:ir.model.fields,field_description:fin_app.field_fin_user__passw
 msgid "Password"
-msgstr ""
+msgstr "كلمة المرور"
 
 #. module: fin_app
 #: model_terms:ir.ui.view,arch_db:fin_app.fin_app_order_report
 msgid "Payment Journal"
-msgstr ""
+msgstr "الدفع"
 
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_acc_conf_manag_pterm
 msgid "Payment Terms"
-msgstr ""
+msgstr "شروط الدفع"
 
 #. module: fin_app
 #: model_terms:ir.ui.view,arch_db:fin_app.fin_app_order_report
 msgid "Payment Type"
-msgstr ""
+msgstr "نوع الدفع"
 
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_acc_ord_purch_paym
 #: model:ir.ui.menu,name:fin_app.menu_fin_acc_ord_sale_paym
 msgid "Payments"
-msgstr ""
+msgstr "دفعيات"
 
 #. module: fin_app
 #: model:ir.model.fields.selection,name:fin_app.selection__wiz_product_update_price__type_inv__percentage
@@ -496,18 +496,18 @@ msgstr ""
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_sale_conf_pricelst
 msgid "Pricelist"
-msgstr ""
+msgstr "قائمة الاسعار"
 
 #. module: fin_app
 #: model:ir.model.fields,field_description:fin_app.field_wiz_product_update_price__product_ids
 #: model_terms:ir.ui.view,arch_db:fin_app.app_sale_report
 msgid "Product"
-msgstr ""
+msgstr "منتج"
 
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_stock_conf_product_cat
 msgid "Product Categories"
-msgstr ""
+msgstr "فئات المنتجات"
 
 #. module: fin_app
 #: model:ir.model,name:fin_app.model_stock_move_line
@@ -519,28 +519,28 @@ msgstr "تحركات المنتج (بنود حركة المخزون)"
 #: model:ir.ui.menu,name:fin_app.menu_fin_order_data_produc
 #: model:ir.ui.menu,name:fin_app.menu_fin_stock_conf_product
 msgid "Products"
-msgstr ""
+msgstr "منتجات"
 
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_pur_conf
 #: model:ir.ui.menu,name:fin_app.menu_fin_pur_pur
 msgid "Purchase"
-msgstr ""
+msgstr "شراء"
 
 #. module: fin_app
 #: model:res.groups,name:fin_app.group_fin_pur_mang_admin
 msgid "Purchase Admin Management"
-msgstr ""
+msgstr "إدارة مسؤول الشراء"
 
 #. module: fin_app
 #: model:ir.model.fields.selection,name:fin_app.selection__wiz_fin_order_report__report_type__in_invoice
 msgid "Purchase Invoices"
-msgstr ""
+msgstr "فواتير الشراء"
 
 #. module: fin_app
 #: model:res.groups,name:fin_app.group_fin_pur_mang
 msgid "Purchase Management"
-msgstr ""
+msgstr "إدارة شراء"
 
 #. module: fin_app
 #: model:ir.actions.act_window,name:fin_app.open_fin_pur_order_act
@@ -557,17 +557,17 @@ msgstr "بند أمر الشراء"
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_pur_pur_ord
 msgid "Purchase Orders"
-msgstr ""
+msgstr "طلبات الشراء"
 
 #. module: fin_app
 #: model:ir.actions.act_window,name:fin_app.open_fin_pur_inv_act
 msgid "Purchase to Invoice"
-msgstr ""
+msgstr "الشراء على الفاتورة"
 
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_ord_acc_purch
 msgid "Purchases"
-msgstr ""
+msgstr "المشتريات"
 
 #. module: fin_app
 #: model:ir.model.fields,field_description:fin_app.field_account_move_line__quantity
@@ -580,65 +580,65 @@ msgstr "الكمية"
 #. module: fin_app
 #: model:ir.actions.act_window,name:fin_app.open_fin_sale_qut_act
 msgid "Quotation"
-msgstr ""
+msgstr "فاتورة مبدئية"
 
 #. module: fin_app
 #: model_terms:ir.ui.view,arch_db:fin_app.app_sale_report
 msgid "Quotation #"
-msgstr ""
+msgstr "فاتورة مبدئية"
 
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_pur_pur_quot
 #: model:ir.ui.menu,name:fin_app.menu_fin_sale_sale_quot
 msgid "Quotations"
-msgstr ""
+msgstr "فاتورة مبدئية"
 
 #. module: fin_app
 #: model:ir.model.fields.selection,name:fin_app.selection__wiz_fin_order_report__report_type__in_refund
 msgid "Refund"
-msgstr ""
+msgstr "راجع"
 
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_conf_report
 msgid "Reports"
-msgstr ""
+msgstr "تقارير"
 
 #. module: fin_app
 #: model:ir.actions.act_window,name:fin_app.open_fin_pur_qut_act
 msgid "Requests for Quotation"
-msgstr ""
+msgstr "طلبات عرض الاسعار"
 
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_sale_conf
 msgid "Sale"
-msgstr ""
+msgstr "البيع"
 
 #. module: fin_app
 #: model:res.groups,name:fin_app.group_fin_sale_mang_admin
 msgid "Sale Admin Management"
-msgstr ""
+msgstr "مدير إدارة  البيع"
 
 #. module: fin_app
 #: model:ir.model.fields.selection,name:fin_app.selection__wiz_fin_order_report__report_type__out_invoice
 msgid "Sale Invoices"
-msgstr ""
+msgstr "فواتير البيع"
 
 #. module: fin_app
 #: model:res.groups,name:fin_app.group_fin_sale_mang
 msgid "Sale Management"
-msgstr ""
+msgstr "إدارة البيع"
 
 #. module: fin_app
 #: model:ir.actions.act_window,name:fin_app.open_fin_sale_order_act
 #: model:ir.model.fields.selection,name:fin_app.selection__wiz_fin_order_report__report_type__sale
 msgid "Sale Order"
-msgstr ""
+msgstr "أوامر البيع"
 
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_acc_ord_sale
 #: model:ir.ui.menu,name:fin_app.menu_fin_sale_sale
 msgid "Sales"
-msgstr ""
+msgstr "مبيعات"
 
 #. module: fin_app
 #: model:ir.model,name:fin_app.model_sale_order
@@ -653,7 +653,7 @@ msgstr "بند أمر المبيعات"
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_sale_sale_ord
 msgid "Sales Orders"
-msgstr ""
+msgstr "طلبات المبيعات"
 
 #. module: fin_app
 #. openerp-web
@@ -670,13 +670,13 @@ msgstr "حدد القيمة المستهدف فوترتها: "
 #: model:ir.ui.menu,name:fin_app.menu_fin_sale_conf_setting
 #: model:ir.ui.menu,name:fin_app.menu_fin_stock_conf_setting
 msgid "Settings"
-msgstr ""
+msgstr "إعدادات"
 
 #. module: fin_app
 #: model:ir.model.fields,field_description:fin_app.field_wiz_fin_order_report__state
 #: model_terms:ir.ui.view,arch_db:fin_app.fin_app_order_report
 msgid "State"
-msgstr ""
+msgstr "الحالة"
 
 #. module: fin_app
 #: model:ir.model,name:fin_app.model_stock_move
@@ -686,17 +686,17 @@ msgstr "حركة المخزون"
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_ord_stock_move
 msgid "Stock Moves"
-msgstr ""
+msgstr "تحركات المخزن"
 
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_ord_stock_oper_all
 msgid "Stock Operations"
-msgstr ""
+msgstr "عمليات المخزون"
 
 #. module: fin_app
 #: model:ir.model.fields,field_description:fin_app.field_wiz_fin_order_report__date_to
 msgid "T-Date"
-msgstr ""
+msgstr "الي"
 
 #. module: fin_app
 #: model_terms:ir.ui.view,arch_db:fin_app.fin_app_order_report
@@ -706,13 +706,13 @@ msgstr ""
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_acc_conf_acc_tax
 msgid "Taxes"
-msgstr ""
+msgstr "الضرائب"
 
 #. module: fin_app
 #: model:ir.model.fields,help:fin_app.field_account_move_line__quantity
 msgid ""
-"The optional quantity expressed by this line, eg: number of product sold. "
-"The quantity is not a legal requirement but is very useful for some reports."
+"The optional quantity expressed by this line, eg: number of product sold. The "
+"quantity is not a legal requirement but is very useful for some reports."
 msgstr ""
 "الكمية الاختيارية المُعبر عنها بهذا البند, مثل: عدد المنتجات المُباعة. الكمية "
 "ليست مطلبًا قانونيًا لكنها مفيدة للغاية لبعض التقارير."
@@ -722,10 +722,10 @@ msgstr ""
 msgid ""
 "This is the quantity of products from an inventory point of view. For moves "
 "in the state 'done', this is the quantity of products that were actually "
-"moved. For other moves, this is the quantity of product that is planned to "
-"be moved. Lowering this quantity does not generate a backorder. Changing "
-"this quantity on assigned moves affects the product reservation, and should "
-"be done with care."
+"moved. For other moves, this is the quantity of product that is planned to be "
+"moved. Lowering this quantity does not generate a backorder. Changing this "
+"quantity on assigned moves affects the product reservation, and should be "
+"done with care."
 msgstr ""
 "هذه هي الكمية من المنتجات من نقطة المخزون فى العرض . ليتحرك للحاله \"تم\"، "
 "وهذا هى كمية المنتجات التي تم نقلها بالفعل. لخطوات أخرى، وهذه هى كمية "
@@ -735,27 +735,27 @@ msgstr ""
 #. module: fin_app
 #: model_terms:ir.ui.view,arch_db:fin_app.fin_app_order_report
 msgid "Total"
-msgstr ""
+msgstr "الاجمالي"
 
 #. module: fin_app
 #: model:ir.model.fields,field_description:fin_app.field_wiz_fin_order_report__report_type
 msgid "Type"
-msgstr ""
+msgstr "النوع"
 
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_stock_conf_product_unit
 msgid "Unit of Measure"
-msgstr ""
+msgstr "وحدة القياس"
 
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_stock_conf_product_unit_cat
 msgid "Unit of Measure Categories"
-msgstr ""
+msgstr "وحدة فئات القياس"
 
 #. module: fin_app
 #: model_terms:ir.ui.view,arch_db:fin_app.fin_app_order_report
 msgid "Untaxed Amount"
-msgstr ""
+msgstr "المبلغ غير الخاضع للضريبة"
 
 #. module: fin_app
 #: model:ir.model,name:fin_app.model_fin_user
@@ -778,34 +778,34 @@ msgstr ""
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_acc_ord_purch_bills
 msgid "Vendor Bills"
-msgstr ""
+msgstr "فواتير الموردين"
 
 #. module: fin_app
 #: model:ir.model.fields.selection,name:fin_app.selection__wiz_fin_order_report__report_type__outbound
 msgid "Vendor Payments"
-msgstr ""
+msgstr "دفعيات الموردين"
 
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_order_data_vendor
 msgid "Vendors"
-msgstr ""
+msgstr "الموردين"
 
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_order_stock
 #: model:ir.ui.menu,name:fin_app.menu_fin_stock_conf
 #: model:ir.ui.menu,name:fin_app.menu_fin_stock_conf_manag_stock
 msgid "Warehouse"
-msgstr ""
+msgstr "مستودع"
 
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_stock_conf_manag
 msgid "Warehouse Management"
-msgstr ""
+msgstr "إدارة المستودعات"
 
 #. module: fin_app
 #: model:res.groups,name:fin_app.group_fin_stock_mang
 msgid "Wherehouse Management"
-msgstr ""
+msgstr "ادارة المخاذن"
 
 #. module: fin_app
 #. openerp-web
@@ -843,4 +843,4 @@ msgstr ""
 #. module: fin_app
 #: model:ir.ui.menu,name:fin_app.menu_fin_acc_conf_acc_add_bank
 msgid "ِAdd Bank Accounts"
-msgstr ""
+msgstr "اضافة حساب بنكي"
