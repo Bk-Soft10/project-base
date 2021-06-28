@@ -11,13 +11,19 @@ class WizStockReport(models.TransientModel):
     _name = 'wiz.stock.report.app'
     _description = 'Wizard Stock Report'
 
+    def _get_locations(self):
+        loc_ids = []
+        for loc in self.env['stock.location'].search([('usage', '=', 'internal')]):
+            loc_ids.append((4, loc.id))
+        return loc_ids
+
     date_from = fields.Date('F-Date', default=time.strftime('%Y-%m-01'), required=True)
     date_to = fields.Date('T-Date',
                           default=str(datetime.now() + relativedelta.relativedelta(months=+1, day=1, days=-1))[:10],
                           required=True)
     opening_balance = fields.Boolean('Opening Balance')
     warehouse_id = fields.Many2one('stock.warehouse', string='Warehouse')
-    location_ids = fields.Many2many('stock.location', string='Locations')
+    location_ids = fields.Many2many('stock.location', string='Locations', default=_get_locations)
     product_ids = fields.Many2many('product.product', string='Products')
     status = fields.Selection([
         ('all', 'All'),

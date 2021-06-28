@@ -14,7 +14,7 @@
             </group>
             <group colspan="4">
                 <field name="warehouse_id" invisible="1"/>
-                <field name="location_ids" domain="[('usage', '=', 'internal')]" options="{'no_create':True}" widget="many2many_tags"/>
+                <field name="location_ids" domain="[('usage', '=', 'internal')]" options="{'no_create':True}" widget="many2many_tags" required="1"/>
                 <field name="product_ids" domain="[('type', '!=', 'service')]" options="{'no_create':True}" widget="many2many_tags"/>
                 <field name="opening_balance"/>
             </group>
