@@ -3,10 +3,76 @@
 
 <template id="view_so_report">
     <t t-call="web.html_container">
-            <t t-call="web.external_layout">
-            <div class="page">
-                <h2>SO Report</h2>
-            </div>
+        <t t-call="web.external_layout">
+            <t t-foreach="docs" t-as="doc">
+                <div class="page">
+                    <h2>SO Report</h2>
+                    <div class="oe_structure"/>
+                    <table class="table table-bordered custom_border">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Product</th>
+                                <th t-if="doc.opening_balance">OP IN</th>
+                                <th t-if="doc.opening_balance">OP Out</th>
+                                <th>IN</th>
+                                <th>Out</th>
+                                <th>Net</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="product_ids" t-as="product">
+                                <t t-set="i" t-value="1"/>
+                                <t t-set="op_in" t-value="get_opening_balance_in(doc, product, location_lst, status)"/>
+                                <t t-set="op_out" t-value="get_opening_balance_out(doc, product, location_lst, status)"/>
+                                <t t-set="qty_in" t-value="get_balance_in(doc, product, location_lst, status)"/>
+                                <t t-set="qty_out" t-value="get_balance_out(doc, product, location_lst, status)"/>
+                                <t t-set="net_up" t-value="op_in + qty_in - op_out - qty_out"/>
+                                <t t-set="net" t-value="qty_in - qty_out"/>
+                                <tr t-if="op_out > 0 or op_in > 0 or qty_out > 0 or qty_in > 0">
+                                    <!--<t t-set="op_in" t-value="get_opening_balance_in(doc, product, location_lst, status)"/>
+                                    <t t-set="op_out" t-value="get_opening_balance_in(doc, product, location_lst, status)"/>
+                                    <t t-set="qty_in" t-value="get_opening_balance_in(doc, product, location_lst, status)"/>
+                                    <t t-set="qty_out" t-value="get_opening_balance_in(doc, product, location_lst, status)"/>
+                                    <t t-set="net_up" t-value="op_in + qty_in - op_out - qty_out"/>
+                                    <t t-set="net" t-value="qty_in - qty_out"/>-->
+                                    <td>
+                                        <t t-esc="i"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="product.name" />
+                                    </td>
+                                    <td t-if="doc.opening_balance">
+                                        <span t-esc="op_in"/>
+                                        <!--<span t-esc="get_opening_balance_in(doc, product, location_lst, status)" />-->
+                                    </td>
+                                    <td t-if="doc.opening_balance">
+                                        <span t-esc="op_out"/>
+                                        <!--<span t-esc="get_opening_balance_in(doc, product, location_lst, status)" />-->
+                                    </td>
+                                    <td>
+                                        <span t-esc="qty_in"/>
+                                        <!--<span t-esc="get_balance_in(doc, product, location_lst, status)" />-->
+                                    </td>
+                                    <td>
+                                        <span t-esc="qty_out"/>
+                                        <!--<span t-esc="get_balance_out(doc, product, location_lst, status)" />-->
+                                    </td>
+                                    <td>
+                                        <t t-if="doc.opening_balance">
+                                            <span t-esc="net_up" />
+                                        </t>
+                                        <t t-if="not doc.opening_balance">
+                                            <span t-esc="net" />
+                                        </t>
+                                    </td>
+                                    <t t-set="i" t-value="i + 1"/>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
         </t>
     </t>
 </template>

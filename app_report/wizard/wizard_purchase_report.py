@@ -15,7 +15,7 @@ class WizPoReport(models.TransientModel):
     date_to = fields.Date('T-Date',
                           default=str(datetime.now() + relativedelta.relativedelta(months=+1, day=1, days=-1))[:10],
                           required=True)
-    partner_ids = fields.Many2many('res.partner', string='Vendors')
+    partner_ids = fields.Many2many('res.partner', string='Vendors', domain=[('supplier_rank', '>', 0)])
     product_ids = fields.Many2many('product.product', string='Products')
     status = fields.Selection([
         ('all', 'All'),
