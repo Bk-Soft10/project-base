@@ -7,70 +7,115 @@
             <t t-foreach="docs" t-as="doc">
                 <div class="page">
                     <h2>SO Report</h2>
+                    <h4>Date : <span t-field="doc.date_from"/> - <span t-field="doc.date_to"/></h4>
+                    <h4>Sales Team : <span t-field="doc.team_id"/></h4>
                     <div class="oe_structure"/>
-                    <table class="table table-bordered custom_border">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Product</th>
-                                <th t-if="doc.opening_balance">OP IN</th>
-                                <th t-if="doc.opening_balance">OP Out</th>
-                                <th>IN</th>
-                                <th>Out</th>
-                                <th>Net</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <t t-foreach="product_ids" t-as="product">
+                    <t t-if="doc.group_by == 'product'">
+                        <table class="table table-bordered custom_border">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Product</th>
+                                    <th>Qty Ordered</th>
+                                    <th>Qty Delevered</th>
+                                    <th>Qty Invoiced</th>
+                                    <th>Total of Price Sale</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                                 <t t-set="i" t-value="1"/>
-                                <t t-set="op_in" t-value="get_opening_balance_in(doc, product, location_lst, status)"/>
-                                <t t-set="op_out" t-value="get_opening_balance_out(doc, product, location_lst, status)"/>
-                                <t t-set="qty_in" t-value="get_balance_in(doc, product, location_lst, status)"/>
-                                <t t-set="qty_out" t-value="get_balance_out(doc, product, location_lst, status)"/>
-                                <t t-set="net_up" t-value="op_in + qty_in - op_out - qty_out"/>
-                                <t t-set="net" t-value="qty_in - qty_out"/>
-                                <tr t-if="op_out > 0 or op_in > 0 or qty_out > 0 or qty_in > 0">
-                                    <!--<t t-set="op_in" t-value="get_opening_balance_in(doc, product, location_lst, status)"/>
-                                    <t t-set="op_out" t-value="get_opening_balance_in(doc, product, location_lst, status)"/>
-                                    <t t-set="qty_in" t-value="get_opening_balance_in(doc, product, location_lst, status)"/>
-                                    <t t-set="qty_out" t-value="get_opening_balance_in(doc, product, location_lst, status)"/>
-                                    <t t-set="net_up" t-value="op_in + qty_in - op_out - qty_out"/>
-                                    <t t-set="net" t-value="qty_in - qty_out"/>-->
+                                <tr t-foreach="product_data" t-as="product">
                                     <td>
                                         <t t-esc="i"/>
                                     </td>
                                     <td>
-                                        <span t-field="product.name" />
-                                    </td>
-                                    <td t-if="doc.opening_balance">
-                                        <span t-esc="op_in"/>
-                                        <!--<span t-esc="get_opening_balance_in(doc, product, location_lst, status)" />-->
-                                    </td>
-                                    <td t-if="doc.opening_balance">
-                                        <span t-esc="op_out"/>
-                                        <!--<span t-esc="get_opening_balance_in(doc, product, location_lst, status)" />-->
+                                        <span t-esc="product['product_name']" />
                                     </td>
                                     <td>
-                                        <span t-esc="qty_in"/>
-                                        <!--<span t-esc="get_balance_in(doc, product, location_lst, status)" />-->
+                                        <span t-esc="product['qty_order']" />
                                     </td>
                                     <td>
-                                        <span t-esc="qty_out"/>
-                                        <!--<span t-esc="get_balance_out(doc, product, location_lst, status)" />-->
+                                        <span t-esc="product['qty_delivered']" />
                                     </td>
                                     <td>
-                                        <t t-if="doc.opening_balance">
-                                            <span t-esc="net_up" />
-                                        </t>
-                                        <t t-if="not doc.opening_balance">
-                                            <span t-esc="net" />
-                                        </t>
+                                        <span t-esc="product['qty_invoiced']" />
+                                    </td>
+                                    <td>
+                                        <span t-esc="product['price_unit']" />
                                     </td>
                                     <t t-set="i" t-value="i + 1"/>
                                 </tr>
-                            </t>
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </t>
+                    <t t-if="doc.group_by == 'partner'">
+                        <table class="table table-bordered custom_border">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Customer</th>
+                                    <th>No of Ordered</th>
+                                    <th>Ordered Total</th>
+                                    <!--<th>Ordered Paid</th>-->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="i" t-value="1"/>
+                                <tr t-foreach="partner_data" t-as="partner">
+                                    <td>
+                                        <t t-esc="i"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="partner['partner']" />
+                                    </td>
+                                    <td>
+                                        <span t-esc="partner['no_ordered']" />
+                                    </td>
+                                    <td>
+                                        <span t-esc="partner['amount_total']" />
+                                    </td>
+                                    <!--<td>
+                                        <span t-esc="partner[3]" />
+                                    </td>-->
+                                    <t t-set="i" t-value="i + 1"/>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </t>
+                    <t t-if="doc.group_by == 'user'">
+                        <table class="table table-bordered custom_border">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>SalePerson</th>
+                                    <th>No of Ordered</th>
+                                    <th>Ordered Total</th>
+                                    <!--<th>Ordered Paid</th>-->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="i" t-value="1"/>
+                                <tr t-foreach="saleperson_data" t-as="user">
+                                    <td>
+                                        <t t-esc="i"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="user['user']" />
+                                    </td>
+                                    <td>
+                                        <span t-esc="user['no_ordered']" />
+                                    </td>
+                                    <td>
+                                        <span t-esc="user['amount_total']" />
+                                    </td>
+                                    <!--<td>
+                                        <span t-esc="user[3]" />
+                                    </td>-->
+                                    <t t-set="i" t-value="i + 1"/>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </t>
                 </div>
             </t>
         </t>

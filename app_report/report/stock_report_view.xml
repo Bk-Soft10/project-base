@@ -7,6 +7,7 @@
                 <t t-foreach="docs" t-as="doc">
                     <div class="page">
                         <h2>Stock Report</h2>
+                        <h4>Date : <span t-field="doc.date_from"/> - <span t-field="doc.date_to"/></h4>
                         <div class="oe_structure"/>
                         <table class="table table-bordered custom_border">
                             <thead>
