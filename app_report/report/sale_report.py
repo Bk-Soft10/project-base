@@ -114,11 +114,13 @@ class SaleReport(models.AbstractModel):
                        "where so.state in " + str(tuple(status)) + " AND so.create_date BETWEEN '" + str(docs.date_from) + "' AND '" + str(docs.date_to) + "' AND partner.id in " + str(tuple(partner_lst or [])) + " GROUP BY partner.name " \
                         "ORDER BY partner.name ASC")
             for partner_line in self._cr.fetchall():
+                customer_id = self.env['res.partner'].browse([int(partner_line[1] or 0)])
                 partner_data.append({
                     'partner': partner_line[0],
                     'no_ordered': partner_line[2],
                     'amount_total': partner_line[3],
                     'paid_total': partner_line[4],
+                    'partner_balance': customer_id.debit - customer_id.credit if customer_id else 0,
                 })
         if docs.group_by == 'user' and user_ids:
             user_lst = user_ids.ids or []

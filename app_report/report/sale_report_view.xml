@@ -91,6 +91,7 @@
                                     <th>No of Ordered</th>
                                     <th>Ordered Total</th>
                                     <th>Total Paid</th>
+                                    <th>Balance</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -110,6 +111,9 @@
                                     </td>
                                     <td>
                                         <span t-esc="user['paid_total']" />
+                                    </td>
+                                    <td>
+                                        <span t-esc="partner['partner_balance']" />
                                     </td>
                                     <t t-set="i" t-value="i + 1"/>
                                 </tr>

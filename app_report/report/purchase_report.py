@@ -94,11 +94,13 @@ class PurchaseReport(models.AbstractModel):
                        "where po.state in " + str(tuple(status)) + " AND po.date_order BETWEEN '" + str(docs.date_from) + "' AND '" + str(docs.date_to) + "' AND partner.id in " + str(tuple(partner_lst or [])) + " GROUP BY partner.name " \
                         "ORDER BY partner.name ASC")
             for partner_line in self._cr.fetchall():
+                vendor_id = self.env['res.partner'].browse([int(partner_line[1] or 0)])
                 partner_data.append({
                     'partner': partner_line[0],
                     'no_ordered': partner_line[2],
                     'amount_total': partner_line[3],
                     'paid_total': partner_line[4],
+                    'partner_balance': vendor_id.debit - vendor_id.credit if vendor_id else 0,
                 })
 
         return {
