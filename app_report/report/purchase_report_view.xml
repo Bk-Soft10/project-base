@@ -52,10 +52,10 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Customer</th>
+                                    <th>Vendor</th>
                                     <th>No of Ordered</th>
                                     <th>Ordered Total</th>
-                                    <!--<th>Ordered Paid</th>-->
+                                    <th>Total Paid</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -73,9 +73,9 @@
                                     <td>
                                         <span t-esc="partner['amount_total']" />
                                     </td>
-                                    <!--<td>
-                                        <span t-esc="partner[3]" />
-                                    </td>-->
+                                    <td>
+                                        <span t-esc="partner['paid_total']" />
+                                    </td>
                                     <t t-set="i" t-value="i + 1"/>
                                 </tr>
                             </tbody>

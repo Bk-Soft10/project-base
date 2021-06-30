@@ -106,7 +106,8 @@ class SaleReport(models.AbstractModel):
             self._cr.execute("SELECT partner.name , " \
                        "min(partner.id), " \
                        "count(so.id), " \
-                       "sum(so.amount_total) " \
+                       "sum(so.amount_total), " \
+                       "sum(so.paid_total) " \
                        "FROM sale_order so " \
                        "INNER JOIN res_partner partner " \
                        "on partner.id = so.partner_id " \
@@ -117,6 +118,7 @@ class SaleReport(models.AbstractModel):
                     'partner': partner_line[0],
                     'no_ordered': partner_line[2],
                     'amount_total': partner_line[3],
+                    'paid_total': partner_line[4],
                 })
         if docs.group_by == 'user' and user_ids:
             user_lst = user_ids.ids or []
@@ -133,7 +135,8 @@ class SaleReport(models.AbstractModel):
             self._cr.execute("SELECT partner.name , " \
                        "min(partner.id), " \
                        "count(so.id), " \
-                       "sum(so.amount_total) " \
+                       "sum(so.amount_total), " \
+                       "sum(so.paid_total) " \
                        "FROM sale_order so " \
                        "INNER JOIN res_users userr " \
                        "on userr.id = so.user_id " \
@@ -146,6 +149,7 @@ class SaleReport(models.AbstractModel):
                     'user': user_line[0],
                     'no_ordered': user_line[2],
                     'amount_total': user_line[3],
+                    'paid_total': user_line[4],
                 })
 
         return {

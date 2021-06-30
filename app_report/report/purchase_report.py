@@ -52,7 +52,7 @@ class PurchaseReport(models.AbstractModel):
         if not docs.product_ids and docs.group_by == 'product':
             product_ids = self.env['product.template'].search([('purchase_ok', '=', True)]) or False
         if not docs.partner_ids and docs.group_by == 'partner':
-            partner_ids = self.env['res.partner'].search([('customer_rank', '>', 0)]) or False
+            partner_ids = self.env['res.partner'].search([('supplier_rank', '>', 0)]) or False
 
         if docs.group_by == 'product' and product_ids:
             product_lst = product_ids.ids or []
@@ -86,7 +86,8 @@ class PurchaseReport(models.AbstractModel):
             self._cr.execute("SELECT partner.name , " \
                        "min(partner.id), " \
                        "count(po.id), " \
-                       "sum(po.amount_total) " \
+                       "sum(po.amount_total), " \
+                       "sum(po.paid_total) " \
                        "FROM purchase_order po " \
                        "INNER JOIN res_partner partner " \
                        "on partner.id = po.partner_id " \
@@ -97,6 +98,7 @@ class PurchaseReport(models.AbstractModel):
                     'partner': partner_line[0],
                     'no_ordered': partner_line[2],
                     'amount_total': partner_line[3],
+                    'paid_total': partner_line[4],
                 })
 
         return {

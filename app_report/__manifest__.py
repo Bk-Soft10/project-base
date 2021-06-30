@@ -21,6 +21,7 @@
         'purchase',
     ],
     'data': [
+        'views/views.xml',
         'wizard/wizard_account_report_view.xml',
         'wizard/wizard_stock_report_view.xml',
         'wizard/wizard_sale_report_view.xml',
