@@ -84,7 +84,7 @@ class SaleReport(models.AbstractModel):
                        "sum(ord_line.qty_invoiced), " \
                        "sum(ord_line.price_unit) " \
                        "FROM sale_order_line ord_line " \
-                       "INNER JOIN sale_order_line so " \
+                       "INNER JOIN sale_order so " \
                        "on so.id = ord_line.order_id " \
                        "INNER JOIN product_product prod " \
                        "on prod.id = ord_line.product_id " \
