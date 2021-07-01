@@ -49,7 +49,7 @@ In This Module:
         'security/fin_security.xml',
         'security/ir.model.access.csv',
         'views/fin_view.xml',
-        'views/res_config_settings_views.xml',
+        # 'views/res_config_settings_views.xml',
         # 'views/fin_product_view.xml',
         # 'views/fin_sale_view.xml',
         # 'wizard/wiz_fin_order_report_view.xml',
