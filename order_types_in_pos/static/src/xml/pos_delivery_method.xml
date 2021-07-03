@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-extend="OrderReceipt">
+        <t t-jquery=".cashier" t-operation="after">
+            <t t-if="widget.pos.config.enable_delivery">
+            <br/>
+            Order Type : <t t-esc="order.delivery_method.name"/><br/>
+            </t>
+        </t>
+    </t>
+
+    <t t-name="SetDeliveryMethodButton">
+        <div class='control-button'>
+            <i class='fa fa-check'  role="img" aria-label="Set delivery method" title="Set delivery method"/> <t t-esc='widget.get_current_delivery_method_name()'/>
+        </div>
+    </t>
+
+</templates>

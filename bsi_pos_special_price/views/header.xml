@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="bsi_pos_our_price_assets" inherit_id="point_of_sale.assets" name="bsi_pos_our_price_assets">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/bsi_pos_special_price/static/src/js/pos_our_price.js"></script>
+                <script type="text/javascript" src="/bsi_pos_special_price/static/src/js/screen.js"></script>
+            </xpath>
+        </template>
+    </data>
+</odoo>
