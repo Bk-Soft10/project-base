@@ -1,0 +1,3 @@
+from . import hr_payslip
+from . import account_payment
+from . import res_config_settings
