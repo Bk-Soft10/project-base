@@ -92,8 +92,6 @@ class HrPayslipRegisterPaymentWizard(models.TransientModel):
         if account_payment and payslip_journal:
             payment_dict['payslip_account_id'] = account_payment.id
             payment_dict['payslip_payment'] = payslip_journal
-        if payslip and payslip.service_source:
-            payment_dict['service_source_hr'] = payslip.service_source.id
 
 
         # Create payment and post it
