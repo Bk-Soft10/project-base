@@ -7,7 +7,7 @@
             model="account.report.general.ledger"
             string="General Ledger"
             report_type="qweb-pdf"
-            name="accounting_pdf_reports.report_generalledger"
+            name="accounting_pdf_reports.report_general_ledger"
             file="accounting_pdf_reports.report_generalledger"
             />
 
