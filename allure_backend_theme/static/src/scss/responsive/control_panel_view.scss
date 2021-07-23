@@ -1,0 +1,635 @@
+@mixin button-primary() {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    visibility: visible;
+    vertical-align: middle;
+    background-color: $brand-secondary;
+    border: 1px solid $brand-secondary;
+    text-align: center;
+    margin: auto;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    color: $white;
+    font-size: large;
+    padding: 0;
+    font-family: 'fontawesome';
+    border-radius: 50%;
+}
+
+@mixin button-secondary() {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    visibility: visible;
+    vertical-align: middle;
+    color: $brand-secondary;
+    background-color: $white;
+    border: 1px solid $brand-secondary;
+    text-align: center;
+    margin: auto;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    color: $brand-secondary;
+    font-size: 14px;
+    padding: 0;
+    font-family: 'fontawesome';
+    border-radius: 50%;
+}
+@mixin control-panel-xs() {
+    & > div.o_action_manager {
+        width: 100%;
+        & > .o_action {
+            & > .o_cp_controller {
+                & > .o_control_panel {
+                    flex-flow: nowrap;
+                    .ad_bottom_panel {
+                        padding-left: 0px;
+                        left: 0;
+                        @include slide-animation();
+                        .o_cp_left{
+                            position: absolute;
+                            z-index: 9;
+                            .o_main_cp_buttons{
+                                position: fixed !important;
+                                bottom: 80px;
+                                right: 30px;
+                                height: 32px;
+                                border-radius: 50%;
+                                width: 34px;
+                                font-size: 0;
+                                display: block;
+                                transition: right 0.3s;
+                                &:before{
+                                    font-size: 14px;
+                                }
+                            }
+                            .o_cp_buttons{
+                                display: none;
+                            }
+                            &.cp_open{
+                                left: 45px;
+                                right: 45px;
+                                width: auto;
+                                padding: 5px;
+                                .o_cp_buttons{
+                                    display: flex;
+                                    width: 100%;
+                                    background-color: $white;
+                                    position: fixed;
+                                    bottom: 40px;
+                                    padding: 5px;
+                                    left: 0;
+                                    right: 0;
+                                    border: 1px solid $border;
+                                    flex-direction: column;
+                                    z-index: 9;
+                                    div{
+                                        width: 100%;
+                                        a, button{
+                                            width: 100%;
+                                            margin-bottom: 5px;
+                                            &.btn.btn-link{
+                                                border: 1px solid $brand-secondary;
+                                                border-radius: 0;
+                                                padding: 4px 8px;
+                                                margin-left: 0px !important;
+                                            }
+                                        }
+                                    }
+                                    & > a, & > button{
+                                        margin-bottom: 5px;
+                                    }
+                                    .o_calendar_buttons{
+                                        & > .btn-group{
+                                            width: 100%;
+                                            display: flex;
+                                            flex-direction: column;
+                                        }
+                                    }
+                                }
+                                .o_main_cp_buttons{
+                                    width: 100%;
+                                    width: 100%;
+                                    position: relative !important;
+                                    border-radius: inherit;
+                                    top: auto;
+                                    right: auto;
+                                    left: auto;
+                                    bottom: auto;
+                                    font-size: 13px;
+                                    font-family: 'roboto';
+                                    &:before{
+                                        font-size: 0;
+                                    }
+                                }
+                            }
+                            .oe_no_button + .o_main_cp_buttons{
+                                display: none;
+                            }
+                        }
+                        .o_cp_right {
+                            padding: 5px;
+                            margin: auto;
+                            width: 100%;
+                            .o_cp_pager {
+                                float: none;
+                                text-align: center;
+                                margin: auto;
+                                .btn-link {
+                                    padding: 0;
+                                    .o_calendar_button_today{
+                                        float: right;
+                                        padding: 0;
+                                        .fa.fa-calendar-o {
+                                            font-size: 2.5em;
+                                            line-height: inherit;
+                                            font-weight: 500;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    &.no_ad_has_search{
+                        .o_search_options{
+                            display: none;
+                        }
+                        .o_cp_searchview {
+                            .d-none.d-md-inline-flex , .d-none.d-md-inline-block{
+                                display: none !important;
+                            }
+                        }
+                    }
+                    .o_mobile_search{
+                        @include slide-animation();
+                        .o_searchview_input_container{
+                            .o_searchview_facet{
+                                margin-bottom: 5px;
+                            }
+                        }
+                    }
+                    .o_mobile_search_show_result{
+                        transition: inherit;
+                    }
+                    .o_search_options {
+                        .o_filters_menu {
+                            .o_filter_condition {
+                                max-width: 100%;
+                            }
+                        }
+                        .o_favorites_menu {
+                            .o_save_name, .o_add_to_dashboard {
+                                max-width: 100%;
+                            }
+                        }
+                    }
+                    &.o_breadcrumb_full {
+                        ol.breadcrumb {
+                            li.active {
+                                max-width: 80%;
+                            }
+                        }
+                    }
+                    ol.breadcrumb {
+                        flex: 1 1 100%;
+                        flex-direction: row;
+                        padding: 0px 0px 0px 30px;
+                        li:not(:nth-last-child(2)):not(.active) {
+                            display: none !important;
+                        }
+                        li:nth-last-child(2) {
+                            font-size: $font-size-n;
+                            display: block;
+                            float: left;
+                            margin: 0;
+                            padding: 5px 10px 5px 5px;
+                            color: $brand-secondary;
+                            border: 0;
+                            &:hover, &:focus, &:active{
+                                background-color: transparent;
+                            }
+                            &:before {
+                                content: '\f053';
+                                font-size: 14px;
+                                display: inline-block;
+                                font: normal normal normal 14px/1 FontAwesome;
+                                color: $brand-secondary;
+                                padding: 0;
+                            }
+                        }
+                        li.active {
+                            padding-left: 0px;
+                            position: absolute;
+                            left: 50px;
+                            right: 65px;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            text-align: center;
+                            @include slide-animation();
+                            &:before {
+                                display: none;
+                            }
+                        }
+                    }
+                    .o_cp_searchview {
+                        margin: 0px;
+                        padding: 0px;
+                        min-height: 100%;
+                        width: auto;
+                        padding: 0;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        height: 40px;
+                        flex: auto;
+                        .fa.fa-search{
+                            font-size: $font-size-8;
+                        }
+                        .o_searchview{
+                            padding: 0;
+                            margin: 0;
+                            width: auto;
+                            height: 100%;
+                            display: inline-flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            .o_enable_searchview{
+                                border: 0;
+                                color: $brand-secondary;
+                                padding: 2px 10px;
+                                font-size: 1.3em;
+                                &:hover{
+                                    background-color: transparent;
+                                }
+                                & + .o_searchview_input_container {
+                                    display: none;
+                                }
+                            }
+                            &.active{
+                                background: none;
+                            }
+                        }
+                        .o_datepickers_searchview{
+                            position: absolute;
+                            bottom: 15px;
+                            top: auto;
+                            height: auto;
+                            left: 4px;
+                            z-index: 999;
+                            right: 4px;
+                            @include slide-animation();
+                            .o_datepicker, .o_salesman_selection{
+                                flex: 1 1 auto;
+                                margin: 1px;
+                                width: auto;
+                            }
+                        }
+                        &.o_searchview_quick {
+                            flex: 1 1 auto;
+                            padding-left: 30px;
+                            .o_searchview {
+                                display: flex;
+                                flex: 1;
+                                flex-direction: row;
+                                & > .o_mobile_search.o_hidden + .o_searchview_input_container {
+                                    flex-wrap: nowrap;
+                                    .o_searchview_input {
+                                        width: 70px;
+                                    }
+                                }
+                                .o_searchview_input_container {
+                                    flex: 1;
+                                    padding-left: 25px;
+                                }
+                                .o_toggle_searchview_full {
+                                    border: 0;
+                                    font-size: 1.3em;
+                                }
+                                .o_enable_searchview {
+                                    margin: 0;
+                                    font-size: 1.3em;
+                                }
+                                .o_search_recs_mobile {
+                                    z-index: 99;
+                                    left: 10px;
+                                    &:after {
+                                        display: none;
+                                    }
+                                    &:before {
+                                        padding: 10px;
+                                    }
+                                }
+                                .o_search_recs_mobile {
+                                    position: absolute;
+                                    left: 0;
+                                    z-index: 11;
+                                }
+                                &:not(.show) {
+                                    .o_search_rec_ul_mobile {
+                                        display: none;
+                                    }
+                                }
+                            }
+                        }
+                        .o_toggle_searchview_full {
+                            border: 0;
+                        }
+                        &:not(.o_searchview_quick) {
+                            & > .o_searchview > *:not(.o_enable_searchview) {
+                                display: none;
+                            }
+                        }
+                    }
+                    & > .ad_mobile_searchview {
+                        display: none;
+                    }
+                    .ad_mobile_searchview {
+                        border: 0;
+                    }
+                    .o_cp_switch_buttons{
+                        display: flex;
+                        padding: 0;
+                        .btn.btn-link.btn-sm{
+                            margin: 0;
+                            padding: 0 16px !important;
+                        }
+                        &.btn-group.show {
+                            .dropdown-menu-right {
+                                button{
+                                    &:hover{
+                                        background: transparent;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    & > .o_cp_switch_buttons {
+                        &.show {
+                            .dropdown-menu {
+                                position: fixed !important;
+                                transform: none !important;
+                                min-width: 100%;
+                                top: 41px !important;
+                                left: 0;
+                                right: 0;
+                                bottom: 0;
+                                margin-top: 0;
+                                z-index: 9999;
+                                border: 0;
+                                display: block;
+                                button:before {
+                                    font-size: $font-size-9;
+                                }
+                            }
+                        }
+                    }
+                    .o_cp_sidebar {
+                        display: block;
+                        .o_drw_in {
+                            right: 0px;
+                            left: 20px;
+                            width: auto;
+                            border-left: 1px solid $border;
+                            @include slide-animation();
+                        }
+                    }
+                }
+            }
+            &.ad_open_search {
+                .o_view_controller{
+                    left: 0;
+                    right: 0;
+                }
+                .o_content{
+                    margin-right: 0px;
+                }
+            }
+            &.o_open_sidebar {
+                .o_view_controller {
+                    right: 100%;
+                    left: -100%;
+                }
+                .o_content {
+                    margin-right: 0 !important;
+                    right: 100%;
+                }
+            }
+        }
+        .o_controller_with_searchpanel {
+            flex-direction: column;
+            .o_search_panel {
+                position: sticky;
+                width: 100%;
+                height: auto;
+                flex: 1 1 auto;
+                top: 0;
+                z-index: 1;
+                padding: 0 !important;
+                border-top: 0;
+                border-left: 0;
+                border-right: 0;
+                left: 0;
+                overflow: unset;
+                right: 0;
+                summary {
+                    list-style-type: none;
+                    padding: 5px;
+                    outline: none;
+                    box-shadow: inset 0px -3px 0px 0px $border;
+                    @include slide-animation();
+                    &::-webkit-details-marker {
+                        display: none;
+                    }
+                    & > div {
+                        .search_panel_close {
+                            display: none;
+                        }
+                    }
+                }
+                &[open] {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    overflow: auto;
+                    padding: 46px 10px 46px 10px !important;
+                    z-index: 9999;
+                    summary {
+                        position: fixed;
+                        background-color: $brand-secondary;
+                        color: $white;
+                        left: 0;
+                        right: 0;
+                        top: 0;
+                        height: 38px;
+                        z-index: 1;
+                        .search_panel_collapse {
+                            display: none;
+                        }
+                        .selection_filter {
+                            display: none;
+                        }
+                        .search_panel_close {
+                            display: block;
+                        }
+                    }
+                    .selection_filter {
+                        border: 0;
+                        @include border-animation();
+                        .o_searchview_facet {
+                            border-color: $border;
+                            color: $Label;
+                            background-color: $tr-hover;
+                            .o_searchview_facet_label {
+                                background-color: $brand-secondary !important;
+                                color: $white !important;
+                            }
+                        }
+                    }
+                    .btn_search_panel_result {
+                        bottom: 40px;
+                        position: fixed important;
+                        @include slide-animation();
+                    }
+                }
+                .selection_filter {
+                    .o_filter {
+                        .fa {
+                            color: $brand-secondary !important;
+                        }
+                    }
+                }
+            }
+            .o_lunch_kanban {
+                flex-direction: column-reverse;
+                .fixed-bottom {
+                    position: sticky;
+                }
+            }
+        }
+    }
+    &:not(.ad_full_view) {
+        .o_action_manager {
+            .o_action {
+                .o_cp_controller {
+                    .o_control_panel {
+                        .o_cp_sidebar {
+                            .o_drw_in {
+                                right: -65px;
+                                left: 85px;
+                                width: 100%;
+                                @include slide-animation();
+                            }
+                        }
+                        .o_mobile_search, .o_mobile_search_show_result{
+                            left: 50px;
+                            @include slide-animation();
+                        }
+                        .o_mobile_search_show_result{
+                            right: -50px;
+                        }
+                        .ad_bottom_panel {
+                            .o_cp_left{
+                                .o_main_cp_buttons{
+                                    right: -35px;
+                                }
+                            }
+                        }
+                        .o_datepickers_searchview{
+                            left: 69px;
+                            @include slide-animation();
+                        }
+                    }
+                }
+                .o_controller_with_searchpanel {
+                    .o_search_panel[open] {
+                        left: 50px;
+                        @include slide-animation();;
+                        summary {
+                            left: 50px;
+                            @include slide-animation();
+                        }
+                    }
+                    .btn_search_panel_result {
+                        left: 50px;
+                        @include slide-animation();
+                    }
+                }
+            }
+        }
+    }
+    &.oe_base_menu{
+        .o_action_manager {
+            .o_action {
+                .o_cp_controller {
+                    .o_control_panel{
+                        .o_cp_switch_buttons{
+                            .dropdown-menu{
+                                top: 76px !important;
+                            }
+                        }
+                        ol.breadcrumb {
+                            padding-left: 15px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@mixin base-control-panel-xs(){
+    & > div.o_action_manager {
+        & > div.o_action {
+            & > .o_cp_controller {
+                .o_control_panel{
+                    .o_cp_switch_buttons{
+                        .dropdown-menu-right{
+                            top: 76px !important;
+                        }
+                    }
+                    .breadcrumb{
+                        padding-left: 15px;
+                    }
+                }
+            }
+        }
+    }
+}
+body.o_web_client.ad_mobile {
+    @include control-panel-xs();
+    &.oe_base_menu{
+        @include base-control-panel-xs();
+    }
+    -webkit-overflow-scrolling: touch;
+    background-color: $white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes overflow-search {
+    from {
+        overflow: hidden;
+    }
+    to {
+        overflow: hidden;
+    }
+}
+
+/* Standard syntax */
+@keyframes overflow-search {
+    from {
+        overflow: hidden;
+    }
+    to {
+        overflow: hidden;
+    }
+}
