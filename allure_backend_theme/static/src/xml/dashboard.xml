@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="DashboardThemeColors">
+        <li class="o_mail_systray_item" t-if="widget.group_theme_config">
+            <a class="dropdown-toggle o-no-caret o_setup_theme" aria-expanded="false" title="Theme Settings" href="#">
+                <i class="fa fa-cog" aria-label="Activities"/>
+            </a>
+        </li>
+    </t>
+    <t t-name="CustomizeTheme">
+        <div class="o_cusomize_theme">
+            <div class="row">
+                <div class="col-md-12 o_left_panel color_panel" t-if="widget.group_system">
+                    <div class="text-center">
+                        <ul class="oe_theme_colorpicker" data-field="color">
+                            <t t-foreach="widget.result" t-as="rec">
+                                <li t-att-class="(rec.selected)? 'selected': ''">
+                                    <span t-att-data-id="rec.id" class="oe_theme_color">
+                                        <div href="#" class="navbar-theme" navbar-theme="themelight1">
+                                            <span class="head oe_night_color"/>
+                                            <span class="oe_left oe_night_color" t-att-style="'background-color:' + rec.leftbar_color"/>
+                                            <span class="oe_right oe_night_color" t-att-style="'background-color:' + rec.buttons_color"/>
+                                        </div>
+                                        <span class="o_theme_option">
+                                            <span class="o_view fa fa-eye"/>
+                                            <span class="o_remove fa fa-trash"/>
+                                        </span>
+                                    </span>
+                                </li>
+                            </t>
+                            <li>
+                                <span t-att-data-id="0" class="oe_theme_color o_add_theme"/>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-12 o_right_panel">
+                    <form class="o_control_form">
+                        <div t-if="widget.group_system" class="row color_panel">
+                            <div class="form-group col-md-3">
+                                <label for="leftbar">Leftbar</label>
+                                <input type="text" name="leftbar_color" class="form-control o_colorpicker" placeholder="#875A7B"/>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="buttons_color">Buttons</label>
+                                <input type="text" name="buttons_color" class="form-control o_colorpicker" placeholder="#00a09d"/>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="menu_color">Menu</label>
+                                <input type="text" name="menu_color" class="form-control o_colorpicker" placeholder="#666666"/>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="heading_color">Heading</label>
+                                <input type="text" name="heading_color" class="form-control o_colorpicker" placeholder="#2f3136"/>
+                            </div>
+                        </div>
+                        <div t-if="widget.group_system" class="row color_panel">
+                            <div class="form-group col-md-3">
+                                <label for="label_color">Label</label>
+                                <input type="text" name="label_color" class="form-control o_colorpicker" placeholder="#999"/>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="label_value_color">Label Value</label>
+                                <input type="text" name="label_value_color" class="form-control o_colorpicker" placeholder="#666666"/>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="link_color">Link</label>
+                                <input type="text" name="link_color" class="form-control o_colorpicker" placeholder="#00a09d"/>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="panel_title_color">Panel Title</label>
+                                <input type="text" name="panel_title_color" class="form-control o_colorpicker" placeholder="#2f3136"/>
+                            </div>
+                        </div>
+                        <div t-if="widget.group_system" class="row color_panel">
+                            <div class="form-group col-md-3">
+                                <label for="tooltip_color">Tooltip</label>
+                                <input type="text" name="tooltip_color" class="form-control o_colorpicker" placeholder="#875A7B"/>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="button_box">Button Box</label>
+                                <input type="text" name="button_box" class="form-control o_colorpicker" placeholder="#666666"/>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="border_color">Border</label>
+                                <input type="text" name="border_color" class="form-control o_colorpicker" placeholder="#cccccc"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="container">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item oe_teb_view" value="base_menu">
+                                      <a class="nav-link active" data-toggle="tab" href="#menu3">Menu</a>
+                                    </li>
+                                    <li t-attf-class="nav-item oe_teb_view #{!widget.group_system ? 'd-none' : ''}" value="base_menu_icon">
+                                      <a class="nav-link" data-toggle="tab" href="#menu2">Icon</a>
+                                    </li>
+                                    <li class="nav-item oe_teb_view" value="base_form_tabs">
+                                      <a class="nav-link" data-toggle="tab" href="#home">Tab</a>
+                                    </li>
+                                    <li class="nav-item oe_teb_view" value="font_type_values">
+                                      <a class="nav-link" data-toggle="tab" href="#menu1">Font</a>
+                                    </li>
+                                    <li class="nav-item oe_teb_view" value="mode">
+                                      <a class="nav-link" data-toggle="tab" href="#menu6">Mode</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div id="home" class="container tab-pane oe_teb_view" value="base_form_tabs">
+                                        <div class="form-group col-md-12">
+                                            <label for="font_label" class="font-control-label">Select Tab Type:</label>
+                                            <div class="font_label_tab">
+                                                <div class="custom-control custom-radio o_radio_item">
+                                                    <input class="custom-control-input o_radio_input o_form_tag" name="base_form_tabs" checked="true" type="radio" value="horizontal_tabs"/>
+                                                    <label class="custom-control-label o_form_label">Horizontals</label>
+                                                </div>
+                                                <div class="custom-control custom-radio o_radio_item">
+                                                    <input class="custom-control-input o_radio_input o_form_tag" name="base_form_tabs" type="radio" value="vertical_tabs"/>
+                                                    <label class="custom-control-label o_form_label">Vertical</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-12 tab_configration_data">
+                                            <label for="tab_configration_value" class="tab-configration-label">Tab Configration:</label>
+                                            <div class="configration_tab">
+                                                <div class="custom-control custom-radio o_radio_item">
+                                                    <input class="custom-control-input o_radio_input" name="tab_configration" checked="true" type="radio" value="open_tabs"/>
+                                                    <label class="custom-control-label o_form_label">Expand</label>
+                                                </div>
+                                                <div class="custom-control custom-radio o_radio_item">
+                                                    <input class="custom-control-input o_radio_input" name="tab_configration" type="radio" value="close_tabs"/>
+                                                    <label class="custom-control-label o_form_label">Collapse</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="menu1" class="container tab-pane oe_teb_view" value="font_type_values">
+                                        <div class="form-group col-md-12">
+                                            <label for="font_label" class="fobt-control-label">Select Font:</label>
+                                            <div class="font_label">
+                                                <div class="custom-control custom-radio o_radio_item">
+                                                    <input class="custom-control-input o_radio_input" name="font_type_values" checked="true" type="radio" value="roboto"/>
+                                                    <label class="custom-control-label o_form_label">Roboto</label>
+                                                </div>
+                                                <div class="custom-control custom-radio o_radio_item">
+                                                    <input class="custom-control-input o_radio_input" name="font_type_values" type="radio" value="alice"/>
+                                                    <label class="custom-control-label o_form_label">Alice</label>
+                                                </div>
+                                                <div class="custom-control custom-radio o_radio_item">
+                                                    <input class="custom-control-input o_radio_input" name="font_type_values" type="radio" value="open_sans"/>
+                                                    <label class="custom-control-label o_form_label">Open Sans</label>
+                                                </div>
+                                                <div class="custom-control custom-radio o_radio_item">
+                                                    <input class="custom-control-input o_radio_input" name="font_type_values" type="radio" value="abel"/>
+                                                    <label class="custom-control-label o_form_label">Abel</label>
+                                                </div>
+                                                <div class="custom-control custom-radio o_radio_item">
+                                                    <input class="custom-control-input o_radio_input" name="font_type_values" type="radio" value="lato"/>
+                                                    <label class="custom-control-label o_form_label">Lato</label>
+                                                </div>
+                                                <div class="custom-control custom-radio o_radio_item">
+                                                    <input class="custom-control-input o_radio_input" name="font_type_values" type="radio" value="montserrat"/>
+                                                    <label class="custom-control-label o_form_label">Montserrat</label>
+                                                </div>
+                                                <div class="custom-control custom-radio o_radio_item">
+                                                    <input class="custom-control-input o_radio_input" name="font_type_values" type="radio" value="droid"/>
+                                                    <label class="custom-control-label o_form_label">Droid</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="menu2" t-attf-class="container tab-pane oe_teb_view #{!widget.group_system ? 'd-none' : ''}" value="base_menu_icon">
+                                        <div class="form-group col-md-12">
+                                            <label for="icon_label" class="icon-control-label">Select Icon Type:</label>
+                                            <div class="menu_icon_label">
+                                                <div class="custom-control custom-radio o_radio_item">
+                                                  <input class="custom-control-input o_radio_input" name="base_menu_icon" checked="true" type="radio" value="base_icon"/>
+                                                  <label class="custom-control-label o_form_label">Base</label>
+                                                </div>
+                                                <div class="custom-control custom-radio o_radio_item">
+                                                    <input class="custom-control-input o_radio_input" name="base_menu_icon" type="radio" value="2d_icon"/>
+                                                    <label class="custom-control-label o_form_label">2d</label>
+                                                </div>
+                                                <div class="custom-control custom-radio o_radio_item">
+                                                    <input class="custom-control-input o_radio_input" name="base_menu_icon" type="radio" value="3d_icon"/>
+                                                    <label class="custom-control-label o_form_label">3d</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="menu3" class="container tab-pane oe_teb_view active" value="base_menu">
+                                        <div class="form-group col-md-12">
+                                          <label for="icon_label" class="icon-control-label">Select Menu Type:</label>
+                                            <div class="menu_icon_label">
+                                                <div class="custom-control custom-radio o_radio_item">
+                                                  <input class="custom-control-input o_radio_input" name="base_menu" checked="true" type="radio" value="base_menu"/>
+                                                  <label class="custom-control-label o_form_label">Horizontal</label>
+                                                </div>
+                                                <div class="custom-control custom-radio o_radio_item">
+                                                    <input class="custom-control-input o_radio_input" name="base_menu" type="radio" value="theme_menu"/>
+                                                    <label class="custom-control-label o_form_label">Vertical</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="menu6" class="container tab-pane oe_teb_view" value="mode">
+                                        <div class="form-group col-md-12">
+                                          <label for="icon_label" class="icon-control-label">Select Mode:</label>
+                                            <div class="menu_icon_label">
+                                                <div class="custom-control custom-radio o_radio_item">
+                                                  <input class="custom-control-input o_radio_input" name="mode" checked="true" type="radio" value="normal_mode_on"/>
+                                                  <label class="custom-control-label o_form_label">Normal</label>
+                                                </div>
+                                                <div class="custom-control custom-radio o_radio_item">
+                                                  <input class="custom-control-input o_radio_input" name="mode" checked="true" type="radio" value="night_mode_on"/>
+                                                  <label class="custom-control-label o_form_label">Night</label>
+                                                </div>
+                                                <div class="custom-control custom-radio o_radio_item">
+                                                    <input class="custom-control-input o_radio_input" name="mode" type="radio" value="light_mode_on"/>
+                                                    <label class="custom-control-label o_form_label">Light</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="o_form_title mt16" t-if="widget.is_status_tags">
+                        <span> Workflow Colors </span>
+                    </div>
+                    <form class="o_breadcrumb_form mt16" t-if="widget.is_status_tags">
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label for="tag_info">Tag Info</label>
+                                <input type="text" name="tag_info" class="form-control o_colorpicker" placeholder="#00b3e5"/>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="tag_danger">Tag Danger</label>
+                                <input type="text" name="tag_danger" class="form-control o_colorpicker" placeholder="#ca0c05"/>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="tag_success">Tag Success</label>
+                                <input type="text" name="tag_success" class="form-control o_colorpicker" placeholder="#00aa00"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label for="tag_warning">Tag Warning</label>
+                                <input type="text" name="tag_warning" class="form-control o_colorpicker" placeholder="#e47e01"/>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="tag_primary">Tag Primary</label>
+                                <input type="text" name="tag_primary" class="form-control o_colorpicker" placeholder="#005ba9"/>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="tag_muted">Tag Muted</label>
+                                <input type="text" name="tag_muted" class="form-control o_colorpicker" placeholder="#717171"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="form-group custom-control uc_dashboard_image">
+            <img class="uc_menu_image" src=""/>
+        </div>
+    </t>
+</templates>

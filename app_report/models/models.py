@@ -71,7 +71,6 @@ class AccountMove(models.Model):
         for rec in self:
             paid = rec.amount_total - rec.amount_residual
             rec.paid_total = paid
-            print("uuuuuu ", paid)
             if paid >= rec.amount_total:
                 rec.paid_state = 'paid'
             elif paid > 0:
