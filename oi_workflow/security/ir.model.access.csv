@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_approval_log_user,access_approval_log_user,model_approval_log,base.group_user,1,0,0,0
+access_approval_config_system,access_approval_config_system,model_approval_config,base.group_system,1,1,1,1
+access_approval_config_user,access_approval_config_user,model_approval_config,base.group_user,1,0,0,0
+access_approval_escalation_system,access_approval_escalation_system,model_approval_escalation,base.group_system,1,1,1,1
+access_approval_escalation_user,access_approval_escalation_user,model_approval_escalation,base.group_user,1,0,0,0
+access_approval_settings_system,access_approval_settings_system,model_approval_settings,base.group_system,1,1,1,1
+access_approval_settings_user,access_approval_settings_user,model_approval_settings,base.group_user,1,0,0,0
+access_approval_settings_state_system,access_approval_settings_state_system,model_approval_settings_state,base.group_system,1,1,1,1
+access_approval_settings_state_user,access_approval_settings_state_user,model_approval_settings_state,base.group_user,1,0,0,0
+access_approval_forward_user,access_approval_forward_user,model_approval_forward,base.group_user,1,0,0,0

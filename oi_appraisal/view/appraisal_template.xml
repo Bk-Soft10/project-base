@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="view_appraisal_template_form" model="ir.ui.view">
+		<field name="name">appraisal.template.form</field>
+		<field name="model">appraisal.template</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<div class="oe_button_box" name="button_box">
+					</div>
+					<widget name="web_ribbon" text="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}" />
+					<group col="4">
+						<field name="name" />
+						<field name="rate_type_id" required="1" />
+						<field name="code" />
+						<field name="active" />
+						<field name="id" invisible="1" />
+					</group>
+					<notebook>
+						<page string="Sections">
+							<field name="sections_ids" nolabel="1" context="{'template_id' : active_id}">
+								<tree>
+									<field name="name" />
+									<field name="weight4tempalte" string="Weight" />
+									<field name="weight_percent" />
+								</tree>
+							</field>
+						</page>
+						<page string="Section Weight">
+							<field name="weight_ids" nolabel="1">
+								<tree editable="bottom">
+									<field name="section_id" options="{'no_create_edit' : True}" domain="[('template_ids','=', parent.id)]" />
+									<field name="weight" />
+								</tree>
+							</field>
+						</page>
+						<page string="Job Positions">
+							<field name="job_ids" nolabel="1" widget="many2many">
+								<tree>
+									<field name="name" />
+									<field name="department_id" />
+								</tree>
+							</field>
+						</page>
+						<page string="Employee Domain">
+							<field name="domain" widget="domain" nolabel="1" options="{'model' : 'hr.employee', 'in_dialog' : True}" />
+						</page>
+					</notebook>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="view_appraisal_template_tree" model="ir.ui.view">
+		<field name="name">appraisal.template.tree</field>
+		<field name="model">appraisal.template</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="sequence" widget="handle" />
+				<field name="name" />
+				<field name="active" />
+			</tree>
+		</field>
+	</record>
+
+	<record id="view_appraisal_template_search" model="ir.ui.view">
+		<field name="name">appraisal.template.search</field>
+		<field name="model">appraisal.template</field>
+		<field name="arch" type="xml">
+			<search>
+				<field name="name" />
+				<filter name="inactive" string="Inactive" domain="[('active','=', False)]" />
+			</search>
+		</field>
+	</record>
+
+</odoo>

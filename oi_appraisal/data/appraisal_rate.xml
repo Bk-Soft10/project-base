@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+	<record id="rate_standard" model="appraisal.rate" forcecreate="False">
+		<field name="name">Standard</field>
+		<field name="lines_ids" eval="[ (5,),
+			(0,0, {'value' : 1, 'name' : 'Unsatisfactory', 'description' : 'Performance was consistently below expectations in most essential areas of responsibility, and/or reasonable progress toward critical goals was not made. Significant improvement is needed in one or more important areas. A plan to correct performance, including timelines, must be outlined and monitored to measure progress.' }),
+			(0,0, {'value' : 2, 'name' : 'Improvement needed', 'description' : 'Performance did not consistently meet expectations – performance failed to meet expectations in one or more essential areas of responsibility, and/or one or more of the most critical goals were not met.  A professional development plan to improve performance must be attached, including timelines, and monitored to measure progress.' }),
+			(0,0, {'value' : 3, 'name' : 'Meets expectations', 'description' : 'Performance consistently met expectations in all essential areas of responsibility, at times possibly exceeding expectations, and the quality of work overall was very good. The most critical annual goals were met.' }),
+			(0,0, {'value' : 4, 'name' : 'Exceeds expectations', 'description' : 'Performance consistently exceeded expectations in all essential areas of responsibility, and the quality of work overall was excellent. Annual goals were met.' }),
+			(0,0, {'value' : 5, 'name' : 'Exceptional', 'description' : 'Performance far exceeded expectations due to exceptionally high quality of work performed in all essential areas of responsibility, resulting in an overall quality of work that was superior; and either 1) included the completion of a major goal or project, or 2) made an exceptional or unique contribution in support of unit, department, or University objectives. This rating is achievable by any employee though given infrequently.'}),
+		]" />
+	</record>
+	
+</odoo>

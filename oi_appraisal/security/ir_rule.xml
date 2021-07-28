@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="rule_appraisal_employee" model="ir.rule">
+		<field name="name">Appraisal Employee</field>
+		<field name="model_id" ref="model_appraisal" />
+		<field name="groups" eval="[(4, ref('group_appraisal_employee'))]" />
+		<field name="domain_force">[('state', '!=', 'draft'), '|', ('employee_id.user_id','=',user.id), ('employee_id', 'child_of', user.employee_ids.ids)]</field>
+	</record>
+	
+	<record id="rule_appraisal_line_employee" model="ir.rule">
+		<field name="name">Appraisal Line Employee</field>
+		<field name="model_id" ref="model_appraisal_line" />
+		<field name="groups" eval="[(4, ref('group_appraisal_employee'))]" />
+		<field name="domain_force">[('appraisal_id.state', '!=', 'draft'), '|', ('appraisal_id.employee_id.user_id','=',user.id), ('appraisal_id.employee_id', 'child_of', user.employee_ids.ids)]</field>
+	</record>	
+	
+	<record id="rule_parent_objective_employee" model="ir.rule">
+		<field name="name">Parent Objective Employee</field>
+		<field name="model_id" ref="model_appraisal_line" />
+		<field name="groups" eval="[(4, ref('group_appraisal_employee'))]" />
+		<field name="domain_force">[('appraisal_id.state', '!=', 'draft'), ('appraisal_id.child_ids.employee_id.user_id', '=', user.id)]</field>
+		<field name="perm_write" eval="False" />
+		<field name="perm_create" eval="False" />
+		<field name="perm_unlink" eval="False" />
+	</record>		
+	
+	<record id="rule_appraisal_officer" model="ir.rule">
+		<field name="name">Appraisal Officer</field>
+		<field name="model_id" ref="model_appraisal" />
+		<field name="groups" eval="[(4, ref('group_appraisal_officer'))]" />
+		<field name="domain_force">[(1,'=', 1)]</field>
+	</record>	
+	
+	<record id="rule_appraisal_line_officer" model="ir.rule">
+		<field name="name">Appraisal Line Officer</field>
+		<field name="model_id" ref="model_appraisal_line" />
+		<field name="groups" eval="[(4, ref('group_appraisal_officer'))]" />
+		<field name="domain_force">[(1,'=', 1)]</field>
+	</record>	
+	
+	<record id="rule_appraisal_multi_company" model="ir.rule">
+		<field name="name">Appraisal Multi Company</field>
+		<field name="model_id" ref="model_appraisal" />
+		<field name="domain_force">['|',('company_id','=',False),('company_id','child_of',user.company_id.ids)]</field>
+	</record>
+
+</odoo>

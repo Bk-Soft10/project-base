@@ -1,0 +1,38 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* oi_mail
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0-20190209\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-12 10:00+0000\n"
+"PO-Revision-Date: 2019-02-12 10:00+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: oi_mail
+#: model:ir.model,name:oi_mail.model_email_template_preview
+msgid "Email Template Preview"
+msgstr "لمحة عامة عن قالب البريد الالكتروني"
+
+#. module: oi_mail
+#: model:ir.model,name:oi_mail.model_mail_template
+msgid "Email Templates"
+msgstr "قوالب البريد"
+
+#. module: oi_mail
+#: model:ir.model,name:oi_mail.model_mail_mail
+msgid "Outgoing Mails"
+msgstr "الرسائل الصادرة"
+
+#. module: oi_mail
+#: model:ir.model.fields,field_description:oi_mail.field_email_template_preview__needaction_partner_ids
+#: model:ir.model.fields,field_description:oi_mail.field_mail_template__needaction_partner_ids
+msgid "Partners with Need Action"
+msgstr ""
+

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="view_appraisal_section_form" model="ir.ui.view">
+		<field name="name">appraisal.section.form</field>
+		<field name="model">appraisal.section</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<div class="oe_button_box" name="button_box">
+						<button name="%(act_appraisal_question)d" type="action" class="oe_stat_button" icon="fa-question">
+							<field name="question_count" string="Questions" widget="statinfo" />
+						</button>
+					</div>
+					<widget name="web_ribbon" text="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}" />
+					<group>
+						<group>
+							<field name="name" />
+							<field name="code" />
+							<field name="weight" />														
+						</group>
+						<group>							
+							<field name="sequence" />
+							<field name="rate_type_id" />
+							<field name="active" />
+						</group>
+					</group>
+					<group col="4">
+						<label for="employee_rating" colspan="2" />
+						<field name="employee_rating" widget="boolean_toggle" colspan="2" nolabel="1" />
+						
+						<label for="manager_rating" colspan="2" />
+						<field name="manager_rating" widget="boolean_toggle" colspan="2" nolabel="1" />
+						
+						<label for="enable_user_questions" colspan="2" />
+						<field name="enable_user_questions" widget="boolean_toggle" colspan="2" nolabel="1" />
+						
+						<label for="enable_user_kpi" colspan="2" attrs="{'invisible' : [('enable_user_questions','=', False)]}" />
+						<field name="enable_user_kpi" widget="boolean_toggle" colspan="2" nolabel="1" attrs="{'invisible' : [('enable_user_questions','=', False)]}" />
+											
+						<label for="show_parent_questions" colspan="2" attrs="{'invisible' : [('enable_user_questions','=', False)]}" />
+						<field name="show_parent_questions" widget="boolean_toggle" colspan="2" nolabel="1" attrs="{'invisible' : [('enable_user_questions','=', False)]}" />
+						
+						<label for="show_previous_objective" colspan="2" attrs="{'invisible' : [('enable_user_questions','=', False)]}" />
+						<field name="show_previous_objective" widget="boolean_toggle" colspan="2" nolabel="1" attrs="{'invisible' : [('enable_user_questions','=', False)]}" />
+												
+						<label for="show_parent_questions_line" colspan="2" attrs="{'invisible' : [('enable_user_questions','=', False)]}" />
+						<field name="show_parent_questions_line" widget="boolean_toggle" colspan="2" nolabel="1" attrs="{'invisible' : [('enable_user_questions','=', False)]}" />
+						
+						<label for="required_parent_questions" colspan="2" attrs="{'invisible' : [('enable_user_questions','=', False)]}" />
+						<field name="required_parent_questions" widget="boolean_toggle" colspan="2" nolabel="1" attrs="{'invisible' : [('enable_user_questions','=', False)]}" />
+						
+						<label for="show_target_date" colspan="2" attrs="{'invisible' : [('enable_user_questions','=', False)]}" />
+						<field name="show_target_date" widget="boolean_toggle" colspan="2" nolabel="1" attrs="{'invisible' : [('enable_user_questions','=', False)]}" />
+
+						<label for="show_employee_evidence" colspan="2" />
+						<field name="show_employee_evidence" widget="boolean_toggle" colspan="2" nolabel="1" />
+
+						<label for="show_manager_evidence" colspan="2" />
+						<field name="show_manager_evidence" widget="boolean_toggle" colspan="2" nolabel="1" />
+						
+						<label for="enable_user_weight" colspan="2" attrs="{'invisible' : [('enable_user_questions','=', False)]}" />
+						<field name="enable_user_weight" widget="boolean_toggle" colspan="2" nolabel="1" attrs="{'invisible' : [('enable_user_questions','=', False)]}" />
+						
+						<label for="enable_user_comments" colspan="2" />
+						<field name="enable_user_comments" widget="boolean_toggle" colspan="2" nolabel="1" />
+												
+						<label for="show_description" colspan="2" />
+						<field name="show_description" widget="boolean_toggle" colspan="2" nolabel="1" />
+						
+						<label for="show_section_result" colspan="2" />
+						<field name="show_section_result" widget="boolean_toggle" colspan="2" nolabel="1" />
+						
+												
+					</group>
+					<group col="4">
+						<label for="manager_rating_enabled_states_ids" colspan="2" />
+						<field name="manager_rating_enabled_states_ids" colspan="2" nolabel="1" widget="many2many_tags" options="{'no_create_edit' : True}" required="1" />
+						<label for="employee_rating_enabled_states_ids" colspan="2" />
+						<field name="employee_rating_enabled_states_ids" colspan="2" nolabel="1" widget="many2many_tags" options="{'no_create_edit' : True}" required="1" />
+						<label for="user_questions_enabled_states_ids" colspan="2" attrs="{'invisible' : [('enable_user_questions','=', False)]}" />
+						<field name="user_questions_enabled_states_ids" colspan="2" nolabel="1" widget="many2many_tags" options="{'no_create_edit' : True}" attrs="{'invisible' : [('enable_user_questions','=', False)], 'required' : [('enable_user_questions','=', True)]}" />
+					</group>
+					<group string="Appraisal Templates">
+						<field name="template_ids" nolabel="1" />
+					</group>
+					<group col="4" groups="base.group_no_one">
+						<field name="lines_field_id" readonly="1" />
+						<field name="parent_lines_field_id" readonly="1"/>
+						<field name="enabled_field_id" readonly="1"/>
+						<field name="result_field_id" readonly="1"/>
+						<field name="previous_field_id" readonly="1"/>
+						<field name="previous_field_enabled_id" readonly="1"/>
+						<field name="section_view_id" readonly="1"/>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+	
+	<record id="view_appraisal_section_tree" model="ir.ui.view">
+		<field name="name">appraisal.section.tree</field>
+		<field name="model">appraisal.section</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="sequence" widget="handle" />
+				<field name="name" />
+				<field name="weight" />
+				<field name="template_ids" widget="many2many_tags" />
+			</tree>
+		</field>
+	</record>	
+
+	<record id="view_appraisal_section_search" model="ir.ui.view">
+		<field name="name">appraisal.section.search</field>
+		<field name="model">appraisal.section</field>
+		<field name="arch" type="xml">
+			<search>
+				<field name="name" />
+				<filter name="inactive" string="Inactive" domain="[('active','=', False)]" />
+			</search>
+		</field>
+	</record>		
+	
+	<function name="_update_sections_view" model="appraisal.section" />
+
+</odoo>

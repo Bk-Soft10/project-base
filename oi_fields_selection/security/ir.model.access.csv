@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ir_model_fields_selection_system,access_ir_model_fields_selection_system,model_ir_model_fields_selection_custom,base.group_system,1,1,1,1
+access_ir_model_fields_selection_all,access_ir_model_fields_selection_all,model_ir_model_fields_selection_custom,,1,0,0,0

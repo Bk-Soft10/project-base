@@ -1,0 +1,1195 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* oi_appraisal
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0-20191028\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-11-03 07:36+0000\n"
+"PO-Revision-Date: 2019-11-03 07:36+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: oi_appraisal
+#: code:addons/oi_appraisal/models/appraisal_rate.py:0
+#, python-format
+msgid " (copy)"
+msgstr ""
+
+#. module: oi_appraisal
+#: code:addons/oi_appraisal/models/appraisal_batch.py:0
+#, python-format
+msgid "%s Appraisal(s) Submitted"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__message_needaction
+msgid "Action Needed"
+msgstr "إجراء مطلوب"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_batch__active
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__active
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_template__active
+msgid "Active"
+msgstr "نشط"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__activity_ids
+msgid "Activities"
+msgstr "الأنشطة"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__activity_state
+msgid "Activity State"
+msgstr "حالة النشاط"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__employee_rating
+msgid "Allow Employee Rating"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__manager_rating
+msgid "Allow Manager Rating"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_batch__appraisal_ids
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_line__appraisal_id
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_hr_job_form
+msgid "Appraisal"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.actions.act_window,name:oi_appraisal.act_appraisal_batch
+#: model:ir.model,name:oi_appraisal.model_appraisal_batch
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__batch_id
+#: model:ir.ui.menu,name:oi_appraisal.menu_appraisal_batch
+msgid "Appraisal Batch"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_batch__appraisal_count
+msgid "Appraisal Count"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_batch__appraisal_draft_count
+msgid "Appraisal Draft Count"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model,name:oi_appraisal.model_appraisal_generate
+msgid "Appraisal Generate"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model,name:oi_appraisal.model_appraisal_line
+msgid "Appraisal Line"
+msgstr ""
+
+#. module: oi_appraisal
+#: code:addons/oi_appraisal/models/appraisal_line.py:0
+#, python-format
+msgid "Appraisal Lines Locked"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.actions.act_window,name:oi_appraisal.act_appraisal_question
+#: model:ir.model,name:oi_appraisal.model_appraisal_question
+msgid "Appraisal Question"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.actions.act_window,name:oi_appraisal.act_appraisal_rate
+#: model:ir.model,name:oi_appraisal.model_appraisal_rate
+#: model:ir.ui.menu,name:oi_appraisal.menu_appraisal_rate
+msgid "Appraisal Rate"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model,name:oi_appraisal.model_appraisal_rate_line
+msgid "Appraisal Rate Line"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_line__rate_type_id
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__rate_type_id
+msgid "Appraisal Rating Type"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model,name:oi_appraisal.model_appraisal_section
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_question__section_id
+msgid "Appraisal Section"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model,name:oi_appraisal.model_appraisal_section_weight
+msgid "Appraisal Section Weight"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.actions.act_window,name:oi_appraisal.act_appraisal_section
+#: model:ir.ui.menu,name:oi_appraisal.menu_appraisal_section
+msgid "Appraisal Sections"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model,name:oi_appraisal.model_appraisal_states
+msgid "Appraisal States"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model,name:oi_appraisal.model_appraisal_template
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__template_ids
+#: model:ir.model.fields,field_description:oi_appraisal.field_hr_job__appraisal_template_id
+msgid "Appraisal Template"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.actions.act_window,name:oi_appraisal.act_appraisal_template
+#: model:ir.ui.menu,name:oi_appraisal.menu_appraisal_template
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_section_form
+msgid "Appraisal Templates"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.ui.menu,name:oi_appraisal.menu_appraisal_root
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_batch_form
+msgid "Appraisals"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__approval_emails
+msgid "Approval Emails"
+msgstr "البريد الإلكتروني للموافقة"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__approval_emp_emails
+msgid "Approval Emp Emails"
+msgstr "البريد الإلكتروني للموافقة الموظفين"
+
+#. module: oi_appraisal
+#: model:approval.config,approve_button_name:oi_appraisal.approval_emp_manager
+#: model:approval.config,approve_button_name:oi_appraisal.approval_employee
+#: model:approval.config,approve_button_name:oi_appraisal.approval_hr
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_form
+msgid "Approve"
+msgstr "موافقه"
+
+#. module: oi_appraisal
+#: model:approval.config,approve_confirm_msg:oi_appraisal.approval_emp_manager
+#: model:approval.config,approve_confirm_msg:oi_appraisal.approval_employee
+#: model:approval.config,approve_confirm_msg:oi_appraisal.approval_hr
+msgid "Approve ?"
+msgstr "موافقة ؟"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__approve_button_name
+msgid "Approve Button Name"
+msgstr "اسم الزر الموافقة"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__approve_confirm_msg
+msgid "Approve Confirm Msg"
+msgstr "رسالة التأكيد للموافقة"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__message_attachment_count
+msgid "Attachment Count"
+msgstr "عدد المرفقات"
+
+#. module: oi_appraisal
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_search
+msgid "Batch"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__button_approve_enabled
+msgid "Button Approve Enabled"
+msgstr "زر الموافقة مفعل"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__button_draft_enabled
+msgid "Button Draft Enabled"
+msgstr "زر المسودة مفعل"
+
+#. module: oi_appraisal
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_generate_form
+msgid "Cancel"
+msgstr "إلغاء"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__comments
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_line__comments
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_form
+msgid "Comments"
+msgstr "التعليقات"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__company_id
+msgid "Company"
+msgstr "الشركة"
+
+#. module: oi_appraisal
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_form
+msgid "Confirm"
+msgstr "تأكيد"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__create_uid
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_batch__create_uid
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_generate__create_uid
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_line__create_uid
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_question__create_uid
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_rate__create_uid
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_rate_line__create_uid
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__create_uid
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section_weight__create_uid
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_states__create_uid
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_template__create_uid
+msgid "Created by"
+msgstr "أنشئ بواسطة"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__create_date
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_batch__create_date
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_generate__create_date
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_line__create_date
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_question__create_date
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_rate__create_date
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_rate_line__create_date
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__create_date
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section_weight__create_date
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_states__create_date
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_template__create_date
+msgid "Created on"
+msgstr "أنشئ في"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__user_questions_enabled_states_ids
+msgid "Defined Objectives Enabled States"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__department_id
+msgid "Department"
+msgstr "القسم"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_line__description
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_question__description
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_rate_line__description
+msgid "Description"
+msgstr "الوصف"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__display_name
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_batch__display_name
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_generate__display_name
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_line__display_name
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_question__display_name
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_rate__display_name
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_rate_line__display_name
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__display_name
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section_weight__display_name
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_states__display_name
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_template__display_name
+msgid "Display Name"
+msgstr "الاسم المعروض"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__document_user_id
+msgid "Document User"
+msgstr "مستخدم الوثيقة"
+
+#. module: oi_appraisal
+#: model:approval.config,name:oi_appraisal.approval_employee
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__employee_id
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_search
+#: model:res.groups,name:oi_appraisal.group_appraisal_employee
+msgid "Employee"
+msgstr "الموظف"
+
+#. module: oi_appraisal
+#: model:approval.config,model_name:oi_appraisal.approval_emp_manager
+#: model:approval.config,model_name:oi_appraisal.approval_employee
+#: model:approval.config,model_name:oi_appraisal.approval_hr
+#: model:ir.actions.act_window,name:oi_appraisal.act_appraisal
+#: model:ir.model,name:oi_appraisal.model_appraisal
+#: model:ir.module.category,name:oi_appraisal.category_appraisal
+#: model:ir.ui.menu,name:oi_appraisal.menu_appraisal
+msgid "Employee Appraisal"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_line__employee_evidence
+msgid "Employee Evidence"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:approval.config,name:oi_appraisal.approval_emp_manager
+msgid "Employee Manager"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_line__employee_rating_id
+msgid "Employee Rating"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_line__employee_rating_enabled
+msgid "Employee Rating Enabled"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__employee_rating_enabled_states
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__employee_rating_enabled_states_ids
+msgid "Employee Rating Enabled States"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_generate__employee_ids
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_generate_form
+msgid "Employees"
+msgstr "الموظفون"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__enabled_field_id
+msgid "Enabled Field"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_batch__end_date
+msgid "End Date"
+msgstr "تاريخ الانتهاء"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__result
+msgid "Final Result"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__result_title
+msgid "Final Result Title"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__message_follower_ids
+msgid "Followers"
+msgstr "المتابعون"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__message_channel_ids
+msgid "Followers (Channels)"
+msgstr "المتابعون (القنوات)"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "المتابعون (الشركاء)"
+
+#. module: oi_appraisal
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_search
+msgid "Future Activities"
+msgstr "الأنشطة المستقبلية"
+
+#. module: oi_appraisal
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_batch_form
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_generate_form
+msgid "Generate"
+msgstr "إنشاء"
+
+#. module: oi_appraisal
+#: model:ir.actions.act_window,name:oi_appraisal.act_appraisal_generate
+msgid "Generate Appraisal"
+msgstr ""
+
+#. module: oi_appraisal
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_search
+msgid "Group By"
+msgstr "تجميع حسب"
+
+#. module: oi_appraisal
+#: model:approval.config,name:oi_appraisal.approval_hr
+msgid "HR Officer"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__id
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_batch__id
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_generate__id
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_line__id
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_question__id
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_rate__id
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_rate_line__id
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__id
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section_weight__id
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_states__id
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_template__id
+msgid "ID"
+msgstr "المُعرف"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__activity_exception_icon
+msgid "Icon"
+msgstr "الأيقونة"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,help:oi_appraisal.field_appraisal__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,help:oi_appraisal.field_appraisal__message_needaction
+#: model:ir.model.fields,help:oi_appraisal.field_appraisal__message_unread
+msgid "If checked, new messages require your attention."
+msgstr "إذا كان محددًا، فهناك رسائل جديدة تحتاج لرؤيتها."
+
+#. module: oi_appraisal
+#: model:ir.model.fields,help:oi_appraisal.field_appraisal__message_has_error
+#: model:ir.model.fields,help:oi_appraisal.field_appraisal__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "إذا كان محددًا، فقد حدث خطأ في تسليم بعض الرسائل."
+
+#. module: oi_appraisal
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_batch_search
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_section_search
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_template_search
+msgid "Inactive"
+msgstr "غير نشط"
+
+#. module: oi_appraisal
+#: code:addons/oi_appraisal/models/appraisal_line.py:0
+#, python-format
+msgid "Invalid Question/Section"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__message_is_follower
+msgid "Is Follower"
+msgstr "متابع"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__is_lines_locked
+msgid "Is Lines Locked"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model,name:oi_appraisal.model_hr_job
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__job_id
+msgid "Job Position"
+msgstr "المنصب الوظيفي"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_template__job_ids
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_template_form
+msgid "Job Positions"
+msgstr "المناصب الوظيفية"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_line__kpi
+msgid "KPI/Measure"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal____last_update
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_batch____last_update
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_generate____last_update
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_line____last_update
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_question____last_update
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_rate____last_update
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_rate_line____last_update
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section____last_update
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section_weight____last_update
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_states____last_update
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_template____last_update
+msgid "Last Modified on"
+msgstr "آخر تعديل في"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__last_state_update
+msgid "Last State Update"
+msgstr "آخر تعديل للحالة"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__write_uid
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_batch__write_uid
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_generate__write_uid
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_line__write_uid
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_question__write_uid
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_rate__write_uid
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_rate_line__write_uid
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__write_uid
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section_weight__write_uid
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_states__write_uid
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_template__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__write_date
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_batch__write_date
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_generate__write_date
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_line__write_date
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_question__write_date
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_rate__write_date
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_rate_line__write_date
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__write_date
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section_weight__write_date
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_states__write_date
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_template__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث في"
+
+#. module: oi_appraisal
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_search
+msgid "Late Activities"
+msgstr "الأنشطة المتأخرة"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__line_ids
+msgid "Line"
+msgstr "بند"
+
+#. module: oi_appraisal
+#: code:addons/oi_appraisal/models/appraisal_line.py:0
+#, python-format
+msgid "Line cannot be deleted"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_rate__lines_ids
+msgid "Lines"
+msgstr "البنود"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__lines_field_id
+msgid "Lines Field"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__lines_locked
+msgid "Lines Locked"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "المرفق الرئيسي"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__manager_id
+#: model:res.groups,name:oi_appraisal.group_appraisal_manager
+msgid "Manager"
+msgstr "المدير"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__parent_id
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_line__parent_id
+msgid "Manager Appraisal"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_line__manager_evidence
+msgid "Manager Evidence"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_line__manager_rating_id
+msgid "Manager Rating"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_line__manager_rating_enabled
+msgid "Manager Rating Enabled"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__manager_rating_enabled_states
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__manager_rating_enabled_states_ids
+msgid "Manager Rating Enabled States"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_rate__max_value
+msgid "Max Value"
+msgstr ""
+
+#. module: oi_appraisal
+#: code:addons/oi_appraisal/models/appraisal_rate.py:0
+#, python-format
+msgid "Max Value must be > 0"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__message_has_error
+msgid "Message Delivery error"
+msgstr "خطأ في تسليم الرسائل"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__message_ids
+msgid "Messages"
+msgstr "الرسائل"
+
+#. module: oi_appraisal
+#: model:ir.model.constraint,message:oi_appraisal.constraint_appraisal_section_weight_uk
+msgid "Must be unique!"
+msgstr ""
+
+#. module: oi_appraisal
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_search
+msgid "My Activities"
+msgstr "أنشطتي"
+
+#. module: oi_appraisal
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_search
+msgid "My Appraisal"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_batch__name
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_line__name
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_question__name
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_rate__name
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_rate_line__name
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__name
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_states__name
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_template__name
+msgid "Name"
+msgstr "الاسم"
+
+#. module: oi_appraisal
+#: model:ir.model.constraint,message:oi_appraisal.constraint_appraisal_batch_name_unqiue
+#: model:ir.model.constraint,message:oi_appraisal.constraint_appraisal_question_name_uniq
+#: model:ir.model.constraint,message:oi_appraisal.constraint_appraisal_rate_line_name_unqiue
+#: model:ir.model.constraint,message:oi_appraisal.constraint_appraisal_rate_name_unqiue
+#: model:ir.model.constraint,message:oi_appraisal.constraint_appraisal_section_name_uniq
+#: model:ir.model.constraint,message:oi_appraisal.constraint_appraisal_template_name_uniq
+msgid "Name must be unique!"
+msgstr "يجب ان يكون الاسم مميزا!"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__needaction_partner_ids
+msgid "Needaction Partner"
+msgstr "بحاجة إلى عمل الشريك"
+
+#. module: oi_appraisal
+#: code:addons/oi_appraisal/models/appraisal.py:0
+#, python-format
+msgid "New"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "الموعد النهائي للنشاط التالي"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__activity_summary
+msgid "Next Activity Summary"
+msgstr "ملخص النشاط التالي"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__activity_type_id
+msgid "Next Activity Type"
+msgstr "نوع النشاط التالي"
+
+#. module: oi_appraisal
+#: code:addons/oi_appraisal/models/appraisal_batch.py:0
+#, python-format
+msgid "No Appraisal Template assign for %s"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__name
+msgid "Number"
+msgstr "الرقم"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__message_needaction_counter
+msgid "Number of Actions"
+msgstr "عدد الإجراءات"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__message_has_error_counter
+msgid "Number of errors"
+msgstr "عدد الاخطاء"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,help:oi_appraisal.field_appraisal__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "عدد الرسائل التي تتطلب إجراء"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,help:oi_appraisal.field_appraisal__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "عدد الرسائل الحادث بها خطأ في التسليم"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,help:oi_appraisal.field_appraisal__message_unread_counter
+msgid "Number of unread messages"
+msgstr "عدد الرسائل الجديدة"
+
+#. module: oi_appraisal
+#: model:res.groups,name:oi_appraisal.group_appraisal_officer
+msgid "Officer"
+msgstr "موظف"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__parent_lines_field_id
+msgid "Parent Lines Field"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_line__parent_line_id
+msgid "Parent Objective"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__previous_field_id
+msgid "Previous Field"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__previous_field_enabled_id
+msgid "Previous Field Enabled"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_line__question_id
+msgid "Question"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__question_count
+msgid "Question Count"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.constraint,message:oi_appraisal.constraint_appraisal_line_name_uniq
+msgid "Question should be unique"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__question_ids
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_section_form
+msgid "Questions"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_rate_line__rate_type_id
+msgid "Rate Type"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_line__value
+msgid "Rating in Percentage"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:approval.config,reject_button_name:oi_appraisal.approval_emp_manager
+#: model:approval.config,reject_button_name:oi_appraisal.approval_employee
+#: model:approval.config,reject_button_name:oi_appraisal.approval_hr
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_form
+msgid "Reject"
+msgstr "رفض"
+
+#. module: oi_appraisal
+#: model:approval.config,reject_confirm_msg:oi_appraisal.approval_emp_manager
+#: model:approval.config,reject_confirm_msg:oi_appraisal.approval_employee
+#: model:approval.config,reject_confirm_msg:oi_appraisal.approval_hr
+msgid "Reject ?"
+msgstr "رفض ؟"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__reject_button_name
+msgid "Reject Button Name"
+msgstr "اسم زر الرفض"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__reject_button_wizard
+msgid "Reject Button Wizard"
+msgstr "عرض إستمارة الرفض"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__reject_confirm_msg
+msgid "Reject Confirm Msg"
+msgstr "رسالة تأكيد الرفض"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_line__required_parent_line_id
+msgid "Required Parent Line"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__required_parent_questions
+msgid "Required Parent Objectives"
+msgstr ""
+
+#. module: oi_appraisal
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_form
+msgid "Reset to draft"
+msgstr "إعادة التعيين لمسودة"
+
+#. module: oi_appraisal
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_form
+msgid "Reset to draft ?"
+msgstr "إعادة التعيين لمسودة"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__activity_user_id
+msgid "Responsible User"
+msgstr "المستخدم المسؤول"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__result_field_id
+msgid "Result Field"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_template__rate_type_id
+msgid "Result Title Rating Type"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "خطأ في تسليم الرسائل القصيرة"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_line__section_id
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section_weight__section_id
+msgid "Section"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__section_view_id
+msgid "Section View"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_template__weight_ids
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_template_form
+msgid "Section Weight"
+msgstr ""
+
+#. module: oi_appraisal
+#: code:addons/oi_appraisal/models/appraisal_line.py:0
+#, python-format
+msgid "Section not allowed user questions"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_template__sections_ids
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_template_form
+msgid "Sections"
+msgstr ""
+
+#. module: oi_appraisal
+#: code:addons/oi_appraisal/models/appraisal.py:0
+#, python-format
+msgid "Select Employee Rating for %s"
+msgstr ""
+
+#. module: oi_appraisal
+#: code:addons/oi_appraisal/models/appraisal.py:0
+#, python-format
+msgid "Select Rating for %s"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_line__sequence
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_question__sequence
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__sequence
+msgid "Sequence"
+msgstr "المسلسل"
+
+#. module: oi_appraisal
+#: model:ir.ui.menu,name:oi_appraisal.menu_appraisal_config
+msgid "Settings"
+msgstr "الإعدادات"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__show_description
+msgid "Show Description"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__show_employee_evidence
+msgid "Show Employee Evidence"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__show_manager_evidence
+msgid "Show Manager Evidence"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__show_parent_questions
+msgid "Show Parent Objectives"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__show_parent_questions_line
+msgid "Show Parent Objectives in Line"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__show_previous_objective
+msgid "Show Previous Objective"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__show_section_result
+msgid "Show Section Result"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__show_target_date
+msgid "Show Target Date"
+msgstr ""
+
+#. module: oi_appraisal
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_search
+msgid "Show all records which has next action date is before today"
+msgstr "عرض كافة السجلات المُعين لها تاريخ إجراء تالي يسبق تاريخ اليوم الجاري"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_batch__start_date
+msgid "Start Date"
+msgstr "تاريخ البداية"
+
+#. module: oi_appraisal
+#: code:addons/oi_appraisal/models/appraisal_batch.py:0
+#, python-format
+msgid "Start Date > End Date"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_states__state
+msgid "State"
+msgstr "المحافظة"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__state_name
+msgid "State Name"
+msgstr "اسم الولاية"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__state
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_search
+msgid "Status"
+msgstr "الحالة"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__log_ids
+msgid "Status Log"
+msgstr "سجل الحالة"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__state_id
+msgid "Status Settings"
+msgstr "إعدادات الحالة"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,help:oi_appraisal.field_appraisal__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"الحالة على أساس الأنشطة\n"
+"المتأخرة: تاريخ الاستحقاق مر\n"
+"اليوم: تاريخ النشاط هو اليوم\n"
+"المخطط: الأنشطة المستقبلية."
+
+#. module: oi_appraisal
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_batch_form
+msgid "Submit"
+msgstr "إنشاء"
+
+#. module: oi_appraisal
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_batch_form
+msgid "Submit Appraisals?"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__child_ids
+msgid "Subordinates Appraisal"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_line__target_date
+msgid "Target Date"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__template_id
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section_weight__template_id
+msgid "Template"
+msgstr "قالب"
+
+#. module: oi_appraisal
+#: model:ir.model.constraint,message:oi_appraisal.constraint_appraisal_batch_emp_uniq
+msgid "This employee already has an appraisal on this batch!"
+msgstr ""
+
+#. module: oi_appraisal
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_search
+msgid "Today Activities"
+msgstr "نشاطات اليوم"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,help:oi_appraisal.field_appraisal__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__message_unread
+msgid "Unread Messages"
+msgstr "الرسائل الجديدة"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "عدد الرسائل الجديدة"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_line__update_enabled
+msgid "Update Enabled"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__user_can_approve
+msgid "User Can Approve"
+msgstr "يمكن للمستخدم الموافقة"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__enable_user_comments
+msgid "User Comments"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__enable_user_questions
+msgid "User Defined Objectives"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__enable_user_weight
+msgid "User Defined Weight"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__enable_user_kpi
+msgid "User KPI/Measure"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__user_questions_enabled_states
+msgid "User Questions Enabled States"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_rate_line__value
+msgid "Value"
+msgstr "القيمة"
+
+#. module: oi_appraisal
+#: code:addons/oi_appraisal/models/appraisal_rate_line.py:0
+#, python-format
+msgid "Value must be positive"
+msgstr ""
+
+#. module: oi_appraisal
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_rate_form
+msgid "Values"
+msgstr "القيم"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__waiting_approval
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_search
+msgid "Waiting Approval"
+msgstr "انتظار الموافقة"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__approval_partner_ids
+msgid "Waiting Partner IDs Approval"
+msgstr "بانتظار موافقة المستخدمين"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__approval_user_ids
+msgid "Waiting User Approval"
+msgstr "بانتظار موافقة المستخدمين"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__approval_user2_ids
+msgid "Waiting User Approval (Without OdooBot)"
+msgstr "بانتظار موافقة المستخدمين (بدون مستخدم النظام)"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__website_message_ids
+msgid "Website Messages"
+msgstr "رسائل الموقع"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,help:oi_appraisal.field_appraisal__website_message_ids
+msgid "Website communication history"
+msgstr "سجل تواصل الموقع"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_line__weight
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_question__weight
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__weight
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section_weight__weight
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_template_form
+msgid "Weight"
+msgstr "الوزن"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_question__weight_percent
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__weight_percent
+msgid "Weight %"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_section__weight4tempalte
+msgid "Weight4Tempalte"
+msgstr ""
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__workflow_states
+msgid "Workflow States"
+msgstr "سير العمل"
+
+#. module: oi_appraisal
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal__year
+#: model:ir.model.fields,field_description:oi_appraisal.field_appraisal_batch__year
+#: model_terms:ir.ui.view,arch_db:oi_appraisal.view_appraisal_search
+msgid "Year"
+msgstr "السنة"
+
+#. module: oi_appraisal
+#: code:addons/oi_appraisal/models/appraisal.py:0
+#, python-format
+msgid "You can delete draft status only"
+msgstr ""
+
+#. module: oi_appraisal
+#: code:addons/oi_appraisal/wizard/appraisal_generate.py:0
+#, python-format
+msgid "You must select employee(s) to generate appraisal(s)."
+msgstr ""

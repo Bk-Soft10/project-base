@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="view_appraisal_rate_form" model="ir.ui.view">
+		<field name="name">appraisal.rate.form</field>
+		<field name="model">appraisal.rate</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<group>
+						<field name="name" />
+					</group>
+					<group string="Values">
+						<field name="lines_ids" nolabel="1">
+							<tree editable="bottom">
+								<field name="value" />
+								<field name="name" />
+								<field name="description" />
+							</tree>
+						</field>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="view_appraisal_rate_tree" model="ir.ui.view">
+		<field name="name">appraisal.rate.form</field>
+		<field name="model">appraisal.rate</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="name" />
+			</tree>
+		</field>
+	</record>
+
+
+</odoo>

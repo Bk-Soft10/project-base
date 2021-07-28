@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<menuitem id="menu_appraisal_root" name="Appraisals" web_icon="oi_appraisal,static/description/icon.png" />
+	
+	<menuitem id="menu_appraisal" action="act_appraisal" parent="menu_appraisal_root" sequence="10" />
+	
+	<menuitem id="menu_appraisal_batch" action="act_appraisal_batch" parent="menu_appraisal_root" sequence="20" groups="group_appraisal_officer" />
+	
+	<menuitem id="menu_appraisal_config" name="Settings" parent="menu_appraisal_root" sequence="999" groups="group_appraisal_manager" />
+	
+	<menuitem id="menu_appraisal_template" action="act_appraisal_template" parent="menu_appraisal_config" sequence="10" />
+	
+	<menuitem id="menu_appraisal_section" action="act_appraisal_section" parent="menu_appraisal_config" sequence="20" />
+	
+	<menuitem id="menu_appraisal_rate" action="act_appraisal_rate" parent="menu_appraisal_config" sequence="30" />
+	
+	<menuitem id="menu_appraisal_batch_type" action="act_appraisal_batch_type" parent="menu_appraisal_config" sequence="40" />
+
+</odoo>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+	<record id="seq_appraisal" model="ir.sequence" forcecreate="False">
+		<field name="name">Appraisal</field>
+		<field name="code">appraisal</field>
+		<field name="prefix">APR</field>
+		<field name="padding">4</field>
+		<field name="company_id" eval="False" />
+	</record>
+	
+</odoo>

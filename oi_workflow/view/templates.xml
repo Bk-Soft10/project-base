@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<template id="approval_record_approved">
+		<div>
+			<p>
+				<strong>Approved</strong>
+			</p>
+			<div t-if="reason" style="margin-top: 8px;">
+				<strong> Reason</strong>
+				<div style="margin-left: 8px;"><t t-esc="reason"/></div>
+			</div>
+		</div>
+	</template>
+
+	<template id="approval_record_rejected">
+		<div>
+			<p>
+				<strong>Rejected</strong>
+			</p>
+			<div t-if="reason" style="margin-top: 8px;">
+				<strong> Reason</strong>
+				<div style="margin-left: 8px;"><t t-esc="reason"/></div>
+			</div>
+		</div>
+
+	</template>
+	
+	<template id="approval_record_return">
+		<div>
+			<p>
+				<strong>Returned</strong>
+			</p>
+			<div t-if="reason" style="margin-top: 8px;">
+				<strong> Reason</strong>
+				<div style="margin-left: 8px;"><t t-esc="reason"/></div>
+			</div>
+		</div>
+
+	</template>
+	
+	<template id="approval_record_forward">
+		<div>
+			<p>
+				<strong>Forwarded To</strong>
+				<span t-field="forward_user.name" />
+			</p>
+			<div t-if="reason" style="margin-top: 8px;">
+				<strong> Reason</strong>
+				<div style="margin-left: 8px;"><t t-esc="reason"/></div>
+			</div>
+		</div>
+
+	</template>
+	
+	<template id="approval_record_transfer">
+		<div>
+			<p>
+				<strong>Transferred To Status</strong>
+				<span t-field="object.state" />
+			</p>
+			<div t-if="reason" style="margin-top: 8px;">
+				<strong> Reason</strong>
+				<div style="margin-left: 8px;"><t t-esc="reason"/></div>
+			</div>
+		</div>
+
+	</template>
+	
+	
+
+</odoo>

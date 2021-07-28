@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+<t t-name="oi_workflow.approval_info">
+    <table class="table table-condensed table-striped">
+        <tr>
+            <th>Name:</th>
+            <td><t t-esc="data.name"/></td>
+        </tr>        
+        <tr t-if="data.waiting_approval">
+            <th>Waiting Approval:</th>
+            <td>
+            	<ul t-if="data.approval_users.length > 1">
+            		<li t-foreach="data.approval_users" t-as="user">
+            			<t t-esc="user[1]"/>
+		            	<t t-if="session.is_system and odoo.debug and odoo._modules.includes('oi_login_as')">            		
+							<a t-attf-href="/web/login_as/#{user[0]}"> (Login As) </a>
+		            	</t>            			
+            		</li>
+            	</ul>
+            	<t t-if="data.approval_users.length == 1">
+            		<t t-set="user" t-value="data.approval_users[0]" />
+            		<t t-esc="user[1]"/>
+					<t t-if="session.is_system and odoo.debug and odoo._modules.includes('oi_login_as')">            		
+						<a t-attf-href="/web/login_as/#{user[0]}"> (Login As) </a>
+	            	</t>            		
+            	</t>
+            </td>
+        </tr>
+    </table>
+    <div>
+	    <t t-if="data.lines[0]">
+	    	<table class="table table-condensed table-striped">
+	    		<thead>
+	    			<tr>
+	    				<th>Date</th>
+	    				<th>User</th>
+	    				<th>Old Status</th>
+	    				<th>New Status</th>
+	    				<th>Note</th>
+	    			</tr>
+	    		</thead>
+	    		<tbody>
+	    			<tr t-foreach="data.lines" t-as="line">
+	    				<td><t t-esc="line.date"/></td>
+	    				<td><t t-esc="line.user"/></td>
+	    				<td><t t-esc="line.old"/></td>
+	    				<td><t t-esc="line.new"/></td>
+	    				<td><t t-esc="line.description"/></td>
+	    			</tr>
+	    		</tbody>
+	    	</table>
+	    </t>
+    </div>
+</t>
+
+</templates>

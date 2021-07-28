@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="view_appraisal_question_form" model="ir.ui.view">
+		<field name="name">appraisal.question.form</field>
+		<field name="model">appraisal.question</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<group>
+						<field name="name" />
+						<field name="description" />
+					</group>
+					<group>
+						<group>
+							<field name="weight" />
+							<field name="weight_percent" />
+							<field name="rate_type_id" />
+						</group>
+						<group>
+							<field name="section_id" />
+							<field name="sequence" />
+						</group>
+					</group>
+					<group string="Job Positions">
+						<field name="job_ids" nolabel="1" />
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="view_appraisal_question_tree" model="ir.ui.view">
+		<field name="name">appraisal.question.tree</field>
+		<field name="model">appraisal.question</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="sequence" widget="handle" />
+				<field name="name" />
+				<field name="description" />
+				<field name="weight" />
+				<field name="weight_percent" />
+			</tree>
+		</field>
+	</record>
+
+</odoo>
