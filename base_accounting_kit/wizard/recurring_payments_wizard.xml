@@ -48,9 +48,9 @@
         </record>
         <menuitem id="account_recurring_payments_child2" name="Recurring Entries"
                   action="action_account_recurring_payments_wizard_view"
-                  parent="account.menu_action_account_payments_receivable" groups="account.group_account_user"/>
+                  parent="account.menu_finance_receivables" groups="account.group_account_user"/>
         <menuitem id="account_recurring_payments_child3" name="Recurring Entries"
                   action="action_account_recurring_payments_wizard_view"
-                  parent="account.menu_action_account_payments_payable" groups="account.group_account_user"/>
+                  parent="account.menu_finance_payables" groups="account.group_account_user"/>
     </data>
 </odoo>

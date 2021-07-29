@@ -12,9 +12,9 @@
 			<t t-set="body_classname" t-value="''"/>
    		</xpath>
 
-		<xpath expr="//div/div/div/div[2]" position="replace">
+		<!--<xpath expr="//div/div/div/div[2]" position="replace">
    			<div class="text-center small mt-4 pt-3 border-top" t-if="not disable_footer"></div>
-   		</xpath>
+   		</xpath>-->
    		
    		<xpath expr="//div[hasclass('container')]" position="attributes">
    			<attribute name="class">body_login</attribute>
@@ -49,11 +49,11 @@
 			<attribute name="placeholder">Password ...</attribute>
 		</xpath>
 
-		<xpath expr="//a[@href='/web/database/selector']" position="replace">
+		<!--<xpath expr="//a[@href='/web/database/selector']" position="replace">
 			<a role="button" href="/web/database/selector" class="btn btn-secondary">
 				<i class="fa fa-database" role="img" aria-label="Database" title="Database"></i>
 			</a>
-		</xpath>
+		</xpath>-->
 	</template>
 
 </odoo>
