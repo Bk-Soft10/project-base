@@ -61,7 +61,6 @@ class DiscountLimit(models.Model):
         else:
             for category in categories:
                 category.apply_limit = True
-                print(category.apply_limit)
             for product in products:
                 product.pd_apply_limit = False
 

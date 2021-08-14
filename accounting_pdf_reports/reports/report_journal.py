@@ -61,7 +61,7 @@ class ReportJournal(models.AbstractModel):
         params = [tuple(move_state), tuple(journal_id.ids)] + query_get_clause[2]
         query = """
             SELECT rel.account_tax_id, SUM("account_move_line".balance) AS base_amount
-            FROM account_move_line_account_tax_rel rel, """ + query_get_clause[0] + """ 
+            FROM account_move_line_account_tax_rel rel, """ + query_get_clause[0] + """
             LEFT JOIN account_move am ON "account_move_line".move_id = am.id
             WHERE "account_move_line".id = rel.account_move_line_id
                 AND am.state IN %s
@@ -105,9 +105,6 @@ class ReportJournal(models.AbstractModel):
         res = {}
         for journal in data['form']['journal_ids']:
             res[journal] = self.with_context(data['form'].get('used_context', {})).lines(target_move, journal, sort_selection, data)
-        print("hhhh", self.env['account.journal'].browse(data['form']['journal_ids']))
-        print("hhhh", time)
-        print("res", res)
         return {
             'doc_ids': data['form']['journal_ids'],
             'doc_model': self.env['account.journal'],

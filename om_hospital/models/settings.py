@@ -13,7 +13,6 @@ class HospitalSettings(models.TransientModel):
     def set_values(self):
         res = super(HospitalSettings, self).set_values()
         self.env['ir.config_parameter'].set_param('om_hospital.note', self.note)
-        print("test", self.product_ids.ids)
         self.env['ir.config_parameter'].set_param('om_hospital.product_ids', self.product_ids.ids)
         return res
 

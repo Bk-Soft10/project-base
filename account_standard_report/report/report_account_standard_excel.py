@@ -88,7 +88,6 @@ class StandardReportXlsx(models.AbstractModel):
                 ]
 
                 all_lines = wizard._sql_get_line_for_report(type_l=('4_total',))
-                # print(all_lines)
                 if all_lines:
 
                     row = 6

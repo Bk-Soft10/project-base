@@ -87,12 +87,9 @@ class AccountPDC(models.Model):
             # if self.payment_id.invoice_ids:
             move.line_ids.sudo().remove_move_reconcile()
             move._reverse_moves()
-            print("move_id ", move)
             reverse_id = self.env['account.move'].search([('reversed_entry_id', '=', move.id)])
-            print("reverse_id ", reverse_id)
             to_reconcile = self.env['account.move.line'].search([('move_id', 'in', [move.id, reverse_id.id]), ('account_id', '=', partner_account.id)])
             to_reconcile.reconcile()
-            print("to_reconcile ", to_reconcile)
             for l in move.line_ids:
                 l.payment_id = False
             self.move_id = reverse_id

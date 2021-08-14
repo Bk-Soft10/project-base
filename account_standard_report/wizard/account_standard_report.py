@@ -306,7 +306,6 @@ class AccountStandardLedger(models.TransientModel):
     def print_excel_report(self):
         self.ensure_one()
         self._compute_data()
-        print(self.env.ref('account_standard_report.action_standard_excel').report_action(self))
         return self.env.ref('account_standard_report.action_standard_excel').report_action(self)
 
     def _pre_compute(self):

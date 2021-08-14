@@ -18,7 +18,8 @@ class HrPayslipRegisterPaymentWizard(models.TransientModel):
         context = dict(self._context or {})
         active_ids = context.get('active_ids', [])
         payslips = self.env['hr.payslip'].browse(active_ids)
-        return payslips.employee_id.address_home_id.id
+        partner = payslips.employee_id.address_home_id.id if payslips.employee_id.address_home_id else self.env.user.company_id.partner_id.id
+        return partner
 
     partner_id = fields.Many2one('res.partner', string='Partner', required=True, default=_default_partner_id)
     journal_id = fields.Many2one('account.journal', string='Payment Method', required=True, domain=[('type', 'in', ('bank', 'cash'))])
@@ -77,7 +78,8 @@ class HrPayslipRegisterPaymentWizard(models.TransientModel):
     ##@api.multi
     def expense_post_payment(self):
         self.ensure_one()
-        payslip_journal = self.env['ir.config_parameter'].sudo().get_param('payslip_payment.payslip_direct_journal')
+        # payslip_journal = self.env['ir.config_parameter'].sudo().get_param('payslip_payment.payslip_direct_journal')
+        payslip_journal = True
         context = dict(self._context or {})
         active_id = context.get('active_id', 0)
         payslip = self.env['hr.payslip'].browse([active_id])
@@ -97,6 +99,7 @@ class HrPayslipRegisterPaymentWizard(models.TransientModel):
         # Create payment and post it
         payment = self.env['account.payment'].create(payment_dict)
         payment.post()
+        print("uuuuuuu", payment)
         # for move in payment.move_line_ids:
         #     move.name = +
         # Log the payment in the chatter

@@ -50,11 +50,13 @@ class HrPayslipBatchwiseRegisterPaymentWizard(models.TransientModel):
     def expense_post_payment(self):
         self.ensure_one()
         payment_lst = []
-        payslip_journal = self.env['ir.config_parameter'].sudo().get_param('payslip_payment.payslip_direct_journal')
+        # payslip_journal = self.env['ir.config_parameter'].sudo().get_param('payslip_payment.payslip_direct_journal')
+        payslip_journal = True
         for batch_id in self.batch_id:
-            for payslip_lines in batch_id.slip_ids:
-                if not payslip_lines.employee_id.address_home_id:
-                    raise ValidationError(_('Please Define Employee Private Address'))
+            # for payslip_lines in batch_id.slip_ids:
+            #     if not payslip_lines.employee_id.address_home_id:
+            #         raise ValidationError(_('Please Define Employee Private Address'))
+
             # if batch_id.journal_id and not batch_id.credit_note:
             #     account_payment = batch_id.journal_id.default_credit_account_id
             # if batch_id.journal_id and batch_id.credit_note:
@@ -65,7 +67,7 @@ class HrPayslipBatchwiseRegisterPaymentWizard(models.TransientModel):
                     payment_values = {
                         'partner_type': 'supplier',
                         'payment_type': 'outbound',
-                        'partner_id': payslip.employee_id.address_home_id.id,
+                        'partner_id': payslip.employee_id.address_home_id.id if payslip.employee_id.address_home_id else self.env.user.company_id.partner_id.id,
                         'journal_id': self.journal_id.id,
                         'company_id': self.company_id.id,
                         'payment_method_id': self.payment_method_id.id,

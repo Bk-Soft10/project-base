@@ -33,15 +33,15 @@ class PosDashboard(models.Model):
         if option == 'pos_hourly_sales':
 
             user_tz = self.env.user.tz if self.env.user.tz else pytz.UTC
-            query = '''select  EXTRACT(hour FROM date_order at time zone 'utc' at time zone '{}') 
-                       as date_month,sum(amount_total) from pos_order where  
-                       EXTRACT(month FROM date_order::date) = EXTRACT(month FROM CURRENT_DATE) 
+            query = '''select  EXTRACT(hour FROM date_order at time zone 'utc' at time zone '{}')
+                       as date_month,sum(amount_total) from pos_order where
+                       EXTRACT(month FROM date_order::date) = EXTRACT(month FROM CURRENT_DATE)
                        AND pos_order.company_id = ''' + str(
                        company_id) + ''' group by date_month '''
             query = query.format(user_tz)
             label = 'HOURS'
         elif option == 'pos_monthly_sales':
-            query = '''select  date_order::date as date_month,sum(amount_total) from pos_order where 
+            query = '''select  date_order::date as date_month,sum(amount_total) from pos_order where
              EXTRACT(month FROM date_order::date) = EXTRACT(month FROM CURRENT_DATE) AND pos_order.company_id = ''' + str(
                 company_id) + '''  group by date_month '''
             label = 'DAYS'
@@ -67,13 +67,13 @@ class PosDashboard(models.Model):
         company_id = self.env.company.id
         cr = self._cr
         cr.execute(
-            """select pos_payment_method.name,sum(amount) from pos_payment inner join pos_payment_method on 
-            pos_payment_method.id=pos_payment.payment_method_id group by pos_payment_method.name ORDER 
+            """select pos_payment_method.name,sum(amount) from pos_payment inner join pos_payment_method on
+            pos_payment_method.id=pos_payment.payment_method_id group by pos_payment_method.name ORDER
             BY sum(amount) DESC; """)
         payment_details = cr.fetchall()
         cr.execute(
-            '''select hr_employee.name,sum(pos_order.amount_paid) as total,count(pos_order.amount_paid) as orders 
-            from pos_order inner join hr_employee on pos_order.user_id = hr_employee.user_id 
+            '''select hr_employee.name,sum(pos_order.amount_paid) as total,count(pos_order.amount_paid) as orders
+            from pos_order inner join hr_employee on pos_order.user_id = hr_employee.user_id
             where pos_order.company_id =''' + str(company_id) + '''GROUP BY hr_employee.name order by total DESC;''')
         salesperson = cr.fetchall()
         total_sales = []
@@ -88,10 +88,10 @@ class PosDashboard(models.Model):
             rec = tuple(rec)
             total_sales.append(rec)
         cr.execute(
-            '''select DISTINCT(product_template.name) as product_name,sum(qty) as total_quantity from 
-       pos_order_line inner join product_product on product_product.id=pos_order_line.product_id inner join 
+            '''select DISTINCT(product_template.name) as product_name,sum(qty) as total_quantity from
+       pos_order_line inner join product_product on product_product.id=pos_order_line.product_id inner join
        product_template on product_product.product_tmpl_id = product_template.id  where pos_order_line.company_id =''' + str(
-                company_id) + ''' group by product_template.id ORDER 
+                company_id) + ''' group by product_template.id ORDER
        BY total_quantity DESC Limit 10 ''')
         selling_product = cr.fetchall()
         sessions = self.env['pos.config'].search([])
@@ -166,13 +166,12 @@ class PosDashboard(models.Model):
     @api.model
     def get_the_top_customer(self, ):
         company_id = self.env.company.id
-        query = '''select res_partner.name as customer,pos_order.partner_id,sum(pos_order.amount_paid) as amount_total from pos_order 
+        query = '''select res_partner.name as customer,pos_order.partner_id,sum(pos_order.amount_paid) as amount_total from pos_order
         inner join res_partner on res_partner.id = pos_order.partner_id where pos_order.company_id = ''' + str(
             company_id) + ''' GROUP BY pos_order.partner_id,
         res_partner.name  ORDER BY amount_total  DESC LIMIT 10;'''
         self._cr.execute(query)
         docs = self._cr.dictfetchall()
-        print(docs)
 
         order = []
         for record in docs:
@@ -187,10 +186,10 @@ class PosDashboard(models.Model):
     def get_the_top_products(self):
         company_id = self.env.company.id
 
-        query = '''select DISTINCT(product_template.name) as product_name,sum(qty) as total_quantity from 
-       pos_order_line inner join product_product on product_product.id=pos_order_line.product_id inner join 
+        query = '''select DISTINCT(product_template.name) as product_name,sum(qty) as total_quantity from
+       pos_order_line inner join product_product on product_product.id=pos_order_line.product_id inner join
        product_template on product_product.product_tmpl_id = product_template.id where pos_order_line.company_id = ''' + str(
-            company_id) + ''' group by product_template.id ORDER 
+            company_id) + ''' group by product_template.id ORDER
        BY total_quantity DESC Limit 10 '''
 
         self._cr.execute(query)
@@ -210,9 +209,9 @@ class PosDashboard(models.Model):
     @api.model
     def get_the_top_categories(self):
         company_id = self.env.company.id
-        query = '''select DISTINCT(product_category.complete_name) as product_category,sum(qty) as total_quantity 
-        from pos_order_line inner join product_product on product_product.id=pos_order_line.product_id  inner join 
-        product_template on product_product.product_tmpl_id = product_template.id inner join product_category on 
+        query = '''select DISTINCT(product_category.complete_name) as product_category,sum(qty) as total_quantity
+        from pos_order_line inner join product_product on product_product.id=pos_order_line.product_id  inner join
+        product_template on product_product.product_tmpl_id = product_template.id inner join product_category on
         product_category.id =product_template.categ_id where pos_order_line.company_id = ''' + str(
             company_id) + ''' group by product_category ORDER BY total_quantity DESC '''
         self._cr.execute(query)

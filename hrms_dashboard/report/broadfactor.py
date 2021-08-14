@@ -18,12 +18,11 @@ class EmployeeBroadFactor(models.Model):
     def init(self):
         tools.drop_view_if_exists(self._cr, 'hr_employee_broad_factor')
         date_today = date.today()
-        print("date_today", date_today)
         self._cr.execute("""
             create or replace view hr_employee_broad_factor as (
                 select
                     e.id,
-                    e.name, 
+                    e.name,
                     count(h.*) as no_of_occurrence,
                     sum(h.number_of_days) as no_of_days,
                     count(h.*)*count(h.*)*sum(h.number_of_days) as broad_factor

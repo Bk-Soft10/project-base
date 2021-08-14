@@ -41,11 +41,24 @@
             <field name="arch" type="xml">
                 <xpath expr="/form/header/button[@name='close_payslip_run']" position="after">
                         <button name="%(payslip_payment.hr_payslip_batchwise_sheet_register_payment_wizard_action)d" states="close" type="action" string="Register Payment" class="oe_highlight o_expense_sheet_pay" context="{'default_batch_id': active_id}" groups="account.group_account_manager"/>
-                        <!--<button name="batch_wise_payslip_confirm" states="draft" type="object" string="Confirm Payslips" class="oe_highlight o_expense_sheet_pay" groups="account.group_account_manager"/>-->
+                        <button name="batch_wise_payslip_confirm" attrs="{'invisible': ['|', ('slip_ids', '=', []), ('state', '!=', 'draft')]}" type="object" string="Confirm Payslips" class="oe_highlight o_expense_sheet_pay" groups="hr_payroll_community.group_hr_payroll_community_user"/>
                 </xpath>
-                <!--<xpath expr="//header/button[@name='close_payslip_run']" position="attributes">
-                    <attribute name="states">done,paid</attribute>
-                </xpath>-->
+                <xpath expr="//header/button[@name='close_payslip_run']" position="attributes">
+                    <attribute name="states">done</attribute>
+                </xpath>
+                <field name="slip_ids" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </field>
+                <field name="slip_ids" position="inside">
+                    <tree string="Employee Payslip">
+                        <field name="number"/>
+                        <field name="employee_id"/>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                        <field name="total_amount"/>
+                        <field name="state"/>
+                    </tree>
+                </field>
             </field>
         </record>
 

@@ -51,6 +51,7 @@ class HrPayslipRun(models.Model):
     _inherit = 'hr.payslip.run'
 
     state = fields.Selection(selection_add=[
+        ('done', 'Confirmed'),
         ('paid', 'Paid'),
     ], string='Status', index=True, readonly=True, copy=False, default='draft')
     total_amount = fields.Float(string='Total Amount', compute='_compute_total_amount')
@@ -74,6 +75,9 @@ class HrPayslipRun(models.Model):
                 if record.state == 'draft':
                     record.action_payslip_done()
             rec.state = 'done'
+    def close_payslip_run(self):
+        self.batch_wise_payslip_confirm()
+        return super(HrPayslipRun, self).close_payslip_run()
 
 class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
@@ -88,7 +92,6 @@ class AccountMoveLine(models.Model):
             rec.payslip_id.set_to_paid()
         #account_move_ids = [l.move_id.id for l in self if float_compare(l.move_id.matched_percentage, 1, precision_digits=5) == 0]
         account_move_ids = [l.move_id.id for l in self if float_compare(l.move_id._get_cash_basis_matched_percentage(), 1, precision_digits=5) == 0]
-        print("account_move_ids payslip >>>> ",account_move_ids)
         if account_move_ids:
             payslip = self.env['hr.payslip'].search([
                 ('move_id', 'in', account_move_ids), ('state', '=', 'done')

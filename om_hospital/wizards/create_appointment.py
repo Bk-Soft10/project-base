@@ -28,15 +28,12 @@ class CreateAppointment(models.TransientModel):
         #         'appointment_date': app.appointment_date
         #     }
         #     appointment_list.append(vals)
-        # # print("appointments", appointments)
         # data['appointments'] = appointment_list
-        # # print("Data", data)
         return self.env.ref('om_hospital.report_appointment').with_context(landscape=True).report_action(self, data=data)
 
     def delete_patient(self):
         for rec in self:
             rec.patient_id.unlink()
-            # print("Test". rec)
 
     # Create Record From Code
     # https://www.youtube.com/watch?v=Jssb15ADeyg&list=PLqRRLx0cl0hoJhjFWkFYowveq2Zn55dhM&index=40

@@ -135,7 +135,6 @@ class HrAppraisalForm(models.Model):
                         self.check_sent = True
                         self.check_draft = False
                 if self.hr_emp and self.emp_survey_id:
-                    print(self.emp_id.work_email)
                     self.ensure_one()
                     if not self.response_id:
                         response = self.emp_survey_id._create_answer(survey_id=self.emp_survey_id.id,

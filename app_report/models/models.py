@@ -42,15 +42,11 @@ class PurchaseOrder(models.Model):
         for rec in self:
             paid_out = 0.00
             paid_in = 0.00
-            print("ooooooooooooooo")
             if rec.invoice_ids:
                 rec.invoice_ids._get_paid_total()
-                print("jjjjjjjjjjjj", rec.invoice_ids)
                 paid_in = sum(inv.paid_total for inv in rec.invoice_ids if inv.type in ['in_invoice'] and inv.state not in ['draft', 'cancel']) or 0.00
                 paid_out = sum(inv.paid_total for inv in rec.invoice_ids if inv.type in ['in_refund'] and inv.state not in ['draft', 'cancel']) or 0.00
             rec.paid_total = paid_in - paid_out
-            print("jjjjjjjjjjjj", paid_in)
-            print("jjjjjjjjjjjj", paid_out)
 
     @api.depends('order_line.invoice_lines.move_id')
     def _compute_invoice(self):
