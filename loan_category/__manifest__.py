@@ -11,6 +11,7 @@
     'data': [
         'security/ir.model.access.csv',
         'views/hr_loan_category.xml',
+        'wizard/payment_wiz_view.xml',
     ],
     "license": "LGPL-3",
     "installable": True,

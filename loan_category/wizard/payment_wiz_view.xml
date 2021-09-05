@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-        <record id="hr_payslip_sheet_register_payment_view_form" model="ir.ui.view">
-            <field name="name">hr.payslip.register.payment.wizard.form</field>
-            <field name="model">hr.payslip.register.payment.wizard</field>
+        <record id="hr_loan_register_payment_view_form" model="ir.ui.view">
+            <field name="name">hr.loan.register.payment.wizard.form</field>
+            <field name="model">wiz.payment.loan</field>
             <field name="arch" type="xml">
                 <form string="Register Payment">
                     <sheet>
                         <field name="id" invisible="1"/>
+                        <field name="loan_id" invisible="1"/>
                         <div class="oe_title">
                             <h1>Draft Payment</h1>
                         </div>
@@ -29,21 +30,21 @@
                         </group>
                     </sheet>
                     <footer>
-                        <button string='Validate' name="expense_post_payment" type="object" class="btn-primary"/>
+                        <button string='Validate' name="create_payment" type="object" class="btn-primary"/>
                         <button string="Cancel" class="btn-default" special="cancel"/>
                     </footer>
                 </form>
             </field>
         </record>
 
-        <!-- Expenses -->
-        <record id="hr_payslip_sheet_register_payment_wizard_action" model="ir.actions.act_window">
+        <!-- loan payment -->
+        <record id="hr_loan_sheet_register_payment_wizard_action" model="ir.actions.act_window">
             <field name="name">Register Payment</field>
-            <field name="res_model">hr.payslip.register.payment.wizard</field>
+            <field name="res_model">wiz.payment.loan</field>
             <field name="view_mode">form</field>
-            <field name="view_id" ref="hr_payslip_sheet_register_payment_view_form"/>
+            <field name="view_id" ref="hr_loan_register_payment_view_form"/>
             <field name="target">new</field>
-            <field name="context">{'default_payment_type': 'inbound'}</field>
+            <field name="context">{'default_payment_type': 'inbound', 'default_partner_type': 'supplier', 'default_loan_id': active_id}</field>
             <field name="domain">[('partner_type', '=', 'supplier')]</field>
         </record>
 

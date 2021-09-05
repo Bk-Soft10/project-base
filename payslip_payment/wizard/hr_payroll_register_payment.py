@@ -11,7 +11,7 @@ _logger = logging.getLogger(__name__)
 
 class HrPayslipRegisterPaymentWizard(models.TransientModel):
     _name = "hr.payslip.register.payment.wizard"
-    _description = "Expense Report Register Payment wizard"
+    _description = "Register Payment wizard"
 
     @api.model
     def _default_partner_id(self):
@@ -99,7 +99,6 @@ class HrPayslipRegisterPaymentWizard(models.TransientModel):
         # Create payment and post it
         payment = self.env['account.payment'].create(payment_dict)
         payment.post()
-        print("uuuuuuu", payment)
         # for move in payment.move_line_ids:
         #     move.name = +
         # Log the payment in the chatter

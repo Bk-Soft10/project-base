@@ -9,10 +9,19 @@ from odoo.exceptions import UserError
 
 
 
+class AccountPayment(models.Model):
+    _inherit = 'account.payment'
+
+    loan_id = fields.Many2one('hr.loan', string="Loan Request")
+
+
+
 class HrLoan(models.Model):
     _inherit = 'hr.loan'
 
     category_id = fields.Many2one('loan.category', string="Loan Category")
+    payment_ids = fields.One2many('account.payment', 'loan_id', string='Payment List')
+    payment = fields.Boolean('Have Payment', store=True, related='category_id.payment', readonly=1)
     # payment_id = fields.Many2one('account.payment')
 
     @api.onchange('category_id')
@@ -74,8 +83,8 @@ class CategoryLoan(models.Model):
     treasury_account_id = fields.Many2one('account.account', string="Treasury Account")
     journal_id = fields.Many2one('account.journal', string="Journal")
     # payment_journal_id = fields.Many2one('account.journal', string="Journal", domain=[('type', 'in', ['bank', 'cash'])])
-    # payment = fields.Boolean('Have Payment')
+    payment = fields.Boolean('Have Payment')
 
 
 
-    
+
