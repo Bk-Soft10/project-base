@@ -10,8 +10,8 @@
     "depends": ["base", "web", "ohrms_loan_accounting", "ohrms_loan"],
     'data': [
         'security/ir.model.access.csv',
-        'views/hr_loan_category.xml',
         'wizard/payment_wiz_view.xml',
+        'views/hr_loan_category.xml',
     ],
     "license": "LGPL-3",
     "installable": True,

@@ -7,8 +7,13 @@
             <field name="model">hr.loan</field>
             <field name="inherit_id" ref="ohrms_loan.hr_loan_form_view"/>
             <field name="arch" type="xml">
+                <button name="action_cancel" position="after">
+                    <field name="payment_ids" invisible="1"/>
+                    <button name="%(loan_category.hr_loan_sheet_register_payment_wizard_action)d" context="{'default_loan_id': active_id, 'default_amount':loan_amount}" type="action" string="Create Payment" attrs="{'invisible':['|', ('payment', '=', False), ('state','not in',('approve')), '|', ('payment_ids', '!=', [])]}" states="approve"/>
+                </button>
                 <xpath expr="//field[@name='loan_amount']" position="after">
-                    <field name="category_id"  attrs="{'readonly':[('state','in',('approve', 'refuse'))]}"/>
+                    <field name="category_id" attrs="{'readonly':[('state','in',('approve', 'refuse'))]}"/>
+                    <field name="payment" readonly="1"/>
                 </xpath>
             </field>
         </record>
@@ -24,6 +29,7 @@
                             <field name="journal_id"/>
                             <field name="employee_account_id"/>
                             <field name="treasury_account_id"/>
+                            <field name="payment"/>
                         </group>
                     </sheet>
                 </form>
