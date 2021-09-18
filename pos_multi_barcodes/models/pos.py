@@ -24,6 +24,7 @@ class pos_multi_barcode_opt(models.Model):
     unit = fields.Many2one("uom.uom", string="Unit")
     product_id = fields.Many2one("product.product", string="Product")
     product_tmpl_id = fields.Many2one("product.template", string="Product Template", store=True, related='product_id.product_tmpl_id')
+    product_name = fields.Char(string="Product Name", store=True, related='product_id.product_tmpl_id.name')
 
     @api.depends('product_tmpl_id')
     def _get_product(self):
@@ -36,7 +37,7 @@ class pos_multi_barcode_opt(models.Model):
 
     @api.onchange('unit')
     def unit_id_change(self):
-        domain = {'unit': [('category_id', '=', self.product_id.uom_id.category_id.id)]}        
+        domain = {'unit': [('category_id', '=', self.product_id.uom_id.category_id.id)]}
         return {'domain': domain}
 
 
@@ -134,4 +135,3 @@ class PosOrder(models.Model):
                 moves.filtered(lambda m: m.product_id.tracking == 'none')._action_done()
 
         return True
-    

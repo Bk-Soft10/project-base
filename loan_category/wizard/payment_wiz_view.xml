@@ -44,7 +44,7 @@
             <field name="view_mode">form</field>
             <field name="view_id" ref="hr_loan_register_payment_view_form"/>
             <field name="target">new</field>
-            <field name="context">{'default_payment_type': 'inbound', 'default_partner_type': 'supplier', 'default_loan_id': active_id}</field>
+            <field name="context">{'default_payment_type': 'outbound', 'default_partner_type': 'supplier', 'default_loan_id': active_id}</field>
             <field name="domain">[('partner_type', '=', 'supplier')]</field>
         </record>
 
