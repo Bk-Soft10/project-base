@@ -19,13 +19,13 @@ class AccountInvoice(models.Model):
                     break
         return result
 
-    
+
     def action_cancel(self):
         res = super(AccountInvoice, self).action_cancel()
         self.env['account.asset.asset'].sudo().search([('invoice_id', 'in', self.ids)]).write({'active': False})
         return res
 
-    
+
     def action_move_create(self):
         result = super(AccountInvoice, self).action_move_create()
         for inv in self:
@@ -95,7 +95,7 @@ class AccountInvoiceLine(models.Model):
         elif self.move_id.type == 'in_invoice' and self.asset_category_id:
             self.account_id = self.asset_category_id.account_asset_id.id
 
-    @api.onchange('uom_id')
+    @api.onchange('product_uom_id')
     def _onchange_uom_id(self):
         result = super(AccountInvoiceLine, self)._onchange_uom_id()
         self.onchange_asset_category_id()
