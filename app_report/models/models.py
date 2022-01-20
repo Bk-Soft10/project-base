@@ -50,7 +50,7 @@ class PurchaseOrder(models.Model):
 
     @api.depends('order_line.invoice_lines.move_id')
     def _compute_invoice(self):
-        super(SaleOrder, self)._compute_invoice()
+        super(PurchaseOrder, self)._compute_invoice()
         self._get_paid_total()
 
 ####################################################################################################################################
