@@ -11,13 +11,14 @@
     'website': "https://era.net.sa",
     'category': 'accounting',
     'version': '0.1',
-    'price': 0,  
+    'price': 0,
     'currency': 'USD',
     'license': 'AGPL-3',
     'images': ['static/description/main_screenshot.png'],
     'depends': ['base', 'account', 'sale', 'purchase'],
     'data': [
         'views/partner.xml',
-        'reports/invoice_inherit_report.xml',
+        # 'reports/invoice_inherit_report.xml',
+        'reports/invoice_qr_report.xml',
     ],
 }
