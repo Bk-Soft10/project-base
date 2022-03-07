@@ -46,7 +46,7 @@ class HrPayslip(models.Model):
     ##@api.multi
     def set_to_paid(self):
         self.write({'state': 'paid'})
-    
+
     def action_payslip_done(self):
         for rec in self:
             if rec.total_amount == 0:

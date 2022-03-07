@@ -5,14 +5,16 @@
         <field name="model">account.payment</field>
         <field name="inherit_id" ref="account.view_account_payment_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='communication']" position="after">
-                <separator string="Check Information" attrs="{'invisible': [('is_check_journal','=', False)]}"/><br/>
-                        <field name="check_note" attrs="{'invisible': [('is_check_journal','=', False)], 'required': [('is_check_journal','=', True)], 'readonly': [('state','!=','draft')]}"/>
-                        <field name="check_ref" attrs="{'invisible': [('is_check_journal','=', False)], 'required': [('is_check_journal','=', True)], 'readonly': [('state','!=','draft')]}"/>
-                        <field name="check_date" attrs="{'invisible': [('is_check_journal','=', False)], 'required': [('is_check_journal','=', True)],'readonly': [('state','!=','draft')]}"/>
-                        <field name="check_journal_id" widget="selection"
+            <xpath expr="//group[@name='right_column']" position="after">
+                <group name="pdc_check" string="Check Information" attrs="{'invisible': [('is_check_journal','=', False)]}">
+                    <!--<separator string="Check Information" attrs="{'invisible': [('is_check_journal','=', False)]}"/><br/>-->
+                    <field name="check_note" attrs="{'invisible': [('is_check_journal','=', False)], 'required': [('is_check_journal','=', True)], 'readonly': [('state','!=','draft')]}"/>
+                    <field name="check_ref" attrs="{'invisible': [('is_check_journal','=', False)], 'required': [('is_check_journal','=', True)], 'readonly': [('state','!=','draft')]}"/>
+                    <field name="check_date" attrs="{'invisible': [('is_check_journal','=', False)], 'required': [('is_check_journal','=', True)],'readonly': [('state','!=','draft')]}"/>
+                    <field name="check_journal_id" widget="selection"
                                attrs="{'invisible': [('is_check_journal','=', False)], 'readonly': [('state','!=','draft')], 'required': [('is_check_journal', '=', True), ('payment_type', '=', 'outbound')]}"/>
-                        <field name="is_check_journal" invisible="1"/>
+                    <field name="is_check_journal" invisible="1"/>
+                </group>
             </xpath>
         </field>
        </record>

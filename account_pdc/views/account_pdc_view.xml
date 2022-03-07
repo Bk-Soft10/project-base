@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
+    <record id="action_update_pdc_move" model="ir.actions.server">
+        <field name="name">PDC Update Move Date</field>
+        <field name="model_id" ref="model_account_pdc"/>
+        <field name="binding_model_id" ref="model_account_pdc"/>
+        <field name="state">code</field>
+        <field name="code">
+         model.update_pdc_move()
+        </field>
+    </record>
+
     <record id="view_account_pdc_calendar" model="ir.ui.view">
         <field name="name">account.pdc.calendar</field>
         <field name="model">account.pdc</field>
@@ -72,6 +83,7 @@
                             </div>
                         <field name="partner_id" readonly="1"/>
                         <field name="maturity_date" attrs="{'readonly': [('state','!=','draft')]}"/>
+                        <field name="with_check_date" attrs="{'readonly': [('state','!=','draft')]}"/>
                     </group>
                     <group>
                         <field name="journal_id" widget="selection" attrs="{'readonly': [('state','!=','draft')]}"/>
