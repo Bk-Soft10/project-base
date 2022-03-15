@@ -27,6 +27,7 @@ class AccountingReport(models.TransientModel):
     print_type = fields.Selection([('pdf', 'PDF'), ('xls', 'Excel')], string='Report Type', required=True, default='pdf')
     date_from_cmp = fields.Date(string='Start Date')
     date_to_cmp = fields.Date(string='End Date')
+    opening_balance = fields.Boolean(string='Opening Balance')
     debit_credit = fields.Boolean(string='Display Debit/Credit Columns', help="This option allows you to get more details about the way your balances are computed. Because it is space consuming, we do not allow to use it while doing a comparison.")
 
     def _build_comparison_context(self, data):
@@ -42,7 +43,7 @@ class AccountingReport(models.TransientModel):
     def check_report(self):
         res = super(AccountingReport, self).check_report()
         data = {}
-        data['form'] = self.read(['account_report_id', 'date_from_cmp', 'date_to_cmp', 'journal_ids', 'filter_cmp', 'target_move'])[0]
+        data['form'] = self.read(['account_report_id', 'date_from_cmp', 'date_to_cmp', 'journal_ids', 'filter_cmp', 'target_move', 'opening_balance'])[0]
         for field in ['account_report_id']:
             if isinstance(data['form'][field], tuple):
                 data['form'][field] = data['form'][field][0]
@@ -53,9 +54,8 @@ class AccountingReport(models.TransientModel):
     def _print_report(self, data):
         #report_financial_xlsx
         if self.print_type == 'pdf':
-            data['form'].update(self.read(['date_from_cmp', 'debit_credit', 'date_to_cmp', 'filter_cmp', 'account_report_id', 'enable_filter', 'label_filter', 'target_move','print_type'])[0])
+            data['form'].update(self.read(['date_from_cmp', 'debit_credit', 'date_to_cmp', 'filter_cmp', 'account_report_id', 'enable_filter', 'label_filter', 'target_move', 'print_type', 'opening_balance'])[0])
             return self.env.ref('app_financial_report.action_report_financial').report_action(self, data=data, config=False)
         else:
-            data['form'].update(self.read(['date_from_cmp', 'debit_credit', 'date_to_cmp', 'filter_cmp', 'account_report_id', 'enable_filter', 'label_filter', 'target_move','print_type'])[0])
-            return self.env.ref('app_financial_report.report_financial_xlsx').with_context(
-                landscape=True).report_action(self, data=data)
+            data['form'].update(self.read(['date_from_cmp', 'debit_credit', 'date_to_cmp', 'filter_cmp', 'account_report_id', 'enable_filter', 'label_filter', 'target_move', 'print_type', 'opening_balance'])[0])
+            return self.env.ref('app_financial_report.report_financial_xlsx').with_context(landscape=True).report_action(self, data=data)
