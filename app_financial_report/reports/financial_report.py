@@ -191,9 +191,9 @@ class ReportFinancial(models.AbstractModel):
                         'account_type': account.internal_type,
                     }
                     if data['opening_balance']:
-                        vals['op_debit'] = res[report.id]['op_debit']
-                        vals['op_credit'] = res[report.id]['op_credit']
-                        vals['op_balance'] = res[report.id]['op_balance']
+                        vals['op_debit'] = value['op_debit']
+                        vals['op_credit'] = value['op_credit']
+                        vals['op_balance'] = value['op_balance']
                     if data['debit_credit']:
                         vals['debit'] = value['debit']
                         vals['credit'] = value['credit']
