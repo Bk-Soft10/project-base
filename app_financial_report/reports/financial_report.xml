@@ -27,32 +27,63 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
+                                    <th class="text-right">O-Debit</th>
+                                    <th class="text-right">O-Credit</th>
+                                    <th class="text-right"/>
                                     <th class="text-right">Debit</th>
                                     <th class="text-right">Credit</th>
+                                    <th class="text-right"/>
+                                    <th class="text-right">C-Debit</th>
+                                    <th class="text-right">C-Credit</th>
                                     <th class="text-right"/>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr t-foreach="get_account_lines" t-as="a">
                                     <t t-if="a['level'] != 0">
+                                        <t t-set="debit" t-value="a.get('debit')"/>
+                                        <t t-set="credit" t-value="a.get('credit')"/>
+                                        <t t-set="balance" t-value="a.get('balance')"/>
+                                        <t t-set="op_debit" t-value="a.get('op_debit')"/>
+                                        <t t-set="op_credit" t-value="a.get('op_credit')"/>
+                                        <t t-set="op_balance" t-value="a.get('op_balance')"/>
+                                        <t t-set="fn_debit" t-value="debit + op_debit"/>
+                                        <t t-set="fn_credit" t-value="credit + op_credit"/>
+                                        <t t-set="fn_balance" t-value="balance + op_balance"/>
                                         <t t-if="a.get('level') &gt; 3"><t t-set="style" t-value="'font-weight: normal;'"/></t>
                                         <t t-if="not a.get('level') &gt; 3"><t t-set="style" t-value="'font-weight: bold;'"/></t>
                                         <td>
                                             <span style="color: white;" t-esc="'..' * a.get('level', 0)"/>
                                             <span t-att-style="style" t-esc="a.get('name')"/>
                                         </td>
+
                                         <td class="text-right" style="white-space: text-nowrap;">
-<!--                                            <t t-if="a.get('debit')">-->
-                                            <span t-att-style="style" t-esc="a.get('debit')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
-<!--                                            </t>-->
+                                            <span t-att-style="style" t-esc="op_debit" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                         </td>
                                         <td class="text-right" style="white-space: text-nowrap;">
-<!--                                            <t t-if="a.get('credit')">-->
-                                            <span t-att-style="style" t-esc="a.get('credit')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
-<!--                                            </t>-->
+                                            <span t-att-style="style" t-esc="op_credit" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                         </td>
                                         <td class="text-right" style="white-space: text-nowrap;">
-                                            <span t-att-style="style" t-esc="a.get('balance')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                            <span t-att-style="style" t-esc="op_balance" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                        </td>
+                                        <td class="text-right" style="white-space: text-nowrap;">
+                                            <span t-att-style="style" t-esc="debit" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                        </td>
+                                        <td class="text-right" style="white-space: text-nowrap;">
+                                            <span t-att-style="style" t-esc="credit" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                        </td>
+                                        <td class="text-right" style="white-space: text-nowrap;">
+                                            <span t-att-style="style" t-esc="balance" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                        </td>
+
+                                        <td class="text-right" style="white-space: text-nowrap;">
+                                            <span t-att-style="style" t-esc="fn_debit" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                        </td>
+                                        <td class="text-right" style="white-space: text-nowrap;">
+                                            <span t-att-style="style" t-esc="fn_credit" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                        </td>
+                                        <td class="text-right" style="white-space: text-nowrap;">
+                                            <span t-att-style="style" t-esc="fn_balance" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                         </td>
                                     </t>
                                 </tr>
@@ -63,19 +94,26 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th class="text-right"/>
+                                    <th class="text-right">Opening Balance</th>
+                                    <th class="text-right">Current Balance</th>
+                                    <th class="text-right">Final Balance</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr t-foreach="get_account_lines" t-as="a">
                                     <t t-if="a['level'] != 0">
+                                        <t t-set="balance" t-value="a.get('balance')"/>
+                                        <t t-set="op_balance" t-value="a.get('op_balance')"/>
+                                        <t t-set="fn_balance" t-value="balance + op_balance"/>
                                         <t t-if="a.get('level') &gt; 3"><t t-set="style" t-value="'font-weight: normal;'"/></t>
                                         <t t-if="not a.get('level') &gt; 3"><t t-set="style" t-value="'font-weight: bold;'"/></t>
                                         <td>
                                             <span style="color: white;" t-esc="'..' * a.get('level', 0)"/>
                                             <span t-att-style="style" t-esc="a.get('name')"/>
                                         </td>
-                                        <td class="text-right"><span t-att-style="style" t-esc="a.get('balance')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/></td>
+                                        <td class="text-right"><span t-att-style="style" t-esc="op_balance" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/></td>
+                                        <td class="text-right"><span t-att-style="style" t-esc="balance" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/></td>
+                                        <td class="text-right"><span t-att-style="style" t-esc="fn_balance" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/></td>
                                     </t>
                                 </tr>
                             </tbody>

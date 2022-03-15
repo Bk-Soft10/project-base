@@ -11,6 +11,34 @@ from odoo.exceptions import UserError
 class ReportFinancial(models.AbstractModel):
     _name = 'report.app_financial_report.report_financial'
 
+    def _compute_account_op_balance(self, accounts):
+        mapping = {
+            'op_balance': "COALESCE(SUM(debit),0) - COALESCE(SUM(credit), 0) as op_balance",
+            'op_debit': "COALESCE(SUM(debit), 0) as op_debit",
+            'op_credit': "COALESCE(SUM(credit), 0) as op_credit",
+        }
+
+        res = {}
+        for account in accounts:
+            res[account.id] = dict.fromkeys(mapping, 0.0)
+        if accounts:
+            tables, where_clause, where_params = self.env['account.move.line'].with_context(initial_bal=True, date_to=False)._query_get()
+            tables = tables.replace('"', '') if tables else "account_move_line"
+            wheres = [""]
+            if where_clause.strip():
+                wheres.append(where_clause.strip())
+            filters = " AND ".join(wheres)
+            request = "SELECT account_id as id, " + ', '.join(mapping.values()) + \
+                      " FROM " + tables + \
+                      " WHERE account_id IN %s " \
+                      + filters + \
+                      " GROUP BY account_id"
+            params = (tuple(accounts._ids),) + tuple(where_params)
+            self.env.cr.execute(request, params)
+            for row in self.env.cr.dictfetchall():
+                res[row['id']] = row
+        return res
+
     def _compute_account_balance(self, accounts):
         mapping = {
             'balance': "COALESCE(SUM(debit),0) - COALESCE(SUM(credit), 0) as balance",
@@ -40,9 +68,12 @@ class ReportFinancial(models.AbstractModel):
         return res
 
     def _compute_report_balance(self, reports):
-
         res = {}
         fields = ['credit', 'debit', 'balance']
+        opening_balance_val = self.env.context.get('opening_balance')
+        if opening_balance_val == True:
+            fields = ['credit', 'debit', 'balance', 'op_credit', 'op_debit', 'op_balance']
+
         for report in reports:
             if report.id in res:
                 continue
@@ -50,36 +81,46 @@ class ReportFinancial(models.AbstractModel):
             if report.type == 'account_type':
                 # it's the sum the leaf accounts with such an account type
                 accounts = self.env['account.account'].search([('user_type_id', 'in', report.account_type_ids.ids)])
-                res[report.id]['account'] = self._compute_account_balance(accounts)
+                res[report.id]['account'] = self.update_bal_values(opening_balance_val, accounts)
+                for value in res[report.id]['account'].values():
+                    for field in fields:
+                        res[report.id][field] += value.get(field)
+            elif report.type == 'accounts':
+                # it's the amount of the linked
+                res[report.id]['account'] = self.update_bal_values(opening_balance_val, report.account_ids)
                 for value in res[report.id]['account'].values():
                     for field in fields:
                         res[report.id][field] += value.get(field)
             elif report.type == 'account_report' and report.account_report_id:
                 # it's the amount of the linked
                 #res[report.id]['account'] = self._compute_report_balance(report.account_report_id)
-                res[report.id]['account'] = self._compute_account_balance(report.account_report_id.account_ids)
+                res[report.id]['account'] = self.update_bal_values(opening_balance_val, report.account_report_id.account_ids)
                 for value in res[report.id]['account'].values():
                     for field in fields:
                         res[report.id][field] += value.get(field)
                 res[report.id]['account'] = False
-            elif report.type == 'accounts':
-                # it's the amount of the linked
-                res[report.id]['account'] = self._compute_account_balance(report.account_ids)
-                for value in res[report.id]['account'].values():
-                    for field in fields:
-                        res[report.id][field] += value.get(field)
 
             elif report.type == 'sum':
                 # it's the sum of the linked accounts
                 accc_idds = self.get_acc_group_root(report)
-                res[report.id]['account'] = self._compute_account_balance(accc_idds)
+                self.update_bal_values(opening_balance_val, accc_idds)
+                res[report.id]['account'] = self.update_bal_values(opening_balance_val, accc_idds)
                 for values in res[report.id]['account'].values():
                     for field in fields:
                         res[report.id][field] += values.get(field)
                 res[report.id]['account'] = False
         return res
 
-    def get_acc_group_root(self,group):
+    def update_bal_values(self, op_bal, account_ids):
+        bal_vals = self._compute_account_balance(account_ids)
+        if op_bal == True:
+            op_bal_vals = self._compute_account_op_balance(account_ids)
+            for key in bal_vals:
+                if key in op_bal_vals:
+                    bal_vals[key].update(op_bal_vals[key])
+        return bal_vals
+
+    def get_acc_group_root(self, group):
         account_ids = self.env['account.account']
         if group.type == 'sum':
             for group_child_id in group._get_children_by_order():
@@ -99,7 +140,7 @@ class ReportFinancial(models.AbstractModel):
         lines = []
         account_report = self.env['account.financial.report'].search([('id', '=', data['account_report_id'][0])])
         child_reports = account_report._get_children_by_order()
-        res = self.with_context(data.get('used_context'))._compute_report_balance(child_reports)
+        res = self.with_context(data.get('used_context'), opening_balance=data['opening_balance'])._compute_report_balance(child_reports)
         if data['enable_filter']:
             comparison_res = self.with_context(data.get('comparison_context'))._compute_report_balance(child_reports)
             for report_id, value in comparison_res.items():
@@ -120,6 +161,10 @@ class ReportFinancial(models.AbstractModel):
             if data['debit_credit']:
                 vals['debit'] = res[report.id]['debit']
                 vals['credit'] = res[report.id]['credit']
+            if data['opening_balance']:
+                vals['op_debit'] = res[report.id]['op_debit']
+                vals['op_credit'] = res[report.id]['op_credit']
+                vals['op_balance'] = res[report.id]['op_balance']
 
             if data['enable_filter']:
                 vals['balance_cmp'] = res[report.id]['comp_bal'] * float(report.sign) if report.sign else 1
@@ -131,7 +176,6 @@ class ReportFinancial(models.AbstractModel):
             if res[report.id].get('account'):
                 # if res[report.id].get('debit'):
                 sub_lines = []
-                print("acc res ff ",res[report.id])
                 for account_id, value in res[report.id]['account'].items():
                     # if there are accounts to display, we add them to the lines with a level equals to their level in
                     # the COA + 1 (to avoid having them with a too low level that would conflicts with the level of data
@@ -146,6 +190,10 @@ class ReportFinancial(models.AbstractModel):
                         'level': report.display_detail == 'detail_with_hierarchy' and 4,
                         'account_type': account.internal_type,
                     }
+                    if data['opening_balance']:
+                        vals['op_debit'] = res[report.id]['op_debit']
+                        vals['op_credit'] = res[report.id]['op_credit']
+                        vals['op_balance'] = res[report.id]['op_balance']
                     if data['debit_credit']:
                         vals['debit'] = value['debit']
                         vals['credit'] = value['credit']
@@ -161,12 +209,10 @@ class ReportFinancial(models.AbstractModel):
                     if flag:
                         sub_lines.append(vals)
                 lines += sorted(sub_lines, key=lambda sub_line: sub_line['name'])
-        print(lines)
         return lines
 
     @api.model
     def _get_report_values(self, docids, data=None):
-        print('success')
         if not data.get('form') or not self.env.context.get('active_model') or not self.env.context.get('active_id'):
             raise UserError(_("Form content is missing, this report cannot be printed."))
 
@@ -197,10 +243,7 @@ class AccountAccount(models.Model):
 
     @api.onchange('cash_flow_type')
     def onchange_cash_flow_type(self):
-        print(self._origin.id, "self.cash_flow_type", self._origin.cash_flow_type)
-
         for rec in self.cash_flow_type:
-            print('rec', rec)
             # update new record
             rec.write({
                 'account_ids': [(4, self._origin.id)]
@@ -208,7 +251,6 @@ class AccountAccount(models.Model):
 
         if self._origin.cash_flow_type.ids:
             for rec in self._origin.cash_flow_type:
-                print('delete', rec.name)
                 # remove old record
                 rec.write({
                     'account_ids': [(3, self._origin.id)]
