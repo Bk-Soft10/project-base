@@ -12,7 +12,7 @@ from odoo.addons.web.controllers import main as report
 
 class ReportController(report.ReportController):
     @route()
-    def report_routes(self, reportname, docids=None, converter=None, **data):
+    def report_routes(self, reportname, docids=[], converter=None, **data):
         if converter == "xlsx":
             report = request.env["ir.actions.report"]._get_report_from_name(reportname)
             context = dict(request.env.context)
@@ -30,7 +30,8 @@ class ReportController(report.ReportController):
                 context.update(data["context"])
             xlsx = report.with_context(context).render_xlsx(docids, data=data)[0]
             report_name = report.report_file
-            if report.print_report_name and not len(docids) > 1:
+            print(docids)
+            if report.print_report_name and docids and not len(docids) > 1:
                 obj = request.env[report.model].browse(docids[0])
                 report_name = safe_eval(
                     report.print_report_name, {"object": obj, "time": time}
