@@ -14,8 +14,6 @@ class ReportFinancialXls(models.AbstractModel):
 
     def generate_xlsx_report(self, workbook, data, wizard):
 
-        #lines = self.getFilterdValue(wizard)
-
         sheet = workbook.add_worksheet(wizard.account_report_id.name)
 
         header_format_sheet = workbook.add_format({'font_size': 10,
@@ -106,14 +104,14 @@ class ReportFinancialXls(models.AbstractModel):
             for report_child_id in report._get_children_by_order():
                 if report_child_id.type == 'account_report' and report_child_id.account_report_id:
                     for report_child_idd in report_child_id.account_report_id._get_children_by_order():
-                        bl += sum(float(acc_data['balance_sum']) for acc_data in self.get_account_report(wizard, report_child_idd))
-                bl += sum(float(acc_data['balance_sum']) for acc_data in self.get_account_report(wizard, report_child_id))
-            return bl
+                        bl += sum(round(acc_data['balance_sum'], 2) for acc_data in self.get_account_report(wizard, report_child_idd))
+                bl += sum(round(acc_data['balance_sum'], 2) for acc_data in self.get_account_report(wizard, report_child_id))
+            return round(bl, 2)
         if report.type == 'account_report':
             bl = 0.00
             for report_child_id in report.account_report_id._get_children_by_order():
-                bl += sum(float(acc_data['balance_sum']) for acc_data in self.get_account_report(wizard, report_child_id))
-            return bl
+                bl += sum(round(acc_data['balance_sum'], 2) for acc_data in self.get_account_report(wizard, report_child_id))
+            return round(bl, 2)
 
     def get_account_report(self, wizard, report):
         accounts = False
@@ -122,12 +120,6 @@ class ReportFinancialXls(models.AbstractModel):
             accounts = self.env['account.account'].search([('id', 'in', report.account_ids.ids)])
         elif report.type == 'account_type':
             accounts = self.env['account.account'].search([('user_type_id.id', 'in', report.account_type_ids.ids)])
-
-        # elif report.type == 'sum':
-        #     accounts = False
-        #     accounts = report._get_children_by_order().filtered(lambda ex: ex.type == 'accounts').mapped('account_ids')
-        #     sum_report_account_type = report._get_children_by_order().filtered(lambda ex: ex.type == 'account_type').mapped('account_type_ids')
-        #     accounts += self.env['account.account'].search([('user_type_id.id', 'in', sum_report_account_type.ids if sum_report_account_type else [])])
         else:
             accounts = False
         if accounts:
@@ -136,19 +128,33 @@ class ReportFinancialXls(models.AbstractModel):
 
     def _get_bal_accounts(self, wizard, report, account_ids):
         account_lines = []
-        data_account_line = self.getFilterdValue(wizard, account_ids)
+        data_account_line, dict_bal = self.getFilterdValue(wizard, account_ids)
+        if wizard.opening_balance == True:
+            data_account_op, dict_op_bal = self.getOPFilterdValue(wizard, account_ids)
+            for key in dict_bal:
+                if key in dict_op_bal:
+                    dict_bal[key].update(dict_op_bal[key])
+            data_account_line = [item for item in dict_bal.values()]
         if data_account_line:
             for line in data_account_line:
-                account_lines.append(({
-                    'account_id': line[0],
-                    'account_name': line[1],
-                    'account_code': line[2],
-                    'debit_sum': line[3],
-                    'credit_sum': line[4],
-                    'balance_sum': line[5],
+                line_dict = {
+                    'account_id': line.get('account_id'),
+                    'account_name': line.get('account_name'),
+                    'account_code': line.get('account_code'),
+                    'debit_sum': round(line.get('debit_sum'), 2) or 0,
+                    'credit_sum': round(line.get('credit_sum'), 2) or 0,
+                    'balance_sum': round(line.get('balance_sum'), 2) or 0,
                     'group_type': report.type,
                     'group_id': report.id,
-                }))
+                }
+                if wizard.opening_balance == True:
+                    line_dict['op_debit_sum'] = round(line.get('op_debit_sum'), 2) if 'op_debit_sum' in line else 0
+                    line_dict['op_credit_sum'] = round(line.get('op_credit_sum'), 2) if 'op_credit_sum' in line else 0
+                    line_dict['op_balance_sum'] = round(line.get('op_balance_sum'), 2) if 'op_balance_sum' in line else 0
+                    line_dict['fn_debit_sum'] = line_dict.get('op_debit_sum') + line_dict.get('debit_sum')
+                    line_dict['fn_credit_sum'] = line_dict.get('op_credit_sum') + line_dict.get('credit_sum')
+                    line_dict['fn_balance_sum'] = line_dict.get('op_balance_sum') + line_dict.get('balance_sum')
+                account_lines.append(line_dict)
         return account_lines
 
     def getFilterdValue(self, wizard, account_ids):
@@ -170,7 +176,7 @@ class ReportFinancialXls(models.AbstractModel):
                 query_where += " and m_line.date <= '%s'" % (datetime.strptime(str(wizard.date_to), '%Y-%m-%d'),)
 
         query_all = """
-        SELECT m_line.account_id as account,
+        SELECT m_line.account_id as account_id,
         acc.name as account_name,
         acc.code as account_code,
         SUM(m_line.debit) as debit_sum,
@@ -189,5 +195,50 @@ class ReportFinancialXls(models.AbstractModel):
 
         self.env.cr.execute(query_all)
 
-        result = self.env.cr.fetchall() or False
-        return result
+        result = self.env.cr.dictfetchall() or False
+        result2 = {}
+        for row in result:
+            result2[row['account_id']] = row
+        return result, result2
+
+    def getOPFilterdValue(self, wizard, account_ids):
+        query_where = "where m_line.move_id = m.id "
+
+        if wizard.target_move == 'posted':
+            query_where += " and m.state = 'posted' "
+
+        if account_ids:
+            if (len(account_ids) == 1):
+                query_where += " and m_line.account_id = %s " % (account_ids[0])
+            else:
+                query_where += " and m_line.account_id IN %s " % (tuple(account_ids),)
+
+        if wizard.date_from:
+            if wizard.date_from:
+                query_where += " and m_line.date < '%s'" % (datetime.strptime(str(wizard.date_from), '%Y-%m-%d'),)
+
+        query_all = """
+        SELECT m_line.account_id as account_id,
+        acc.name as account_name,
+        acc.code as account_code,
+        SUM(m_line.debit) as op_debit_sum,
+        SUM(m_line.credit) as op_credit_sum,
+        (SUM(m_line.debit)-SUM(m_line.credit)) as op_balance_sum
+        FROM account_move_line m_line
+        JOIN account_move m ON
+        m_line.move_id = m.id
+        JOIN account_account acc ON
+        m_line.account_id = acc.id
+        """
+        if query_where:
+            query_all = query_all + query_where + " group by m_line.account_id,acc.name,acc.id "
+        else:
+            query_all = query_all + " group by m_line.account_id "
+
+        self.env.cr.execute(query_all)
+
+        result = self.env.cr.dictfetchall() or False
+        result2 = {}
+        for row in result:
+            result2[row['account_id']] = row
+        return result, result2
