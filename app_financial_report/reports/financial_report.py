@@ -93,8 +93,10 @@ class ReportFinancial(models.AbstractModel):
                         res[report.id][field] += value.get(field)
             elif report.type == 'account_report' and report.account_report_id:
                 # it's the amount of the linked
+                accc_idds = self.get_acc_group_root(report.account_report_id)
+                res[report.id]['account'] = self.update_bal_values(opening_balance_val, accc_idds)
                 #res[report.id]['account'] = self._compute_report_balance(report.account_report_id)
-                res[report.id]['account'] = self.update_bal_values(opening_balance_val, report.account_report_id.account_ids)
+                # res[report.id]['account'] = self.update_bal_values(opening_balance_val, report.account_report_id.account_ids)
                 for value in res[report.id]['account'].values():
                     for field in fields:
                         res[report.id][field] += value.get(field)
@@ -103,7 +105,6 @@ class ReportFinancial(models.AbstractModel):
             elif report.type == 'sum':
                 # it's the sum of the linked accounts
                 accc_idds = self.get_acc_group_root(report)
-                self.update_bal_values(opening_balance_val, accc_idds)
                 res[report.id]['account'] = self.update_bal_values(opening_balance_val, accc_idds)
                 for values in res[report.id]['account'].values():
                     for field in fields:
@@ -127,13 +128,25 @@ class ReportFinancial(models.AbstractModel):
                 if group_child_id.type == 'accounts':
                     account_ids += group_child_id.account_ids
                 if group_child_id.type == 'account_type':
-                    account_ids += self.env['account.account'].search([('user_type_id.id','in',group_child_id.account_type_ids.ids)])
-        if group.type == 'account_report':
-            for group_child_id in group._get_children_by_order():
+                    account_ids += self.env['account.account'].search([('user_type_id.id', 'in', group_child_id.account_type_ids.ids)])
+                if group_child_id.type == 'sum':
+                    account_ids += group_child_id._get_children_by_order().filtered(lambda ex: ex.type == 'accounts').mapped('account_ids')
+                    sum_report_account_type = group_child_id._get_children_by_order().filtered(lambda ex: ex.type == 'account_type').mapped('account_type_ids')
+                    account_ids += self.env['account.account'].search([('user_type_id.id', 'in', sum_report_account_type.ids if sum_report_account_type else [])])
+                if group_child_id.type == 'account_report' and group_child_id.account_report_id:
+                    account_ids += group_child_id.account_report_id._get_children_by_order().filtered(lambda ex: ex.type == 'accounts').mapped('account_ids')
+                    sum_report_account_type = group_child_id.account_report_id._get_children_by_order().filtered(lambda ex: ex.type == 'account_type').mapped('account_type_ids')
+                    account_ids += self.env['account.account'].search([('user_type_id.id', 'in', sum_report_account_type.ids if sum_report_account_type else [])])
+        if group.type == 'account_report' and group.account_report_id:
+            for group_child_id in group.account_report_id._get_children_by_order():
                 if group_child_id.type == 'accounts':
                     account_ids += group_child_id.account_ids
                 if group_child_id.type == 'account_type':
-                    account_ids += self.env['account.account'].search([('user_type_id.id','in',group_child_id.account_type_ids.ids)])
+                    account_ids += self.env['account.account'].search([('user_type_id.id', 'in', group_child_id.account_type_ids.ids)])
+                if group_child_id.type == 'sum':
+                    account_ids += group_child_id._get_children_by_order().filtered(lambda ex: ex.type == 'accounts').mapped('account_ids')
+                    sum_report_account_type = group_child_id._get_children_by_order().filtered(lambda ex: ex.type == 'account_type').mapped('account_type_ids')
+                    account_ids += self.env['account.account'].search([('user_type_id.id', 'in', sum_report_account_type.ids if sum_report_account_type else [])])
         return account_ids
 
     def get_account_lines(self, data):

@@ -58,91 +58,98 @@ class ReportFinancialXls(models.AbstractModel):
         prod_col = 0
         for header_val in HEADER_VALS1:
             sheet.write(prod_row, prod_col, header_val, header_format_sheet)
-            sheet.set_column(prod_row, prod_col, len(header_val) * 1.5)
+            sheet.set_column(prod_row, prod_col, len(header_val) * 4)
             prod_col += 1
         for root_tree in wizard.account_report_id._get_children_by_order():
             prod_row += 1
             if root_tree.type == 'sum':
                 sheet.write(prod_row, 0, root_tree.name, data_font_size_88)
-            if root_tree.type == 'account_report':
+            elif root_tree.type == 'account_report':
                 sheet.write(prod_row, 0, root_tree.name, data_font_size_85)
             else:
                 sheet.write(prod_row, 0, root_tree.name, data_font_size_8)
-            sheet.set_column(prod_row, 0, len(root_tree.name) * 1.1)
+                # pass
+            sheet.set_column(prod_row, 0, len(root_tree.name) * 4)
             sheet.write(prod_row, 1, "", data_font_size_8)
-            ddd_data = self.get_account_group(wizard,root_tree)
+            ddd_data = self.get_account_report(wizard, root_tree)
             if root_tree.type == 'sum':
-                sheet.write(prod_row, 2, self.get_sum_group_balance(wizard,root_tree), data_font_size_8)
+                sheet.write(prod_row, 2, self.get_sum_report_balance(wizard, root_tree), data_font_size_8)
             elif root_tree.type == 'account_report':
-                sheet.write(prod_row, 2, self.get_sum_group_balance(wizard,root_tree), data_font_size_8)
+                sheet.write(prod_row, 2, self.get_sum_report_balance(wizard, root_tree), data_font_size_8)
             else:
                 sum_balance = sum(float(pp['balance_sum']) for pp in ddd_data)
                 sheet.write(prod_row, 2, sum_balance, data_font_size_8)
             bal_sum = 0
-            if root_tree.type in ['accounts','account_type']:
+            if root_tree.type in ['accounts', 'account_type']:
                 for parent_root in ddd_data:
                     prod_row = prod_row + 1
-                    account_id = self.env['account.account'].search([('id','=',int(parent_root['account_id']))],limit=1)
-                    sheet.write(prod_row, 1, account_id.display_name + '(' + account_id.company_id.display_name + ')', data_font_size_8)
+                    account_id = self.env['account.account'].search([('id', '=', int(parent_root['account_id']))], limit=1)
+                    sheet.write(prod_row, 1, account_id.display_name, data_font_size_8)
                     sheet.write(prod_row, 2, parent_root['balance_sum'], data_font_size_8)
-                    # sheet.write(prod_row, 3, "", data_font_size_8)
-                    # sheet.write(prod_row, 4, 0, data_font_size_8)
                     bal_sum = bal_sum + float(parent_root['balance_sum'])
 
-    def get_sum_group_balance(self, wizard, group):
-        if group.type == 'sum':
+    def get_sum_report_balance(self, wizard, report):
+        if report.type == 'sum':
             bl = 0.00
-            for group_child_id in group._get_children_by_order():
-                bl += sum(float(acc_data['balance_sum']) for acc_data in self.get_account_group(wizard, group_child_id))
+            for report_child_id in report._get_children_by_order():
+                report_child = report_child_id
+                if report_child_id.type == 'account_report':
+                    report_child = report_child_id.account_report_id
+                bl += sum(float(acc_data['balance_sum']) for acc_data in self.get_account_report(wizard, report_child))
             return bl
-        if group.type == 'account_report':
+        if report.type == 'account_report':
             bl = 0.00
-            for group_child_id in group.account_report_id._get_children_by_order():
-                bl += sum(float(acc_data['balance_sum']) for acc_data in self.get_account_group(wizard, group_child_id))
+            for report_child_id in report.account_report_id._get_children_by_order():
+                bl += sum(float(acc_data['balance_sum']) for acc_data in self.get_account_report(wizard, report_child_id))
             return bl
 
-    def get_account_group(self, wizard, group):
+    def get_account_report(self, wizard, report):
         accounts = False
         account_lines = []
-        if group.type == 'accounts':
-            accounts = self.env['account.account'].search([('id', 'in', group.account_ids.ids)])
-        elif group.type == 'account_type':
-            accounts = self.env['account.account'].search([('user_type_id.id', 'in', group.account_type_ids.ids)])
+        if report.type == 'accounts':
+            accounts = self.env['account.account'].search([('id', 'in', report.account_ids.ids)])
+        elif report.type == 'account_type':
+            accounts = self.env['account.account'].search([('user_type_id.id', 'in', report.account_type_ids.ids)])
         else:
             accounts = False
         if accounts:
-            data_account_line = self.getFilterdValue(wizard, accounts)
-            if data_account_line:
-                for line in self.getFilterdValue(wizard, accounts):
-                    account_lines.append(({
-                        'account_id': line[0],
-                        'account_name': line[1],
-                        'account_code': line[2],
-                        'debit_sum': line[3],
-                        'credit_sum': line[4],
-                        'balance_sum': line[5],
-                        'group_type': group.type,
-                        'group_id': group.id,
-                    }))
+            account_lines = self._get_bal_accounts(wizard, report, accounts.ids)
+        return account_lines
+
+    def _get_bal_accounts(self, wizard, report, account_ids):
+        account_lines = []
+        data_account_line = self.getFilterdValue(wizard, account_ids)
+        if data_account_line:
+            for line in data_account_line:
+                account_lines.append(({
+                    'account_id': line[0],
+                    'account_name': line[1],
+                    'account_code': line[2],
+                    'debit_sum': line[3],
+                    'credit_sum': line[4],
+                    'balance_sum': line[5],
+                    'group_type': report.type,
+                    'group_id': report.id,
+                }))
         return account_lines
 
     def getFilterdValue(self, wizard, account_ids):
-        query_a = "where m_line.move_id = m.id "
+        query_where = "where m_line.move_id = m.id "
 
         if wizard.target_move == 'posted':
-            query_a += " and m.state = 'posted' "
+            query_where += " and m.state = 'posted' "
 
         if account_ids:
-            if (len(account_ids.ids) == 1):
-                query_a += " and m_line.account_id = %s " % (account_ids.ids[0])
+            if (len(account_ids) == 1):
+                query_where += " and m_line.account_id = %s " % (account_ids[0])
             else:
-                query_a += " and m_line.account_id IN %s " % (tuple(account_ids.ids),)
+                query_where += " and m_line.account_id IN %s " % (tuple(account_ids),)
 
         if wizard.date_from or wizard.date_to:
             if wizard.date_from:
-                query_a += " and m_line.date >= '%s'" % (datetime.strptime(str(wizard.date_from), '%Y-%m-%d'),)
+                query_where += " and m_line.date >= '%s'" % (datetime.strptime(str(wizard.date_from), '%Y-%m-%d'),)
             if wizard.date_to:
-                query_a += " and m_line.date <= '%s'" % (datetime.strptime(str(wizard.date_to), '%Y-%m-%d'),)
+                query_where += " and m_line.date <= '%s'" % (datetime.strptime(str(wizard.date_to), '%Y-%m-%d'),)
 
         query_all = """
         SELECT m_line.account_id as account,
@@ -157,8 +164,8 @@ class ReportFinancialXls(models.AbstractModel):
         JOIN account_account acc ON
         m_line.account_id = acc.id
         """
-        if query_a:
-            query_all = query_all + query_a + " group by m_line.account_id,acc.name,acc.id "
+        if query_where:
+            query_all = query_all + query_where + " group by m_line.account_id,acc.name,acc.id "
         else:
             query_all = query_all + " group by m_line.account_id "
 

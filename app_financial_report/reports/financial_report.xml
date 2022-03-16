@@ -40,7 +40,7 @@
                             </thead>
                             <tbody>
                                 <tr t-foreach="get_account_lines" t-as="a">
-                                    <t t-if="a['level'] != 0">
+                                    <t>
                                         <t t-set="debit" t-value="a.get('debit')"/>
                                         <t t-set="credit" t-value="a.get('credit')"/>
                                         <t t-set="balance" t-value="a.get('balance')"/>
@@ -102,7 +102,7 @@
                             </thead>
                             <tbody>
                                 <tr t-foreach="get_account_lines" t-as="a">
-                                    <t t-if="a['level'] != 0">
+                                    <t>
                                         <t t-set="balance" t-value="a.get('balance')"/>
                                         <t t-if="a.get('level') &gt; 3"><t t-set="style" t-value="'font-weight: normal;'"/></t>
                                         <t t-if="not a.get('level') &gt; 3"><t t-set="style" t-value="'font-weight: bold;'"/></t>
