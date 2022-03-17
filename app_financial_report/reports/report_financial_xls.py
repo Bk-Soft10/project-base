@@ -80,23 +80,44 @@ class ReportFinancialXls(models.AbstractModel):
                 sheet.write(prod_row, col_group, root_tree.name, data_font_size_8)
                 # pass
             sheet.set_column(prod_row, col_group, len(root_tree.name) * 5)
-            sheet.write(prod_row, col_account, "", data_font_size_88)
+            if root_tree.type == 'sum':
+                sheet.write(prod_row, col_account, "", data_font_size_88)
+            if root_tree.type == 'account_report':
+                sheet.write(prod_row, col_account, "", data_font_size_88)
+            if root_tree.type == 'account_type':
+                sheet.write(prod_row, col_account, "", data_font_size_8)
+            if root_tree.type == 'accounts':
+                sheet.write(prod_row, col_account, "", data_font_size_8)
             ddd_data = self.get_account_report(wizard, root_tree)
             if root_tree.type == 'sum':
                 sheet.write(prod_row, col_bal, self.get_sum_report_balance(wizard, root_tree), data_font_size_88)
+                if wizard.opening_balance == True:
+                    sheet.write(prod_row, col_op_bal, self.get_sum_report_op_balance(wizard, root_tree), data_font_size_88)
+                    sheet.write(prod_row, col_fn_bal, self.get_sum_report_fn_balance(wizard, root_tree), data_font_size_88)
             elif root_tree.type == 'account_report' and root_tree.account_report_id:
                 sheet.write(prod_row, col_bal, self.get_sum_report_balance(wizard, root_tree.account_report_id), data_font_size_88)
+                if wizard.opening_balance == True:
+                    sheet.write(prod_row, col_op_bal, self.get_sum_report_op_balance(wizard, root_tree.account_report_id), data_font_size_88)
+                    sheet.write(prod_row, col_fn_bal, self.get_sum_report_fn_balance(wizard, root_tree.account_report_id), data_font_size_88)
             else:
                 sum_balance = sum(float(pp['balance_sum']) for pp in ddd_data)
                 sheet.write(prod_row, col_bal, sum_balance, data_font_size_8)
-            bal_sum = 0
+                if wizard.opening_balance == True:
+                    sum_op_balance = sum(float(pp['op_balance_sum']) for pp in ddd_data)
+                    sum_fn_balance = sum(float(pp['fn_balance_sum']) for pp in ddd_data)
+                    sheet.write(prod_row, col_op_bal, sum_op_balance, data_font_size_8)
+                    sheet.write(prod_row, col_fn_bal, sum_fn_balance, data_font_size_8)
+            # bal_sum = 0
             if root_tree.type in ['accounts', 'account_type']:
                 for parent_root in ddd_data:
                     prod_row = prod_row + 1
                     account_id = self.env['account.account'].search([('id', '=', int(parent_root['account_id']))], limit=1)
                     sheet.write(prod_row, col_account, account_id.display_name, data_font_size_8)
                     sheet.write(prod_row, col_bal, parent_root['balance_sum'], data_font_size_8)
-                    bal_sum = bal_sum + float(parent_root['balance_sum'])
+                    if wizard.opening_balance == True:
+                        sheet.write(prod_row, col_op_bal, parent_root['op_balance_sum'], data_font_size_8)
+                        sheet.write(prod_row, col_fn_bal, parent_root['fn_balance_sum'], data_font_size_8)
+                    # bal_sum = bal_sum + float(parent_root['balance_sum'])
 
     def get_sum_report_balance(self, wizard, report):
         if report.type == 'sum':
@@ -111,6 +132,36 @@ class ReportFinancialXls(models.AbstractModel):
             bl = 0.00
             for report_child_id in report.account_report_id._get_children_by_order():
                 bl += sum(round(acc_data['balance_sum'], 2) for acc_data in self.get_account_report(wizard, report_child_id))
+            return round(bl, 2)
+
+    def get_sum_report_op_balance(self, wizard, report):
+        if report.type == 'sum':
+            bl = 0.00
+            for report_child_id in report._get_children_by_order():
+                if report_child_id.type == 'account_report' and report_child_id.account_report_id:
+                    for report_child_idd in report_child_id.account_report_id._get_children_by_order():
+                        bl += sum(round(acc_data['op_balance_sum'], 2) for acc_data in self.get_account_report(wizard, report_child_idd))
+                bl += sum(round(acc_data['op_balance_sum'], 2) for acc_data in self.get_account_report(wizard, report_child_id))
+            return round(bl, 2)
+        if report.type == 'account_report':
+            bl = 0.00
+            for report_child_id in report.account_report_id._get_children_by_order():
+                bl += sum(round(acc_data['op_balance_sum'], 2) for acc_data in self.get_account_report(wizard, report_child_id))
+            return round(bl, 2)
+
+    def get_sum_report_fn_balance(self, wizard, report):
+        if report.type == 'sum':
+            bl = 0.00
+            for report_child_id in report._get_children_by_order():
+                if report_child_id.type == 'account_report' and report_child_id.account_report_id:
+                    for report_child_idd in report_child_id.account_report_id._get_children_by_order():
+                        bl += sum(round(acc_data['fn_balance_sum'], 2) for acc_data in self.get_account_report(wizard, report_child_idd))
+                bl += sum(round(acc_data['fn_balance_sum'], 2) for acc_data in self.get_account_report(wizard, report_child_id))
+            return round(bl, 2)
+        if report.type == 'account_report':
+            bl = 0.00
+            for report_child_id in report.account_report_id._get_children_by_order():
+                bl += sum(round(acc_data['fn_balance_sum'], 2) for acc_data in self.get_account_report(wizard, report_child_id))
             return round(bl, 2)
 
     def get_account_report(self, wizard, report):
@@ -214,8 +265,7 @@ class ReportFinancialXls(models.AbstractModel):
                 query_where += " and m_line.account_id IN %s " % (tuple(account_ids),)
 
         if wizard.date_from:
-            if wizard.date_from:
-                query_where += " and m_line.date < '%s'" % (datetime.strptime(str(wizard.date_from), '%Y-%m-%d'),)
+            query_where += " and m.date < '%s'" % (datetime.strptime(str(wizard.date_from), '%Y-%m-%d'),)
 
         query_all = """
         SELECT m_line.account_id as account_id,
@@ -241,4 +291,7 @@ class ReportFinancialXls(models.AbstractModel):
         result2 = {}
         for row in result:
             result2[row['account_id']] = row
+        print("result2 ", result2)
+        print("account_ids ", account_ids)
+        print("result2kk ", result2.keys())
         return result, result2

@@ -213,8 +213,15 @@ class ReportFinancial(models.AbstractModel):
                         if not account.company_id.currency_id.is_zero(
                                 vals['debit']) or not account.company_id.currency_id.is_zero(vals['credit']):
                             flag = True
+                        if data['opening_balance']:
+                            if not account.company_id.currency_id.is_zero(vals['debit']) or not account.company_id.currency_id.is_zero(vals['credit']) or not account.company_id.currency_id.is_zero(
+                                vals['op_debit']) or not account.company_id.currency_id.is_zero(vals['op_credit']):
+                                flag = True
                     if not account.company_id.currency_id.is_zero(vals['balance']):
                         flag = True
+                    if data['opening_balance']:
+                        if not account.company_id.currency_id.is_zero(vals['balance']) or  not account.company_id.currency_id.is_zero(vals['op_balance']):
+                            flag = True
                     if data['enable_filter']:
                         vals['balance_cmp'] = value['comp_bal'] * float(report.sign) if report.sign else 1
                         if not account.company_id.currency_id.is_zero(vals['balance_cmp']):
