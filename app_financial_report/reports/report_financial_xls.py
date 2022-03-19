@@ -113,10 +113,10 @@ class ReportFinancialXls(models.AbstractModel):
                     prod_row = prod_row + 1
                     account_id = self.env['account.account'].search([('id', '=', int(parent_root['account_id']))], limit=1)
                     sheet.write(prod_row, col_account, account_id.display_name, data_font_size_8)
-                    sheet.write(prod_row, col_bal, parent_root['balance_sum'], data_font_size_8)
+                    sheet.write(prod_row, col_bal, parent_root['balance_sum'] if 'balance_sum' in parent_root else 0, data_font_size_8)
                     if wizard.opening_balance == True:
-                        sheet.write(prod_row, col_op_bal, parent_root['op_balance_sum'], data_font_size_8)
-                        sheet.write(prod_row, col_fn_bal, parent_root['fn_balance_sum'], data_font_size_8)
+                        sheet.write(prod_row, col_op_bal, parent_root['op_balance_sum'] if 'op_balance_sum' in parent_root else 0, data_font_size_8)
+                        sheet.write(prod_row, col_fn_bal, parent_root['fn_balance_sum'] if 'fn_balance_sum' in parent_root else 0, data_font_size_8)
                     # bal_sum = bal_sum + float(parent_root['balance_sum'])
 
     def get_sum_report_balance(self, wizard, report):
@@ -179,22 +179,32 @@ class ReportFinancialXls(models.AbstractModel):
 
     def _get_bal_accounts(self, wizard, report, account_ids):
         account_lines = []
-        data_account_line, dict_bal = self.getFilterdValue(wizard, account_ids)
+        # data_account_line, dict_bal = self.getFilterdValue(wizard, account_ids.ids)
+        data_account_line, dict_bal = self._compute_account_balance(account_ids)
         if wizard.opening_balance == True:
-            data_account_op, dict_op_bal = self.getOPFilterdValue(wizard, account_ids)
+            # data_account_op, dict_op_bal = self.getOPFilterdValue(wizard, account_ids.ids)
+            data_account_op, dict_op_bal = self._compute_account_op_balance(account_ids)
             for key in dict_bal:
                 if key in dict_op_bal:
+                    # if key not in dict_bal:
+                    #     dict_bal[key.id] = {'account_id': key.id, 'account_name': key.name, 'account_code': key.code, 'debit_sum': 0, 'credit_sum': 0, 'balance_sum': 0}
+                    account_rec = self.env['account.account'].browse([key])
+                    if account_rec:
+                        dict_bal[key].update({'account_id': account_rec.id, 'account_name': account_rec.name, 'account_code': account_rec.code})
                     dict_bal[key].update(dict_op_bal[key])
+                # if key not in dict_op_bal:
+                #     dict_bal[key.id] = {'op_debit_sum': 0, 'op_credit_sum': 0, 'op_balance_sum': 0}
             data_account_line = [item for item in dict_bal.values()]
+            print(data_account_line)
         if data_account_line:
             for line in data_account_line:
                 line_dict = {
                     'account_id': line.get('account_id'),
                     'account_name': line.get('account_name'),
                     'account_code': line.get('account_code'),
-                    'debit_sum': round(line.get('debit_sum'), 2) or 0,
-                    'credit_sum': round(line.get('credit_sum'), 2) or 0,
-                    'balance_sum': round(line.get('balance_sum'), 2) or 0,
+                    'debit_sum': round(line.get('debit_sum'), 2) if 'debit_sum' in line else 0,
+                    'credit_sum': round(line.get('credit_sum'), 2) if 'credit_sum' in line else 0,
+                    'balance_sum': round(line.get('balance_sum'), 2) if 'balance_sum' in line else 0,
                     'group_type': report.type,
                     'group_id': report.id,
                 }
@@ -291,7 +301,62 @@ class ReportFinancialXls(models.AbstractModel):
         result2 = {}
         for row in result:
             result2[row['account_id']] = row
-        print("result2 ", result2)
-        print("account_ids ", account_ids)
-        print("result2kk ", result2.keys())
         return result, result2
+
+    def _compute_account_balance(self, accounts):
+        mapping = {
+            'balance_sum': "COALESCE(SUM(debit),0) - COALESCE(SUM(credit), 0) as balance_sum",
+            'debit_sum': "COALESCE(SUM(debit), 0) as debit_sum",
+            'credit_sum': "COALESCE(SUM(credit), 0) as credit_sum",
+        }
+
+        res = {}
+        for account in accounts:
+            res[account] = dict.fromkeys(mapping, 0.0)
+        if accounts:
+            tables, where_clause, where_params = self.env['account.move.line']._query_get()
+            tables = tables.replace('"', '') if tables else "account_move_line"
+            wheres = [""]
+            if where_clause.strip():
+                wheres.append(where_clause.strip())
+            filters = " AND ".join(wheres)
+            request = "SELECT account_id as account_id, " + ', '.join(mapping.values()) + \
+                      " FROM " + tables + \
+                      " WHERE account_id IN %s " \
+                      + filters + \
+                      " GROUP BY account_id"
+            params = (tuple(accounts),) + tuple(where_params)
+            self.env.cr.execute(request, params)
+            result = self.env.cr.dictfetchall()
+            for row in result:
+                res[row['account_id']] = row
+        return result, res
+
+    def _compute_account_op_balance(self, accounts):
+        mapping = {
+            'op_balance_sum': "COALESCE(SUM(debit),0) - COALESCE(SUM(credit), 0) as op_balance_sum",
+            'op_debit_sum': "COALESCE(SUM(debit), 0) as op_debit_sum",
+            'op_credit_sum': "COALESCE(SUM(credit), 0) as op_credit_sum",
+        }
+
+        res = {}
+        for account in accounts:
+            res[account] = dict.fromkeys(mapping, 0.0)
+        if accounts:
+            tables, where_clause, where_params = self.env['account.move.line'].with_context(initial_bal=True, date_to=False)._query_get()
+            tables = tables.replace('"', '') if tables else "account_move_line"
+            wheres = [""]
+            if where_clause.strip():
+                wheres.append(where_clause.strip())
+            filters = " AND ".join(wheres)
+            request = "SELECT account_id as account_id, " + ', '.join(mapping.values()) + \
+                      " FROM " + tables + \
+                      " WHERE account_id IN %s " \
+                      + filters + \
+                      " GROUP BY account_id"
+            params = (tuple(accounts),) + tuple(where_params)
+            self.env.cr.execute(request, params)
+            result = self.env.cr.dictfetchall()
+            for row in result:
+                res[row['account_id']] = row
+        return result, res
