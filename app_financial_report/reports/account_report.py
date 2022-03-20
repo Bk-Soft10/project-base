@@ -266,7 +266,11 @@ class AccountReport(models.AbstractModel):
             if not partner_ids:
                 partner_ids = self.env['res.partner'].search([])
             val_lines = self.update_partners_bal_values(wizard, wizard.opening_balance, partner_ids)
-        lines = [item for item in val_lines.values()]
+
+        if wizard.without_zero:
+            lines = [item for item in val_lines.values() if 'balance' in item and item['balance'] != 0]
+        else:
+            lines = [item for item in val_lines.values()]
         return lines
 
     @api.model

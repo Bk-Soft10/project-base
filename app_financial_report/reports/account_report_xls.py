@@ -272,7 +272,7 @@ class ReportAccountLedgerXls(models.AbstractModel):
             op_bal_vals = self._compute_account_op_balance(wizard, account_ids)
             for key in bal_vals:
                 if key not in op_bal_vals:
-                    op_bal_vals[key] = {'account_id': item, 'op_debit': 0, 'op_credit': 0, 'op_balance': 0}
+                    op_bal_vals[key] = {'account_id': key, 'op_debit': 0, 'op_credit': 0, 'op_balance': 0}
                 if key in op_bal_vals:
                     bal_vals[key].update(op_bal_vals[key])
                     bal_vals[key]['fn_balance'] = bal_vals[key].get('balance', 0) + bal_vals[key].get('op_balance', 0)
@@ -295,7 +295,7 @@ class ReportAccountLedgerXls(models.AbstractModel):
             op_bal_vals = self._compute_partner_op_balance(wizard, partner_ids)
             for key in bal_vals:
                 if key not in op_bal_vals:
-                    op_bal_vals[key] = {'partner_id': item, 'op_debit': 0, 'op_credit': 0, 'op_balance': 0}
+                    op_bal_vals[key] = {'partner_id': key, 'op_debit': 0, 'op_credit': 0, 'op_balance': 0}
                 if key in op_bal_vals:
                     bal_vals[key].update(op_bal_vals[key])
                     bal_vals[key]['fn_balance'] = bal_vals[key].get('balance', 0) + bal_vals[key].get('op_balance', 0)
@@ -319,5 +319,8 @@ class ReportAccountLedgerXls(models.AbstractModel):
             if not partner_ids:
                 partner_ids = self.env['res.partner'].search([])
             val_lines = self.update_partners_bal_values(wizard, wizard.opening_balance, partner_ids)
-        lines = [item for item in val_lines.values()]
+        if wizard.without_zero:
+            lines = [item for item in val_lines.values() if 'balance' in item and item['balance'] != 0]
+        else:
+            lines = [item for item in val_lines.values()]
         return lines

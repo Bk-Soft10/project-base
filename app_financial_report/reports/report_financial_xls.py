@@ -181,19 +181,24 @@ class ReportFinancialXls(models.AbstractModel):
         account_lines = []
         # data_account_line, dict_bal = self.getFilterdValue(wizard, account_ids.ids)
         data_account_line, dict_bal = self._compute_account_balance(account_ids)
+
+
+        val_ids = [id for id in dict_bal]
+        for item in account_ids:
+            if item not in val_ids:
+                dict_bal[item] = {'account_id': item, 'debit_sum': 0, 'credit_sum': 0, 'balance_sum': 0}
+
         if wizard.opening_balance == True:
             # data_account_op, dict_op_bal = self.getOPFilterdValue(wizard, account_ids.ids)
             data_account_op, dict_op_bal = self._compute_account_op_balance(account_ids)
             for key in dict_bal:
+                if key not in dict_op_bal:
+                    dict_op_bal[key] = {'account_id': key, 'op_debit_sum': 0, 'op_credit_sum': 0, 'op_balance_sum': 0}
                 if key in dict_op_bal:
-                    # if key not in dict_bal:
-                    #     dict_bal[key.id] = {'account_id': key.id, 'account_name': key.name, 'account_code': key.code, 'debit_sum': 0, 'credit_sum': 0, 'balance_sum': 0}
                     account_rec = self.env['account.account'].browse([key])
                     if account_rec:
                         dict_bal[key].update({'account_id': account_rec.id, 'account_name': account_rec.name, 'account_code': account_rec.code})
                     dict_bal[key].update(dict_op_bal[key])
-                # if key not in dict_op_bal:
-                #     dict_bal[key.id] = {'op_debit_sum': 0, 'op_credit_sum': 0, 'op_balance_sum': 0}
             data_account_line = [item for item in dict_bal.values()]
         if data_account_line:
             for line in data_account_line:
@@ -329,6 +334,9 @@ class ReportFinancialXls(models.AbstractModel):
             result = self.env.cr.dictfetchall()
             for row in result:
                 res[row['account_id']] = row
+        if not result:
+            for key in accounts:
+                res[key] = {'account_id': key, 'debit_sum': 0, 'credit_sum': 0, 'balance_sum': 0}
         return result, res
 
     def _compute_account_op_balance(self, accounts):
@@ -358,4 +366,7 @@ class ReportFinancialXls(models.AbstractModel):
             result = self.env.cr.dictfetchall()
             for row in result:
                 res[row['account_id']] = row
+        if not result:
+            for key in accounts:
+                res[key] = {'account_id': key, 'op_debit_sum': 0, 'op_credit_sum': 0, 'op_balance_sum': 0}
         return result, res
