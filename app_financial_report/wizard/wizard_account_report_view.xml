@@ -10,7 +10,8 @@
                 <field name="date_from"/>
                 <field name="date_to"/>
                 <field name="target_move"/>
-                <field name="report_type" invisible="1"/>
+                <field name="debit_credit"/>
+                <field name="report_type" invisible="0"/>
             </group>
             <group colspan="4">
                 <field name="group_by"/>

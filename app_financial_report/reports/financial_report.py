@@ -50,6 +50,7 @@ class ReportFinancial(models.AbstractModel):
         for account in accounts:
             res[account.id] = dict.fromkeys(mapping, 0.0)
         if accounts:
+            print("ccontttt ", self.env.context)
             tables, where_clause, where_params = self.env['account.move.line']._query_get()
             tables = tables.replace('"', '') if tables else "account_move_line"
             wheres = [""]
@@ -62,6 +63,7 @@ class ReportFinancial(models.AbstractModel):
                       + filters + \
                       " GROUP BY account_id"
             params = (tuple(accounts._ids),) + tuple(where_params)
+            print(request)
             self.env.cr.execute(request, params)
             for row in self.env.cr.dictfetchall():
                 res[row['id']] = row
