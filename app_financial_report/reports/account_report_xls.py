@@ -58,6 +58,7 @@ class ReportAccountLedgerXls(models.AbstractModel):
         header_report = ['Name', 'Debit', 'Credit', 'Balance']
         if not wizard.debit_credit:
             col_bal = 1
+            header_report = ['Name', 'Balance']
         if wizard.opening_balance == True:
             if wizard.debit_credit == True:
                 op_col_debit = 1
@@ -69,11 +70,13 @@ class ReportAccountLedgerXls(models.AbstractModel):
                 fn_col_debit = 7
                 fn_col_credit = 8
                 fn_col_bal = 9
+                header_report = ['Name', 'O-Debit', 'O-Credit', 'O-Balance', 'Debit', 'Credit', 'Balance', 'F-Debit',
+                                 'F-Credit', 'F-Balance']
             else:
                 op_col_bal = 1
                 col_bal = 2
                 fn_col_bal = 3
-            header_report = ['Name', 'O-Debit', 'O-Credit', 'O-Balance', 'Debit', 'Credit', 'Balance', 'F-Debit', 'F-Credit', 'F-Balance']
+                header_report = ['Name', 'O-Balance', 'Balance', 'F-Balance']
         for header_val in header_report:
             sheet.write(prod_row, prod_col, header_val, header_format_sheet)
             sheet.set_column(prod_row, prod_col, len(header_val) * 5)
