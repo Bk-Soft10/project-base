@@ -18,7 +18,9 @@
     ],
     'data': [
         'wizard/account_report_view.xml',
+        'wizard/wizard_account_report_view.xml',
         'reports/financial_report.xml',
+        'reports/account_report_view.xml',
     ],
     'images': ['static/description/banner.png'],
     'license': 'AGPL-3',

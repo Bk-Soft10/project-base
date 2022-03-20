@@ -1,20 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-<template id="view_account_report">
-    <t t-call="web.html_container">
-            <t t-call="web.external_layout">
-            <div class="page">
-                <h2>Account Report</h2>
-            </div>
+    <template id="view_account_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>Accounting Report</h2>
+
+                        <div class="row mt32 mb32">
+                            <div class="col-4">
+                                <strong>Target Moves:</strong>
+                                <p>
+                                    <span t-if="data['target_move'] == 'all'">All Entries</span>
+                                    <span t-if="data['target_move'] == 'posted'">All Posted Entries</span>
+                                </p>
+                            </div>
+                            <div class="col-4">
+                                <p>
+                                    <strong>Date from :</strong> <span t-esc="data['date_from']"/><br/>
+                                    <strong>Date to :</strong> <span t-esc="data['date_to']"/>
+                                </p>
+                            </div>
+                        </div>
+
+                        <table class="table table-sm table-reports">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th t-if="data['opening_balance'] and data['debit_credit']" class="text-right">O-Debit</th>
+                                    <th t-if="data['opening_balance'] and data['debit_credit']" class="text-right">O-Credit</th>
+                                    <th t-if="data['opening_balance']" class="text-right">O-Balance</th>
+                                    <th t-if="data['debit_credit']" class="text-right">Debit</th>
+                                    <th t-if="data['debit_credit']" class="text-right">Credit</th>
+                                    <th class="text-right">Balance</th>
+                                    <th t-if="data['opening_balance'] and data['debit_credit']" class="text-right">F-Debit</th>
+                                    <th t-if="data['opening_balance'] and data['debit_credit']" class="text-right">F-Credit</th>
+                                    <th t-if="data['opening_balance']" class="text-right">F-Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="report_line_val" t-as="line">
+                                    <t>
+                                        <t t-if="o.group_by == 'account'">
+                                            <t t-set="name" t-value="line.get('account_name')"/>
+                                        </t>
+                                        <t t-if="o.group_by == 'partner'">
+                                            <t t-set="name" t-value="line.get('partner_name')"/>
+                                        </t>
+                                        <t t-set="style" t-value="'font-weight: normal;'"/>
+                                        <td>
+                                            <span t-att-style="style" t-esc="name"/>
+                                        </td>
+
+                                        <td t-if="data['opening_balance'] and data['debit_credit']" class="text-right" style="white-space: text-nowrap;">
+                                            <span t-att-style="style" t-esc="line.get('op_debit')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                        </td>
+                                        <td t-if="data['opening_balance'] and data['debit_credit']" class="text-right" style="white-space: text-nowrap;">
+                                            <span t-att-style="style" t-esc="line.get('op_credit')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                        </td>
+                                        <td t-if="data['opening_balance']" class="text-right" style="white-space: text-nowrap;">
+                                            <span t-att-style="style" t-esc="line.get('op_balance')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                        </td>
+
+                                        <td t-if="data['debit_credit']" class="text-right" style="white-space: text-nowrap;">
+                                            <span t-att-style="style" t-esc="line.get('debit')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                        </td>
+                                        <td t-if="data['debit_credit']" class="text-right" style="white-space: text-nowrap;">
+                                            <span t-att-style="style" t-esc="line.get('credit')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                        </td>
+                                        <td class="text-right" style="white-space: text-nowrap;">
+                                            <span t-att-style="style" t-esc="line.get('balance')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                        </td>
+
+                                        <td t-if="data['opening_balance'] and data['debit_credit']" class="text-right" style="white-space: text-nowrap;">
+                                            <span t-att-style="style" t-esc="line.get('fn_debit')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                        </td>
+                                        <td t-if="data['opening_balance'] and data['debit_credit']" class="text-right" style="white-space: text-nowrap;">
+                                            <span t-att-style="style" t-esc="line.get('fn_credit')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                        </td>
+                                        <td t-if="data['opening_balance']" class="text-right" style="white-space: text-nowrap;">
+                                            <span t-att-style="style" t-esc="line.get('fn_balance')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
         </t>
-    </t>
-</template>
+    </template>
 
     <data>
         <report
                 id="action_account_report"
-                model="wiz.account.report.app"
+                model="wiz.account.report"
                 string="Account Move Report"
                 report_type="qweb-pdf"
                 name="app_financial_report.view_account_report"

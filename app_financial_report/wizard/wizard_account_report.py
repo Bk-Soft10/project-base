@@ -8,7 +8,7 @@ from odoo.exceptions import ValidationError
 
 
 class WizAccountReport(models.TransientModel):
-    _name = 'wiz.account.report.app'
+    _name = 'wiz.account.report'
     _description = 'Wizard Account Report'
 
     date_from = fields.Date('F-Date', default=time.strftime('%Y-%m-01'), required=True)
@@ -17,14 +17,15 @@ class WizAccountReport(models.TransientModel):
     opening_balance = fields.Boolean('Opening Balance')
     partner_ids = fields.Many2many('res.partner', string='Partners')
     account_ids = fields.Many2many('account.account', string='Accounts')
+    debit_credit = fields.Boolean(string='Display Debit/Credit Columns', help="This option allows you to get more details about the way your balances are computed. Because it is space consuming, we do not allow to use it while doing a comparison.")
     group_by = fields.Selection([
         ('account', 'Accounts'),
         ('partner', 'Partners'),
     ], string='Group By', required=True, default='account')
-    status = fields.Selection([
+    target_move = fields.Selection([
         ('all', 'All'),
-        ('post', 'Posted'),
-    ], string='Status', required=True, default='all')
+        ('posted', 'Posted'),
+    ], string='Target', required=True, default='posted')
     report_type = fields.Selection([
         ('pdf', 'PDF'),
         ('excel', 'Excel'),
@@ -32,7 +33,7 @@ class WizAccountReport(models.TransientModel):
 
     def print_report(self):
         if self.report_type == 'pdf' or not self.report_type:
-            data = self.read(['date_from', 'date_to', 'opening_balance', 'report_type', 'status', 'group_by', 'partner_ids', 'account_ids'])[0]
+            data = self.read(['date_from', 'date_to', 'opening_balance', 'report_type', 'target_move', 'debit_credit', 'group_by', 'partner_ids', 'account_ids'])[0]
             return self.env.ref('app_financial_report.action_account_report').report_action(self, data=data)
         else:
             pass
