@@ -92,14 +92,19 @@
         </t>
     </template>
 
-    <data>
-        <report
-                id="action_account_report"
-                model="wiz.account.report"
-                string="Accounting Ledger"
-                report_type="qweb-pdf"
-                name="app_financial_report.view_account_report"
-                file="app_financial_report.view_account_report"
-                />
-    </data>
+    <report
+            id="action_account_report"
+            model="wiz.account.report"
+            string="Accounting Ledger"
+            report_type="qweb-pdf"
+            name="app_financial_report.view_account_report"
+            file="app_financial_report.view_account_report"
+            />
+    <report
+        id="report_ledger_xlsx"
+        model="wiz.account.report"
+        string="Accounting Ledger XLSX"
+        report_type="xlsx"
+        name="app_financial_report.report_ledger_xlsx_template"
+        file="app_financial_report.report_ledger_xlsx_template"/>
 </odoo>

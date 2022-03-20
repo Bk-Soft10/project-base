@@ -168,7 +168,6 @@ class SalaryAdvancePayment(models.Model):
                 line_ids.append(credit_line)
                 credit_sum += credit_line[2]['credit'] - credit_line[2]['debit']
             move.update({'line_ids': line_ids})
-            print("move.update({'line_ids': line_ids})",move.update({'invoice_line_ids': line_ids}))
             draft = move_obj.create(move)
             draft.post()
             self.state = 'approve'

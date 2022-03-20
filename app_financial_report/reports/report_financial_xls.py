@@ -195,7 +195,6 @@ class ReportFinancialXls(models.AbstractModel):
                 # if key not in dict_op_bal:
                 #     dict_bal[key.id] = {'op_debit_sum': 0, 'op_credit_sum': 0, 'op_balance_sum': 0}
             data_account_line = [item for item in dict_bal.values()]
-            print(data_account_line)
         if data_account_line:
             for line in data_account_line:
                 line_dict = {

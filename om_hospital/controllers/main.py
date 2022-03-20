@@ -29,7 +29,6 @@ class WebsiteSaleInherit(WebsiteSale):
     ], type='http', auth="public", website=True)
     def shop(self, page=0, category=None, search='', ppg=False, **post):
         res = super(WebsiteSaleInherit, self).shop(page=0, category=None, search='', ppg=False, **post)
-        print("Inherited Odoo Mates ....", res)
         return res
 
 
@@ -37,7 +36,6 @@ class Hospital(http.Controller):
 
     @http.route('/patient_webform', type="http", auth="public", website=True)
     def patient_webform(self, **kw):
-        print("Execution Here.........................")
         doctor_rec = request.env['hospital.doctor'].sudo().search([])
         print("doctor_rec...", doctor_rec)
         return http.request.render('om_hospital.create_patient', {'patient_name': 'Odoo Mates Test 123',

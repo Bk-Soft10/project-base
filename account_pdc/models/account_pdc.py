@@ -31,7 +31,6 @@ class AccountPDC(models.Model):
         for pdc in pdc_ids:
             if pdc.move_id.date != pdc.maturity_date:
                 pdc.move_id.date = pdc.maturity_date
-                print(pdc.maturity_date)
 
 
     def clear(self):

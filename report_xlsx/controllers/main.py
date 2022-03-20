@@ -30,7 +30,6 @@ class ReportController(report.ReportController):
                 context.update(data["context"])
             xlsx = report.with_context(context).render_xlsx(docids, data=data)[0]
             report_name = report.report_file
-            print(docids)
             if report.print_report_name and docids and not len(docids) > 1:
                 obj = request.env[report.model].browse(docids[0])
                 report_name = safe_eval(

@@ -2,7 +2,7 @@
 <odoo>
 
     <record id="app_account_report_view" model="ir.ui.view">
-        <field name="name">Account Report</field>
+        <field name="name">Account Ledger Report</field>
         <field name="model">wiz.account.report</field>
         <field name="arch" type="xml">
         <form string="Report Options">

@@ -81,7 +81,6 @@ class AccountMoveInherit(models.Model):
         date_hex = self._get_hex("03", "14", time_stamp)
         total_with_vat_hex = self._get_hex("04", "0a", str(round(self.amount_total, 2))) or 0
         total_vat_hex = self._get_hex("05", "09", str(round(self.amount_tax, 2))) or 0
-        print(vat_hex)
         qr_hex = seller_hex + vat_hex + date_hex + total_with_vat_hex + total_vat_hex
         encoded_base64_bytes = base64.b64encode(bytes.fromhex(qr_hex)).decode()
         return encoded_base64_bytes

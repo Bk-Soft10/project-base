@@ -7,7 +7,7 @@ from odoo.exceptions import ValidationError
 
 
 
-class WizAccountReport(models.TransientModel):
+class WizLedgerReport(models.TransientModel):
     _name = 'wiz.account.report'
     _description = 'Wizard Account Report'
 
@@ -36,4 +36,5 @@ class WizAccountReport(models.TransientModel):
             data = self.read(['date_from', 'date_to', 'opening_balance', 'report_type', 'target_move', 'debit_credit', 'group_by', 'partner_ids', 'account_ids'])[0]
             return self.env.ref('app_financial_report.action_account_report').report_action(self, data=data)
         else:
-            pass
+            data = self.read(['date_from', 'date_to', 'opening_balance', 'report_type', 'target_move', 'debit_credit', 'group_by', 'partner_ids', 'account_ids'])[0]
+            return self.env.ref('app_financial_report.report_ledger_xlsx').with_context(landscape=True).report_action(self, data=data)
