@@ -34,8 +34,8 @@ class WizLedgerReport(models.TransientModel):
 
     def print_report(self):
         if self.report_type == 'pdf' or not self.report_type:
-            data = self.read(['date_from', 'date_to', 'opening_balance', 'report_type', 'target_move', 'debit_credit', 'without_zero ', 'group_by', 'partner_ids', 'account_ids'])[0]
+            data = self.read(['date_from', 'date_to', 'opening_balance', 'report_type', 'target_move', 'debit_credit', 'without_zero', 'group_by', 'partner_ids', 'account_ids'])[0]
             return self.env.ref('app_financial_report.action_account_report').report_action(self, data=data)
         else:
-            data = self.read(['date_from', 'date_to', 'opening_balance', 'report_type', 'target_move', 'debit_credit', 'without_zero ', 'group_by', 'partner_ids', 'account_ids'])[0]
+            data = self.read(['date_from', 'date_to', 'opening_balance', 'report_type', 'target_move', 'debit_credit', 'without_zero', 'group_by', 'partner_ids', 'account_ids'])[0]
             return self.env.ref('app_financial_report.report_ledger_xlsx').with_context(landscape=True).report_action(self, data=data)
