@@ -48,7 +48,7 @@ class AccountReport(models.AbstractModel):
         return datetime.strftime(date, '%Y-%m-%d')
 
     def where_sql(self, wizard, op_balance):
-        whare_str = ""
+        whare_str = " AND m.state != 'cancel'"
         if op_balance:
             if wizard.date_from:
                 whare_str = " AND m_line.date < '" + self.date_str(wizard.date_from) + "' "
@@ -89,10 +89,13 @@ class AccountReport(models.AbstractModel):
 
         self.env.cr.execute(query_all)
 
-        result = self.env.cr.dictfetchall() or False
+        result = self.env.cr.dictfetchall()
         result2 = {}
         for row in result:
             result2[row['account_id']] = row
+        if not result:
+            for key in account_ids:
+                result2[key] = {'account_id': key, 'op_debit': 0, 'op_credit': 0, 'op_balance': 0}
         return result2
 
     def _compute_account_balance(self, wizard, accounts):
@@ -122,10 +125,13 @@ class AccountReport(models.AbstractModel):
 
         self.env.cr.execute(query_all)
 
-        result = self.env.cr.dictfetchall() or False
+        result = self.env.cr.dictfetchall()
         result2 = {}
         for row in result:
             result2[row['account_id']] = row
+        if not result:
+            for key in account_ids:
+                result2[key] = {'account_id': key, 'debit': 0, 'credit': 0, 'balance': 0}
         return result2
 
     def _compute_partner_op_balance(self, wizard, partners):
@@ -155,10 +161,13 @@ class AccountReport(models.AbstractModel):
 
         self.env.cr.execute(query_all)
 
-        result = self.env.cr.dictfetchall() or False
+        result = self.env.cr.dictfetchall()
         result2 = {}
         for row in result:
-            result2[row['account_id']] = row
+            result2[row['partner_id']] = row
+        if not result:
+            for key in partner_ids:
+                result2[key] = {'partner_id': key, 'op_debit': 0, 'op_credit': 0, 'op_balance': 0}
         return result2
 
     def _compute_partner_balance(self, wizard, partners):
@@ -188,19 +197,29 @@ class AccountReport(models.AbstractModel):
 
         self.env.cr.execute(query_all)
 
-        result = self.env.cr.dictfetchall() or False
+        result = self.env.cr.dictfetchall()
         result2 = {}
         for row in result:
-            result2[row['account_id']] = row
+            result2[row['partner_id']] = row
+        if not result:
+            for key in partner_ids:
+                result2[key] = {'partner_id': key, 'debit': 0, 'credit': 0, 'balance': 0}
         return result2
 
     def update_accounts_bal_values(self, wizard, op_bal, account_ids):
         bal_vals = self._compute_account_balance(wizard, account_ids)
         # bal_vals = self.getFilterdValue(wizard, account_ids.ids)
 
+        val_ids = [id for id in bal_vals]
+        for item in account_ids.ids:
+            if item not in val_ids:
+                bal_vals[item] = {'account_id': item, 'debit': 0, 'credit': 0, 'balance': 0}
+
         if op_bal == True:
             op_bal_vals = self._compute_account_op_balance(wizard, account_ids)
             for key in bal_vals:
+                if key not in op_bal_vals:
+                    op_bal_vals[key] = {'account_id': item, 'op_debit': 0, 'op_credit': 0, 'op_balance': 0}
                 if key in op_bal_vals:
                     bal_vals[key].update(op_bal_vals[key])
                     bal_vals[key]['fn_balance'] = bal_vals[key].get('balance', 0) + bal_vals[key].get('op_balance', 0)
@@ -213,9 +232,17 @@ class AccountReport(models.AbstractModel):
 
     def update_partners_bal_values(self, wizard, op_bal, partner_ids):
         bal_vals = self._compute_partner_balance(wizard, partner_ids)
+
+        val_ids = [id for id in bal_vals]
+        for item in partner_ids.ids:
+            if item not in val_ids:
+                bal_vals[item] = {'partner_id': item, 'debit': 0, 'credit': 0, 'balance': 0}
+
         if op_bal == True:
             op_bal_vals = self._compute_partner_op_balance(wizard, partner_ids)
             for key in bal_vals:
+                if key not in op_bal_vals:
+                    op_bal_vals[key] = {'partner_id': item, 'op_debit': 0, 'op_credit': 0, 'op_balance': 0}
                 if key in op_bal_vals:
                     bal_vals[key].update(op_bal_vals[key])
                     bal_vals[key]['fn_balance'] = bal_vals[key].get('balance', 0) + bal_vals[key].get('op_balance', 0)
@@ -239,9 +266,7 @@ class AccountReport(models.AbstractModel):
             if not partner_ids:
                 partner_ids = self.env['res.partner'].search([])
             val_lines = self.update_partners_bal_values(wizard, wizard.opening_balance, partner_ids)
-        print("val_lines ", val_lines)
         lines = [item for item in val_lines.values()]
-        print("lines ", lines)
         return lines
 
     @api.model

@@ -28,7 +28,7 @@
     </record>
 
     <record id="app_action_account_report" model="ir.actions.act_window">
-        <field name="name">Account Report</field>
+        <field name="name">Accounting Ledger</field>
         <field name="res_model">wiz.account.report</field>
         <field name="view_mode">form</field>
         <field name="view_id" ref="app_account_report_view"/>
