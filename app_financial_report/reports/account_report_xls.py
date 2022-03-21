@@ -61,17 +61,12 @@ class ReportAccountLedgerXls(models.AbstractModel):
             header_report = ['Name', 'Balance']
         if wizard.opening_balance == True:
             if wizard.debit_credit == True:
-                op_col_debit = 1
-                op_col_credit = 2
-                op_col_bal = 3
-                col_debit = 4
-                col_credit = 5
-                col_bal = 6
-                fn_col_debit = 7
-                fn_col_credit = 8
-                fn_col_bal = 9
-                header_report = ['Name', 'O-Debit', 'O-Credit', 'O-Balance', 'Debit', 'Credit', 'Balance', 'F-Debit',
-                                 'F-Credit', 'F-Balance']
+                op_col_bal = 1
+                col_debit = 2
+                col_credit = 3
+                col_bal = 4
+                fn_col_bal = 5
+                header_report = ['Name', 'O-Balance', 'Debit', 'Credit', 'Balance', 'F-Balance']
             else:
                 op_col_bal = 1
                 col_bal = 2
@@ -92,14 +87,14 @@ class ReportAccountLedgerXls(models.AbstractModel):
 
             if wizard.opening_balance:
                 sheet.write(prod_row, op_col_bal, line.get('op_balance', False), data_font_size_85)
-                if wizard.debit_credit:
-                    sheet.write(prod_row, op_col_debit, line.get('op_debit', False), data_font_size_8)
-                    sheet.write(prod_row, op_col_credit, line.get('op_credit', False), data_font_size_8)
+                # if wizard.debit_credit:
+                #     sheet.write(prod_row, op_col_debit, line.get('op_debit', False), data_font_size_8)
+                #     sheet.write(prod_row, op_col_credit, line.get('op_credit', False), data_font_size_8)
                 ###
                 sheet.write(prod_row, fn_col_bal, line.get('fn_balance', False), data_font_size_85)
-                if wizard.debit_credit:
-                    sheet.write(prod_row, fn_col_debit, line.get('fn_debit', False), data_font_size_8)
-                    sheet.write(prod_row, fn_col_credit, line.get('fn_credit', False), data_font_size_8)
+                # if wizard.debit_credit:
+                #     sheet.write(prod_row, fn_col_debit, line.get('fn_debit', False), data_font_size_8)
+                #     sheet.write(prod_row, fn_col_credit, line.get('fn_credit', False), data_font_size_8)
 
     def date_str(self, date):
         return datetime.strftime(date, '%Y-%m-%d')

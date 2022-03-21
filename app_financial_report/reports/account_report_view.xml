@@ -28,14 +28,14 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th t-if="data['opening_balance'] and data['debit_credit']" class="text-right">O-Debit</th>
-                                    <th t-if="data['opening_balance'] and data['debit_credit']" class="text-right">O-Credit</th>
+                                    <!--<th t-if="data['opening_balance'] and data['debit_credit']" class="text-right">O-Debit</th>
+                                    <th t-if="data['opening_balance'] and data['debit_credit']" class="text-right">O-Credit</th>-->
                                     <th t-if="data['opening_balance']" class="text-right">O-Balance</th>
                                     <th t-if="data['debit_credit']" class="text-right">Debit</th>
                                     <th t-if="data['debit_credit']" class="text-right">Credit</th>
                                     <th class="text-right">Balance</th>
-                                    <th t-if="data['opening_balance'] and data['debit_credit']" class="text-right">F-Debit</th>
-                                    <th t-if="data['opening_balance'] and data['debit_credit']" class="text-right">F-Credit</th>
+                                    <!--<th t-if="data['opening_balance'] and data['debit_credit']" class="text-right">F-Debit</th>
+                                    <th t-if="data['opening_balance'] and data['debit_credit']" class="text-right">F-Credit</th>-->
                                     <th t-if="data['opening_balance']" class="text-right">F-Balance</th>
                                 </tr>
                             </thead>
@@ -53,12 +53,12 @@
                                             <span t-att-style="style" t-esc="name"/>
                                         </td>
 
-                                        <td t-if="data['opening_balance'] and data['debit_credit']" class="text-right" style="white-space: text-nowrap;">
+                                        <!--<td t-if="data['opening_balance'] and data['debit_credit']" class="text-right" style="white-space: text-nowrap;">
                                             <span t-att-style="style" t-esc="line.get('op_debit')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                         </td>
                                         <td t-if="data['opening_balance'] and data['debit_credit']" class="text-right" style="white-space: text-nowrap;">
                                             <span t-att-style="style" t-esc="line.get('op_credit')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
-                                        </td>
+                                        </td>-->
                                         <td t-if="data['opening_balance']" class="text-right" style="white-space: text-nowrap;">
                                             <span t-att-style="style" t-esc="line.get('op_balance')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                         </td>
@@ -73,12 +73,12 @@
                                             <span t-att-style="style" t-esc="line.get('balance')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                         </td>
 
-                                        <td t-if="data['opening_balance'] and data['debit_credit']" class="text-right" style="white-space: text-nowrap;">
+                                        <!--<td t-if="data['opening_balance'] and data['debit_credit']" class="text-right" style="white-space: text-nowrap;">
                                             <span t-att-style="style" t-esc="line.get('fn_debit')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                         </td>
                                         <td t-if="data['opening_balance'] and data['debit_credit']" class="text-right" style="white-space: text-nowrap;">
                                             <span t-att-style="style" t-esc="line.get('fn_credit')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
-                                        </td>
+                                        </td>-->
                                         <td t-if="data['opening_balance']" class="text-right" style="white-space: text-nowrap;">
                                             <span t-att-style="style" t-esc="line.get('fn_balance')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                         </td>

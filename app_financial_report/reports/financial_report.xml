@@ -27,15 +27,15 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th t-if="data['opening_balance']" class="text-right">O-Debit</th>
-                                    <th t-if="data['opening_balance']" class="text-right">O-Credit</th>
-                                    <th t-if="data['opening_balance']" class="text-right"/>
+                                    <!--<th t-if="data['opening_balance']" class="text-right">O-Debit</th>
+                                    <th t-if="data['opening_balance']" class="text-right">O-Credit</th>-->
+                                    <th t-if="data['opening_balance']" class="text-right">O-Balance</th>
                                     <th class="text-right">Debit</th>
                                     <th class="text-right">Credit</th>
-                                    <th class="text-right"/>
-                                    <th t-if="data['opening_balance']" class="text-right">C-Debit</th>
-                                    <th t-if="data['opening_balance']" class="text-right">C-Credit</th>
-                                    <th t-if="data['opening_balance']" class="text-right"/>
+                                    <th class="text-right">Balance</th>
+                                    <!--<th t-if="data['opening_balance']" class="text-right">F-Debit</th>
+                                    <th t-if="data['opening_balance']" class="text-right">F-Credit</th>-->
+                                    <th t-if="data['opening_balance']" class="text-right">F-Balance</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -51,14 +51,14 @@
                                             <span t-att-style="style" t-esc="a.get('name')"/>
                                         </td>
 
-                                        <td t-if="data['opening_balance']" class="text-right" style="white-space: text-nowrap;">
+                                        <!--<td t-if="data['opening_balance']" class="text-right" style="white-space: text-nowrap;">
                                             <t t-set="op_debit" t-value="a.get('op_debit')"/>
                                             <span t-att-style="style" t-esc="op_debit" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                         </td>
                                         <td t-if="data['opening_balance']" class="text-right" style="white-space: text-nowrap;">
                                             <t t-set="op_credit" t-value="a.get('op_credit')"/>
                                             <span t-att-style="style" t-esc="op_credit" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
-                                        </td>
+                                        </td>-->
                                         <td t-if="data['opening_balance']" class="text-right" style="white-space: text-nowrap;">
                                             <t t-set="op_balance" t-value="a.get('op_balance')"/>
                                             <span t-att-style="style" t-esc="op_balance" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
@@ -74,14 +74,14 @@
                                             <span t-att-style="style" t-esc="balance" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                         </td>
 
-                                        <td t-if="data['opening_balance']" class="text-right" style="white-space: text-nowrap;">
+                                        <!--<td t-if="data['opening_balance']" class="text-right" style="white-space: text-nowrap;">
                                             <t t-set="fn_debit" t-value="debit + op_debit"/>
                                             <span t-att-style="style" t-esc="fn_debit" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                         </td>
                                         <td t-if="data['opening_balance']" class="text-right" style="white-space: text-nowrap;">
                                             <t t-set="fn_credit" t-value="credit + op_credit"/>
                                             <span t-att-style="style" t-esc="fn_credit" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
-                                        </td>
+                                        </td>-->
                                         <td t-if="data['opening_balance']" class="text-right" style="white-space: text-nowrap;">
                                             <t t-set="fn_balance" t-value="balance + op_balance"/>
                                             <span t-att-style="style" t-esc="fn_balance" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
