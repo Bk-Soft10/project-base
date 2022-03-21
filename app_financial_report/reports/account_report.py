@@ -171,8 +171,10 @@ class AccountReport(models.AbstractModel):
         return result2
 
     def _compute_partner_balance(self, wizard, partners):
-        query_where = "where m_line.move_id = m.id "
+        query_where = "WHERE act.type IN ('receivable','payable') AND m_line.move_id = m.id "
         partner_ids = partners.ids or []
+
+        # partners_account = partners.mapped('')
         if partner_ids:
             if (len(partner_ids) == 1):
                 query_where += " and m_line.partner_id = %s " % (partner_ids[0])
@@ -187,8 +189,9 @@ class AccountReport(models.AbstractModel):
                 SUM(m_line.credit) as credit,
                 (SUM(m_line.debit)-SUM(m_line.credit)) as balance
                 FROM account_move_line m_line
-                JOIN account_move m ON
-                m_line.move_id = m.id
+                JOIN account_move m ON m_line.move_id = m.id
+                LEFT JOIN account_account a ON (account_move_line.account_id=a.id)
+                LEFT JOIN account_account_type act ON (a.user_type_id=act.id)
                 """
         if query_where:
             query_all = query_all + query_where + " group by m_line.partner_id "
