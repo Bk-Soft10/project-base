@@ -187,7 +187,7 @@ class ReportAccountLedgerXls(models.AbstractModel):
         return result2
 
     def _compute_partner_op_balance(self, wizard, partners):
-        query_where = "where m_line.move_id = m.id "
+        query_where = "WHERE act.type IN ('receivable','payable') AND m_line.move_id = m.id "
         partner_ids = partners.ids or []
         if partner_ids:
             if (len(partner_ids) == 1):
@@ -203,8 +203,9 @@ class ReportAccountLedgerXls(models.AbstractModel):
                 SUM(m_line.credit) as op_credit,
                 (SUM(m_line.debit)-SUM(m_line.credit)) as op_balance
                 FROM account_move_line m_line
-                JOIN account_move m ON
-                m_line.move_id = m.id
+                JOIN account_move m ON m_line.move_id = m.id
+                LEFT JOIN account_account a ON (m_line.account_id=a.id)
+                LEFT JOIN account_account_type act ON (a.user_type_id=act.id)
                 """
         if query_where:
             query_all = query_all + query_where + " group by m_line.partner_id "
@@ -223,7 +224,7 @@ class ReportAccountLedgerXls(models.AbstractModel):
         return result2
 
     def _compute_partner_balance(self, wizard, partners):
-        query_where = "where m_line.move_id = m.id "
+        query_where = "WHERE act.type IN ('receivable','payable') AND m_line.move_id = m.id "
         partner_ids = partners.ids or []
         if partner_ids:
             if (len(partner_ids) == 1):
@@ -239,8 +240,9 @@ class ReportAccountLedgerXls(models.AbstractModel):
                 SUM(m_line.credit) as credit,
                 (SUM(m_line.debit)-SUM(m_line.credit)) as balance
                 FROM account_move_line m_line
-                JOIN account_move m ON
-                m_line.move_id = m.id
+                JOIN account_move m ON m_line.move_id = m.id
+                LEFT JOIN account_account a ON (m_line.account_id=a.id)
+                LEFT JOIN account_account_type act ON (a.user_type_id=act.id)
                 """
         if query_where:
             query_all = query_all + query_where + " group by m_line.partner_id "

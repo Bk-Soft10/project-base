@@ -11,9 +11,9 @@ class WizLedgerReport(models.TransientModel):
     _name = 'wiz.account.report'
     _description = 'Wizard Account Report'
 
-    date_from = fields.Date('F-Date', default=time.strftime('%Y-%m-01'), required=True)
+    date_from = fields.Date('F-Date', default=time.strftime('%Y-%m-01'), required=False)
     date_to = fields.Date('T-Date', default=str(datetime.now() + relativedelta.relativedelta(months=+1, day=1, days=-1))[:10],
-                          required=True)
+                          required=False)
     opening_balance = fields.Boolean('Opening Balance')
     without_zero = fields.Boolean('Without Zero Balance')
     partner_ids = fields.Many2many('res.partner', string='Partners')

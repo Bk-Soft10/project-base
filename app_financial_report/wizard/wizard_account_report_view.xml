@@ -7,8 +7,8 @@
         <field name="arch" type="xml">
         <form string="Report Options">
             <group col="4">
-                <field name="date_from"/>
-                <field name="date_to"/>
+                <field name="date_from" attrs="{'required': [('opening_balance','=',True)]}"/>
+                <field name="date_to" attrs="{'required': [('opening_balance','=',True)]}"/>
                 <field name="target_move"/>
                 <field name="debit_credit"/>
                 <field name="without_zero"/>
