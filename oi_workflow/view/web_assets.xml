@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="assets_backend" name="oi_workflow assets" inherit_id="web.assets_backend">
+        <script position="after">        	
+        	<script type="text/javascript" src="/oi_workflow/static/src/js/sidebar.js"></script>
+        	<script type="text/javascript" src="/oi_workflow/static/src/js/web_client.js"></script>
+        	<script type="text/javascript" src="/oi_workflow/static/src/js/form_controller.js"></script>
+        	<script type="text/javascript" src="/oi_workflow/static/src/js/statusbar.js"></script>
+        </script>
+    </template>
+
+</odoo>

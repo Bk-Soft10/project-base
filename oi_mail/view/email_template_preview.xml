@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<record model="ir.ui.view" id="email_template_preview_form">
+		<field name="name">email_template.preview.form</field>
+		<field name="model">email_template.preview</field>
+		<field name="inherit_id" ref="mail.email_template_preview_form" />
+		<field name="arch" type="xml">
+			<field name="scheduled_date" position="after">
+				<field name="needaction_partner_ids" />
+			</field>
+		</field>
+	</record>
+
+</odoo>

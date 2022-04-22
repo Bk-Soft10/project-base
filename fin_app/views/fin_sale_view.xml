@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="fin_sale_veiw" model ="ir.ui.view">
+        <field name="name">fin_sale</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type ="xml">
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="before">
+                <field name="categ_id" optional="show" options="{'no_create':True,'no_quick_create':True,'no_create_edit':True}" required="1"/>
+                <field name="product_model" optional="show" options="{'no_create':True,'no_quick_create':True,'no_create_edit':True}"/>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="attributes">
+                <attribute name="attrs">{'readonly': ['|', ('categ_id', '=', False), ('product_updatable', '=', False)], 'required': [('display_type', '=', False)]}</attribute>
+                <attribute name="options">{'no_create':True,'no_quick_create':True,'no_create_edit':True}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

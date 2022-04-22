@@ -1,0 +1,1285 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* oi_workflow
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0-20191113\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-11-14 07:14+0000\n"
+"PO-Revision-Date: 2020-07-25 12:05+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: ar_SA\n"
+"X-Generator: Poedit 2.3.1\n"
+
+#. module: oi_workflow
+#: model:mail.template,body_html:oi_workflow.template_workflow_approval_notification
+msgid ""
+"\n"
+"<p>\n"
+"<b>Dear Sir</b>,\n"
+"</p>\n"
+"<br />\n"
+"<p>\n"
+"Document is Waiting For Your Approval\n"
+"</p>    \n"
+"<p>\n"
+"    ${object.get_title()}\n"
+"    <br>\n"
+"</p>\n"
+"<div style=\"margin-top: 16px;\">\n"
+"        <a href=\"${object.get_form_url()}\" style=\"padding: 5px 10px; font-size: 12px; line-height: 18px; color: #FFFFFF; "
+"border-color:#875A7B; text-decoration: none; display: inline-block; margin-bottom: 0px; font-weight: 400; text-align: center; "
+"vertical-align: middle; cursor: pointer; white-space: nowrap; background-image: none; background-color: #875A7B; border: 1px "
+"solid #875A7B; border-radius:3px\">View Document</a>\n"
+"</div>\n"
+"<br />\n"
+"<p>\n"
+"<b>Best regards,</b>\n"
+"</p>  \n"
+"\n"
+"\t\t\t   \n"
+"\t\t"
+msgstr ""
+"\n"
+"<p>\n"
+"<b>سيدي العزيز</b>,\n"
+"</p>\n"
+"<br />\n"
+"<p>\n"
+"الوثيقة في انتظار موافقتك\n"
+"</p>    \n"
+"<p>\n"
+"    ${object.get_title()}\n"
+"    <br>\n"
+"</p>\n"
+"<div style=\"margin-top: 16px;\">\n"
+"        <a href=\"${object.get_form_url()}\" style=\"padding: 5px 10px; font-size: 12px; line-height: 18px; color: #FFFFFF; "
+"border-color:#875A7B; text-decoration: none; display: inline-block; margin-bottom: 0px; font-weight: 400; text-align: center; "
+"vertical-align: middle; cursor: pointer; white-space: nowrap; background-image: none; background-color: #875A7B; border: 1px "
+"solid #875A7B; border-radius:3px\">عرض الوثيقة</a>\n"
+"</div>\n"
+"<br />\n"
+"<p>\n"
+"<b>مع خالص تحياتي,</b>\n"
+"</p>  \n"
+"\n"
+"\t\t\t   \n"
+"\t\t"
+
+#. module: oi_workflow
+#. openerp-web
+#: code:addons/oi_workflow/static/src/xml/templates.xml:0
+#, python-format
+msgid "(Login As)"
+msgstr "(تسجيل الدخول باسم)"
+
+#. module: oi_workflow
+#: model_terms:ir.ui.view,arch_db:oi_workflow.approval_record_forward
+#: model_terms:ir.ui.view,arch_db:oi_workflow.approval_record_rejected
+#: model_terms:ir.ui.view,arch_db:oi_workflow.approval_record_return
+msgid "<strong> Reason</strong>"
+msgstr "<strong> السبب </strong>"
+
+#. module: oi_workflow
+#: model_terms:ir.ui.view,arch_db:oi_workflow.approval_record_approved
+msgid "<strong>Approved</strong>"
+msgstr "<strong> موافق من قبل </strong>"
+
+#. module: oi_workflow
+#: model_terms:ir.ui.view,arch_db:oi_workflow.approval_record_forward
+msgid "<strong>Forwarded To</strong>"
+msgstr "<strong>أحيل إلى</strong>"
+
+#. module: oi_workflow
+#: model_terms:ir.ui.view,arch_db:oi_workflow.approval_record_rejected
+msgid "<strong>Rejected</strong>"
+msgstr "<strong> مرفوض من </strong>"
+
+#. module: oi_workflow
+#: model_terms:ir.ui.view,arch_db:oi_workflow.approval_record_return
+msgid "<strong>Returned</strong>"
+msgstr "<strong>مرتجع</strong>"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__help
+msgid "Action Description"
+msgstr "وصف الإجراء"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__name
+msgid "Action Name"
+msgstr "اسم الإجراء"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__state
+msgid "Action To Do"
+msgstr "إجراء مطلوب"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__type
+msgid "Action Type"
+msgstr "نوع الإجراء"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__active
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__active
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_forward__active
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_settings_state__active
+msgid "Active"
+msgstr "نشط"
+
+#. module: oi_workflow
+#: model:ir.model,name:oi_workflow.model_mail_activity
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__activity_type_id
+msgid "Activity"
+msgstr "النشاط"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__schedule_activity_days
+msgid "Activity Days"
+msgstr "أيام النشاط"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__activity_user_type
+msgid "Activity User Type"
+msgstr "نوع مستخدم النشاط"
+
+#. module: oi_workflow
+#: model:ir.model.fields,help:oi_workflow.field_approval_config__auto_subscribe_users
+msgid "Add Approval Users to the record followers"
+msgstr "أضافه مستخدمي الموافقة إلى متابعي السجلات"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__channel_ids
+msgid "Add Channels"
+msgstr "إضافة قنوات"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__partner_ids
+msgid "Add Followers"
+msgstr "إضافة متابعين"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__auto_subscribe_users
+msgid "Add followers"
+msgstr "أضافه متابعين"
+
+#. module: oi_workflow
+#: model:ir.model.fields.selection,name:oi_workflow.selection__approval_settings_state__type__after
+msgid "After Approval"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__after_script
+msgid "After Script"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__allow_forward
+msgid "Allow Forward"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__allow_return
+msgid "Allow Return"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__filter_domain
+msgid "Apply on"
+msgstr "يُطبق على"
+
+#. module: oi_workflow
+#: model:mail.activity.type,name:oi_workflow.activity_type_approval
+msgid "Approval"
+msgstr "موافقة"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_settings__approval_count
+msgid "Approval Count"
+msgstr "عدد الموافقات"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_record__approval_emails
+msgid "Approval Emails"
+msgstr "البريد الإلكتروني للموافقة"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_record__approval_emp_emails
+msgid "Approval Emp Emails"
+msgstr "البريد الإلكتروني للموافقة الموظفين"
+
+#. module: oi_workflow
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_escalation_tree
+msgid "Approval Escalation"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model,name:oi_workflow.model_approval_forward
+msgid "Approval Forward"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model,name:oi_workflow.model_approval_forward_wizard
+msgid "Approval Forward Wizard"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__group_ids
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_config_form
+msgid "Approval Groups"
+msgstr ""
+
+#. module: oi_workflow
+#. openerp-web
+#: code:addons/oi_workflow/static/src/js/sidebar.js:0
+#, python-format
+msgid "Approval Info"
+msgstr "معلومات الموافقة"
+
+#. module: oi_workflow
+#: model:ir.model,name:oi_workflow.model_approval_record
+msgid "Approval Record"
+msgstr "سجل الموافقة"
+
+#. module: oi_workflow
+#: model:ir.model,name:oi_workflow.model_approval_return_wizard
+msgid "Approval Return Wizard"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.actions.act_window,name:oi_workflow.act_approval_settings
+msgid "Approval Settings"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model,name:oi_workflow.model_approval_escalation
+msgid "Approval Workflow Escalation"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model,name:oi_workflow.model_approval_log
+msgid "Approval Workflow Log"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model,name:oi_workflow.model_approval_settings
+msgid "Approval Workflow Model Settings"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model,name:oi_workflow.model_approval_reject_wizard
+msgid "Approval Workflow Reject Wizard"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model,name:oi_workflow.model_approval_config
+msgid "Approval Workflow Settings"
+msgstr "إعدادات سير عمل الموافقة"
+
+#. module: oi_workflow
+#: model:ir.model,name:oi_workflow.model_approval_settings_state
+msgid "Approval Workflow Static Status"
+msgstr ""
+
+#. module: oi_workflow
+#: model:mail.template,subject:oi_workflow.template_workflow_approval_notification
+msgid "Approval | ${object.get_title()}"
+msgstr "الموافقة | ${object.get_title()}"
+
+#. module: oi_workflow
+#. openerp-web
+#: code:addons/oi_workflow/static/src/js/sidebar.js:0 model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_config_form
+#, python-format
+msgid "Approve"
+msgstr "موافقة"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__approve_button_name
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_record__approve_button_name
+msgid "Approve Button Name"
+msgstr "اسم الزر الموافقة"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__approve_confirm_msg
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_record__approve_confirm_msg
+msgid "Approve Confirm Msg"
+msgstr "رسالة التأكيد للموافقة"
+
+#. module: oi_workflow
+#: code:addons/oi_workflow/models/approval_record.py:0
+#, python-format
+msgid "Approved"
+msgstr "موافق عليه"
+
+#. module: oi_workflow
+#. openerp-web
+#: code:addons/oi_workflow/static/src/js/sidebar.js:0
+#, python-format
+msgid "Are you sure you want to approve selected documents?"
+msgstr "هل تريد الموافقة على المستندات المحددة ؟"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__auto_subscribe_users_enabled
+msgid "Auto Subscribe Users Enabled"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__automation_id
+msgid "Automated Action"
+msgstr "إجراء آلي"
+
+#. module: oi_workflow
+#: model:ir.model.fields.selection,name:oi_workflow.selection__approval_settings_state__type__before
+msgid "Before Approval"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__before_script
+msgid "Before Script"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__filter_pre_domain
+msgid "Before Update Domain"
+msgstr "نطاق ما قبل التحديث"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__binding_model_id
+msgid "Binding Model"
+msgstr "كائن الربط"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__binding_type
+msgid "Binding Type"
+msgstr "نوع الربط"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__binding_view_types
+msgid "Binding View Types"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_record__button_approve_enabled
+msgid "Button Approve Enabled"
+msgstr "زر الموافقة مفعل"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_record__button_draft_enabled
+msgid "Button Draft Enabled"
+msgstr "زر المسودة مفعل"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_record__button_forward_enabled
+msgid "Button Forward Enabled"
+msgstr ""
+
+#. module: oi_workflow
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_config_form
+msgid "Button Name"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_record__button_return_enabled
+msgid "Button Return Enabled"
+msgstr ""
+
+#. module: oi_workflow
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_config_form
+msgid "Buttons"
+msgstr ""
+
+#. module: oi_workflow
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_forward_wizard
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_reject_wizard
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_return_wizard
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_state_update_form
+msgid "Cancel"
+msgstr "إلغاء"
+
+#. module: oi_workflow
+#: model:ir.model,name:oi_workflow.model_approval_state_update
+msgid "Change Document Status"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__child_ids
+msgid "Child Actions"
+msgstr "إجراءات تابعة"
+
+#. module: oi_workflow
+#: model:ir.model.fields,help:oi_workflow.field_approval_escalation__child_ids
+msgid ""
+"Child server actions that will be executed. Note that the last return returned action value will be used as global return value."
+msgstr "إجراءات السيرفر التابعة التي سيتم تنفيذها. لاحظ أن القيمة المُعادة من إجراء الإعادة الأخير ستستخدم كقيمة معادة عمومية."
+
+#. module: oi_workflow
+#: model:ir.model.fields,help:oi_workflow.field_approval_escalation__on_change_fields
+msgid "Comma-separated list of field names that triggers the onchange."
+msgstr "قائمة أسماء الحقل التي تفعل التغيير مفصولة بفواصل."
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__config_id
+msgid "Config"
+msgstr "إعدادات"
+
+#. module: oi_workflow
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_config_form
+msgid "Confirm Message"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__crud_model_id
+msgid "Create/Write Target Model"
+msgstr "إنشاء/كتابة الكائن المستهدف"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__create_uid
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__create_uid
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_forward__create_uid
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_forward_wizard__create_uid
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_reject_wizard__create_uid
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_return_wizard__create_uid
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_settings__create_uid
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_settings_state__create_uid
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_state_update__create_uid
+msgid "Created by"
+msgstr "أنشئ بواسطة"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__create_date
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__create_date
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_forward__create_date
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_forward_wizard__create_date
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_reject_wizard__create_date
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_return_wizard__create_date
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_settings__create_date
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_settings_state__create_date
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_state_update__create_date
+msgid "Created on"
+msgstr "أنشئ في"
+
+#. module: oi_workflow
+#. openerp-web
+#: code:addons/oi_workflow/static/src/xml/templates.xml:0
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_log__date
+#, python-format
+msgid "Date"
+msgstr "التاريخ"
+
+#. module: oi_workflow
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_escalation_form
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_escalation_tree
+msgid "Delay Duration"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,help:oi_workflow.field_approval_escalation__trg_date_range
+msgid ""
+"Delay after the trigger date.\n"
+"                                    You can put a negative number if you need a delay before the\n"
+"                                    trigger date, like sending a reminder 15 minutes before a meeting."
+msgstr ""
+"المهلة بعد تاريخ التفعيل\n"
+"                                    يمكنك وضع قيمة سالبة إذا أردت أن تكون المهلة قبل\n"
+"                                    تاريخ التفعيل، مثل إرسال تذكير قبل 15 دقيقة من بداية اجتماع."
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__trg_date_range
+msgid "Delay after trigger date"
+msgstr "المهلة بعد تاريخ التفعيل"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__trg_date_range_type
+msgid "Delay type"
+msgstr "نوع المهلة"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_log__description
+msgid "Description"
+msgstr "الوصف"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__display_name
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__display_name
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_forward__display_name
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_forward_wizard__display_name
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_log__display_name
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_record__display_name
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_reject_wizard__display_name
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_return_wizard__display_name
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_settings__display_name
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_settings_state__display_name
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_state_update__display_name
+msgid "Display Name"
+msgstr "الاسم المعروض"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_record__document_user_id
+msgid "Document User"
+msgstr "مستخدم الوثيقة"
+
+#. module: oi_workflow
+#: code:addons/oi_workflow/models/approval_record.py:0
+#, python-format
+msgid "Draft"
+msgstr "مسودة"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__activity_date_deadline_range
+msgid "Due Date In"
+msgstr "تاريخ الاستحقاق في"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__activity_date_deadline_range_type
+msgid "Due type"
+msgstr "نوع الاستحقاق"
+
+#. module: oi_workflow
+#: model:ir.model.constraint,message:oi_workflow.constraint_approval_forward_duplicate_check
+msgid "Duplicate Forward Record!"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__template_id
+msgid "Email Template"
+msgstr "قالب البريد الإلكتروني"
+
+#. module: oi_workflow
+#: model:ir.model,name:oi_workflow.model_mail_template
+msgid "Email Templates"
+msgstr "قوالب البريد"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__escalation_ids
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_config_form
+msgid "Escalation"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__xml_id
+msgid "External ID"
+msgstr "معرف خارجي"
+
+#. module: oi_workflow
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_config_form
+msgid "Filter"
+msgstr "الفرز"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__filter_condition
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_config_form
+msgid "Filter Condition"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__filter_group_ids
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_config_form
+msgid "Filter Condition Ignore Groups"
+msgstr ""
+
+#. module: oi_workflow
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_forward_wizard
+msgid "Forward"
+msgstr ""
+
+#. module: oi_workflow
+#: code:addons/oi_workflow/models/approval_record.py:0
+#, python-format
+msgid "Forward %s : %s"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_forward__forwarder_user_id
+msgid "Forwarder User"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__groups_id
+msgid "Groups"
+msgstr "المجموعات"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__schedule_activity_enabled
+msgid "Hours"
+msgstr "الساعات"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__id
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__id
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_forward__id
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_forward_wizard__id
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_log__id
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_record__id
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_reject_wizard__id
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_return_wizard__id
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_settings__id
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_settings_state__id
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_state_update__id
+msgid "ID"
+msgstr "المُعرف"
+
+#. module: oi_workflow
+#: model:ir.model.fields,help:oi_workflow.field_approval_escalation__filter_domain
+msgid "If present, this condition must be satisfied before executing the action rule."
+msgstr "إذا كان موجودًا، يتوجب استيفاء هذا الشرط قبل تنفيذ قاعدة الإجراء."
+
+#. module: oi_workflow
+#: model:ir.model.fields,help:oi_workflow.field_approval_escalation__filter_pre_domain
+msgid "If present, this condition must be satisfied before the update of the record."
+msgstr "إذا كان موجودًا، فسيتوجب استيفاء هذا الشرط قبل تحديث السجل."
+
+#. module: oi_workflow
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_config_search
+msgid "Inactive"
+msgstr "غير نشط"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config____last_update
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation____last_update
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_forward____last_update
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_forward_wizard____last_update
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_log____last_update
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_record____last_update
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_reject_wizard____last_update
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_return_wizard____last_update
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_settings____last_update
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_settings_state____last_update
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_state_update____last_update
+msgid "Last Modified on"
+msgstr "آخر تعديل في"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__last_run
+msgid "Last Run"
+msgstr "اخر تشغيل"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__last_state_update_id
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_record__last_state_update
+msgid "Last State Update"
+msgstr "آخر تعديل للحالة"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__write_uid
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__write_uid
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_forward__write_uid
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_forward_wizard__write_uid
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_reject_wizard__write_uid
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_return_wizard__write_uid
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_settings__write_uid
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_settings_state__write_uid
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_state_update__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__write_date
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__write_date
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_forward__write_date
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_forward_wizard__write_date
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_reject_wizard__write_date
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_return_wizard__write_date
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_settings__write_date
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_settings_state__write_date
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_state_update__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث في"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__link_field_id
+msgid "Link using field"
+msgstr "حقل استخدام الرابط"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__template_ids
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_config_form
+msgid "Mail Templates"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__model
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__model_id
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_forward_wizard__model
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_return_wizard__model
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_settings__model
+msgid "Model"
+msgstr "الكائن"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__model_name
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_settings__model_name
+msgid "Model Description"
+msgstr "وصف الكائن"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__model_name
+msgid "Model Name"
+msgstr "اسم الكائن"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_settings_state__settings_id
+msgid "Model Settings"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,help:oi_workflow.field_approval_escalation__crud_model_id
+msgid "Model for record creation / update. Set this field only to specify a different model than the base model."
+msgstr "الكائن المستخدم في إنشاء أو تحديث السجل. اختر قيمة لهذا الحقل فقط إذا كنت تريد كائنًا مختلفًا عن الكائن الأساسي."
+
+#. module: oi_workflow
+#: model:ir.model.fields,help:oi_workflow.field_approval_escalation__model_id
+msgid "Model on which the server action runs."
+msgstr "الكائن الذي تجرى عليه إجراءات السيرفر."
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__name
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_settings_state__name
+msgid "Name"
+msgstr "الاسم"
+
+#. module: oi_workflow
+#. openerp-web
+#: code:addons/oi_workflow/static/src/xml/templates.xml:0
+#, python-format
+msgid "Name:"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_record__needaction_partner_ids
+msgid "Needaction Partner"
+msgstr "بحاجة إلى عمل الشريك"
+
+#. module: oi_workflow
+#. openerp-web
+#: code:addons/oi_workflow/static/src/xml/templates.xml:0
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_log__name
+#, python-format
+msgid "New Status"
+msgstr "حالة جديدة"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__activity_note
+msgid "Note"
+msgstr "الملاحظات"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__model_id
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_forward__model_id
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_log__model_id
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_settings__model_id
+msgid "Object"
+msgstr "الكائن"
+
+#. module: oi_workflow
+#: code:addons/oi_workflow/models/approval_config.py:0
+#, python-format
+msgid "Object must inherit mail.activity.mixin"
+msgstr "يجب ان يرث الكائن البريد. النشاط. mixin"
+
+#. module: oi_workflow
+#: code:addons/oi_workflow/models/approval_config.py:0
+#, python-format
+msgid "Object must inherit mail.thread"
+msgstr "يجب ان يرث الكائن البريد. مؤشر الترابط"
+
+#. module: oi_workflow
+#. openerp-web
+#: code:addons/oi_workflow/static/src/js/sidebar.js:0
+#, python-format
+msgid "Ok"
+msgstr ""
+
+#. module: oi_workflow
+#. openerp-web
+#: code:addons/oi_workflow/static/src/xml/templates.xml:0
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_log__old_name
+#, python-format
+msgid "Old Status"
+msgstr "الحالة القديمة"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_settings__on_approval
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_settings_form
+msgid "On Approval"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_settings__on_approve
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_settings_form
+msgid "On Approve"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__on_change_fields
+msgid "On Change Fields Trigger"
+msgstr "تفعيل عند تغير قيمة الحقول"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_settings__on_forward
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_settings_form
+msgid "On Forward"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_settings__on_reject
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_settings_form
+msgid "On Reject"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_settings__on_return
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_settings_form
+msgid "On Return"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__on_script
+msgid "On Script"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_settings__on_submit
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_settings_form
+msgid "On Submit"
+msgstr ""
+
+#. module: oi_workflow
+#: code:addons/oi_workflow/wizard/approval_state_update.py:0
+#, python-format
+msgid "Only Administrator"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,help:oi_workflow.field_approval_escalation__help
+msgid "Optional help text for the users with a description of the target view, such as its usage and purpose."
+msgstr "نص مساعد اختياري للمستخدمين يشمل وصفًا للعرض المرجو. مثلًا: طريقة الاستخدام، والهدف من الإنشاء."
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__own_group_ids
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_config_form
+msgid "Own Document Approval Groups"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__post_approval_msg
+msgid "Post Approval Message"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__post_reject_msg
+msgid "Post Reject Message"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,help:oi_workflow.field_approval_escalation__link_field_id
+msgid "Provide the field used to link the newly created record on the record on used by the server action."
+msgstr "يخزن قيمة الحقل المستخدم للربط بين بند السجل الجديد المنشأ في السجل المستخدم في الإجراء السيرفري."
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__code
+msgid "Python Code"
+msgstr "كود بايثون"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_forward__reason
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_forward_wizard__reason
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_reject_wizard__reason
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_return_wizard__reason
+msgid "Reason"
+msgstr "السبب"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_forward__record_id
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_forward_wizard__record_id
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_forward_wizard__record_ref
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_log__record_id
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_return_wizard__record_id
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_return_wizard__record_ref
+msgid "Record"
+msgstr "السجل"
+
+#. module: oi_workflow
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_config_form
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_reject_wizard
+msgid "Reject"
+msgstr "رفض"
+
+#. module: oi_workflow
+#: code:addons/oi_workflow/models/approval_record.py:0
+#, python-format
+msgid "Reject %s : %s"
+msgstr "رفض %s: %s"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__reject_button_name
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_record__reject_button_name
+msgid "Reject Button Name"
+msgstr "اسم زر الرفض"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__reject_button_wizard
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_record__reject_button_wizard
+msgid "Reject Button Wizard"
+msgstr "عرض إستمارة الرفض"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__reject_confirm_msg
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_record__reject_confirm_msg
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_reject_wizard__reject_confirm_msg
+msgid "Reject Confirm Msg"
+msgstr "رسالة تأكيد الرفض"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__reject_template_ids
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_config_form
+msgid "Reject Mail Templates"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__reject_script
+msgid "Reject Script"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_settings_state__reject_state
+msgid "Reject State"
+msgstr ""
+
+#. module: oi_workflow
+#: code:addons/oi_workflow/models/approval_record.py:0
+#, python-format
+msgid "Rejected"
+msgstr "مرفوض"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__condition
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_config_form
+msgid "Required Condition"
+msgstr ""
+
+#. module: oi_workflow
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_config_form
+msgid "Required Reason"
+msgstr ""
+
+#. module: oi_workflow
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_settings_form
+msgid "Reset Static States"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__activity_user_id
+msgid "Responsible"
+msgstr "المسئول"
+
+#. module: oi_workflow
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_return_wizard
+msgid "Return"
+msgstr "الترجيع"
+
+#. module: oi_workflow
+#: code:addons/oi_workflow/models/approval_record.py:0
+#, python-format
+msgid "Return %s : %s"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__schedule_activity
+msgid "Schedule Activity"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__schedule_activity_field_id
+msgid "Schedule Activity Field"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,help:oi_workflow.field_approval_config__after_script
+msgid "Script to Execute after Exit this State"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,help:oi_workflow.field_approval_config__before_script
+msgid "Script to Execute on Enter this State"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,help:oi_workflow.field_approval_config__on_script
+msgid "Script to Execute on Exit this State"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,help:oi_workflow.field_approval_config__reject_script
+msgid "Script to Execute on Reject"
+msgstr ""
+
+#. module: oi_workflow
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_config_form
+msgid "Scripts"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__sequence
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__sequence
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_settings_state__sequence
+msgid "Sequence"
+msgstr "المسلسل"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__action_server_id
+msgid "Server Actions"
+msgstr "إجراءات السيرفر"
+
+#. module: oi_workflow
+#: model:ir.model.fields,help:oi_workflow.field_approval_escalation__binding_model_id
+msgid "Setting a value makes this action available in the sidebar for the given model."
+msgstr "بتعيين قيمة سيكون هذا الإجراء متاحًا في الشريط الجانبي للنموذج المعطى."
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_config__state
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_forward__state_id
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_log__state
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_settings__state_ids
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_settings_state__state
+msgid "State"
+msgstr "المحافظة"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_record__state_name
+msgid "State Name"
+msgstr "اسم الولاية"
+
+#. module: oi_workflow
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_settings_form
+msgid "Static Statuses"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_record__state
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_return_wizard__state
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_state_update__state
+msgid "Status"
+msgstr "الحالة"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_record__log_ids
+msgid "Status Log"
+msgstr "سجل الحالة"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_record__state_id
+msgid "Status Settings"
+msgstr "إعدادات الحالة"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__activity_summary
+msgid "Summary"
+msgstr "الملخص"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__crud_model_name
+msgid "Target Model"
+msgstr "الكائن المستهدف"
+
+#. module: oi_workflow
+#: model:ir.model.fields,help:oi_workflow.field_approval_escalation__activity_user_field_name
+msgid "Technical name of the user on the record"
+msgstr "اسم تقني للمستخدم في السجلات"
+
+#. module: oi_workflow
+#: model:ir.model.fields,help:oi_workflow.field_approval_escalation__trigger_field_ids
+msgid "The action will be triggered if and only if one of these fields is updated.If empty, all fields are watched."
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.constraint,message:oi_workflow.constraint_approval_settings_model_uniq
+msgid "The model should be unique !"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.constraint,message:oi_workflow.constraint_approval_config_name_uniq
+msgid "The name should be unique !"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.constraint,message:oi_workflow.constraint_approval_config_state_uniq
+#: model:ir.model.constraint,message:oi_workflow.constraint_approval_settings_state_state_uniq
+msgid "The state should be unique !"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__trigger
+msgid "Trigger Condition"
+msgstr "شرط التفعيل"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__trg_date_id
+msgid "Trigger Date"
+msgstr "تاريخ التفعيل"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_settings_state__type
+msgid "Type"
+msgstr "النوع"
+
+#. module: oi_workflow
+#: model:ir.model.fields,help:oi_workflow.field_approval_escalation__state
+msgid ""
+"Type of server action. The following values are available:\n"
+"- 'Execute Python Code': a block of python code that will be executed\n"
+"- 'Create': create a new record with new values\n"
+"- 'Update a Record': update the values of a record\n"
+"- 'Execute several actions': define an action that triggers several other server actions\n"
+"- 'Send Email': automatically send an email (Discuss)\n"
+"- 'Add Followers': add followers to a record (Discuss)\n"
+"- 'Create Next Activity': create an activity (Discuss)"
+msgstr ""
+
+#. module: oi_workflow
+#: model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_state_update_form
+msgid "Update"
+msgstr "تحديث"
+
+#. module: oi_workflow
+#. openerp-web
+#: code:addons/oi_workflow/static/src/js/sidebar.js:0
+#, python-format
+msgid "Update Status"
+msgstr "تحديث الحالة"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__usage
+msgid "Usage"
+msgstr "استخدام"
+
+#. module: oi_workflow
+#: model:ir.model.fields,help:oi_workflow.field_approval_escalation__activity_user_type
+msgid ""
+"Use 'Specific User' to always assign the same user on the next activity. Use 'Generic User From Record' to specify the field "
+"name of the user to choose on the record."
+msgstr ""
+"استخدم القيمة 'مستخدم محدد' لتعيين نفس المستخدم على النشاط التالي. واستخدم 'مستخدم عام من السجل' لتحديد اسم حقل المستخدم المراد "
+"من السجل."
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__trg_date_calendar_id
+msgid "Use Calendar"
+msgstr "استخدام التقويم"
+
+#. module: oi_workflow
+#. openerp-web
+#: code:addons/oi_workflow/static/src/xml/templates.xml:0
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_forward__user_id
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_forward_wizard__user_id
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_log__user_id
+#, python-format
+msgid "User"
+msgstr "المستخدم"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_record__user_can_approve
+msgid "User Can Approve"
+msgstr "يمكن للمستخدم الموافقة"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__activity_user_field_name
+msgid "User field name"
+msgstr "اسم حقل المستخدم"
+
+#. module: oi_workflow
+#: model:ir.model,name:oi_workflow.model_res_users
+msgid "Users"
+msgstr "المستخدمون"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__fields_lines
+msgid "Value Mapping"
+msgstr "ربط القيمة"
+
+#. module: oi_workflow
+#: code:addons/oi_workflow/models/approval_record.py:0
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_record__waiting_approval
+#, python-format
+msgid "Waiting Approval"
+msgstr "انتظار الموافقة"
+
+#. module: oi_workflow
+#. openerp-web
+#: code:addons/oi_workflow/static/src/xml/templates.xml:0
+#, python-format
+msgid "Waiting Approval:"
+msgstr "انتظار الموافقة:"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_record__approval_partner_ids
+msgid "Waiting Partner IDs Approval"
+msgstr "بانتظار موافقة المستخدمين"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_record__approval_user_ids
+msgid "Waiting User Approval"
+msgstr "بانتظار موافقة المستخدمين"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_record__approval_user2_ids
+msgid "Waiting User Approval (Without OdooBot)"
+msgstr "بانتظار موافقة المستخدمين (بدون مستخدم النظام)"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_escalation__trigger_field_ids
+msgid "Watched fields"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.model.fields,help:oi_workflow.field_approval_escalation__trg_date_calendar_id
+msgid "When calculating a day-based timed condition, it is possible to use a calendar to compute the date based on working days."
+msgstr "عند حساب شروط زمنية تعتمد على الأيام، من الممكن استخدام التقويم لحساب التاريخ المطلوب وفقًا لأيام العمل."
+
+#. module: oi_workflow
+#: model:ir.model.fields,help:oi_workflow.field_approval_escalation__sequence
+msgid "When dealing with multiple actions, the execution order is based on the sequence. Low number means high priority."
+msgstr "عند التعامل مع عدة إجراءات، يعتمد ترتيب التنفيذ على تسلسلهم. الرقم الأصغر يعني أولوية أقل."
+
+#. module: oi_workflow
+#: model:ir.model.fields,help:oi_workflow.field_approval_escalation__trg_date_id
+msgid ""
+"When should the condition be triggered.\n"
+"                                  If present, will be checked by the scheduler. If empty, will be checked at creation and update."
+msgstr ""
+"متى يتم تفعيل الشرط.\n"
+"                                  إذا كان له قيمة، سيتحقق منها المجدول. وإذا كان فارغًا، سيتم التحقق منه عند الإنشاء والتحديث."
+
+#. module: oi_workflow
+#: model:ir.model.fields,help:oi_workflow.field_approval_escalation__active
+msgid "When unchecked, the rule is hidden and will not be executed."
+msgstr "عند إلغاء تحديده، سيتم إخفاء هذه القاعدة ولن يتم تنفيذها."
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_res_users__wkf_groups_ids
+msgid "Wkf Groups"
+msgstr ""
+
+#. module: oi_workflow
+#: model:ir.ui.menu,name:oi_workflow.menu_approval_config model_terms:ir.ui.view,arch_db:oi_workflow.view_approval_settings_form
+msgid "Workflow"
+msgstr "سير العمل"
+
+#. module: oi_workflow
+#: model:ir.model.fields,field_description:oi_workflow.field_approval_record__workflow_states
+msgid "Workflow States"
+msgstr "سير العمل"
+
+#. module: oi_workflow
+#: model:ir.model.fields,help:oi_workflow.field_approval_escalation__code
+msgid ""
+"Write Python code that the action will execute. Some variables are available for use; help about python expression is given in "
+"the help tab."
+msgstr ""
+"اكتب كود بايثون الذي سينفذه الإجراء. بعض المتغيرات متاحة للاستخدام؛ وستجد مساعدة لكيفية الكتابة بلغة بايثون في تبويب مساعدة."

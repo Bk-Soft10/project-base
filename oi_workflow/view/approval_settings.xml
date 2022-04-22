@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="view_approval_settings_form" model="ir.ui.view">
+		<field name="name">approval.settings.form</field>
+		<field name="model">approval.settings</field>
+		<field name="arch" type="xml">
+			<form create="false">
+				<header>
+					<button name="reset_states" string="Reset Static States" type="object" confirm="Reset Static States" />
+				</header>
+				<sheet>
+					<div class="oe_button_box" name="button_box">
+						<button name="action_view_approval" type="object" class="oe_stat_button" icon="fa-check">
+							<field name="approval_count" string="Workflow" widget="statinfo" />
+						</button>				
+					</div>						
+					<group>
+						<group>
+							<field name="model_id" />
+						</group>
+						<group>
+							<field name="model" />
+						</group>
+					</group>
+					<notebook>
+						<page string="Static Statuses">
+							<group>
+								<field name="state_ids" nolabel="1">
+									<tree editable="bottom" decoration-muted="not active">
+										<field name="sequence" widget="handle" />
+										<field name="state" />
+										<field name="name" />
+										<field name="type" />
+										<field name="reject_state" />
+										<field name="active" widget="boolean_toggle" />
+									</tree>
+								</field>
+							</group>
+						</page>
+						<page string="On Submit">
+							<field name="on_submit" nolabel="1" widget="ace" options="{'mode': 'python'}" />
+						</page>
+						<page string="On Approval">
+							<field name="on_approval" nolabel="1" widget="ace" options="{'mode': 'python'}" />
+						</page>						
+						<page string="On Approve">
+							<field name="on_approve" nolabel="1" widget="ace" options="{'mode': 'python'}" />
+						</page>
+						<page string="On Reject">
+							<field name="on_reject" nolabel="1" widget="ace" options="{'mode': 'python'}" />
+						</page>			
+						<page string="On Forward">
+							<field name="on_forward" nolabel="1" widget="ace" options="{'mode': 'python'}" />
+						</page>						
+						<page string="On Return">
+							<field name="on_return" nolabel="1" widget="ace" options="{'mode': 'python'}" />
+						</page>				
+						<page string="On Transfer">
+							<field name="on_transfer" nolabel="1" widget="ace" options="{'mode': 'python'}" />
+						</page>																																																				
+					</notebook>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="view_approval_settings_tree" model="ir.ui.view">
+		<field name="name">approval.settings.tree</field>
+		<field name="model">approval.settings</field>
+		<field name="arch" type="xml">
+			<tree create="false">
+				<field name="model" />
+				<field name="model_id" />				
+			</tree>
+		</field>
+	</record>
+
+	<record id="view_approval_settings_search" model="ir.ui.view">
+		<field name="name">approval.settings.search</field>
+		<field name="model">approval.settings</field>
+		<field name="arch" type="xml">
+			<search>
+				<field name="model_id" />
+			</search>
+		</field>
+	</record>
+
+
+</odoo>

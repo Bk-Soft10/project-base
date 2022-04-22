@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+	<record id="approval_employee" model="approval.config" forcecreate="False">
+		<field name="model_id" ref="model_appraisal" />
+		<field name="state">emp</field>
+		<field name="name">Employee</field>
+		<field name="sequence">10</field>
+		<field name="group_ids" eval="[(4, ref('group_appraisal_employee'))]" />
+		<field name="condition">any(record.mapped('template_id.sections_ids.employee_rating'))</field>
+		<field name="filter_condition">record.employee_id.user_id == user</field>
+		<field name="schedule_activity" eval="True" />
+		<field name="after_script">record._validate_employee_rating()</field>
+	</record>
+	
+	<record id="approval_emp_manager" model="approval.config" forcecreate="False">
+		<field name="model_id" ref="model_appraisal" />
+		<field name="state">emp_mgr</field>
+		<field name="name">Employee Manager</field>
+		<field name="sequence">10</field>
+		<field name="group_ids" eval="[(4, ref('group_appraisal_employee'))]" />
+		<field name="condition">True</field>
+		<field name="filter_condition">record.employee_id.parent_id.user_id == user</field>
+		<field name="schedule_activity" eval="True" />
+		<field name="after_script">		
+<![CDATA[
+record._validate_manager_rating()
+record.sudo().write({'lines_locked' : True })   
+]]>
+		</field>		
+	</record>	
+	
+	<record id="approval_hr" model="approval.config" forcecreate="False">
+		<field name="model_id" ref="model_appraisal" />
+		<field name="state">hr</field>
+		<field name="name">HR Officer</field>
+		<field name="sequence">20</field>
+		<field name="group_ids" eval="[(4, ref('group_appraisal_officer'))]" />
+		<field name="condition">True</field>
+		<field name="filter_condition"></field>
+		<field name="schedule_activity" eval="True" />
+	</record>	
+
+</odoo>

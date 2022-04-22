@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="view_po_report">
+    <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+            <t t-foreach="docs" t-as="doc">
+                <div class="page">
+                    <h2>PO Report</h2>
+                    <h4>Date : <span t-field="doc.date_from"/> - <span t-field="doc.date_to"/></h4>
+                    <div class="oe_structure"/>
+                    <t t-if="doc.group_by == 'product'">
+                        <table class="table table-bordered custom_border">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Product</th>
+                                    <th>Qty Ordered</th>
+                                    <th>Qty Received</th>
+                                    <th>Qty Invoiced</th>
+                                    <th>Total of Cost Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="i" t-value="1"/>
+                                <tr t-foreach="product_data" t-as="product">
+                                    <td>
+                                        <t t-esc="i"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="product['product_name']" />
+                                    </td>
+                                    <td>
+                                        <span t-esc="product['qty_order']" />
+                                    </td>
+                                    <td>
+                                        <span t-esc="product['qty_received']" />
+                                    </td>
+                                    <td>
+                                        <span t-esc="product['qty_invoiced']" />
+                                    </td>
+                                    <td>
+                                        <span t-esc="product['price_unit']" />
+                                    </td>
+                                    <t t-set="i" t-value="i + 1"/>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </t>
+                    <t t-if="doc.group_by == 'partner'">
+                        <table class="table table-bordered custom_border">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Vendor</th>
+                                    <th>No of Ordered</th>
+                                    <th>Ordered Total</th>
+                                    <th>Total Paid</th>
+                                    <th>Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="i" t-value="1"/>
+                                <tr t-foreach="partner_data" t-as="partner">
+                                    <td>
+                                        <t t-esc="i"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="partner['partner']" />
+                                    </td>
+                                    <td>
+                                        <span t-esc="partner['no_ordered']" />
+                                    </td>
+                                    <td>
+                                        <span t-esc="partner['amount_total']" />
+                                    </td>
+                                    <td>
+                                        <span t-esc="partner['paid_total']" />
+                                    </td>
+                                    <td>
+                                        <span t-esc="partner['partner_balance']" />
+                                    </td>
+                                    <t t-set="i" t-value="i + 1"/>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </t>
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+</odoo>

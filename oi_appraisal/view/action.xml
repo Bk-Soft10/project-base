@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="act_appraisal_generate" model="ir.actions.act_window">
+		<field name="name">Generate Appraisal</field>
+		<field name="res_model">appraisal.generate</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+	</record>
+
+	<record id="act_appraisal_question" model="ir.actions.act_window">
+		<field name="name">Appraisal Question</field>
+		<field name="res_model">appraisal.question</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('section_id','=', active_id)]</field>
+		<field name="context">{'default_section_id' : active_id}</field>
+	</record>
+
+	<record id="act_appraisal" model="ir.actions.act_window">
+		<field name="name">Employee Appraisal</field>
+		<field name="res_model">appraisal</field>
+		<field name="view_mode">tree,kanban,form</field>
+	</record>
+
+	<record id="act_appraisal_batch" model="ir.actions.act_window">
+		<field name="name">Appraisal Batch</field>
+		<field name="res_model">appraisal.batch</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<record id="act_appraisal_section" model="ir.actions.act_window">
+		<field name="name">Appraisal Sections</field>
+		<field name="res_model">appraisal.section</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<record id="act_appraisal_template" model="ir.actions.act_window">
+		<field name="name">Appraisal Templates</field>
+		<field name="res_model">appraisal.template</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<record id="act_appraisal_rate" model="ir.actions.act_window">
+		<field name="name">Appraisal Rate</field>
+		<field name="res_model">appraisal.rate</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<record id="act_appraisal_batch_type" model="ir.actions.act_window">
+		<field name="name">Appraisal Batch Type</field>
+		<field name="res_model">appraisal.batch.type</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+	
+	
+</odoo>

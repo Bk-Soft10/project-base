@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+	<record id="template_workflow_approval_notification" model="mail.template" forcecreate="False">
+		<field name="name">Approval Notification</field>
+		<field name="model_id" ref="model_approval_record" />
+		<field name="subject">Approval | ${object.get_title()}</field>
+		<field name="partner_to">${object.approval_partner_ids}</field>
+		<field name="needaction_partner_ids">${object.needaction_partner_ids}</field>
+		<field name="body_html"><![CDATA[
+<p>
+<b>Dear Sir</b>,
+</p>
+<br />
+<p>
+Document is Waiting For Your Approval
+</p>    
+<p>
+    ${object.get_title()}
+    <br>
+</p>
+<div style="margin-top: 16px;">
+        <a href="${object.get_form_url()}" style="padding: 5px 10px; font-size: 12px; line-height: 18px; color: #FFFFFF; border-color:#875A7B; text-decoration: none; display: inline-block; margin-bottom: 0px; font-weight: 400; text-align: center; vertical-align: middle; cursor: pointer; white-space: nowrap; background-image: none; background-color: #875A7B; border: 1px solid #875A7B; border-radius:3px">View Document</a>
+</div>
+<br />
+<p>
+<b>Best regards,</b>
+</p>  
+
+			   ]]>
+		</field>
+	</record>
+
+</odoo>

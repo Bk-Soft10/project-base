@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<record id="view_ir_model_fields_selection_custom_tree" model="ir.ui.view">
+		<field name="name">ir.model.fields.selection.custom.tree</field>
+		<field name="model">ir.model.fields.selection.custom</field>
+		<field name="arch" type="xml">
+			<tree editable="bottom">
+				<field name="sequence" widget="handle" />
+				<field name="value" />
+				<field name="name" />
+				<field name="active" widget="boolean_toggle" />
+			</tree>
+		</field>
+	</record>
+	
+	<record id="view_ir_model_fields_selection_custom_search" model="ir.ui.view">
+		<field name="name">ir.model.fields.selection.custom.search</field>
+		<field name="model">ir.model.fields.selection.custom</field>
+		<field name="arch" type="xml">
+			<search>
+				<field name="name" filter_domain="['|', ('name','=', self), ('value','=', self)]" />
+				<filter name="inactive" string="Inactive" domain="[('active','=', False)]" />
+			</search>
+		</field>
+	</record>
+	
+</odoo>

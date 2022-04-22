@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_payroll_inh_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.payroll</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="10"/>
+        <field name="inherit_id" ref="hr_payroll_extender.res_config_settings_view_payroll_inh_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='payslip_payment']" position="after">
+                <!--<h2>Other</h2>-->
+                    <!--<div class="row mt16 o_settings_container" id="hr_payroll_extend">-->
+
+                        <div class="col-lg-6 col-12 o_setting_box" id="payslip_direct_journal" title="Payslip Journal Account" groups="hr_payroll_community.group_hr_payroll_manager">
+                            <div class="o_setting_left_pane" >
+                                <field name="payslip_direct_journal" />
+                            </div>
+                            <div class="o_setting_right_pane" >
+                                <label for="payslip_direct_journal"/>
+                                <!--<div class="text-muted">
+                                    Payslip Payment Journal
+                                </div>-->
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-12 o_setting_box" id="payslip_payment_journal" title="Payment as Journal Entry" groups="hr_payroll_community.group_hr_payroll_manager">
+                            <div class="o_setting_left_pane" >
+                                <field name="module_payslip_payment_journal" />
+                            </div>
+                            <div class="o_setting_right_pane" >
+                                <label for="module_payslip_payment_journal"/>
+                                <!--<div class="text-muted">
+                                    Payslip Payment Journal
+                                </div>-->
+                            </div>
+                        </div>
+
+                    <!--</div>-->
+
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

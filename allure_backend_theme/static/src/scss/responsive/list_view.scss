@@ -1,0 +1,19 @@
+@mixin list-xs() {
+    .o_action_manager {
+        .o_view_controller {
+            .o_content {
+                .o_optional_columns_dropdown_toggle.fa-ellipsis-v {
+                    z-index: 6;
+                    padding: 0px 15px;
+                    &:before {
+                        font-size: 20px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.o_web_client.ad_mobile {
+    @include list-xs();
+}

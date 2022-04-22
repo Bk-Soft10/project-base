@@ -1,0 +1,66 @@
+.calendars-popup {
+    z-index: 99999 !important;
+    position: absolute !important;
+    & > .calendars {
+        min-width: 225px;
+        & > .calendars-month-row {
+            & > .calendars-month {
+                width: 100%;
+                & > .calendars-month-header {
+                    display: flex;
+                    & > .calendars-month-year {
+                        width: auto;
+                        display: inline;
+                    }
+                }
+            }
+        }
+        .calendars-month {
+            table {
+                & > thead {
+                    & > tr {
+                        & > th {
+                            span {
+                                max-width: 29px;
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+.o_list_view .o_data_row.o_selected_row {
+    & > .o_data_cell:not(.o_readonly_modifier) {
+        & > .o_datepicker {
+            position: relative;
+            display: inline;
+            float: left;
+            width: 50%;
+        }
+    }
+}
+
+.o_list_view {
+    .o_list_table {
+        tbody {
+            tr {
+                td {
+                    .o_datepicker_input {
+                        width: 50% !important;
+                    }
+                }
+            }
+        }
+    }  
+}
+
+.o_datepicker {
+    .o_datepicker_button {
+        &.o_hijri_datepicker_button {
+            top: 30px;
+        }
+    }
+}

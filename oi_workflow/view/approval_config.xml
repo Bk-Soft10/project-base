@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="view_approval_config_form" model="ir.ui.view">
+		<field name="name">approval.config.form</field>
+		<field name="model">approval.config</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<div class="oe_button_box" name="button_box" />
+					<widget name="web_ribbon" text="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+					<group>
+						<group>
+							<field name="active" invisible="1"/>
+							<field name="model_id" readonly="1" />
+							<field name="model_name" invisible="1" />
+							<field name="auto_subscribe_users_enabled" invisible="1" />
+							<field name="sequence" />
+							<field name="auto_subscribe_users" attrs="{'readonly' : [('auto_subscribe_users_enabled', '=', False)]}" />
+							<field name="post_approval_msg" attrs="{'readonly' : [('auto_subscribe_users_enabled', '=', False)]}" />
+							<field name="post_reject_msg" attrs="{'readonly' : [('auto_subscribe_users_enabled', '=', False)]}" />
+							<field name="auto_approve" />
+						</group>
+						<group>
+							<field name="state" />
+							<field name="name" />
+							<field name="allow_forward" />
+							<field name="allow_return" />
+							<field name="allow_transfer" />											
+							<field name="schedule_activity_enabled" invisible="1" />
+							<field name="schedule_activity" attrs="{'readonly' : [('schedule_activity_enabled', '=', False)]}" />
+							<field name="schedule_activity_field_id" options="{'no_create_edit' : True}" domain="[('model_id','=', model_id), ('ttype', 'in', ['date', 'datetime'])]" attrs="{'invisible' : [('schedule_activity', '=', False)]}" />	
+							<field name="schedule_activity_days" attrs="{'invisible' : [('schedule_activity', '=', False)]}" />							
+						</group>
+					</group>
+					<group string="Required Condition">
+						<field name="condition" nolabel="1" widget="ace" options="{'mode': 'python'}"  />
+					</group>
+					<notebook>
+						<page string="Approval Groups">
+							<group>
+								<field name="group_ids" nolabel="1">
+									<tree>
+										<field name="display_name" />
+									</tree>
+								</field>
+							</group>
+						</page>
+						<page string="Filter">
+							<group string="Filter Condition">
+								<field name="filter_condition" nolabel="1" widget="ace" options="{'mode': 'python'}"  />
+							</group>
+						</page>
+						<page string="Mail Templates">
+							<group>
+								<field name="template_ids" nolabel="1">
+									<tree>
+										<field name="display_name" />
+									</tree>
+								</field>
+							</group>
+						</page>
+						<page string="Reject Mail Templates">
+							<group>
+								<field name="reject_template_ids" nolabel="1">
+									<tree>
+										<field name="display_name" />
+									</tree>
+								</field>
+							</group>
+						</page>						
+						<page string="Scripts">
+							<group>
+								<field name="before_script" widget="ace" options="{'mode': 'python'}" />
+							</group>
+							<group>
+								<field name="on_script" widget="ace" options="{'mode': 'python'}" />
+							</group>
+							<group>
+								<field name="after_script" widget="ace" options="{'mode': 'python'}" />
+							</group>
+							<group>
+								<field name="reject_script" widget="ace" options="{'mode': 'python'}" />
+							</group>																					
+						</page>						
+						<page string="Buttons">
+							<group>								
+								<group string="Approve">
+									<field name="approve_button_wizard" string="Required Reason" />
+									<field name="approve_button_name" string="Button Name" />								
+									<field name="approve_confirm_msg" string="Confirm Message" />								
+								</group>
+								<group string="Reject">
+									<field name="reject_button_wizard" string="Required Reason" />
+									<field name="reject_button_name" string="Button Name" />									
+									<field name="reject_confirm_msg" string="Confirm Message" />
+								</group>
+							</group>
+						</page>
+						<page string="Escalation">
+							<group>								
+								<field name="escalation_ids" nolabel="1" context="{'default_model_id' : model_id,'default_name' : model_name + ': ' + name + ' Escalation', 'default_trigger' : 'on_time', 'default_trg_date_id' : last_state_update_id, 'default_filter_domain' : [('state','=', state)]}" />
+								
+							</group>
+							<group>
+								<field name="last_state_update_id" invisible="1" />
+							</group>
+						</page>						
+					</notebook>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="view_approval_config_tree" model="ir.ui.view">
+		<field name="name">approval.config.tree</field>
+		<field name="model">approval.config</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="model_id" invisible="1" />
+				<field name="sequence" widget="handle" />
+				<field name="state" />
+				<field name="name" />
+				<field name="condition" />
+				<field name="group_ids" widget="many2many_tags" />
+				<field name="active" />
+			</tree>
+		</field>
+	</record>
+
+	<record id="view_approval_config_search" model="ir.ui.view">
+		<field name="name">approval.config.search</field>
+		<field name="model">approval.config</field>
+		<field name="arch" type="xml">
+			<search>
+				<field name="state" />
+				<field name="name" />
+				<filter name="inactive" string="Inactive" domain="[('active','=',False)]" />
+			</search>
+		</field>
+	</record>
+
+
+</odoo>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="view_appraisal_form" model="ir.ui.view">
+		<field name="name">appraisal.form</field>
+		<field name="model">appraisal</field>
+		<field name="arch" type="xml">
+			<form create="false">
+				<header>
+					<field name="state" widget="statusbar" />
+					<field name="workflow_states" invisible="1" />
+					<field name="user_can_approve" invisible="1" />
+					<field name="button_approve_enabled" invisible="1" />
+					<field name="button_forward_enabled" invisible="1" />
+					<field name="button_return_enabled" invisible="1" />										
+					<field name="approve_button_name" invisible="1" />
+					<field name="approve_confirm_msg" invisible="1" />
+					<field name="reject_button_wizard" invisible="1" />
+					<field name="reject_button_name" invisible="1" />
+					<field name="reject_confirm_msg" invisible="1" />
+					<button name="action_approve" type="object" string="Confirm" class="oe_highlight" states="draft" />
+					<button name="action_approve" type="object" string="Approve" class="oe_highlight oe_workflow_approve" attrs="{'invisible' : [('user_can_approve','=', False)]}" />
+					<button name="action_reject_wizard" type="object" string="Reject" class="oe_workflow_reject" attrs="{'invisible' : ['|', '|', ('user_can_approve','=', False), ('reject_button_name', '=', False), ('reject_button_wizard', '=', False)]}" />
+					<button name="action_reject" type="object" string="Reject" class="oe_workflow_reject" attrs="{'invisible' : ['|','|', ('user_can_approve','=', False), ('reject_button_name', '=', False), ('reject_button_wizard', '=', True)]}" />
+					<button name="action_draft" type="object" confirm="Reset to draft ?" string="Reset to draft" states="rejected" />
+					<button name="action_forward" type="object" string="Forward" attrs="{'invisible' : [('button_forward_enabled','=', False)]}" />
+					<button name="action_return" type="object" string="Return" attrs="{'invisible' : [('button_return_enabled','=', False)]}" />										
+				</header>
+				<sheet>
+					<group>
+						<group>
+							<field name="name" />
+							<field name="employee_id" />
+							<field name="batch_id" />
+							<field name="result" />
+							<field name="result_title" />
+							<field name="is_lines_locked" invisible="1" />
+						</group>
+						<group>
+							<field name="template_id" groups="base.group_no_one" />
+							<field name="company_id" groups="base.group_multi_company" />
+							<field name="department_id" />
+							<field name="job_id" />
+							<field name="manager_id" />
+							<field name="parent_id" groups="base.group_no_one" />
+						</group>
+					</group>
+					<notebook>
+
+					</notebook>
+					<group>
+						<field name="comments" nolabel="1" placeholder="Comments" />
+					</group>
+				</sheet>
+				<div class="oe_chatter">
+					<field name="message_follower_ids" widget="mail_followers" />
+					<field name="activity_ids" widget="mail_activity" />
+					<field name="message_ids" widget="mail_thread" />
+				</div>
+			</form>
+		</field>
+	</record>
+
+	<record id="view_appraisal_tree" model="ir.ui.view">
+		<field name="name">appraisal.tree</field>
+		<field name="model">appraisal</field>
+		<field name="arch" type="xml">
+			<tree create="false">
+				<field name="name" />
+				<field name="employee_id" />
+				<field name="batch_id" optional="show" />
+				<field name="department_id" optional="hide" />
+				<field name="job_id" optional="hide" />
+				<field name="manager_id" optional="hide"  />
+				<field name="result" optional="show" />
+				<field name="result_title" optional="show" />
+				<field name="template_id" optional="hide" />
+				<field name="state" optional="show" />
+			</tree>
+		</field>
+	</record>
+	
+    <record id="view_appraisal_kanban" model="ir.ui.view">
+        <field name="name">appraisal.kanban</field>
+        <field name="model">appraisal</field>
+        <field name="arch" type="xml">
+            <kanban class="o_hr_employee_kanban">
+                <field name="id"/>
+				<field name="name" />
+				<field name="employee_id" />
+				<field name="batch_id" />
+				<field name="state" />
+				<field name="result" />
+				<field name="result_title" />
+                <templates>
+                    <t t-name="kanban-box">
+                    <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_hr_kanban_record">
+                        <!-- Medium employee's picture -->
+                        <div class="o_kanban_image_fill_left d-none d-md-block" t-attf-style="background-image: url(#{kanban_image('hr.employee', 'image_medium', record.employee_id.raw_value)})" role="img"/>
+                        <!-- Employee's picture optimized for mobile -->
+                        <div class="o_kanban_image d-md-none rounded-circle" t-attf-style="background-image: url(#{kanban_image('hr.employee', 'image_small', record.employee_id.raw_value)})" role="img"/>
+
+                        <div class="oe_kanban_details">
+                            <div class="o_kanban_record_top">
+                                <div class="o_kanban_record_headings">
+                                    <strong class="o_kanban_record_title">
+                                        <field name="employee_id"/>
+                                    </strong>
+                                    <span class="o_kanban_record_subtitle"><field name="batch_id"/></span>
+                                </div>
+                            </div>
+                            <field name="state" widget="label_selection" options="{'classes': {'draft': 'default', 'rejected': 'warning', 'done': 'success'}}" />
+                            <ul>
+                                <li><field name="name"/></li>
+                                <li t-if="record.result.raw_value"><field name="result"/></li>
+                            </ul>
+                        </div>
+                    </div>
+                    </t>
+                </templates>
+            </kanban>
+
+        </field>
+    </record>
+	
+
+	<record id="view_appraisal_search" model="ir.ui.view">
+		<field name="name">appraisal.search</field>
+		<field name="model">appraisal</field>
+		<field name="arch" type="xml">
+			<search>
+				<field name="name" />
+				<field name="employee_id" />
+				<separator />
+				<filter string="My Appraisal" name="appraisal_my" domain="[('employee_id.user_id', '=', uid)]" />
+				<filter string="Waiting Approval" name="approval" domain="[('waiting_approval', '=', True)]" />
+				<separator />
+				<filter string="My Activities" name="activities_my" domain="[('activity_ids.user_id', '=', uid)]" />
+				<separator />
+				<filter string="Late Activities" name="activities_overdue" domain="[('activity_ids.date_deadline', '&lt;', context_today().strftime('%Y-%m-%d'))]"
+					help="Show all records which has next action date is before today" />
+				<filter string="Today Activities" name="activities_today" domain="[('activity_ids.date_deadline', '=', context_today().strftime('%Y-%m-%d'))]" />
+				<filter string="Future Activities" name="activities_upcoming_all"
+					domain="[('activity_ids.date_deadline', '&gt;', context_today().strftime('%Y-%m-%d'))
+                        ]" />
+				<group expand="0" string="Group By">
+					<filter string="Employee" name="employee" domain="[]" context="{'group_by':'employee_id'}" />
+					<filter string="Status" name="group_status" domain="[]" context="{'group_by':'state'}" />
+					<filter string="Year" name="group_year" domain="[]" context="{'group_by':'year'}" />
+					<filter string="Batch" name="group_batch" domain="[]" context="{'group_by':'batch_id'}" />
+					<filter string="Template" name="group_template" domain="[]" context="{'group_by':'template_id'}" />
+					<filter string="Department" name="group_department" domain="[]" context="{'group_by':'department_id'}" />
+				</group>
+			</search>
+		</field>
+	</record>
+
+</odoo>
