@@ -22,10 +22,46 @@ odoo.define('pos_multi_barcodes', function (require) {
             this._super(options);
 
         },
+        _product_search_string: function(product){
+            var str = product.display_name;
+            if (product.barcode) {
+                str += '|' + product.barcode;
+            }
+            if (product.default_code) {
+                str += '|' + product.default_code;
+            }
+            if (product.description) {
+                str += '|' + product.description;
+            }
+            if (product.description_sale) {
+                str += '|' + product.description_sale;
+            }
+            var self = this;
+//            var str = this._super(product);
+
+            if(product.pos_multi_barcode_option.length > 0){
+                var barcod_opt = self.product_barcode_option_list;
+                for(var k=0;k<barcod_opt.length;k++){
+                    for(var j=0;j<product.pos_multi_barcode_option.length;j++){
+                        if(barcod_opt[k].id == product.pos_multi_barcode_option[j]){
+                            if (barcod_opt[k].name) {
+                                var posbarcode = barcod_opt[k].name;
+                                if (posbarcode) {
+                                    str += '|' + posbarcode;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            str  = product.id + ':' + str.replace(/:/g,'') + '\n';
+            return str
+
+        },
         add_products: function(products){
             var self = this;
-            this._super(products); 
-            
+            this._super(products);
+
             for(var i = 0, len = products.length; i < len; i++){
                 var product = products[i];
                 if(product.pos_multi_barcode_option){
@@ -49,7 +85,7 @@ odoo.define('pos_multi_barcodes', function (require) {
     var SuperPosModel = models.PosModel.prototype;
     models.PosModel = models.PosModel.extend({
         scan_product: function(parsed_code){
-            var selectedOrder = this.get_order();       
+            var selectedOrder = this.get_order();
             var product = this.db.get_product_by_barcode(parsed_code.base_code);
 
             if(!product){
