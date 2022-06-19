@@ -36,7 +36,7 @@
                         <div class="row">
                             <div class="col-4">
                                 <div class="text-center" style="padding:3px; max-width:200px;margin:auto;text-align:right;">
-                                    <h3>فاتورة INVOICE</h3>
+                                    <h3>فاتورة ضريبية  INVOICE TAX</h3>
                                     <h3>
                                         <span t-field="o.name" />
                                     </h3>
