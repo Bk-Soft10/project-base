@@ -64,8 +64,14 @@
                                         <tr>
                                             <td style="border-left: solid 1px;">Name الاسم</td>
                                             <td>
+                                                <span t-field="o.partner_id"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border-left: solid 1px;">Address العنوان</td>
+                                            <td>
                                                 <span t-field="o.partner_id"
-                                                    t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
+                                                    t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}' />
                                             </td>
                                         </tr>
 
@@ -73,12 +79,6 @@
                                             <td style="border-left: solid 1px;">VAT. المعرف الضريبي</td>
                                             <td>
                                                 <span t-field="o.partner_id.vat" />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="border-left: solid 1px;">Phone الجوال</td>
-                                            <td>
-                                                <span t-field="o.partner_id.phone" />
                                             </td>
                                         </tr>
                                         <tr>
