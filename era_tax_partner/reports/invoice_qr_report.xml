@@ -58,13 +58,14 @@
                         <br />
 
                         <div class="row">
-                            <div class="col-4 text-center">
+                            <div class="col-5 text-center">
                                 <table class="table-sm" style="width: 100%;background-color: none;">
                                     <thead>
                                         <tr>
                                             <td style="border-left: solid 1px;">Name الاسم</td>
                                             <td>
-                                                <span t-field="o.partner_id" />
+                                                <span t-field="o.partner_id"
+                                                    t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
                                             </td>
                                         </tr>
 
@@ -95,7 +96,7 @@
                                     </thead>
                                 </table>
                             </div>
-                            <div class="col-4 text-center">
+                            <div class="col-2 text-center">
                                 <div class="text-center" style="background-color:#FFF;border: 3px solid #eeeded;padding:3px; max-width:200px;margin:auto;text-align:center;">
                                     <!--<t t-esc="o._generate_qr_code()" />
                                     <img t-att-src="image_data_uri(o.qr_image)" style="max-height: 150px;" alt="QR Code" />-->
@@ -103,7 +104,7 @@
                                     <img t-att-src="image_data_uri(o.qr_code)" style="height: 150px;" alt="QR Code"/>
                                 </div>
                             </div>
-                            <div class="col-4 text-center">
+                            <div class="col-5 text-center">
                                 <table class="table-sm" style="width: 100%;background-color: none;">
                                     <thead>
                                         <tr>
@@ -131,8 +132,15 @@
                         </div>
                         <br />
                         <div class="row text-center">
-                            <span><b>Company VAT : </b></span>
-                            <span t-field="company.vat" />
+                            <div class="col-3 text-center"></div>
+
+                            <div class="col-6 text-center">
+                                <strong><span t-field="o.ref" /></strong>
+                                <!--<strong><b>Company VAT : </b></strong>
+                                <span t-field="company.vat" />-->
+                            </div>
+
+                            <div class="col-3 text-center"></div>
                         </div>
 
                         <!-- Is there a discount on at least one line? -->
