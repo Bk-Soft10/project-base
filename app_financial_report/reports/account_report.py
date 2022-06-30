@@ -75,17 +75,20 @@ class AccountReport(models.AbstractModel):
 
         query_all = """
                 SELECT m_line.account_id as account_id,
+                acc.code as account_code,
                 SUM(m_line.debit) as op_debit,
                 SUM(m_line.credit) as op_credit,
                 (SUM(m_line.debit)-SUM(m_line.credit)) as op_balance
                 FROM account_move_line m_line
                 JOIN account_move m ON
                 m_line.move_id = m.id
+                JOIN account_account acc ON
+                m_line.account_id = acc.id
                 """
         if query_where:
             query_all = query_all + query_where + " group by m_line.account_id order by m_line.account_id "
         else:
-            query_all = query_all + " group by m_line.account_id order by m_line.account_id "
+            query_all = query_all + " group by m_line.account_id order by acc.code,m_line.account_id "
 
         self.env.cr.execute(query_all)
 
@@ -111,17 +114,20 @@ class AccountReport(models.AbstractModel):
 
         query_all = """
                 SELECT m_line.account_id as account_id,
+                acc.code as account_code,
                 SUM(m_line.debit) as debit,
                 SUM(m_line.credit) as credit,
                 (SUM(m_line.debit)-SUM(m_line.credit)) as balance
                 FROM account_move_line m_line
                 JOIN account_move m ON
                 m_line.move_id = m.id
+                JOIN account_account acc ON
+                m_line.account_id = acc.id
                 """
         if query_where:
-            query_all = query_all + query_where + " group by m_line.account_id order by m_line.account_id "
+            query_all = query_all + query_where + " group by m_line.account_id order by acc.code,m_line.account_id "
         else:
-            query_all = query_all + " group by m_line.account_id order by m_line.account_id "
+            query_all = query_all + " group by m_line.account_id order by acc.id "
 
         self.env.cr.execute(query_all)
 
