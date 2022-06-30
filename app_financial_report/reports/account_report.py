@@ -86,9 +86,9 @@ class AccountReport(models.AbstractModel):
                 m_line.account_id = acc.id
                 """
         if query_where:
-            query_all = query_all + query_where + " group by m_line.account_id order by m_line.account_id "
+            query_all = query_all + query_where + " group by acc.code,m_line.account_id order by acc.code,m_line.account_id "
         else:
-            query_all = query_all + " group by m_line.account_id order by acc.code,m_line.account_id "
+            query_all = query_all + " group by acc.code,m_line.account_id order by acc.code,m_line.account_id "
 
         self.env.cr.execute(query_all)
 
@@ -125,9 +125,9 @@ class AccountReport(models.AbstractModel):
                 m_line.account_id = acc.id
                 """
         if query_where:
-            query_all = query_all + query_where + " group by m_line.account_id order by acc.code,m_line.account_id "
+            query_all = query_all + query_where + " group by acc.code,m_line.account_id order by acc.code,m_line.account_id "
         else:
-            query_all = query_all + " group by m_line.account_id order by acc.id "
+            query_all = query_all + " group by acc.code,m_line.account_id order by acc.code,m_line.account_id "
 
         self.env.cr.execute(query_all)
 
