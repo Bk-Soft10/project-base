@@ -40,6 +40,11 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <t t-set="sum_op_balance" t-value="0"/>
+                                <t t-set="sum_debit" t-value="0"/>
+                                <t t-set="sum_credit" t-value="0"/>
+                                <t t-set="sum_balance" t-value="0"/>
+                                <t t-set="sum_fn_balance" t-value="0"/>
                                 <tr t-foreach="report_line_val" t-as="line">
                                     <t>
                                         <t t-if="o.group_by == 'account'">
@@ -60,16 +65,20 @@
                                             <span t-att-style="style" t-esc="line.get('op_credit')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                         </td>-->
                                         <td t-if="data['opening_balance']" class="text-right" style="white-space: text-nowrap;">
+                                            <t t-set="sum_op_balance" t-value="sum_op_balance + line.get('op_balance')"/>
                                             <span t-att-style="style" t-esc="line.get('op_balance')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                         </td>
 
                                         <td t-if="data['debit_credit']" class="text-right" style="white-space: text-nowrap;">
+                                            <t t-set="sum_debit" t-value="sum_debit + line.get('debit')"/>
                                             <span t-att-style="style" t-esc="line.get('debit')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                         </td>
                                         <td t-if="data['debit_credit']" class="text-right" style="white-space: text-nowrap;">
+                                            <t t-set="sum_credit" t-value="sum_credit + line.get('credit')"/>
                                             <span t-att-style="style" t-esc="line.get('credit')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                         </td>
                                         <td class="text-right" style="white-space: text-nowrap;">
+                                            <t t-set="sum_balance" t-value="sum_balance + line.get('balance')"/>
                                             <span t-att-style="style" t-esc="line.get('balance')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                         </td>
 
@@ -80,7 +89,33 @@
                                             <span t-att-style="style" t-esc="line.get('fn_credit')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                         </td>-->
                                         <td t-if="data['opening_balance']" class="text-right" style="white-space: text-nowrap;">
+                                            <t t-set="sum_fn_balance" t-value="sum_fn_balance + line.get('fn_balance')"/>
                                             <span t-att-style="style" t-esc="line.get('fn_balance')" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr>
+                                    <t>
+
+                                        <t t-set="style" t-value="'font-weight: normal;'"/>
+                                        <td>
+                                            <span>SUM</span>
+                                        </td>
+                                        <td t-if="data['opening_balance']" class="text-right" style="white-space: text-nowrap;">
+                                            <span t-esc="'{0:,.2f}'.format(round(sum_op_balance,2))" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                        </td>
+
+                                        <td t-if="data['debit_credit']" class="text-right" style="white-space: text-nowrap;">
+                                            <span t-esc="'{0:,.2f}'.format(round(sum_debit,2))" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                        </td>
+                                        <td t-if="data['debit_credit']" class="text-right" style="white-space: text-nowrap;">
+                                            <span t-esc="'{0:,.2f}'.format(round(sum_credit,2))" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                        </td>
+                                        <td class="text-right" style="white-space: text-nowrap;">
+                                            <span t-esc="'{0:,.2f}'.format(round(sum_balance,2))" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                        </td>
+                                        <td t-if="data['opening_balance']" class="text-right" style="white-space: text-nowrap;">
+                                            <span t-esc="'{0:,.2f}'.format(round(sum_fn_balance,2))" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
                                         </td>
                                     </t>
                                 </tr>
