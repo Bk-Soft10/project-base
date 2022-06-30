@@ -263,7 +263,7 @@ class AccountReport(models.AbstractModel):
         if wizard.group_by == 'account':
             account_ids = wizard.account_ids
             if not account_ids:
-                account_ids = self.env['account.account'].search([])
+                account_ids = self.env['account.account'].search([], order='code asc')
             val_lines = self.update_accounts_bal_values(wizard, wizard.opening_balance, account_ids)
         if wizard.group_by == 'partner':
             partner_ids = wizard.partner_ids
