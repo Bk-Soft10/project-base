@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="settlement_type_view_form" model="ir.ui.view">
+        <field name="name">payslip.settlement.type.form</field>
+        <field name="model">payslip.settlement.type</field>
+        <field name="arch" type="xml">
+            <form string="Settlement TYpe">
+                <header>
+                    <button string="Confirm" name="action_confirm" type="object" states="draft"
+                            groups="hr_payroll_community.group_hr_payroll_manager"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group name="input">
+                            <field name="name" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="type" attrs="{'readonly':[('state','!=','draft')]}"/>
+                        </group>
+                        <group name="output">
+                            <field name="rule_id"/>
+                            <field name="code" force_save="1"/>
+                            <field name="portal_service"/>
+                            <field name="amount" attrs="{'invisible':[('portal_service','=',False)]}"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="settlement_type_view_tree" model="ir.ui.view">
+        <field name="name">payslip.settlement.type.tree</field>
+        <field name="model">payslip.settlement.type</field>
+        <field name="arch" type="xml">
+            <tree string="Settlement Type List">
+                <field name="name"/>
+                <field name="type"/>
+                <field name="rule_id"/>
+                <field name="code"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_settlement_type" model="ir.actions.act_window">
+        <field name="name">Settlement Type</field>
+        <field name="res_model">payslip.settlement.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+            id="menu_settlement_type"
+            action="action_settlement_type"
+            name="Settlement Type"
+            sequence="102"
+            parent="hr_payroll_community.menu_hr_payroll_configuration"/>
+</odoo> 

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate='1'>
+        <!-- Salary Structure Rule for General Employee Settlement-->
+        <record id="hr_payslip_settlement_deduct_rule" model="hr.salary.rule">
+            <field name="code">EMPDED</field>
+            <field name="name">Employee Deduction</field>
+            <field name="sequence" eval="105"/>
+            <field name="category_id" ref="hr_payroll_community.DED"/>
+            <field name="struct_id" ref="hr_payroll_community.structure_base"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = employee.compute_settlement("deduct", payslip)</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = employee.compute_settlement("deduct", payslip)</field>
+        </record>
+
+        <record id="hr_payslip_settlement_allowance_rule" model="hr.salary.rule">
+            <field name="code">EMPALW</field>
+            <field name="name">Employee Allowance</field>
+            <field name="sequence" eval="102"/>
+            <field name="category_id" ref="hr_payroll_community.ALW"/>
+            <field name="struct_id" ref="hr_payroll_community.structure_base"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = employee.compute_settlement(payslip,"allowance")</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = employee.compute_settlement(payslip,"allowance")</field>
+        </record>
+
+        <record id="hr_payroll_community.structure_base" model="hr.payroll.structure">
+            <field name="rule_ids"
+                   eval="[(4, ref('hr_payslip_settlement_deduct_rule')),(4, ref('hr_payslip_settlement_allowance_rule'))]"/>
+        </record>
+    </data>
+</odoo>

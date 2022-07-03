@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_general_settlement_employee,access.general.settlement.employee,model_hr_payslip_settlement,base.group_user,1,0,0,0
+access_general_settlement_officer,access.general.settlement.officer,model_hr_payslip_settlement,hr_payroll_community.group_hr_payroll_user,1,1,1,1
+access_genearl_settlement_manager,access.general.settlement.manager,model_hr_payslip_settlement,hr_payroll_community.group_hr_payroll_manager,1,1,1,1
+access_genearl_settlement_portal,access.general.settlement.portal,model_hr_payslip_settlement,base.group_portal,1,1,1,1
+access_genearl_payslip_settlement_type_portal,access.general.payslip.settlement.type.portal,model_payslip_settlement_type,base.group_portal,1,1,1,1
+access_payslip_settlement_type_employee,access.payslip.settlement.type.employee,model_payslip_settlement_type,base.group_user,1,0,0,0
+access_hr_payslip_settlement_lines,access.hr.payslip.settlement.lines,model_hr_payslip_settlement_lines,base.group_user,1,1,1,1
+access_payslip_settlement_type_officer,access.payslip.settlement.type.officer,model_payslip_settlement_type,hr_payroll_community.group_hr_payroll_user,1,1,1,0
+access_payslip_settlement_type_manager,access.payslip.settlement.type.manager,model_payslip_settlement_type,hr_payroll_community.group_hr_payroll_manager,1,1,1,0

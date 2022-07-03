@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="hr_payslip_settlement_view_form" model="ir.ui.view">
+        <field name="name">hr.payslip.settlement.form</field>
+        <field name="model">hr.payslip.settlement</field>
+        <field name="arch" type="xml">
+            <form string="Employee Payslip settlement">
+                <header>
+                    <button string="Submit" name="action_waitting_approval" type="object" states="draft"
+                            groups="hr_payroll_community.group_hr_payroll_user" class="oe_highlight"/>
+
+                    <button string="Confirm" name="action_approved" type="object" states="waitting_approve"
+                            groups="hr_payroll_community.group_hr_payroll_manager" class="oe_highlight"/>
+
+                    <button string="Cancel" name="action_cancel" type="object"
+                            groups="hr_payroll_community.group_hr_payroll_manager" attrs="{'invisible':[('state','in',['close','cancel'])]}"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group string="Employee Info" name="emp_info">
+                            <field name="employee_id" placeholder="Employee" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <!--<field name="emp_no" readonly="1" force_save="1"/>-->
+                            <field name="department_id" readonly="1" force_save="1"/>
+                            <field name="job_id" readonly="1" force_save="1"/>
+                        </group>
+                        <group string="Request Info">
+                            <field name="request_date" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="request_type" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="settlement_type" attrs="{'readonly':[('state','!=','draft')]}" domain="[('type','=',request_type),('state','=','confirmed')]" options="{'no_create_edit': True, 'no_open': True}"/>
+                            <field name="date_start" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="duration" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="date_end"/>
+                            <field name="calculation_method" widget='radio' attrs="{'required':1,'readonly':[('state','!=','draft')]}"/>
+                            <field name="calculation_based" widget='radio' attrs="{'required':1,'readonly':[('state','!=','draft')]}"/>
+                            <field name="amount" attrs="{'required':1,'readonly':[('state','!=','draft')]}"/>
+                            <field name="month_amount" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="total_amount" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="amount_deducted" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="remain_amount"/>
+
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Lines">
+                            <field name="settlement_line_ids" readonly="1" colspan="4" nolabel="1">
+                                <tree>
+                                    <field name="employee_id" invisible="1"/>
+                                    <field name="request_type" invisible="0"/>
+                                    <field name="date_start"/>
+                                    <field name="date_end"/>
+                                    <field name="amount"/>
+                                    <field name="paid"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Attachments">
+                            <field name="attachment_ids" widget="many2many_binary"/>
+                        </page>
+                        <page string="Reason settlement">
+                            <field name="reason" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="hr_payslip_settlement_view_tree" model="ir.ui.view">
+        <field name="name">hr.payslip.settlement.tree</field>
+        <field name="model">hr.payslip.settlement</field>
+        <field name="arch" type="xml">
+            <tree string="Employee Payslip Settlement List">
+                <field name="employee_id"/>
+                <!--<field name="emp_no"/>-->
+                <field name="request_type"/>
+                <field name="settlement_type"/>
+                <field name="duration"/>
+                <field name="date_end"/>
+                <field name="month_amount"/>
+                <field name="total_amount"/>
+                <field name="amount_deducted"/>
+                <field name="remain_amount"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_hr_payslip_settlement" model="ir.actions.act_window">
+        <field name="name">Employee settlement</field>
+        <field name="res_model">hr.payslip.settlement</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+            id="menu_hr_payslip_settlement"
+            action="action_hr_payslip_settlement"
+            name="Employee Payslip Settlement"
+            sequence="55"
+            parent="hr_payroll_community.menu_hr_payroll_root"/>
+</odoo> 
