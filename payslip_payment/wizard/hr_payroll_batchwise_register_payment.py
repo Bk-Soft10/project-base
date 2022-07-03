@@ -14,7 +14,7 @@ class HrPayslipBatchwiseRegisterPaymentWizard(models.TransientModel):
     _name = "hr.payslip.batchwise.register.payment.wizard"
     _description = "Batch Wise Register Payment wizard"
 
-    batch_id = fields.Many2one('hr.payslip.run','Batch Name')
+    batch_id = fields.Many2one('hr.payslip.run', 'Batch Name')
     journal_id = fields.Many2one('account.journal', string='Payment Method', required=True, domain=[('type', 'in', ('bank', 'cash'))])
     company_id = fields.Many2one('res.company', related='journal_id.company_id', string='Company', readonly=True, required=True)
     payment_method_id = fields.Many2one('account.payment.method', string='Payment Type', required=True)
@@ -26,7 +26,6 @@ class HrPayslipBatchwiseRegisterPaymentWizard(models.TransientModel):
         help="Technical field used to hide the payment method if the selected journal has only one available which is 'manual'")
     batch_payment = fields.Boolean(string="Batch Payment", help="Create Batch Payment")
 
-    # @api.one
     @api.depends('journal_id')
     def _compute_hide_payment_method(self):
         for rec in self:
@@ -90,8 +89,12 @@ class HrPayslipBatchwiseRegisterPaymentWizard(models.TransientModel):
 
                     # Create payment and post it
                     payment = self.env['account.payment'].sudo().create(payment_values)
-                    payment.sudo().post()
-                    payment_lst.append(payment)
+
+                    if payment:
+                        if account_payment:
+                            payment.sudo().write({'destination_account_id': account_payment.id})
+                        payment.sudo().post()
+                        payment_lst.append(payment)
                     # for move in payment.move_line_ids:
                     #     move.name = +
                     # Log the payment in the chatter
@@ -110,12 +113,4 @@ class HrPayslipBatchwiseRegisterPaymentWizard(models.TransientModel):
                 if payslip_paid_search:
                     if len(batch_id.slip_ids) == len(payslip_paid_search):
                         self.batch_id.write({'state': 'paid'})
-            # if self[0].batch_payment:
-            #     batch = self.env['account.batch.payment'].sudo().create({
-            #         'journal_id': self[0].journal_id.id,
-            #         'payment_ids': [(4, payment.id, None) for payment in payment_lst],
-            #         'payment_method_id': self[0].payment_method_id.id,
-            #         'batch_type': 'outbound',
-            #     })
-            #     batch_id.batch_payment_id = batch.id or False
         return {'type': 'ir.actions.act_window_close'}

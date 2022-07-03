@@ -32,14 +32,12 @@ class HrPayslipRegisterPaymentWizard(models.TransientModel):
     hide_payment_method = fields.Boolean(compute='_compute_hide_payment_method',
         help="Technical field used to hide the payment method if the selected journal has only one available which is 'manual'")
 
-    #@api.one
     @api.constrains('amount')
     def _check_amount(self):
         for rec in self:
             if not rec.amount > 0.0:
                 raise ValidationError(_('The payment amount must be strictly positive.'))
 
-    # @api.one
     @api.depends('journal_id')
     def _compute_hide_payment_method(self):
         for rec in self:
@@ -75,7 +73,6 @@ class HrPayslipRegisterPaymentWizard(models.TransientModel):
             'writeoff_label': 'Payslip Payment',
         }
 
-    ##@api.multi
     def expense_post_payment(self):
         self.ensure_one()
         # payslip_journal = self.env['ir.config_parameter'].sudo().get_param('payslip_payment.payslip_direct_journal')
@@ -98,7 +95,10 @@ class HrPayslipRegisterPaymentWizard(models.TransientModel):
 
         # Create payment and post it
         payment = self.env['account.payment'].create(payment_dict)
-        payment.post()
+        if payment:
+            if account_payment:
+                payment.sudo().write({'destination_account_id': account_payment.id})
+            payment.post()
         # for move in payment.move_line_ids:
         #     move.name = +
         # Log the payment in the chatter
