@@ -81,9 +81,11 @@ class HrPayslipBatchwiseRegisterPaymentWizard(models.TransientModel):
                     }
                     account_payment = False
                     if batch_id.journal_id and not batch_id.credit_note:
-                        account_payment = batch_id.journal_id.default_credit_account_id
-                    if batch_id.journal_id and batch_id.credit_note:
                         account_payment = batch_id.journal_id.default_debit_account_id
+                    if batch_id.journal_id and batch_id.credit_note:
+                        account_payment = batch_id.journal_id.default_credit_account_id
+                        payment_values['partner_type'] = 'customer'
+                        payment_values['payment_type'] = 'inbound'
                     if account_payment and payslip_journal:
                         payment_values['payslip_account_id'] = account_payment.id
 

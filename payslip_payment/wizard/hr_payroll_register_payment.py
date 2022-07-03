@@ -85,9 +85,11 @@ class HrPayslipRegisterPaymentWizard(models.TransientModel):
         payment_dict['payslip_id'] = payslip.id or False
         account_payment = False
         if payslip.journal_id and not payslip.credit_note:
-            account_payment = payslip.journal_id.default_credit_account_id
-        if payslip.journal_id and payslip.credit_note:
             account_payment = payslip.journal_id.default_debit_account_id
+        if payslip.journal_id and payslip.credit_note:
+            account_payment = payslip.journal_id.default_credit_account_id
+            payment_dict['partner_type'] = 'customer'
+            payment_dict['payment_type'] = 'inbound'
         if account_payment and payslip_journal:
             payment_dict['payslip_account_id'] = account_payment.id
             payment_dict['payslip_payment'] = payslip_journal
