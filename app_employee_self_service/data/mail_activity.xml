@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="notification_pm" model="mail.activity.type">
+        <field name="name">Notify To PM</field>
+        <field name="icon">fa-pencil-square-o</field>
+        <field name="delay_count">5</field>
+        <field name="sequence">12</field>
+    </record>
+
+    <record id="notification_hro" model="mail.activity.type">
+        <field name="name">Notify To HRO</field>
+        <field name="icon">fa-pencil-square-o</field>
+        <field name="delay_count">5</field>
+        <field name="sequence">12</field>
+    </record>
+
+    <record id="notification_finance" model="mail.activity.type">
+        <field name="name">Notify Finance</field>
+        <field name="icon">fa-pencil-square-o</field>
+        <field name="delay_count">5</field>
+        <field name="sequence">12</field>
+    </record>
+
+    <record id="notification_requester" model="mail.activity.type">
+        <field name="name">Notify Requester</field>
+        <field name="icon">fa-pencil-square-o</field>
+        <field name="delay_count">5</field>
+        <field name="sequence">12</field>
+    </record>
+
+</odoo>

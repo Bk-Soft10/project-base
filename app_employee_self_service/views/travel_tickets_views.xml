@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="req_travel_tickets_form_view" model="ir.ui.view">
+        <field name="name">req.travel_tickets.form</field>
+        <field name="model">req.travel_tickets</field>
+        <field name="arch" type="xml">
+            <form string="Travel Tickets Requests">
+                <header>
+                    <field name="id" invisible="1"/>
+                    <button string="Reset To Draft" name="set_draft" states="cancel" type="object"/>
+                    <button string="Submit" name="set_pm" states="draft" type="object" class="oe_highlight"/>
+                    <button string="Send To HRO" name="set_hro" states="PM Approval" type="object" class="oe_highlight"/>
+                    <button string="Set Done" name="set_done" states="HRO Approval" groups="hr.group_hr_user" type="object" class="oe_highlight"/>
+                    <button string="Cancel" name="set_cancel" states="draft,PM Approval" type="object"/>
+                    <!--<button string="Reject" name="set_reject" states="PM Approval,HRO Approval" type="object"/>-->
+                    <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                    </div>
+                    <div class="oe_title">
+                        <label for="code" class="oe_edit_only"/>
+                        <h1><field name="code" nolabel="1" readonly="1" force_save="1"/></h1>
+                    </div>
+                    <group col="4">
+                        <field name="purpose" force_save="1"/>
+                        <field name="trip_type" force_save="1"/>
+                        <field name="tickets_class" force_save="1"/>
+                        <field name="other_travellers" force_save="1"/>
+                        <field name="date_from" force_save="1"/>
+                        <field name="date_to" force_save="1"/>
+                        <field name="place_from" force_save="1"/>
+                        <field name="place_to" force_save="1"/>
+                    </group>
+                    <group colspan="4">
+                        <field name="travellers_ids" attrs="{'invisible': [('other_travellers', '=', 'Yes')]}" force_save="1" colspan="4">
+                            <tree string="Travellers" editable="bottom">
+                                <field name="name"/>
+                                <field name="relative_relation"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <notebook>
+                        <page name="employee_info" string="Employee Information">
+                            <group col="4">
+                                <field name="employee_id" force_save="1" options="{'no_create': True, 'no_edit': True, 'no_open': 'True'}"/>
+                                <field name="department_id" readonly="1" force_save="1" options="{'no_create': True, 'no_edit': True, 'no_open': 'True'}"/>
+                                <field name="analytic_account_id" readonly="1" force_save="1" options="{'no_create': True, 'no_edit': True, 'no_open': 'True'}"/>
+                                <field name="company_id" readonly="1" groups="base.group_multi_company" force_save="1" options="{'no_create': True, 'no_edit': True, 'no_open': 'True'}"/>
+                                <field name="active" invisible="1"/>
+                            </group>
+                        </page>
+                        <page name="justification_req" string="Justification">
+                            <group colspan="4">
+                                <field name="justification" force_save="1" colspan="4" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page name="req_info" string="Request Information">
+                            <group col="4">
+                                <field name="user_id" force_save="1" options="{'no_create': True, 'no_edit': True, 'no_open': 'True'}"/>
+                                <field name="request_date"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="req_travel_tickets_tree_view" model="ir.ui.view">
+        <field name="name">req.travel_tickets.tree</field>
+        <field name="model">req.travel_tickets</field>
+        <field name="arch" type="xml">
+            <tree string="Travel Tickets Requests">
+                <field name="code"/>
+                <field name="employee_id"/>
+                <field name="department_id" optional="hide"/>
+                <field name="user_id" optional="hide"/>
+                <field name="request_date" optional="hide"/>
+                <field name="purpose"/>
+                <field name="trip_type"/>
+                <field name="tickets_class"/>
+                <field name="state"/>
+                <field name="company_id" groups="base.group_multi_company" force_save="1" options="{'no_create': True, 'no_edit': True, 'no_open': 'True'}"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="open_req_travel_tickets_act" model="ir.actions.act_window">
+        <field name="name">Travel Tickets</field>
+        <field name="res_model">req.travel_tickets</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_req_travel_tickets_open" name="Travel Tickets" parent="app_employee_self_service.menu_req_service_str" sequence="19" action="open_req_travel_tickets_act"/>
+
+
+</odoo>

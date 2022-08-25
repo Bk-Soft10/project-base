@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <record id="email_self_service_wait_approve" model="mail.template">
+            <field name="name">Request for Self Service Waiting Approve - Send by Email</field>
+            <field name="email_from">${object.company_id.email|safe}</field>
+            <field name="subject">Approval Request for Self-Service - ${object.code}</field>
+            <field name="model_id" ref="app_employee_self_service.model_req_self_service"/>
+            <field name="model">req.self_service</field>
+            <field name="auto_delete" eval="True"/>
+            <!--<field name="lang">${object.lang}</field>-->
+            <field name="body_html" type="html">
+                <div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+                    <p> Approve Request for Self-Service - ${object.code}.</p>
+                    <p> Request is Submitted by ${object.user_id.name}</p>
+                    <p> We Want your Approval</p> <br/>
+
+                    <div style="margin:16px 0px 16px 0px;">
+                        <a href="${object.prepare_base_url()|safe}" style="background-color:#875A7B;padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                                    Flow This Link
+                        </a>
+                    </div>
+
+                    <p>Thank you,</p>
+                    <br/>
+                    <div style="width: 375px; margin: 0px; padding: 0px; background-color: #8E0000; border-top-left-radius: 5px 5px; border-top-right-radius: 5px 5px; background-repeat: repeat no-repeat;">
+                        <h3 style="margin: 0px; padding: 2px 14px; font-size: 12px; color: #DDD;">
+                            <strong style="text-transform:uppercase;">${user.company_id.name}</strong></h3>
+                    </div>
+                    <div style="width: 347px; margin: 0px; padding: 5px 14px; line-height: 16px; background-color: #F2F2F2;">
+                        <span style="color: #222; margin-bottom: 5px; display: block; ">
+                            ${user.company_id.partner_id.sudo().with_context(show_address=True, html_format=True).name_get()[0][1] | safe}
+                        </span>
+                        % if user.company_id.phone:
+                            <div style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; ">
+                                Phone: ${object.company_id.phone}
+                            </div>
+                        % endif
+                        % if user.company_id.website:
+                            <div>
+                                Web :<a href="${object.company_id.website}">${user.company_id.website}</a>
+                            </div>
+                        %endif
+                        <p></p>
+                    </div>
+                </div>
+            </field>
+        </record>
+
+        <record id="email_self_service_reject" model="mail.template">
+            <field name="name">Request for Self Service Rejected - Send by Email</field>
+            <field name="email_from">${object.company_id.email|safe}</field>
+            <field name="subject">Request for Self-Service Rejected - ${object.code}</field>
+            <field name="model_id" ref="app_employee_self_service.model_req_self_service"/>
+            <field name="model">req.self_service</field>
+            <field name="auto_delete" eval="True"/>
+            <!--<field name="lang">${object.lang}</field>-->
+            <field name="body_html" type="html">
+                <div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+                    <p> Request for Self-Service is Rejected - ${object.code}.</p>
+                    <!--<p> Request is Submitted by ${object.user_id.name}</p>
+                    <p> We Want your Approval</p>-->
+                    <br/>
+
+                    <div style="margin:16px 0px 16px 0px;">
+                        <a href="${object.prepare_base_url()|safe}" style="background-color:#875A7B;padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                                    Flow This Link
+                        </a>
+                    </div>
+
+                    <p>Thank you,</p>
+                    <br/>
+                    <div style="width: 375px; margin: 0px; padding: 0px; background-color: #8E0000; border-top-left-radius: 5px 5px; border-top-right-radius: 5px 5px; background-repeat: repeat no-repeat;">
+                        <h3 style="margin: 0px; padding: 2px 14px; font-size: 12px; color: #DDD;">
+                            <strong style="text-transform:uppercase;">${user.company_id.name}</strong></h3>
+                    </div>
+                    <div style="width: 347px; margin: 0px; padding: 5px 14px; line-height: 16px; background-color: #F2F2F2;">
+                        <span style="color: #222; margin-bottom: 5px; display: block; ">
+                            ${user.company_id.partner_id.sudo().with_context(show_address=True, html_format=True).name_get()[0][1] | safe}
+                        </span>
+                        % if user.company_id.phone:
+                            <div style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; ">
+                                Phone: ${object.company_id.phone}
+                            </div>
+                        % endif
+                        % if user.company_id.website:
+                            <div>
+                                Web :<a href="${object.company_id.website}">${user.company_id.website}</a>
+                            </div>
+                        %endif
+                        <p></p>
+                    </div>
+                </div>
+            </field>
+        </record>
+
+        <record id="email_self_service_approved" model="mail.template">
+            <field name="name">Request for Self Service Approved - Send by Email</field>
+            <field name="email_from">${object.company_id.email|safe}</field>
+            <field name="subject">Request for Self-Service Approved - ${object.code}</field>
+            <field name="model_id" ref="app_employee_self_service.model_req_self_service"/>
+            <field name="model">req.self_service</field>
+            <field name="auto_delete" eval="True"/>
+            <!--<field name="lang">${object.lang}</field>-->
+            <field name="body_html" type="html">
+                <div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+                    <p> Request for Self-Service is Approved - ${object.code}.</p>
+                    <!--<p> Request is Submitted by ${object.user_id.name}</p>
+                    <p> We Want your Approval</p>-->
+                    <br/>
+
+                    <div style="margin:16px 0px 16px 0px;">
+                        <a href="${object.prepare_base_url()|safe}" style="background-color:#875A7B;padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                                    Flow This Link
+                        </a>
+                    </div>
+
+                    <p>Thank you,</p>
+                    <br/>
+                    <div style="width: 375px; margin: 0px; padding: 0px; background-color: #8E0000; border-top-left-radius: 5px 5px; border-top-right-radius: 5px 5px; background-repeat: repeat no-repeat;">
+                        <h3 style="margin: 0px; padding: 2px 14px; font-size: 12px; color: #DDD;">
+                            <strong style="text-transform:uppercase;">${user.company_id.name}</strong></h3>
+                    </div>
+                    <div style="width: 347px; margin: 0px; padding: 5px 14px; line-height: 16px; background-color: #F2F2F2;">
+                        <span style="color: #222; margin-bottom: 5px; display: block; ">
+                            ${user.company_id.partner_id.sudo().with_context(show_address=True, html_format=True).name_get()[0][1] | safe}
+                        </span>
+                        % if user.company_id.phone:
+                            <div style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; ">
+                                Phone: ${object.company_id.phone}
+                            </div>
+                        % endif
+                        % if user.company_id.website:
+                            <div>
+                                Web :<a href="${object.company_id.website}">${user.company_id.website}</a>
+                            </div>
+                        %endif
+                        <p></p>
+                    </div>
+                </div>
+            </field>
+        </record>
+
+        <record id="email_salary_transfer_otp_code" model="mail.template">
+            <field name="name">Request for Salary Transfer - OTP Code</field>
+            <field name="email_from">${object.company_id.email|safe}</field>
+            <field name="subject">OTP Code for Salary Transfer - ${object.salary_transfer_id.code}</field>
+            <field name="model_id" ref="app_employee_self_service.model_salary_transfer_otp_code"/>
+            <field name="model">salary_transfer.otp.code</field>
+            <field name="auto_delete" eval="True"/>
+            <!--<field name="lang">${object.lang}</field>-->
+            <field name="body_html" type="html">
+                <div style="font-family: 'Lucida Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+                    <p> OTP Code for Salary Transfer - ${object.salary_transfer_id.code}.</p>
+                    <br/>
+                    <center><h3>${object.code}</h3></center>
+
+                    <br/>
+
+                    <p>Thank you,</p>
+                    <br/>
+                    <div style="width: 375px; margin: 0px; padding: 0px; background-color: #8E0000; border-top-left-radius: 5px 5px; border-top-right-radius: 5px 5px; background-repeat: repeat no-repeat;">
+                        <h3 style="margin: 0px; padding: 2px 14px; font-size: 12px; color: #DDD;">
+                            <strong style="text-transform:uppercase;">${user.company_id.name}</strong></h3>
+                    </div>
+                    <div style="width: 347px; margin: 0px; padding: 5px 14px; line-height: 16px; background-color: #F2F2F2;">
+                        <span style="color: #222; margin-bottom: 5px; display: block; ">
+                            ${user.company_id.partner_id.sudo().with_context(show_address=True, html_format=True).name_get()[0][1] | safe}
+                        </span>
+                        % if user.company_id.phone:
+                            <div style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; ">
+                                Phone: ${object.company_id.phone}
+                            </div>
+                        % endif
+                        % if user.company_id.website:
+                            <div>
+                                Web :<a href="${object.company_id.website}">${user.company_id.website}</a>
+                            </div>
+                        %endif
+                        <p></p>
+                    </div>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

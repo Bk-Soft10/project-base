@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="req_salary_identification_form_view" model="ir.ui.view">
+        <field name="name">req.salary_identification.form</field>
+        <field name="model">req.salary_identification</field>
+        <field name="arch" type="xml">
+            <form string="Salary Identification Requests">
+                <header>
+                    <field name="id" invisible="1"/>
+                    <button string="Confirm" name="set_done" states="draft" type="object" class="oe_highlight"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                    </div>
+                    <div class="oe_title">
+                        <label for="code" class="oe_edit_only"/>
+                        <h1><field name="code" nolabel="1" readonly="1" force_save="1"/></h1>
+                    </div>
+                    <group colspan="4">
+                        <field name="to_who" force_save="1"/>
+                    </group>
+                    <notebook>
+                        <page name="employee_info" string="Employee Information">
+                            <group col="4">
+                                <field name="employee_id" force_save="1" options="{'no_create': True, 'no_edit': True, 'no_open': 'True'}"/>
+                                <field name="department_id" readonly="1" force_save="1" options="{'no_create': True, 'no_edit': True, 'no_open': 'True'}"/>
+                                <field name="analytic_account_id" readonly="1" force_save="1" options="{'no_create': True, 'no_edit': True, 'no_open': 'True'}"/>
+                                <field name="company_id" readonly="1" groups="base.group_multi_company" force_save="1" options="{'no_create': True, 'no_edit': True, 'no_open': 'True'}"/>
+                                <field name="active" invisible="1"/>
+                            </group>
+                        </page>
+                        <page name="justification_req" string="Justification">
+                            <group colspan="4">
+                                <field name="justification" force_save="1" colspan="4" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page name="req_info" string="Request Information">
+                            <group col="4">
+                                <field name="user_id" force_save="1" options="{'no_create': True, 'no_edit': True, 'no_open': 'True'}"/>
+                                <field name="request_date"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="req_salary_identification_tree_view" model="ir.ui.view">
+        <field name="name">req.salary_identification.tree</field>
+        <field name="model">req.salary_identification</field>
+        <field name="arch" type="xml">
+            <tree string="Salary Identification Requests">
+                <field name="code"/>
+                <field name="employee_id"/>
+                <field name="department_id" optional="hide"/>
+                <field name="user_id" optional="hide"/>
+                <field name="request_date" optional="hide"/>
+                <field name="to_who"/>
+                <field name="state"/>
+                <field name="company_id" groups="base.group_multi_company" force_save="1" options="{'no_create': True, 'no_edit': True, 'no_open': 'True'}"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="open_req_salary_identification_act" model="ir.actions.act_window">
+        <field name="name">Salary Identification</field>
+        <field name="res_model">req.salary_identification</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_req_salary_identification_open" name="Salary Identification" parent="app_employee_self_service.menu_req_service_str" sequence="13" action="open_req_salary_identification_act"/>
+
+
+</odoo>

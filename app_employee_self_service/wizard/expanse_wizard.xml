@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <data>
+
+        <record id="expanse_wizard_view" model="ir.ui.view">
+            <field name="name">expanse.request.wizard</field>
+            <field name="model">expanse.req.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Create Expanse Wizard">
+                    <field name="req_id" invisible="1"/>
+                    <group colspan="4">
+                        <field name="expense_amount"/>
+                    </group>
+                    <footer>
+                        <button string='Submit' name="create_expanse" type="object" class="btn btn-danger"/>
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="expanse_wizard_action" model="ir.actions.act_window">
+            <field name="name">Expanse Wizard</field>
+            <field name="res_model">expanse.req.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="app_employee_self_service.expanse_wizard_view"/>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

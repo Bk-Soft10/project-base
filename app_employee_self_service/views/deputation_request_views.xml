@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="req_deputation_request_form_view" model="ir.ui.view">
+        <field name="name">req.deputation_request.form</field>
+        <field name="model">req.deputation_request</field>
+        <field name="arch" type="xml">
+            <form string="Business Trip Requests">
+                <header>
+                    <field name="id" invisible="1"/>
+                    <button string="Reset To Draft" name="set_draft" states="cancel" type="object" class="oe_highlight"/>
+                    <button string="Submit" name="set_pm" states="draft" type="object" class="oe_highlight"/>
+                    <button string="Send To HRO" name="set_hro" states="PM Approval" type="object" class="oe_highlight"/>
+                    <button string="Set Done" name="set_done" states="HRO Approval" groups="hr.group_hr_user" type="object" class="oe_highlight"/>
+                    <button string="Cancel" name="set_cancel" states="draft,PM Approval" type="object"/>
+                    <!--<button string="Reject" name="set_reject" states="PM Approval,HRO Approval" type="object"/>-->
+                    <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                    </div>
+                    <div class="oe_title">
+                        <label for="code" class="oe_edit_only"/>
+                        <h1><field name="code" nolabel="1" readonly="1" force_save="1"/></h1>
+                    </div>
+                    <group col="4">
+                        <field name="dest_country_id" options="{'no_create': True, 'no_edit': True, 'no_open': 'True'}" force_save="1"/>
+                        <field name="dest_city_id" options="{'no_create': True, 'no_edit': True, 'no_open': 'True'}" force_save="1"/>
+                        <label for="date_from"/>
+                        <div class="o_row o_row_readonly">
+                            <field name="date_from" class="oe_inline" force_save="1"/>
+                            <span class="oe_inline" > To </span>
+                            <field name="date_to" class="oe_inline" force_save="1"/>
+                        </div>
+                        <field name="num_days" readonly="1" force_save="1"/>
+                        <field name="purpose_trip" force_save="1"/>
+                        <field name="payment_method" force_save="1"/>
+                        <field name="travel_ticket" force_save="1"/>
+                    </group>
+                    <group colspan="4">
+                        <field name="purpose" colspan="4" force_save="1"/>
+                    </group>
+                    <notebook>
+                        <page name="employee_info" string="Employee Information">
+                            <group col="4">
+                                <field name="employee_id" force_save="1" options="{'no_create': True, 'no_edit': True, 'no_open': 'True'}"/>
+                                <field name="department_id" readonly="1" force_save="1" options="{'no_create': True, 'no_edit': True, 'no_open': 'True'}"/>
+                                <field name="analytic_account_id" readonly="1" force_save="1" options="{'no_create': True, 'no_edit': True, 'no_open': 'True'}"/>
+                                <field name="company_id" readonly="1" groups="base.group_multi_company" force_save="1" options="{'no_create': True, 'no_edit': True, 'no_open': 'True'}"/>
+                                <field name="active" invisible="1"/>
+                            </group>
+                        </page>
+                        <page name="justification_req" string="Justification">
+                            <group colspan="4">
+                                <field name="justification" force_save="1" colspan="4" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page name="req_info" string="Request Information">
+                            <group col="4">
+                                <field name="user_id" force_save="1" options="{'no_create': True, 'no_edit': True, 'no_open': 'True'}"/>
+                                <field name="request_date"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="req_deputation_request_tree_view" model="ir.ui.view">
+        <field name="name">req.deputation_request.tree</field>
+        <field name="model">req.deputation_request</field>
+        <field name="arch" type="xml">
+            <tree string="Business Trip Requests">
+                <field name="code"/>
+                <field name="employee_id"/>
+                <field name="department_id" optional="hide"/>
+                <field name="user_id" optional="hide"/>
+                <field name="request_date" optional="hide"/>
+                <field name="dest_country_id"/>
+                <field name="dest_city_id"/>
+                <field name="date_from"/>
+                <field name="date_to"/>
+                <field name="state"/>
+                <field name="company_id" groups="base.group_multi_company" force_save="1" options="{'no_create': True, 'no_edit': True, 'no_open': 'True'}"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="open_req_deputation_request_act" model="ir.actions.act_window">
+        <field name="name">Business Trip</field>
+        <field name="res_model">req.deputation_request</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_req_deputation_request_open" name="Business Trip" parent="app_employee_self_service.menu_req_service_str" sequence="21" action="open_req_deputation_request_act"/>
+
+
+</odoo>

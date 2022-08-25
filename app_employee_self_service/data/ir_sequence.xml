@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="seq_self_service_req" model="ir.sequence">
+		<field name="name">Self-Service Request</field>
+		<field name="code">req.self_service</field>
+		<field name="prefix">R-</field>
+		<field name="padding">6</field>
+		<!--<field name="company_id" eval="False" />-->
+	</record>
+
+</odoo>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_self_service_root" name="Self-Service Employees" sequence="5"
+                  web_icon="app_employee_self_service,static/description/icon.png"/>
+
+    <menuitem id="menu_req_service_str" name="Self-Service" parent="menu_self_service_root" sequence="25"/>
+
+    <menuitem id="menu_req_service_configration" name="Configration" parent="menu_self_service_root" sequence="99"/>
+
+    <menuitem id="menu_country_open" name="Countries" parent="app_employee_self_service.menu_req_service_configration" sequence="12" action="base.action_country"/>
+    <menuitem id="menu_city_open" name="Cities" parent="app_employee_self_service.menu_req_service_configration" sequence="13" action="base.action_country_state"/>
+    <menuitem id="menu_bank_open" name="Banks" parent="app_employee_self_service.menu_req_service_configration" sequence="15" action="base.action_res_bank_form"/>
+
+    <!-- ############### ####################################### ##################### -->
+    <!-- ############### ####################################### ##################### -->
+
+    <record id="req_self_service_form_view" model="ir.ui.view">
+        <field name="name">req.self_service.form</field>
+        <field name="model">req.self_service</field>
+        <field name="arch" type="xml">
+            <form string="Self-Service Requests" create="0" delete="0" duplicate="0">
+                <header>
+                    <field name="id" invisible="1"/>
+                    <button string="Source Request" name="open_source_document" type="object" class="oe_highlight"/>
+                    <!--<field name="state" widget="statusbar" statusbar_visible="draft,done"/>-->
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                    </div>
+                    <group col="4">
+                        <field name="code"/>
+                        <field name="active"/>
+                        <field name="user_id" force_save="1" options="{'no_create': True, 'no_edit': True, 'no_open': 'True'}"/>
+                        <field name="request_date"/>
+                    </group>
+                    <notebook>
+                        <page name="employee_info" string="Employee Information">
+                            <group col="4">
+                                <field name="employee_id" force_save="1" options="{'no_create': True, 'no_edit': True, 'no_open': 'True'}"/>
+                                <field name="department_id" force_save="1" options="{'no_create': True, 'no_edit': True, 'no_open': 'True'}"/>
+                                <field name="analytic_account_id" force_save="1" options="{'no_create': True, 'no_edit': True, 'no_open': 'True'}"/>
+                                <field name="company_id" groups="base.group_multi_company" force_save="1" options="{'no_create': True, 'no_edit': True, 'no_open': 'True'}"/>
+                            </group>
+                        </page>
+                        <page name="justification_req" string="Justification">
+                            <group colspan="4">
+                                <field name="justification" force_save="1" colspan="4" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page name="req_source" string="Source Request">
+                            <group col="4">
+                                <field name="source_model" force_save="1" options="{'no_create': True, 'no_edit': True, 'no_open': 'True'}"/>
+                                <field name="source_id" force_save="1" options="{'no_create': True, 'no_edit': True, 'no_open': 'True'}"/>
+                                <button name="open_source_document" string="Open Request" type="object" class="oe_highlight" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="req_self_service_tree_view" model="ir.ui.view">
+        <field name="name">req.self_service.tree</field>
+        <field name="model">req.self_service</field>
+        <field name="arch" type="xml">
+            <tree string="Self-Service Requests" create="0" delete="0" duplicate="0">
+                <field name="code"/>
+                <field name="employee_id"/>
+                <field name="department_id" optional="hide"/>
+                <field name="user_id" optional="hide"/>
+                <field name="request_date" optional="hide"/>
+                <field name="source_model" optional="hide"/>
+                <field name="state" optional="show"/>
+                <field name="company_id" groups="base.group_multi_company" force_save="1" options="{'no_create': True, 'no_edit': True, 'no_open': 'True'}"/>
+                <button name="open_source_document"
+                        string="Open Request"
+                        type="object"
+                        class="oe_highlight" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="open_req_self_service_act" model="ir.actions.act_window">
+        <field name="name">Self-Service Request</field>
+        <field name="res_model">req.self_service</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'group_by': 'source_model'}</field>
+    </record>
+
+    <menuitem id="menu_req_service_open" name="Self-Service" parent="menu_req_service_str" sequence="1" action="open_req_self_service_act"/>
+
+    <!-- ############### ####################################### ##################### -->
+    <!-- ############### ####################################### ##################### -->
+
+    <record id="open_my_profile_act" model="ir.actions.act_window">
+        <field name="name">My Profile</field>
+        <field name="res_model">hr.employee</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('user_id', '=', uid)]</field>
+    </record>
+
+    <menuitem id="menu_my_profile_open" name="My Profile" parent="menu_self_service_root" sequence="5" action="open_my_profile_act"/>
+
+    <!-- ############### ####################################### ##################### -->
+    <!-- ############### ####################################### ##################### -->
+
+    <record id="open_my_contract_act" model="ir.actions.act_window">
+        <field name="name">My Contract</field>
+        <field name="res_model">hr.contract</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('employee_id.user_id', '=', uid)]</field>
+    </record>
+
+    <menuitem id="menu_my_contract_open" name="My Contract" parent="menu_self_service_root" sequence="7" action="open_my_contract_act"/>
+
+    <!-- ############### ####################################### ##################### -->
+    <!-- ############### ####################################### ##################### -->
+
+    <record id="open_my_payslip_act" model="ir.actions.act_window">
+        <field name="name">My Payslip</field>
+        <field name="res_model">hr.payslip</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('employee_id.user_id', '=', uid)]</field>
+    </record>
+
+    <menuitem id="menu_my_payslip_open" name="My Payslip" parent="menu_self_service_root" sequence="9" action="open_my_payslip_act"/>
+
+
+</odoo>

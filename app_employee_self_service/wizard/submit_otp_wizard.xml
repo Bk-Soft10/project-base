@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <data>
+
+        <record id="submit_otp_wizard_view" model="ir.ui.view">
+            <field name="name">submit.otp.wizard</field>
+            <field name="model">submit.otp.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Submit OTP Code Wizard">
+                    <field name="salary_transfer_id" force_save="1" readonly="1" invisible="1"/>
+                    <group colspan="4">
+                        <field name="enter_otp_code"/>
+                    </group>
+                    <footer>
+                        <button string='Validate OTP' name="validate_otp" type="object" class="btn btn-danger"/>
+                         OR
+                        <button string='Resend OTP Code' name="resend_otp" type="object" class="btn btn-danger"/>
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="submit_otp_wizard_action" model="ir.actions.act_window">
+            <field name="name">Submit OTP Code Wizard</field>
+            <field name="res_model">submit.otp.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="app_employee_self_service.submit_otp_wizard_view"/>
+            <field name="context">{'default_salary_transfer_id': active_id}</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>
