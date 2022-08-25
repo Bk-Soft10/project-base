@@ -105,7 +105,11 @@ odoo.define('pos_multi_barcodes', function (require) {
             var pos_multi_op = this.multi_barcode_options;
             for(var i=0;i<pos_multi_op.length;i++){
                 if(pos_multi_op[i].name == parsed_code.code){
-                    line.set_quantity(pos_multi_op[i].qty);
+                    var qty_line = line.quantity - 1
+                    if (qty_line < 0){
+                        qty_line = 0
+                    }
+                    line.set_quantity(pos_multi_op[i].qty + qty_line);
                     line.set_unit_price(pos_multi_op[i].price);
                     line.set_pro_uom(pos_multi_op[i].unit[0]);
                 }
