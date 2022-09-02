@@ -18,7 +18,7 @@ _logger = logging.getLogger(__name__)
 class pos_multi_barcode_opt(models.Model):
     _name = 'pos.multi.barcode.options'
 
-    name = fields.Char('Barcode', required=True)
+    name = fields.Char('Barcode', required=True, unique=True, copy=False)
     qty = fields.Float("Quantity")
     price = fields.Float("Price")
     unit = fields.Many2one("uom.uom", string="Unit")
@@ -40,16 +40,36 @@ class pos_multi_barcode_opt(models.Model):
         domain = {'unit': [('category_id', '=', self.product_id.uom_id.category_id.id)]}
         return {'domain': domain}
 
+    @api.constrains('name')
+    def _barcode_const(self):
+        for record in self:
+            if record.name:
+                barcode_stander = self.env['product.product'].search([('barcode', '=', record.name)])
+                if barcode_stander:
+                    raise UserError(_("Standard Barcode %s has been duplicated." % record.name))
+                if not record.qty or not record.price or not record.unit:
+                    raise UserError(_("Qty,Price and UOM are Mandatory."))
+                other_record = self.env['pos.multi.barcode.options'].sudo().search(
+                    [('id', '!=', record.id or record._origin.id), ('name', '=', record.name)])
+                if other_record:
+                    raise UserError(_("Options Barcode %s has been duplicated." % record.name))
+
 
 class product_product(models.Model):
     _inherit = 'product.product'
 
-    pos_multi_barcode_option = fields.One2many('pos.multi.barcode.options','product_id',string='Barcodes')
+    pos_multi_barcode_option = fields.One2many('pos.multi.barcode.options', 'product_id', string='Barcodes')
+
+    # @api.onchange('pos_multi_barcode_option')
+    # def _change_barcode_options(self):
+    #     for rec in self:
+    #         for barcode_line in rec.pos_multi_barcode_option:
+    #             barcode_line._barcode_const()
 
 class PosOrderLine(models.Model):
     _inherit = "pos.order.line"
 
-    product_uom = fields.Many2one('uom.uom','Unit of measure')
+    product_uom = fields.Many2one('uom.uom', 'Unit of measure')
 
 
 class PosOrder(models.Model):
