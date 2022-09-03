@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_workshop_model,app.workshop.model.dev,model_app_workshop,group_app_workshop_dev,1,1,1,1
+access_workshop_model_stage,app.workshop.model.dev.stage,model_app_workshop_stage,group_app_workshop_dev,1,1,1,1
+access_workshop_model_type,app.workshop.model.dev.type,model_app_workshop_type,group_app_workshop_dev,1,1,1,1
+access_workshop_model_line,app.workshop.model.dev.line,model_app_workshop_line,group_app_workshop_dev,1,1,1,1
+access_workshop_model_spare,app.workshop.model.dev.spare,model_app_workshop_spare,group_app_workshop_dev,1,1,1,1
+access_workshop_model_spare_order,app.workshop.model.dev.spare.order,model_app_workshop_spare_order,group_app_workshop_dev,1,1,1,1
+access_workshop_model_appoint,app.workshop.model.dev.appoint,model_app_workshop_appointments,group_app_workshop_dev,1,1,1,1
