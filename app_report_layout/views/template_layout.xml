@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="app_layout_report">
+            <div t-attf-class="header o_company_#{company.id}_layout">
+                <div class="row">
+                    <div class="row col-md-12">
+                        <img t-if="company.report_header_img" t-att-src="image_data_uri(company.report_header_img)" style="max-height: 160px;width:100%" alt="Logo"/>
+                    </div>
+                </div>
+                <br /><br />
+            </div>
+
+            <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+                <t t-call="web.address_layout"/>
+                <t t-raw="0"/>
+            </div>
+
+            <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
+                <div class="text-center" >
+                    <div class="row">
+                        <div class="row col-md-12">
+                            <img t-if="company.report_footer_img" t-att-src="image_data_uri(company.report_footer_img)" style="max-height: 60px;width:100%" alt="Logo"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <template id="app_external_layout_boxed" name="App Layout Report">
+            <div t-attf-class="o_company_#{company.id}_layout header" t-att-style="report_header_style">
+                <div class="o_background_header">
+                    <!--<img t-if="company.logo" t-att-src="image_data_uri(company.logo)" class="float-left" alt="Logo"/>
+                    <div class="float-right company_address"/>
+                    <div class="clearfix mb8"/>-->
+
+                    <div class="row">
+                        <t t-if="company.report_header_img">
+                            <img t-att-src="image_data_uri(company.report_header_img)" style="margin:auto;max-height:150px;width:100%" alt="Logo"/>
+                        </t>
+                        <t t-if="not company.report_header_img">
+                            <div class="col-4">
+                                <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="margin:auto;max-height:150px;width:100%" alt="Logo"/>
+                            </div>
+                            <div class="col-8 text-center" style="border:1px solid transparent;">
+                            </div>
+                        </t>
+                    </div>
+                    <div class="clearfix mb8"/>
+                </div>
+            </div>
+
+            <div t-attf-class="o_company_#{company.id}_layout article o_report_layout_background" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+                <!--<t t-call="web.address_layout"/>-->
+                <t t-raw="0"/>
+            </div>
+
+            <div t-attf-class="o_company_#{company.id}_layout footer o_background_footer">
+                <div class="row">
+                    <t t-if="company.report_footer_img">
+                        <img t-att-src="image_data_uri(company.report_footer_img)" style="margin:auto;max-height:100px;width:100%" alt="Logo"/>
+                    </t>
+                    <t t-if="not company.report_footer_img">
+                        <div class="text-center">
+                            <ul class="list-inline">
+                                <li t-if="company.phone" class="list-inline-item"><i class="fa fa-phone" role="img" aria-label="Phone" title="Phone"/> <span class="o_force_ltr" t-field="company.phone"/></li>
+                                <li t-if="company.email" class="list-inline-item"><i class="fa fa-at" role="img" aria-label="Email" title="Email"/> <span t-field="company.email"/></li>
+                                <li t-if="company.website" class="list-inline-item"><i class="fa fa-globe" role="img" aria-label="Website" title="Website"/> <span t-field="company.website"/></li>
+                                <li t-if="company.vat" class="list-inline-item"><i class="fa fa-building-o" role="img" aria-label="Fiscal number"/><t t-esc="company.country_id.vat_label or 'Tax ID'"/>: <span t-field="company.vat"/></li>
+                            </ul>
+                            <div t-field="company.report_footer"/>
+                            <div t-if="report_type == 'pdf'" class="text-muted">
+                                Page:
+                                <span class="page"/>
+                                of
+                                <span class="topage"/>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </template>
+
+    </data>
+</odoo>
