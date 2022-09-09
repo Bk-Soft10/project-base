@@ -46,7 +46,9 @@
                                     <th>Reference number</th>
                                     <th>Date</th>
                                     <th>Description</th>
-                                    <th class="amount">Amount</th>
+                                    <!--<th class="amount">Amount</th>-->
+                                    <th class="amount">Debit</th>
+                                    <th class="amount">Credit</th>
                                     <th class="amount">Balance</th>
                                 </tr>
                             </thead>
@@ -59,6 +61,7 @@
                                     <td>
                                             Balance Forward
                                         </td>
+                                    <td />
                                     <td />
                                     <td class="amount">
                                         <span
@@ -106,9 +109,21 @@
                                             <span t-else="" t-esc="line['ref']" />
                                         </t>
                                     </td>
-                                    <td class="amount">
+                                    <!--<td class="amount">
                                         <span
                                             t-esc="line['amount']"
+                                            t-options="{'widget': 'monetary', 'display_currency': display_currency}"
+                                        />
+                                    </td>-->
+                                    <td class="amount">
+                                        <span
+                                            t-esc="line['debit']"
+                                            t-options="{'widget': 'monetary', 'display_currency': display_currency}"
+                                        />
+                                    </td>
+                                    <td class="amount">
+                                        <span
+                                            t-esc="line['credit']"
                                             t-options="{'widget': 'monetary', 'display_currency': display_currency}"
                                         />
                                     </td>
@@ -127,6 +142,7 @@
                                     <td>
                                             Ending Balance
                                         </td>
+                                    <td />
                                     <td />
                                     <td class="amount">
                                         <span
