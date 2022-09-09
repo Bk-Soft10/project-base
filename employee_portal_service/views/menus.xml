@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_employee_portal" model="ir.actions.act_url">
+        <field name="name">Employees portal</field>
+        <field name="url">/portal/home</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="menu_myprofil" model="ir.ui.menu">
+        <field name="name">Employees portal</field>
+        <field name="sequence" eval="2"/>
+        <field name="web_icon">employee_portal_service,static/icon/employee.png</field>
+        <field name="action" ref="action_employee_portal"/>
+    </record>
+
+    <menuitem id="portal_setting_menu"
+              name="Portal Settings"
+              sequence="20"
+              parent="base.menu_administration"
+              groups="employee_portal_service.group_setting_portal"/>
+
+</odoo>

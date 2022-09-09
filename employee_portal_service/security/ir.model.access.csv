@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_portal_website_all,name_portal_website_all,model_portal_website,,1,1,1,1
+access_portal_group_page_all,name_portal_group_page_all,model_portal_group_page,,1,1,1,1
+access_portal_page_all,name_portal_page_all,model_portal_page,,1,1,1,1
+access_portal_transaction_setting_all,name_portal_transaction_setting_all,model_portal_transaction_setting,,1,1,1,1

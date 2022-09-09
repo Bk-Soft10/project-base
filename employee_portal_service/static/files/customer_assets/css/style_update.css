@@ -1,0 +1,34 @@
+/*#mCSB_1_container{
+    position: relative !important;
+    top: 0px !important;
+    left: 0px !important;
+    width: 100% !important;
+}*/
+.header-navbar .navbar-wrapper .navbar-container .header-notification .badge{
+    top: -16px !important;
+}
+.class_search_update{
+    top: 20px;
+}
+.class_update_css{
+    top: 60px !important;
+}
+table.footable>tbody>tr>td.footable-sortable, table.footable>tbody>tr>th.footable-sortable, table.footable>tfoot>tr>td.footable-sortable, table.footable>tfoot>tr>th.footable-sortable, table.footable>thead>tr>td.footable-sortable, table.footable>thead>tr>th.footable-sortable {
+    padding-right: 0 !important;
+}
+
+.bg-c-lite-green {
+    background: linear-gradient(to right, #130c24, #2d204b) !important;
+}
+
+.bg-c-pink {
+    background: linear-gradient(to right, #3f3355, #5c4d81) !important;
+}
+
+.bg-c-green {
+    background: linear-gradient(to right, #a19796, #baa2a0) !important;
+}
+
+.bg-c-yellow {
+    background: linear-gradient(to right, #44978c, #66d6c7) !important;
+}

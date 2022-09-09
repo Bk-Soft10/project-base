@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- ########################################################################################
+                            portal.group.page
+    #############################################################################################-->
+
+    <record id="portal_website_form" model="ir.ui.view">
+        <field name="name">portal.website.form</field>
+        <field name="model">portal.website</field>
+        <field name="arch" type="xml">
+            <form string="Website Portal" create="0">
+                <sheet>
+                    <field name="portal_logo" widget="image" class="oe_avatar"/>
+                    <group col="4">
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="portal_website_tree" model="ir.ui.view">
+        <field name="name">portal.website.tree</field>
+        <field name="model">portal.website</field>
+        <field name="arch" type="xml">
+            <tree string="Website Portal" create="0">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_portal_website" model="ir.actions.act_window">
+        <field name="name">Website Portal</field>
+        <field name="res_model">portal.website</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="portal_website_menu"
+              name="Website Portal"
+              sequence="2"
+              parent="portal_setting_menu"
+              action="action_portal_website"/>
+
+    <!-- ########################################################################################
+                            portal.group.page
+    #############################################################################################-->
+
+    <record id="portal_group_page_form" model="ir.ui.view">
+        <field name="name">portal.group.page.form</field>
+        <field name="model">portal.group.page</field>
+        <field name="arch" type="xml">
+            <form string="Portal Group Page">
+                <sheet>
+                    <group col="4">
+                        <field name="name"/>
+                        <field name="sequence"/>
+                    </group>
+                    <group col="4">
+                        <field name="portal_id" options="{'no_create': True}"/>
+                        <field name="parent_id" options="{'no_create': True}"/>
+                        <field name="s_group_id" options="{'no_create': True}"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="portal_group_page_tree" model="ir.ui.view">
+        <field name="name">portal.group.page.tree</field>
+        <field name="model">portal.group.page</field>
+        <field name="arch" type="xml">
+            <tree string="Portal Group Page">
+                <field name="name"/>
+                <field name="parent_id" optional="hide"/>
+                <field name="portal_id" optional="hide"/>
+                <field name="s_group_id" optional="hide"/>
+                <field name="sequence" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_portal_group_page" model="ir.actions.act_window">
+        <field name="name">Portal Group Page</field>
+        <field name="res_model">portal.group.page</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="portal_group_page_menu"
+              name="Group Page"
+              sequence="20"
+              parent="portal_setting_menu"
+              action="action_portal_group_page"/>
+
+    <!-- ########################################################################################
+                            portal.page
+    #############################################################################################-->
+
+    <record id="portal_page_search_view" model="ir.ui.view">
+        <field name="name">portal.page.search</field>
+        <field name="model">portal.page</field>
+        <field name="arch" type="xml">
+            <search string="Portal Page">
+                <field name="name"/>
+                <field name="parent_id"/>
+                <field name="portal_id"/>
+                <field name="group_id"/>
+                <group expand="0" string="Group By">
+                    <filter name="parent_group" string="Portal Parent" domain="[]"
+                            context="{'group_by':'parent_id'}"/>
+                    <filter name="group_group" string="Portal Parent" domain="[]"
+                            context="{'group_by':'group_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="portal_page_form" model="ir.ui.view">
+        <field name="name">portal.page.form</field>
+        <field name="model">portal.page</field>
+        <field name="arch" type="xml">
+            <form string="Portal Page">
+                <sheet>
+                    <group col="4">
+                        <field name="name"/>
+                        <field name="page_url"/>
+                        <field name="fa_icon"/>
+                        <field name="sequence"/>
+                        <field name="group_id" options="{'no_create': True}"/>
+                        <field name="portal_id" options="{'no_create': True}"/>
+                        <field name="parent_id" options="{'no_create': True}"/>
+                        <field name="s_group_id" options="{'no_create': True}"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="portal_page_tree" model="ir.ui.view">
+        <field name="name">portal.page.tree</field>
+        <field name="model">portal.page</field>
+        <field name="arch" type="xml">
+            <tree string="Portal Page">
+                <field name="name"/>
+                <field name="group_id"/>
+                <field name="parent_id" optional="hide"/>
+                <field name="portal_id" optional="hide"/>
+                <field name="s_group_id" optional="hide"/>
+                <field name="sequence" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_portal_page" model="ir.actions.act_window">
+        <field name="name">Portal Page</field>
+        <field name="res_model">portal.page</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="portal_page_menu"
+              name="portal Page"
+              sequence="15"
+              parent="portal_setting_menu"
+              action="action_portal_page"/>
+
+    <!-- ########################################################################################
+                            transaction.setting
+    #############################################################################################-->
+
+    <record id="portal_transaction_setting_search_view" model="ir.ui.view">
+        <field name="name">portal.transaction.setting.search</field>
+        <field name="model">portal.transaction.setting</field>
+        <field name="arch" type="xml">
+            <search string="Transaction">
+                <field name="transaction_label"/>
+                <field name="transaction_type"/>
+                <group expand="0" string="Group By">
+                    <filter name="transaction_type" string="Transaction Type" domain="[]"
+                            context="{'group_by':'transaction_type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="portal_transaction_setting_form" model="ir.ui.view">
+        <field name="name">portal.transaction.setting.form</field>
+        <field name="model">portal.transaction.setting</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group string="Permissions Properties">
+                            <field name="group_id"/>
+                            <field name="model_id"/>
+                            <field name="transaction_type"/>
+                            <field name="domain"/>
+                            <field name="after_searching_filter"/>
+                        </group>
+                        <group string="Transaction Properties">
+                            <field name="transaction_label"/>
+                            <field name="transaction_field_number"/>
+                            <field name="transaction_field_date"/>
+                            <field name="transaction_approve_method"
+                                   attrs="{'invisible':[('transaction_type', '=', 'follow')]}"/>
+                            <field name="transaction_refuse_method"
+                                   attrs="{'invisible':[('transaction_type', '=', 'follow')]}"/>
+                            <field name="field_refuse_reason"
+                                   attrs="{'invisible':[('transaction_type', '=', 'follow')]}"/>
+                            <field name="details_url" placeholder="Ex: /portal/holidays/"/>
+                            <field name="display_button_accept"/>
+                            <field name="display_button_refuse"/>
+                            <field name="display_button_details"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="portal_transaction_setting_tree" model="ir.ui.view">
+        <field name="name">portal.transaction.setting.tree</field>
+        <field name="model">portal.transaction.setting</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="group_id"/>
+                <field name="model_id"/>
+                <field name="domain"/>
+                <field name="transaction_label"/>
+                <field name="transaction_field_number"/>
+                <field name="transaction_field_date"/>
+                <field name="transaction_approve_method"/>
+                <field name="transaction_refuse_method"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_portal_transaction_setting">
+        <field name="name">Transaction Setting</field>
+        <field name="res_model">portal.transaction.setting</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="portal_transaction_setting_menu"
+              name='Transaction Setting'
+              sequence="5"
+              parent="portal_setting_menu"
+              action="action_portal_transaction_setting"/>
+
+
+</odoo>

@@ -1,0 +1,164 @@
+
+@font-face {
+    font-family:'janna';
+    
+    src: url(../../fonts/JannaLTRegular.eot) format("embedded-opentype"), url(../../fonts/JannaLTRegular.woff) format("woff"), url(../../fonts/JannaLTRegular.ttf) format("truetype");
+    /*font-weight: 500;*/
+    font-style: normal
+}
+body
+{
+	font-family: "janna" !important;
+	    font-size: initial !important;
+}
+.header-navbar .navbar-wrapper .navbar-container .header-notification .profile-notification a {
+
+    padding-right: 0 !important;
+}
+
+.header-navbar .navbar-wrapper .navbar-container .header-notification .profile-notification {
+    min-width: 16em !important;
+}
+.header-navbar .navbar-wrapper .navbar-container .header-notification .show-notification li img, .header-navbar .navbar-wrapper .navbar-container .header-notification .profile-notification li img {
+    width: 40px;
+    margin-right: 10px !important;
+	margin-left:0 !important;
+    -ms-flex-item-align: start !important;
+    align-self: flex-start !important;
+}
+.label {
+    border-radius: 4px;
+    font-size: 100%;
+}
+.form-control
+
+{
+	text-align:left;
+}
+.txt-wight
+{
+	color:#fff;
+}
+.tooltip
+{
+	font-size:80%;
+}
+.users-main .media .chat-header {
+    font-size: 14px;
+    font-weight: 600;
+	text-align:left;
+}
+.users-main .media {
+	direction:ltr;
+}
+.userlist-box .media-left {
+    padding-left: 10px;
+}
+.header-navbar .navbar-wrapper .navbar-container .header-notification .profile-notification i {
+
+    float: left !important;
+}
+.card .card-header .card-header-left {
+    border-radius: 0 0 0 7px;
+    left: 10px;
+    top: 18px;
+    display: inline-block;
+    float: left;
+    padding: 7px 0;
+    position: absolute;
+}
+.card .card-header .card-header-left i {
+    margin: 0 8px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #919aa3;
+    line-height: 20px;
+}
+.card .card-header .card-header-left .card-option li {
+    display: inline-block;
+}
+.m-h-500
+{
+	/*height:500px;*/
+	min-height:500px;
+}
+.header-navbar .navbar-wrapper .navbar-container .header-notification .show-notification:after, .header-navbar .navbar-wrapper .navbar-container .header-notification .profile-notification:after {
+    content: "";
+    position: absolute;
+    top: -10px;
+	  right: auto;
+    right: 30px;
+    -webkit-transform: rotate(
+45deg
+);
+    transform: rotate(
+45deg
+);
+    border: 10px solid #fff;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    -webkit-box-shadow: -10px -9px 23px 1px rgb(0 0 0 / 10%);
+    box-shadow: -10px -9px 23px 1px rgb(0 0 0 / 10%);
+}
+  .scroll {
+  scroll-behavior: smooth;
+}
+/* scrollbar styling non-standard version */
+.scroll::-webkit-scrollbar {
+  width: 1rem;
+  background-color: rgba(0,0,0,.15); 
+}
+.scroll::-webkit-scrollbar-thumb {
+       background: -webkit-gradient(linear, left top, right top, from(#01a9ac), to(#01dbdf));
+    background: linear-gradient(to right, #01a9ac, #01dbdf);
+}
+/* scrollbar styling standard version */
+.scroll {
+  scrollbar-color: #000 rgba(0,0,0,.15);
+  scrollbar-width: thin;
+}
+  .scroll{
+	  overflow-y: scroll;
+	  overflow-x:hidden;
+    height: 315px;
+  }
+
+.h-300
+{
+	height:300px;
+}
+.page-header,.page-body
+{
+	width:100%;
+}
+/* Reset */
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+* {
+  box-sizing: inherit;
+}
+body .pcoded[vertical-placement="right"] .header-navbar .navbar-wrapper .navbar-container .nav-left li, body .pcoded[vertical-placement="right"] .header-navbar .navbar-wrapper .navbar-container .nav-right li, body .pcoded[vertical-placement="right"] .header-navbar .navbar-wrapper .navbar-container .nav-right li {
+    float: right !important;
+    text-align: right;
+}
+
+.text-left {
+    text-align: left !important;
+}
+.p-r-0 {
+    padding-right: 0 !important;
+}
+/* Nabil */
+.footable-details.table>caption+thead>tr:first-child>td, .footable-details.table>caption+thead>tr:first-child>th, .footable-details.table>colgroup+thead>tr:first-child>td, .footable-details.table>colgroup+thead>tr:first-child>th, .footable-details.table>thead:first-child>tr:first-child>td, .footable-details.table>thead:first-child>tr:first-child>th, .footable.table>caption+thead>tr:first-child>td, .footable.table>caption+thead>tr:first-child>th, .footable.table>colgroup+thead>tr:first-child>td, .footable.table>colgroup+thead>tr:first-child>th, .footable.table>thead:first-child>tr:first-child>td, .footable.table>thead:first-child>tr:first-child>th {
+    text-align: left;
+}
+.js_change_lang{
+    background-color:transparent;
+    font-size:14px;
+}
+.js_change_lang:focus, .js_change_lang:hover{
+    background-color:transparent !important;
+}

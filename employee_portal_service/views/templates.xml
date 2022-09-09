@@ -1,0 +1,581 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="website_assets_profil_frontend_table">
+            <!--foo table Grid-->
+            <link rel="stylesheet" type="text/css"
+                  href="/employee_portal_service/static/files/assets/pages/foo-table/css/footable.bootstrap.min.css"/>
+            <link rel="stylesheet" type="text/css"
+                  href="/employee_portal_service/static/files/assets/pages/foo-table/css/jquery.dataTables.min.css"/>
+            <link rel="stylesheet" type="text/css"
+                  href="/employee_portal_service/static/files/assets/pages/foo-table/css/footable.standalone.min.css"/>
+        </template>
+
+        <template id="website_assets_profil_frontend_checkd">
+            <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+            <t t-set="direction"
+               t-value="request.env['res.lang'].search([('code', '=', request.env.lang)]).direction"/>
+            <head>
+                <title>Employee Portal</title>
+                <!-- HTML5 Shim and Respond.js IE10 support of HTML5 elements and media queries -->
+                <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+                <!--[if lt IE 10]>
+                  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+                  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+                  <![endif]-->
+                <!-- Meta -->
+                <meta charset="utf-8"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui"/>
+                <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+                <meta name="description" content="#"/>
+                <meta name="keywords"
+                      content=""/>
+                <meta name="author" content="#"/>
+                <!-- Favicon icon -->
+                <!--                <link rel="icon" href="/employee_portal_service/static/files/assets/images/favicon.ico" type="image/x-icon"/>-->
+                <!-- Google font-->
+                <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800" rel="stylesheet"/>
+                <!-- Required Fremwork -->
+                <link rel="stylesheet" type="text/css"
+                      href="/employee_portal_service/static/files/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+                <!--                  <link rel="stylesheet" type="text/css" href="/employee_portal_service/static/files/assets/css/bootstrap_rtl.css"/>-->
+                <!-- themify-icons line icon -->
+                <link rel="stylesheet" type="text/css"
+                      href="/employee_portal_service/static/files/assets/icon/themify-icons/themify-icons.css"/>
+                <!-- ico font -->
+                <link rel="stylesheet" type="text/css"
+                      href="/employee_portal_service/static/files/assets/icon/icofont/css/icofont.css"/>
+                <!-- feather Awesome -->
+                <link rel="stylesheet" type="text/css"
+                      href="/employee_portal_service/static/files/assets/icon/feather/css/feather.css"/>
+                <!-- Syntax highlighter Prism css -->
+                <link rel="stylesheet" type="text/css"
+                      href="/employee_portal_service/static/files/assets/pages/prism/prism.css"/>
+                <!-- Date-time picker css -->
+                <link rel="stylesheet" type="text/css"
+                      href="/employee_portal_service/static/files/assets/pages/advance-elements/css/bootstrap-datetimepicker.css"/>
+                <!-- Date-range picker css  -->
+                <link rel="stylesheet" type="text/css"
+                      href="/employee_portal_service/static/files/bower_components/bootstrap-daterangepicker/daterangepicker.css"/>
+                <!-- Date-Dropper css -->
+                <link rel="stylesheet" type="text/css"
+                      href="/employee_portal_service/static/files/bower_components/datedropper/datedropper.min.css"/>
+                <!-- Style.css -->
+                <link rel="stylesheet" type="text/css" href="/employee_portal_service/static/files/assets/css/style.css"/>
+                <t t-if="direction == 'ltr'">
+                    <link rel="stylesheet" type="text/css"
+                          href="/employee_portal_service/static/files/assets/css/en/custim.css"/>
+                </t>
+                <t t-else="">
+                    <link rel="stylesheet" type="text/css"
+                          href="/employee_portal_service/static/files/assets/css/ar/custim.css"/>
+                </t>
+                <link rel="stylesheet" type="text/css"
+                      href="/employee_portal_service/static/files/assets/css/jquery.mCustomScrollbar.css"/>
+                <link rel="stylesheet" type="text/css"
+                      href="/employee_portal_service/static/files/customer_assets/css/style_update.css"/>
+            </head>
+            <!--<t t-set="head_website">
+                <script type="text/javascript">
+                    odoo.session_info = {
+                    is_admin:<t t-esc="json.dumps(request.env.user._is_admin())"/>,
+                    is_system:<t t-esc="json.dumps(request.env.user._is_system())"/>,
+                    is_website_user:<t t-esc="json.dumps(request.env.user._is_public())"/>,
+                    user_id:<t t-esc="json.dumps(request.env.user.id)"/>,
+                    is_frontend: true,
+                    translationURL: '/website/translations',
+                    };
+                </script>
+            </t>-->
+        </template>
+
+        <template id="slnee_header_navbar_profil_modal" name="Main Profil Header Modal">
+            <t t-set="direction"
+               t-value="request.env['res.lang'].search([('code', '=', request.env.lang)]).direction"/>
+            <nav class="navbar header-navbar pcoded-header">
+                <div class="navbar-wrapper">
+                    <div class="navbar-logo">
+                        <a class="mobile-menu" id="mobile-collapse" href="#!">
+                            <i class="feather icon-menu"/>
+                        </a>
+                        <a href="/portal/home">
+                            <img class="img-fluid" src="/employee_portal_service/static/files/assets/images/logo.png"
+                                 alt=""/>
+                        </a>
+                        <a class="mobile-options">
+                            <i class="feather icon-more-horizontal"/>
+                        </a>
+                    </div>
+                    <div class="navbar-container">
+                        <ul class="nav-left">
+                            <li class="header-search">
+                                <div class="main-search morphsearch-search">
+                                    <div class="input-group class_search_update">
+                                        <span class="input-group-addon search-close">
+                                            <i class="feather icon-x"/>
+                                        </span>
+                                        <input type="text" class="form-control"/>
+                                        <span class="input-group-addon search-btn">
+                                            <i class="feather icon-search"/>
+                                        </span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="#!" onclick="javascript:toggleFullScreen()">
+                                    <i class="feather icon-maximize full-screen"/>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav-right">
+
+                            <li>
+                                <a href="/web">
+                                    <i class="feather icon-home"/>
+                                </a>
+                            </li>
+                            <li class="header-notification">
+                                <div class="dropdown-primary dropdown">
+                                    <div class="dropdown-toggle" data-toggle="dropdown">
+                                        <i class="feather icon-bell"/>
+                                        <span class="badge bg-c-pink" style="color:#fff !important;">1</span>
+                                    </div>
+                                    <ul class="show-notification notification-view dropdown-menu class_update_css"
+                                        data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                                        <li>
+                                            <div class="media">
+                                                <div class="media-body">
+                                                    <h5 class="notification-user">Notif</h5>
+                                                    <p class="notification-msg">Lorem Ipsum dollars Sete Amit,
+                                                        Konsectetwr Odaaba Askinj ...
+                                                    </p>
+                                                    <span class="notification-time">Before 30 min</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="header-notification">
+                                <div class="dropdown-primary dropdown">
+                                    <div class="displayChatbox dropdown-toggle" data-toggle="dropdown">
+                                        <i class="feather icon-message-square"/>
+                                        <span class="badge bg-c-green" style="color:#fff !important;">3</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="header-notification">
+                                <input type="hidden" t-att-value="direction" id="direction_str"/>
+                                <div class="dropdown-primary dropdown">
+                                    <div class="dropdown-toggle" data-toggle="dropdown">
+                                        <span id="span_change_lang">
+                                            Language
+                                        </span>
+                                        <i class="feather icon-chevron-down"/>
+                                    </div>
+                                    <script type="text/javascript">
+                                        function handleSelect(elm){window.location = elm.value;}
+                                    </script>
+                                    <ul class="js_language_selector show-notification profile-notification dropdown-menu"
+                                        data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                                        <t t-foreach="languages" t-as="lg">
+                                            <li>
+                                                <button onclick="javascript:handleSelect(this)"
+                                                        t-att-value="url_for(request.httprequest.path + '?' + keep_query(), lang_code=lg[0])"
+                                                        class="dropdown-item js_change_lang" t-att-data-url_code="lg[1]"
+                                                        t-att-data-url_name="lg[2].split('/').pop()">
+                                                    <span t-esc="lg[2].split('/').pop()"/>
+                                                </button>
+                                            </li>
+                                        </t>
+                                    </ul>
+
+                                </div>
+                            </li>
+                            <li class="user-profile header-notification">
+                                <div class="dropdown-primary dropdown">
+                                    <div class="dropdown-toggle" data-toggle="dropdown">
+                                        <t t-if="employee.id">
+                                            <img class="img-radius"
+                                                 t-att-src="website.sudo().image_url(employee, 'image_128')"
+                                                 alt="User-Profile-Image"/>
+                                        </t>
+                                        <span>
+                                            <t t-if="direction == 'ltr'">
+                                                <t t-esc="employee.name"/>
+                                            </t>
+                                            <t t-else="">
+                                                <t t-esc="employee.name"/>
+                                            </t>
+                                        </span>
+                                        <i class="feather icon-chevron-down"/>
+                                    </div>
+                                    <ul class="show-notification profile-notification dropdown-menu"
+                                        data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                                        <li>
+                                            <a href="#!">
+                                                Settings
+                                                <i class="feather icon-settings"/>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/portal/home">
+                                                Info
+                                                <i class="feather icon-user"/>
+                                            </a>
+                                        </li>
+
+
+                                        <li>
+                                            <a href="/web/session/logout?redirect=/">
+                                                Log out
+                                                <i class="feather icon-log-out"/>
+                                            </a>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Sidebar chat start -->
+            <div id="sidebar" class="users p-chat-user showChat">
+                <div class="had-container">
+                    <div class="card card_main p-fixed users-main">
+                        <div class="user-box">
+                            <div class="chat-inner-header">
+                                <div class="back_chatBox">
+                                    <div class="right-icon-control">
+                                        <input type="text" class="form-control  search-text" placeholder="Search"
+                                               id="search-friends"/>
+                                        <div class="form-icon">
+                                            <i class="icofont icofont-search"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="main-friend-list">
+                                <div class="media userlist-box" data-id="1" data-status="online"
+                                     data-username="Author of message" data-toggle="tooltip" data-placement="right"
+                                     title="Author of message">
+                                    <a class="media-right" href="#!">
+                                        <img class="media-object img-radius img-radius"
+                                             src="/employee_portal_service/static/files/assets/images/avatar-3.jpg"
+                                             alt="Generic placeholder image "/>
+                                        <div class="live-status bg-success"></div>
+                                    </a>
+                                    <div class="media-body">
+                                        <div class="f-13 chat-header">Author of message</div>
+                                    </div>
+                                </div>
+                                <div class="media userlist-box" data-id="2" data-status="online"
+                                     data-username="Author of message" data-toggle="tooltip" data-placement="right"
+                                     title="Author of message">
+                                    <a class="media-right" href="#!">
+                                        <img class="media-object img-radius"
+                                             src="/employee_portal_service/static/files/assets/images/avatar-2.jpg"
+                                             alt="Generic placeholder image"/>
+                                        <div class="live-status bg-success"></div>
+                                    </a>
+                                    <div class="media-body">
+                                        <div class="f-13 chat-header">Author of message</div>
+                                    </div>
+                                </div>
+                                <div class="media userlist-box" data-id="3" data-status="online"
+                                     data-username="Author of message"
+                                     data-toggle="tooltip" data-placement="right" title="Author of message">
+                                    <a class="media-right" href="#!">
+                                        <img class="media-object img-radius"
+                                             src="/employee_portal_service/static/files/assets/images/avatar-4.jpg"
+                                             alt="Generic placeholder image"/>
+                                        <div class="live-status bg-success"></div>
+                                    </a>
+                                    <div class="media-body">
+                                        <div class="f-13 chat-header">Author of message</div>
+                                    </div>
+                                </div>
+                                <div class="media userlist-box" data-id="4" data-status="online"
+                                     data-username="Author of message"
+                                     data-toggle="tooltip" data-placement="right" title="Author of message">
+                                    <a class="media-right" href="#!">
+                                        <img class="media-object img-radius"
+                                             src="/employee_portal_service/static/files/assets/images/avatar-3.jpg"
+                                             alt="Generic placeholder image"/>
+                                        <div class="live-status bg-success"></div>
+                                    </a>
+                                    <div class="media-body">
+                                        <div class="f-13 chat-header">Author of message</div>
+                                    </div>
+                                </div>
+                                <div class="media userlist-box" data-id="5" data-status="online"
+                                     data-username="Author of message"
+                                     data-toggle="tooltip" data-placement="right" title="Author of message">
+                                    <a class="media-right" href="#!">
+                                        <img class="media-object img-radius"
+                                             src="/employee_portal_service/static/files/assets/images/avatar-2.jpg"
+                                             alt="Generic placeholder image"/>
+                                        <div class="live-status bg-success"></div>
+                                    </a>
+                                    <div class="media-body">
+                                        <div class="f-13 chat-header">Author of message</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <template id="slnee_header_menu_profil_modal" name="Main Profil Header Modal">
+            <nav class="pcoded-navbar">
+                <div class="pcoded-inner-navbar main-menu">
+                    <ul class="pcoded-item pcoded-left-item">
+                        <li>
+                            <a href="/portal/home">
+                                <span class="pcoded-micon">
+                                    <i class="feather icon-home"/>
+                                </span>
+                                <span class="pcoded-mtext">Home</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="pcoded-navigatio-lavel" menu-title-theme="theme5">My services</div>
+                    <ul class="pcoded-item pcoded-left-item">
+                        <li>
+                            <a href="javascript:void(0)" id="my_dues_id">
+                                <span class="pcoded-micon">
+                                    <i class="feather icon-menu"/>
+                                </span>
+                                <span class="pcoded-mtext">My dues</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" id="my_cards_id">
+                                <span class="pcoded-micon">
+                                    <i class="feather icon-credit-card"/>
+                                </span>
+                                <span class="pcoded-mtext">My cards</span>
+                            </a>
+                        </li>
+                        <li id="li_holidays">
+                            <a href="javascript:void(0)" id="my_holidays_id">
+                                <span class="pcoded-micon">
+                                    <i class="feather icon-sun"/>
+                                </span>
+                                <span class="pcoded-mtext">My holidays</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" id="my_mandate_id">
+                                <span class="pcoded-micon">
+                                    <i class="feather icon-feather"/>
+                                </span>
+                                <span class="pcoded-mtext">My mandate</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" id="my_posts_tasks_id">
+                                <span class="pcoded-micon">
+                                    <i class="feather icon-feather"/>
+                                </span>
+                                <span class="pcoded-mtext">Posts and assignments</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" id="my_loan_id">
+                                <span class="pcoded-micon">
+                                    <i class="feather icon-feather"></i>
+                                </span>
+                                <span class="pcoded-mtext">Loan Registration</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" id="my_list_retirement_services_id">
+                                <span class="pcoded-micon">
+                                    <i class="feather icon-feather"></i>
+                                </span>
+                                <span class="pcoded-mtext">Retirement Services</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" id="my_list_resignation_services_id">
+                                <span class="pcoded-micon">
+                                    <i class="feather icon-feather"></i>
+                                </span>
+                                <span class="pcoded-mtext">Resignation Services</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" id="my_list_hr_medail_id">
+                                <span class="pcoded-micon">
+                                    <i class="feather icon-feather"></i>
+                                </span>
+                                <span class="pcoded-mtext">Medals and Badges</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" id="out_of_service_id">
+                                <span class="pcoded-micon">
+                                    <i class="feather icon-feather"></i>
+                                </span>
+                                <span class="pcoded-mtext">Out of Service</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" id="confirm_out_of_service_id">
+                                <span class="pcoded-micon">
+                                    <i class="feather icon-feather"></i>
+                                </span>
+                                <span class="pcoded-mtext">Accreditation Out of Service</span>
+                            </a>
+                        </li>
+                        <li id="li_promotion">
+                            <a href="javascript:void(0)" id="my_promotions_id">
+                                <span class="pcoded-micon">
+                                    <i class="feather icon-award"></i>
+                                </span>
+                                <span class="pcoded-mtext">My promotions</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </template>
+
+        <template id="slnee_profil_assets_body">
+            <t t-set="direction"
+               t-value="request.env['res.lang'].search([('code', '=', request.env.lang)]).direction"/>
+            <!-- Required Jquery -->
+            <script type="text/javascript"
+                    src="/employee_portal_service/static/files/bower_components/jquery/dist/jquery.min.js"></script>
+            <script type="text/javascript"
+                    src="/employee_portal_service/static/files/bower_components/jquery-ui/jquery-ui.min.js"></script>
+            <script type="text/javascript"
+                    src="/employee_portal_service/static/files/bower_components/popper.js/dist/umd/popper.min.js"></script>
+            <script type="text/javascript"
+                    src="/employee_portal_service/static/files/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+            <!-- jquery slimscroll js -->
+            <script type="text/javascript"
+                    src="/employee_portal_service/static/files/bower_components/jquery-slimscroll/jquery.slimscroll.js"></script>
+            <!-- modernizr js -->
+            <script type="text/javascript"
+                    src="/employee_portal_service/static/files/bower_components/modernizr/modernizr.js"></script>
+            <script type="text/javascript"
+                    src="/employee_portal_service/static/files/bower_components/modernizr/feature-detects/css-scrollbars.js"></script>
+            <!-- Syntax highlighter prism js -->
+            <script type="text/javascript"
+                    src="/employee_portal_service/static/files/assets/pages/prism/custom-prism.js"></script>
+            <!-- i18next.min.js -->
+            <script type="text/javascript"
+                    src="/employee_portal_service/static/files/bower_components/i18next/i18next.min.js"></script>
+            <script type="text/javascript"
+                    src="/employee_portal_service/static/files/bower_components/i18next-xhr-backend/i18nextXHRBackend.min.js"></script>
+            <script type="text/javascript"
+                    src="/employee_portal_service/static/files/bower_components/i18next-browser-languagedetector/i18nextBrowserLanguageDetector.min.js"></script>
+            <script type="text/javascript"
+                    src="/employee_portal_service/static/files/bower_components/jquery-i18next/jquery-i18next.min.js"></script>
+            <!-- Chart js -->
+            <script type="text/javascript"
+                    src="/employee_portal_service/static/files/bower_components/chart.js/dist/Chart.js"></script>
+            <!--FOO Table js-->
+            <script src="/employee_portal_service/static/files/assets/pages/foo-table/js/footable.min.js"></script>
+            <script src="/employee_portal_service/static/files/assets/pages/foo-table/js/foo-table-custom.js"></script>
+            <!-- amchart js -->
+            <script src="/employee_portal_service/static/files/assets/pages/widget/amchart/amcharts.js"></script>
+            <script src="/employee_portal_service/static/files/assets/pages/widget/amchart/serial.js"></script>
+            <script src="/employee_portal_service/static/files/assets/pages/widget/amchart/light.js"></script>
+            <script src="/employee_portal_service/static/files/assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+            <!--            <script type="text/javascript" src="/employee_portal_service/static/files/assets/js/SmoothScroll.js"></script>-->
+            <!-- Bootstrap date-time-picker js -->
+            <script type="text/javascript"
+                    src="/employee_portal_service/static/files/assets/pages/advance-elements/moment-with-locales.min.js"></script>
+            <script type="text/javascript"
+                    src="/employee_portal_service/static/files/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+            <script type="text/javascript"
+                    src="/employee_portal_service/static/files/assets/pages/advance-elements/bootstrap-datetimepicker.min.js"></script>
+            <!-- Date-range picker js -->
+            <script type="text/javascript"
+                    src="/employee_portal_service/static/files/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+            <!-- Custom js -->
+            <script src="/employee_portal_service/static/files/assets/js/pcoded.min.js"></script>
+            <t t-if="direction == 'ltr'">
+                <script src="/employee_portal_service/static/files/assets/js/menu/en/menu-ltr.js"></script>
+            </t>
+            <t t-else="">
+                <script src="/employee_portal_service/static/files/assets/js/menu/ar/menu-rtl.js"></script>
+            </t>
+            <script type="text/javascript"
+                    src="/employee_portal_service/static/files/assets/pages/dashboard/custom-dashboard.js"></script>
+            <script type="text/javascript"
+                    src="/employee_portal_service/static/files/assets/pages/chart/chartjs/chartjs-custom.js"></script>
+            <script src="/employee_portal_service/static/files/assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+            <script type="text/javascript" src="/employee_portal_service/static/files/assets/js/script.js"></script>
+            <script type="text/javascript" src="/employee_portal_service/static/files/assets/js/script_nabil.js"></script>
+        </template>
+
+        <template id="employee_portal_layout" name="Employee Portal">
+            <!--            <t t-call="website.layout">-->
+            <t t-call="employee_portal_service.website_assets_profil_frontend_checkd"/>
+            <t t-set="direction"
+               t-value="request.env['res.lang'].search([('code', '=', request.env.lang)]).direction"/>
+            <!-- Pre-loader start -->
+            <div class="theme-loader">
+                <div class="ball-scale">
+                    <div class='contain'>
+                        <div class="ring">
+                            <div class="frame"></div>
+                        </div>
+                        <div class="ring">
+                            <div class="frame"></div>
+                        </div>
+                        <div class="ring">
+                            <div class="frame"></div>
+                        </div>
+                        <div class="ring">
+                            <div class="frame"></div>
+                        </div>
+                        <div class="ring">
+                            <div class="frame"></div>
+                        </div>
+                        <div class="ring">
+                            <div class="frame"></div>
+                        </div>
+                        <div class="ring">
+                            <div class="frame"></div>
+                        </div>
+                        <div class="ring">
+                            <div class="frame"></div>
+                        </div>
+                        <div class="ring">
+                            <div class="frame"></div>
+                        </div>
+                        <div class="ring">
+                            <div class="frame"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Pre-loader end -->
+            <!-- Menu header start -->
+            <div id="pcoded" class="pcoded">
+                <div class="pcoded-overlay-box"></div>
+                <div class="pcoded-container navbar-wrapper">
+                    <t t-call="employee_portal_service.slnee_header_navbar_profil_modal"/>
+                    <div class="pcoded-main-container">
+                        <div class="pcoded-wrapper">
+                            <t t-call="employee_portal_service.slnee_header_menu_profil_modal"/>
+                            <div class="pcoded-content">
+                                <t t-raw="0"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <t t-call="employee_portal_service.slnee_profil_assets_body"/>
+            <!--            </t>-->
+        </template>
+    </data>
+</odoo>
