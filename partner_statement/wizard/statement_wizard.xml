@@ -42,8 +42,8 @@
                             options="{'no_create': True}"
                             groups="base.group_multi_company"
                         />
-                        <label for="account_type" />
-                        <field name="account_type" nolabel="1" widget="radio" />
+                        <label for="account_type" invisible="1" />
+                        <field name="account_type" invisible="1" nolabel="1" widget="radio" />
                     </group>
                     <group name="aging_report">
                         <field name="show_aging_buckets" />
