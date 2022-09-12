@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="portal_home" name="Home">
+            <t t-call="employee_portal_service.employee_portal_layout">
+                <div class="pcoded-inner-content">
+                    <!-- Main-body start -->
+                    <div class="main-body text-left">
+                        <div class="page-wrapper">
+                            <!-- Page body start -->
+                            <div class="page-body">
+
+                                <section class="content-header">
+                                    <ol class="breadcrumb">
+                                        <li>
+                                            <a href="/portal">
+                                                <i class="fa fa-home"></i>
+                                            </a>
+                                        </li>
+                                        <li class="active">بياناتي الشخصية</li>
+                                    </ol>
+                                </section>
+                                <!-- Main content -->
+                                <section class="content">
+
+                                    <div class="row">
+                                        <div class="col-md-3">
+
+                                            <!-- Profile Image -->
+                                            <div class="box box-success">
+                                                <div class="box-body box-profile">
+                                                    <div class="widget-user-image" t-field="employee.image_1920"
+                                                         t-options='{"widget": "image", "class":"img-circle"}'/>
+
+                                                    <h3 class="profile-username text-center">
+                                                        <t t-esc="employee.name"/>
+                                                    </h3>
+
+                                                    <ul class="list-group list-group-unbordered">
+                                                        <li class="list-group-item">
+                                                            <b>Identification</b>
+                                                            <a class="pull-left">
+                                                                <t t-esc="employee.identification_id"/>
+                                                            </a>
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            <b>Job</b>
+                                                            <a class="pull-left">
+                                                                <t t-esc="employee.job_id.name"/>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                    <t t-if="display_button">
+                                                        <a href="/portal/profile/edit" name="edit_button" class="btn btn-success btn-block">
+                                                            <b>Update Information</b>
+                                                        </a>
+                                                    </t>
+                                                </div>
+                                                <!-- /.box-body -->
+                                            </div>
+
+                                            <!-- About Me Box -->
+                                            <div class="box box-success">
+                                                <div class="box-header with-border">
+                                                    <h3 class="box-title">Public Information</h3>
+                                                </div>
+                                                <!-- /.box-header -->
+                                                <div class="box-body">
+
+                                                </div>
+                                                <!-- /.box-body -->
+                                            </div>
+                                            <!-- /.box -->
+                                        </div>
+                                        <!-- /.col -->
+                                        <div class="col-md-9">
+                                            <div class="row">
+                                            </div>
+                                            <div class="box box-success">
+                                                <div class="box-header with-border">
+                                                    <h3 class="box-title">Personal Information</h3>
+                                                    <div class="box-tools pull-right">
+                                                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                                            <i class="fa fa-minus"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="box-body">
+                                                    <!-- START ALL FORM ELEMENT -->
+                                                    <div class="all-form-section">
+                                                        <div class="col-md-6">
+                                                            <form class="form-horizontal">
+                                                                <div class="row">
+                                                                    <div class="element-form form-group">
+                                                                        <div class="col-xl-4 col-lg-3 col-md-3 col-sm-12 col-xs-12 text-xs-right">
+                                                                            <label for="inputName" class="label">Name</label>
+
+                                                                        </div>
+                                                                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                                                            <div class="form-group">
+                                                                                <span t-field="employee.name"/>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="element-form form-group">
+                                                                        <div class="col-xl-4 col-lg-3 col-md-3 col-sm-12 col-xs-12 text-xs-right">
+                                                                            <label>Country</label>
+                                                                        </div>
+                                                                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                                                            <div class="form-group">
+                                                                                <span t-field="employee.country_id.name"/>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="element-form form-group">
+                                                                        <div class="col-xl-4 col-lg-3 col-md-3 col-sm-12 col-xs-12 text-xs-right">
+                                                                            <label>Gender</label>
+                                                                        </div>
+                                                                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                                                            <div class="form-group">
+                                                                                <span t-field="employee.gender"/>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="element-form form-group">
+                                                                        <div class="col-xl-4 col-lg-3 col-md-3 col-sm-12 col-xs-12 text-xs-right">
+                                                                            <label>Private Email</label>
+                                                                        </div>
+                                                                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                                                            <div class="form-group">
+                                                                                <span t-field="employee.private_email"/>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <form class="form-horizontal">
+                                                                <div class="row">
+                                                                    <div class="element-form form-group">
+                                                                        <div class="col-xl-4 col-lg-3 col-md-3 col-sm-12 col-xs-12 text-xs-right">
+                                                                            <label>Identification</label>
+                                                                        </div>
+                                                                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                                                            <div class="form-group">
+                                                                                <t t-esc="employee.identification_id"/>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="element-form form-group">
+                                                                        <div class="col-xl-4 col-lg-3 col-md-3 col-sm-12 col-xs-12 text-xs-right">
+                                                                            <label>Passport</label>
+                                                                        </div>
+                                                                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                                                            <div class="form-group">
+                                                                                <t t-esc="employee.passport_id"/>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="element-form form-group">
+                                                                        <div class="col-xl-4 col-lg-3 col-md-3 col-sm-12 col-xs-12 text-xs-right">
+                                                                            <label>Passport No</label>
+                                                                        </div>
+                                                                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                                                            <div class="form-group">
+                                                                                <t t-esc="employee.birthday"/>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="element-form form-group">
+                                                                        <div class="col-xl-4 col-lg-3 col-md-3 col-sm-12 col-xs-12 text-xs-right">
+                                                                            <label>Marital Status</label>
+                                                                        </div>
+                                                                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                                                            <div class="form-group">
+                                                                                <t t-esc="employee.marital"/>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+
+                                                        <!-- END ALL FORM ELEMENT -->
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="nav-tabs-custom">
+                                                <ul class="nav nav-tabs">
+                                                    <li class="active">
+                                                        <a href="#comm_tab" data-toggle="tab" aria-expanded="false">Contact Information</a>
+                                                    </li>
+                                                    <li class="">
+                                                        <a href="#job_tab" data-toggle="tab" aria-expanded="false">Work Information</a>
+                                                    </li>
+                                                    <li class="" style="display:none;">
+                                                        <a href="#bank_tab" data-toggle="tab" aria-expanded="false">Bank Information</a>
+                                                    </li>
+                                                    <li class="" style="display:none;">
+                                                        <a href="#operations_tab" data-toggle="tab" aria-expanded="false">Activity Log</a>
+                                                    </li>
+                                                </ul>
+                                                <div class="tab-content">
+                                                    <div class="tab-pane active" id="comm_tab">
+                                                        <div class="row">
+                                                            <div class="col-md-12 col-sm-12">
+                                                                <div class="col-md-6">
+                                                                    <form class="form-horizontal">
+                                                                        <div class="row">
+                                                                            <div class="element-form form-group">
+                                                                                <div class="col-xl-4 col-lg-3 col-md-3 col-sm-12 col-xs-12 text-xs-right">
+                                                                                    <label>Mobile</label>
+                                                                                </div>
+                                                                                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                                                                    <div class="form-group">
+                                                                                        <span t-field="employee.mobile_phone"/>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="element-form form-group">
+                                                                                <div class="col-xl-4 col-lg-3 col-md-3 col-sm-12 col-xs-12 text-xs-right">
+                                                                                    <label>Work Phone</label>
+                                                                                </div>
+                                                                                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                                                                    <div class="form-group">
+                                                                                        <span t-esc="employee.work_phone"/>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="element-form form-group">
+                                                                                <div class="col-xl-4 col-lg-3 col-md-3 col-sm-12 col-xs-12 text-xs-right">
+                                                                                    <label>Work Location</label>
+                                                                                </div>
+                                                                                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                                                                    <div class="form-group">
+                                                                                        <span t-esc="employee.work_location"/>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="element-form form-group">
+                                                                                <div class="col-xl-4 col-lg-3 col-md-3 col-sm-12 col-xs-12 text-xs-right">
+                                                                                    <label>Work Redirect</label>
+                                                                                </div>
+                                                                                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                                                                    <div class="form-group">
+                                                                                        <span t-esc="employee.work_phone"/>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <form class="form-horizontal">
+                                                                        <div class="row">
+                                                                            <div class="element-form form-group">
+                                                                                <div class="col-xl-4 col-lg-3 col-md-3 col-sm-12 col-xs-12 text-xs-right">
+                                                                                    <label>Work Email</label>
+                                                                                </div>
+                                                                                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                                                                    <div class="form-group">
+                                                                                        <span t-esc="employee.work_email"/>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="element-form form-group">
+                                                                                <div class="col-xl-4 col-lg-3 col-md-3 col-sm-12 col-xs-12 text-xs-right">
+                                                                                    <label>Personal Email</label>
+                                                                                </div>
+                                                                                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                                                                    <div class="form-group">
+                                                                                        <span t-esc="employee.private_email"/>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane" id="job_tab">
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <div class="box-body">
+                                                                    <div class="col-md-12">
+                                                                        <div class="col-md-6">
+                                                                            <form class="form-horizontal">
+                                                                                <div class="row">
+                                                                                    <div class="element-form form-group">
+                                                                                        <div class="col-xl-4 col-lg-3 col-md-3 col-sm-12 col-xs-12 text-xs-right">
+                                                                                            <label>القسم</label>
+                                                                                        </div>
+                                                                                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                                                                            <div class="form-group">
+                                                                                                <span t-esc="employee.department_id.name"/>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="element-form form-group" id="job_name_id">
+                                                                                        <!-- here will be the employee's job name -->
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="element-form form-group">
+                                                                                        <div class="col-xl-4 col-lg-3 col-md-3 col-sm-12 col-xs-12 text-xs-right">
+                                                                                            <label>المدير المباشر</label>
+                                                                                        </div>
+                                                                                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                                                                            <div class="form-group">
+                                                                                                <span t-esc="employee.parent_id.name"/>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <form class="form-horizontal">
+                                                                                <div class="row">
+                                                                                    <div class="element-form form-group">
+                                                                                        <div class="col-xl-4 col-lg-3 col-md-3 col-sm-12 col-xs-12 text-xs-right">
+                                                                                            <label>تاريخ التعيين بالجهة</label>
+                                                                                        </div>
+                                                                                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                                                                            <div class="form-group">
+                                                                                                <span t-esc="employee.recruiter_date"/>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    <div class="element-form form-group">
+                                                                                        <div class="col-xl-4 col-lg-3 col-md-3 col-sm-12 col-xs-12 text-xs-right">
+                                                                                            <label>تاريخ بداية العمل الحكومى</label>
+                                                                                        </div>
+                                                                                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                                                                                            <div class="form-group">
+                                                                                                <span t-esc="employee.begin_work_date"/>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane" id="bank_tab">
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <div class="box-body">
+                                                                    <div class="table-responsive">
+                                                                        <table class="table nowrap table-bordered table-striped table-hover common_datatable">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>رقم الحساب</th>
+                                                                                    <th>البنك</th>
+                                                                                    <th>العملة</th>
+                                                                                    <th>تاريخ فتح الحساب</th>
+                                                                                    <th>للإيداع</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr t-foreach="employee.bank_account_ids"
+                                                                                    t-as="line">
+                                                                                    <td>
+                                                                                        <t t-esc="line.acc_number"/>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <t t-esc="line.bank_id.name"/>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <t t-if="line.currency_id.name=='SAR'">
+                                                                                            ر.س
+                                                                                        </t>
+                                                                                    </td>
+                                                                                    <td class="hijridate">
+                                                                                        <t t-esc="line.account_opening_date"/>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <t t-if="line.is_deposit">نعم</t>
+                                                                                        <t t-if="not line.is_deposit">لا</t>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- /.tab-pane -->
+                                                    <div class="tab-pane" id="operations_tab">
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <div class="box-body">
+                                                                    <div class="table-responsive">
+                                                                        <table class="table common_datatable table-bordered table-striped">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>مسمى الوظيفه</th>
+                                                                                    <th>المرتبة</th>
+                                                                                    <th>رقمها</th>
+                                                                                    <th>الجهة</th>
+                                                                                    <th>الفرع</th>
+                                                                                    <th>الاجرا ء</th>
+                                                                                    <th>تاريخه</th>
+                                                                                    <th>رقم القرار</th>
+                                                                                    <th>تاريخه</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr t-foreach="employee.history_ids" t-as="line">
+                                                                                    <td>
+                                                                                        <t t-esc="line.job_id"/>
+                                                                                    </td>
+                                                                                    <td>
+
+                                                                                        <t t-esc="line.grade_id_number"/>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <t t-esc="line.number"/>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <t t-esc="line.dep_side"/>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <t t-esc="line.department_id.name"/>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <span t-field="line.operation_type"/>
+                                                                                    </td>
+                                                                                    <td class="hijridate">
+                                                                                        <t t-esc="line.date"/>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <t t-esc="line.num_decision"/>
+                                                                                    </td>
+                                                                                    <td class="hijridate">
+                                                                                        <t t-esc="line.date_decision"/>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- /.tab-pane -->
+                                                </div>
+                                                <!-- /.tab-content -->
+                                            </div>
+                                        </div>
+
+                                        <!-- /.col -->
+                                    </div>
+                                    <!-- /.row -->
+
+                                </section>
+                            </div>
+                            <!-- Page body end -->
+                        </div>
+                    </div>
+                    <!-- Main-body end -->
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>
