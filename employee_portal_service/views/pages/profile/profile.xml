@@ -10,18 +10,18 @@
                             <!-- Page body start -->
                             <div class="page-body">
 
-                                <section class="content-header">
+                                <!--<section class="content-header">
                                     <ol class="breadcrumb">
                                         <li>
                                             <a href="/portal">
                                                 <i class="fa fa-home"></i>
                                             </a>
                                         </li>
-                                        <li class="active">بياناتي الشخصية</li>
+                                        <li class="active">Personal Information</li>
                                     </ol>
                                 </section>
-                                <!-- Main content -->
-                                <section class="content">
+                                &lt;!&ndash; Main content &ndash;&gt;
+                                <section class="content">-->
 
                                     <div class="row">
                                         <div class="col-md-3">
@@ -75,7 +75,6 @@
                                         <!-- /.col -->
                                         <div class="col-md-9">
                                             <div class="row">
-                                            </div>
                                             <div class="box box-success">
                                                 <div class="box-header with-border">
                                                     <h3 class="box-title">Personal Information</h3>
@@ -421,13 +420,14 @@
                                                 </div>
                                                 <!-- /.tab-content -->
                                             </div>
+                                            </div>
                                         </div>
 
                                         <!-- /.col -->
                                     </div>
                                     <!-- /.row -->
 
-                                </section>
+                                <!--</section>-->
                             </div>
                             <!-- Page body end -->
                         </div>

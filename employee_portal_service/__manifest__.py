@@ -16,6 +16,7 @@
         'website',
         'portal',
         'auth_signup',
+        'hr',
     ],
     'data': [
         'security/portal_security.xml',
