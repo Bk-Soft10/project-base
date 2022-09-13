@@ -1,6 +1,6 @@
 import json
 import werkzeug
-from odoo.addons.employee_portal_service.controllers.main import EmployeePortal
+from odoo.addons.employee_portal_service.controller.main import EmployeePortal
 from odoo import http, _
 from odoo.http import request
 import base64

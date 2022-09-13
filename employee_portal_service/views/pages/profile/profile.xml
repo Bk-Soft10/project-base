@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <template id="portal_home" name="Home">
+        <template id="employee_profile_page" name="Profile">
             <t t-call="employee_portal_service.employee_portal_layout">
                 <div class="pcoded-inner-content">
                     <!-- Main-body start -->
@@ -311,7 +311,7 @@
                                                                                 <div class="row">
                                                                                     <div class="element-form form-group">
                                                                                         <div class="col-xl-4 col-lg-3 col-md-3 col-sm-12 col-xs-12 text-xs-right">
-                                                                                            <label>القسم</label>
+                                                                                            <label>Department</label>
                                                                                         </div>
                                                                                         <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
                                                                                             <div class="form-group">
@@ -328,7 +328,7 @@
                                                                                 <div class="row">
                                                                                     <div class="element-form form-group">
                                                                                         <div class="col-xl-4 col-lg-3 col-md-3 col-sm-12 col-xs-12 text-xs-right">
-                                                                                            <label>المدير المباشر</label>
+                                                                                            <label>Manager</label>
                                                                                         </div>
                                                                                         <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
                                                                                             <div class="form-group">
@@ -344,11 +344,11 @@
                                                                                 <div class="row">
                                                                                     <div class="element-form form-group">
                                                                                         <div class="col-xl-4 col-lg-3 col-md-3 col-sm-12 col-xs-12 text-xs-right">
-                                                                                            <label>تاريخ التعيين بالجهة</label>
+                                                                                            <label>Visa No</label>
                                                                                         </div>
                                                                                         <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
                                                                                             <div class="form-group">
-                                                                                                <span t-esc="employee.recruiter_date"/>
+                                                                                                <span t-esc="employee.visa_no"/>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
@@ -356,11 +356,11 @@
                                                                                 <div class="row">
                                                                                     <div class="element-form form-group">
                                                                                         <div class="col-xl-4 col-lg-3 col-md-3 col-sm-12 col-xs-12 text-xs-right">
-                                                                                            <label>تاريخ بداية العمل الحكومى</label>
+                                                                                            <label>Visa Expire</label>
                                                                                         </div>
                                                                                         <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
                                                                                             <div class="form-group">
-                                                                                                <span t-esc="employee.begin_work_date"/>
+                                                                                                <span t-esc="employee.visa_expire"/>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
@@ -377,18 +377,16 @@
                                                             <div class="col-sm-12">
                                                                 <div class="box-body">
                                                                     <div class="table-responsive">
-                                                                        <table class="table nowrap table-bordered table-striped table-hover common_datatable">
+                                                                        <table t-if="employee.address_home_id" class="table nowrap table-bordered table-striped table-hover common_datatable">
                                                                             <thead>
                                                                                 <tr>
-                                                                                    <th>رقم الحساب</th>
-                                                                                    <th>البنك</th>
-                                                                                    <th>العملة</th>
-                                                                                    <th>تاريخ فتح الحساب</th>
-                                                                                    <th>للإيداع</th>
+                                                                                    <th>Account No</th>
+                                                                                    <th>Bank</th>
+                                                                                    <th>Currency</th>
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
-                                                                                <tr t-foreach="employee.bank_account_ids"
+                                                                                <tr t-foreach="employee.address_home_id.bank_ids"
                                                                                     t-as="line">
                                                                                     <td>
                                                                                         <t t-esc="line.acc_number"/>
@@ -397,16 +395,7 @@
                                                                                         <t t-esc="line.bank_id.name"/>
                                                                                     </td>
                                                                                     <td>
-                                                                                        <t t-if="line.currency_id.name=='SAR'">
-                                                                                            ر.س
-                                                                                        </t>
-                                                                                    </td>
-                                                                                    <td class="hijridate">
-                                                                                        <t t-esc="line.account_opening_date"/>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <t t-if="line.is_deposit">نعم</t>
-                                                                                        <t t-if="not line.is_deposit">لا</t>
+                                                                                        <t t-esc="line.currency_id.name"/>
                                                                                     </td>
                                                                                 </tr>
                                                                             </tbody>
@@ -423,53 +412,6 @@
                                                             <div class="col-sm-12">
                                                                 <div class="box-body">
                                                                     <div class="table-responsive">
-                                                                        <table class="table common_datatable table-bordered table-striped">
-                                                                            <thead>
-                                                                                <tr>
-                                                                                    <th>مسمى الوظيفه</th>
-                                                                                    <th>المرتبة</th>
-                                                                                    <th>رقمها</th>
-                                                                                    <th>الجهة</th>
-                                                                                    <th>الفرع</th>
-                                                                                    <th>الاجرا ء</th>
-                                                                                    <th>تاريخه</th>
-                                                                                    <th>رقم القرار</th>
-                                                                                    <th>تاريخه</th>
-                                                                                </tr>
-                                                                            </thead>
-                                                                            <tbody>
-                                                                                <tr t-foreach="employee.history_ids" t-as="line">
-                                                                                    <td>
-                                                                                        <t t-esc="line.job_id"/>
-                                                                                    </td>
-                                                                                    <td>
-
-                                                                                        <t t-esc="line.grade_id_number"/>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <t t-esc="line.number"/>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <t t-esc="line.dep_side"/>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <t t-esc="line.department_id.name"/>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <span t-field="line.operation_type"/>
-                                                                                    </td>
-                                                                                    <td class="hijridate">
-                                                                                        <t t-esc="line.date"/>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <t t-esc="line.num_decision"/>
-                                                                                    </td>
-                                                                                    <td class="hijridate">
-                                                                                        <t t-esc="line.date_decision"/>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
                                                                     </div>
                                                                 </div>
                                                             </div>

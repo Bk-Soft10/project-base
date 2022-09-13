@@ -121,7 +121,7 @@ class EmployeePortal(http.Controller):
         employee_id = emp_obj.sudo().search([('user_id', '=', user.id)], limit=1)
         transactions_content = self.get_transactions_page_contents('all')
         follow_transactions = transactions_content['follow_transactions']
-        validate_transactions = transactions_content['waiting_actions']
+        validate_transactions = transactions_content['validate_transactions']
         smart_button['req_follow'] = len(follow_transactions)
         smart_button['req_validate'] = len(validate_transactions)
         page_content['smart_button'] = smart_button
