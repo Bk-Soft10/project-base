@@ -70,7 +70,9 @@ class EmployeePayslip(EmployeePortal):
         if not payslip_id:
             payslip_id = 0
         employee = request.env['hr.employee'].sudo().search([('user_id', '=', request.uid)], limit=1)
-        payslip_row = request.env['hr.payslip'].sudo().browse(int(payslip_id))
+        payslip_row = request.env['hr.payslip'].sudo().search([('employee_id.user_id', '=', request.uid), ('id', '=', payslip_id)], limit=1)
+        if not payslip_row:
+            return werkzeug.utils.redirect("/portal/home")
         return request.render('employee_portal_service.view_payslip_page',
                               qcontext={
                                   'payslip_id': payslip_row,
@@ -80,6 +82,11 @@ class EmployeePayslip(EmployeePortal):
 
     @http.route(['/print/payslip-details'], type='http', auth="public", website=True)
     def print_payslip(self, **kwargs):
-        pdf, _ = request.env.ref('om_hr_payroll.action_report_payslip').sudo().render_qweb_pdf([int(kwargs.get('id'))])
+        payslip_id = kwargs.get('id') if 'id' in kwargs else 0
+        payslip_row = request.env['hr.payslip'].sudo().search(
+            [('employee_id.user_id', '=', request.uid), ('id', '=', payslip_id)], limit=1)
+        if not payslip_row:
+            return werkzeug.utils.redirect("/portal/home")
+        pdf, _ = request.env.ref('om_hr_payroll.action_report_payslip').sudo().render_qweb_pdf([int(payslip_id)])
         pdfhttpheaders = [('Content-Type', 'application/pdf'), ('Content-Length', u'%s' % len(pdf)), ("Content-Disposition", 'filename="reportbk.pdf"')]
         return request.make_response(pdf, headers=pdfhttpheaders)

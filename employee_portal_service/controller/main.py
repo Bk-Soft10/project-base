@@ -136,7 +136,7 @@ class EmployeePortal(http.Controller):
     ##################################################################################################################
     #################################################################################################################
 
-    @http.route('/portal/home', auth="user", website=True)
+    @http.route(['/portal/home', '/portal'], auth="user", website=True)
     def employee_portal_home(self, **kw):
         page_context = self.get_home_page_contents()
         return request.render("employee_portal_service.portal_home", page_context)
