@@ -17,6 +17,7 @@
         'portal',
         'auth_signup',
         'hr',
+        'hr_contract',
     ],
     'data': [
         'security/portal_security.xml',
@@ -27,7 +28,9 @@
         # 'views/assets.xml',
         'views/templates.xml',
         'views/pages/portal_home.xml',
-        'views/pages/profile/profile.xml',
+        'views/pages/profile/profile_employee.xml',
+        'views/pages/contract/contract_list.xml',
+        'views/pages/contract/contract_view.xml'
     ],
     'installable': True,
     'auto_install': False,

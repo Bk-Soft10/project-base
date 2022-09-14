@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <template id="portal_home" name="Home">
+        <template id="employee_contracts_list_page" name="Contract List">
             <t t-call="employee_portal_service.employee_portal_layout">
                 <div class="pcoded-inner-content">
                     <!-- Main-body start -->
@@ -9,251 +9,64 @@
                         <div class="page-wrapper">
                             <!-- Page body start -->
                             <div class="page-body">
-                                <div name="smart_card_info" class="row">
-                                    <div class="col-xl-3 col-md-6">
-                                        <div class="card bg-c-yellow update-card">
-                                            <div class="card-block">
-                                                <div class="row align-items-end">
-                                                    <div class="col-8">
-                                                        <h4 class="text-white">Days</h4>
-                                                        <h6 class="text-white m-b-0">My holidays
-                                                        </h6>
-                                                    </div>
-                                                    <div class="col-4 text-left">
-                                                        <div class="chartjs-size-monitor">
-                                                            <div class="chartjs-size-monitor-expand">
-                                                                <div class=""></div>
-                                                            </div>
-                                                            <div class="chartjs-size-monitor-shrink">
-                                                                <div class=""></div>
-                                                            </div>
-                                                        </div>
-                                                        <canvas id="update-chart-1" height="100"
-                                                                style="display: block; width: 78px; height: 50px;"
-                                                                width="156"
-                                                                class="chartjs-render-monitor"/>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card-footer">
-                                                <p class="text-white m-b-0">
-                                                    <i
-                                                            class="feather icon-clock text-white f-14 m-r-10"/>
-                                                    Last updated
-                                                    :
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-6">
-                                        <div class="card bg-c-green update-card">
-                                            <div class="card-block">
-                                                <div class="row align-items-end">
-                                                    <div class="col-8">
-                                                        <h4 class="text-white">290+</h4>
-                                                        <h6 class="text-white m-b-0">My requests
-                                                        </h6>
-                                                    </div>
-                                                    <div class="col-4 text-left">
-                                                        <div class="chartjs-size-monitor">
-                                                            <div class="chartjs-size-monitor-expand">
-                                                                <div class=""></div>
-                                                            </div>
-                                                            <div class="chartjs-size-monitor-shrink">
-                                                                <div class=""></div>
-                                                            </div>
-                                                        </div>
-                                                        <canvas id="update-chart-2" height="100"
-                                                                width="156"
-                                                                class="chartjs-render-monitor"
-                                                                style="display: block; width: 78px; height: 50px;"/>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card-footer">
-                                                <p class="text-white m-b-0">
-                                                    <i class="feather icon-clock text-white f-14 m-r-10"/>
-                                                    Last request
-                                                    :
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-6">
-                                        <div class="card bg-c-pink update-card">
-                                            <div class="card-block">
-                                                <div class="row align-items-end">
-                                                    <div class="col-8">
-                                                        <h4 class="text-white">145</h4>
-                                                        <h6 class="text-white m-b-0">My courses</h6>
-                                                    </div>
-                                                    <div class="col-4 text-left">
-                                                        <div class="chartjs-size-monitor">
-                                                            <div class="chartjs-size-monitor-expand">
-                                                                <div class=""></div>
-                                                            </div>
-                                                            <div class="chartjs-size-monitor-shrink">
-                                                                <div class=""></div>
-                                                            </div>
-                                                        </div>
-                                                        <canvas id="update-chart-3" height="100"
-                                                                width="156"
-                                                                class="chartjs-render-monitor"
-                                                                style="display: block; width: 78px; height: 50px;"/>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card-footer">
-                                                <p class="text-white m-b-0">
-                                                    <i class="feather icon-clock text-white f-14 m-r-10"/>
-                                                    Last cycle
-                                                    :
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-6">
-                                        <div class="card bg-c-lite-green update-card">
-                                            <div class="card-block">
-                                                <div class="row align-items-end">
-                                                    <div class="col-8">
-                                                        <h4 class="text-white">12</h4>
-                                                        <h6 class="text-white m-b-0">My mandate</h6>
-                                                    </div>
-                                                    <div class="col-4 text-left">
-                                                        <div class="chartjs-size-monitor">
-                                                            <div class="chartjs-size-monitor-expand">
-                                                                <div class=""></div>
-                                                            </div>
-                                                            <div class="chartjs-size-monitor-shrink">
-                                                                <div class=""></div>
-                                                            </div>
-                                                        </div>
-                                                        <canvas id="update-chart-4" height="100"
-                                                                width="156"
-                                                                class="chartjs-render-monitor"
-                                                                style="display: block; width: 78px; height: 50px;"/>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card-footer">
-                                                <p class="text-white m-b-0">
-                                                    <i class="feather icon-clock text-white f-14 m-r-10"/>
-                                                    Last assignment
-                                                    :
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div name="empl_min_info" class="row">
-                                    <div class="col-md-6">
-                                        <div class="card user-card-full">
-                                            <div class="row m-l-0 m-r-0">
-                                                <div class="col-sm-4 bg-c-lite-green user-profile">
-                                                    <div class="card-block text-center text-white">
-                                                        <div class="m-b-25">
-                                                            <img class="img-radius"
-                                                                 t-att-src="website.sudo().image_url(employee, 'image_128')"
-                                                                 alt="User-Profile-Image"/>
-                                                        </div>
-                                                        <h6 class="f-w-600" t-if="employee">
-                                                            <t t-esc="employee.name"/>
-                                                        </h6>
-                                                        <p t-if="employee.department_id">
-                                                            <t t-esc="employee.department_id.name"/>
-                                                        </p>
-                                                        <a href="/details/account" data-toggle="tooltip"
-                                                           data-placement="bottom" title="Details">
-                                                            <i class="feather icon-edit m-t-10 f-16 txt-wight"/>
+                                <div name="emp_contract_lst" class="row">
+                                    <t t-set="breadcrumbs_searchbar" t-value="True"/>
+                                    <t t-call="portal.portal_searchbar">
+                                        <t t-set="title">Contract List</t>
+                                    </t>
+                                    <t t-if="contract_ids" t-call="portal.portal_table">
+                                        <thead>
+                                            <tr class="active">
+                                                <th>Reference</th>
+                                                <th>Start Date</th>
+                                                <th>End Date</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-foreach="contract_ids" t-as="contract_id">
+                                                <tr>
+                                                    <td>
+                                                        <a t-attf-href="/portal/employee-contract/#{contract_id.id}?#{keep_query()}">
+                                                            <t t-esc="contract_id.name or contract_id.display_name"/>
                                                         </a>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-8">
-                                                    <div class="card-block">
-                                                        <h6 class="m-b-20 p-b-5 b-b-default f-w-600">
-                                                            Personal information
-                                                        </h6>
-                                                        <div class="row">
-                                                            <div class="col-sm-6">
-                                                                <p class="m-b-10 f-w-600">E-mail</p>
-                                                                <h6 class="text-muted f-w-400">
-                                                                    <t t-esc="employee.work_email"/>
-                                                                </h6>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                <p class="m-b-10 f-w-600">Phone
-                                                                    number
-                                                                </p>
-                                                                <h6 class="text-muted f-w-400">
-                                                                    <t t-esc="employee.mobile_phone"/>
-                                                                </h6>
-                                                            </div>
-                                                        </div>
-                                                        <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">
-                                                            Professional information
-                                                        </h6>
-                                                        <div class="row">
-                                                            <div class="col-sm-12">
-                                                                <p class="m-b-10 f-w-600">
-                                                                    Administration
-                                                                </p>
-                                                                <h6 class="text-muted f-w-400" t-if="employee.department_id">
-                                                                    <t t-esc="employee.department_id.name"/>
-                                                                </h6>
-                                                            </div>
-                                                            <div class="col-sm-12">
-                                                                <p class="m-b-10 f-w-600">Direct
-                                                                    manager
-                                                                </p>
-                                                                <h6 class="text-muted f-w-400" t-if="employee.parent_id">
-                                                                    <t t-esc="employee.parent_id.name"/>
-                                                                </h6>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="card user-activity-card scroll ">
-                                            <div class="card-header">
-                                                <h5>Latest news</h5>
-                                            </div>
-                                            <div class="card-block">
-                                                <div class="row m-b-25" id="item_latest_news">
-                                                    <div class="col-auto p-r-0">
-                                                        <div class="u-img">
-                                                            <img src="/employee_portal_service/static/files/assets/images/breadcrumb-bg.jpg"
-                                                                 alt="user image"
-                                                                 class="img-radius cover-img"/>
-                                                            <img src="/employee_portal_service/static/files/assets/images/avatar-2.jpg"
-                                                                 alt="user image"
-                                                                 class="img-radius profile-img"/>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <h6 class="m-b-5">Lorem Ipsum is simply</h6>
-                                                        <p class="text-muted m-b-0">Lorem Ipsum is
-                                                            simply dummy text of the printing and
-                                                            typesetting industry...
-                                                        </p>
-                                                        <p class="text-muted m-b-0">2
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="text-center">
-                                                    <a href="#!" class="b-b-primary text-primary" id="href_list_news">
-                                                        All
-                                                        news and circulars
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="contract_id.date_start"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="contract_id.date_end"/>
+                                                    </td>
+                                                    <td>
+                                                        <t t-if="contract_id.state == 'draft'">
+                                                            <span class="badge badge-pill badge-info">
+                                                                <i class="fa fa fa-pencil"/>
+                                                                New
+                                                            </span>
+                                                        </t>
+                                                        <t t-if="contract_id.state == 'open'">
+                                                            <span class="badge badge-pill badge-info">
+                                                                <i class="fa fa fa-circle text-success"/>
+                                                                Running
+                                                            </span>
+                                                        </t>
+                                                        <t t-if="contract_id.state == 'close'">
+                                                            <span class="badge badge-pill badge-secondary">
+                                                                <i class="fa fa fa-circle text-danger"/>
+                                                                Expired
+                                                            </span>
+                                                        </t>
+                                                        <t t-if="contract_id.state == 'cancel'">
+                                                            <span class="badge badge-pill badge-secondary">
+                                                                <i class="fa fa fa-circle text-warning"/>
+                                                                Cancelled
+                                                            </span>
+                                                        </t>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </t>
                                 </div>
                             </div>
                             <!-- Page body end -->
