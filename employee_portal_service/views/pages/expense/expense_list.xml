@@ -9,12 +9,12 @@
                         <div class="page-wrapper">
                             <!-- Page body start -->
                             <div class="page-body">
-                                <div name="emp_contract_lst" class="row">
+                                <div name="emp_expense_lst" class="row">
                                     <t t-set="breadcrumbs_searchbar" t-value="True"/>
                                     <t t-call="portal.portal_searchbar">
-                                        <t t-set="title">Contract List</t>
+                                        <t t-set="title">Expense List</t>
                                     </t>
-                                    <t t-if="contract_ids" t-call="portal.portal_table">
+                                    <t t-if="expense_ids" t-call="portal.portal_table">
                                         <thead>
                                             <tr class="active">
                                                 <th>Reference</th>
@@ -24,39 +24,39 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <t t-foreach="contract_ids" t-as="contract_id">
+                                            <t t-foreach="expense_ids" t-as="expense_id">
                                                 <tr>
                                                     <td>
-                                                        <a t-attf-href="/portal/employee-contract/#{contract_id.id}?#{keep_query()}">
-                                                            <t t-esc="contract_id.name or contract_id.display_name"/>
+                                                        <a t-attf-href="/portal/employee-expense/#{expense_id.id}?#{keep_query()}">
+                                                            <t t-esc="expense_id.name or expense_id.display_name"/>
                                                         </a>
                                                     </td>
                                                     <td>
-                                                        <span t-field="contract_id.date_start"/>
+                                                        <span t-field="expense_id.date_start"/>
                                                     </td>
                                                     <td>
-                                                        <span t-field="contract_id.date_end"/>
+                                                        <span t-field="expense_id.date_end"/>
                                                     </td>
                                                     <td>
-                                                        <t t-if="contract_id.state == 'draft'">
+                                                        <t t-if="expense_id.state == 'draft'">
                                                             <span class="badge badge-pill badge-info">
                                                                 <i class="fa fa fa-pencil"/>
                                                                 New
                                                             </span>
                                                         </t>
-                                                        <t t-if="contract_id.state == 'open'">
+                                                        <t t-if="expense_id.state == 'open'">
                                                             <span class="badge badge-pill badge-info">
                                                                 <i class="fa fa fa-circle text-success"/>
                                                                 Running
                                                             </span>
                                                         </t>
-                                                        <t t-if="contract_id.state == 'close'">
+                                                        <t t-if="expense_id.state == 'close'">
                                                             <span class="badge badge-pill badge-secondary">
                                                                 <i class="fa fa fa-circle text-danger"/>
                                                                 Expired
                                                             </span>
                                                         </t>
-                                                        <t t-if="contract_id.state == 'cancel'">
+                                                        <t t-if="expense_id.state == 'cancel'">
                                                             <span class="badge badge-pill badge-secondary">
                                                                 <i class="fa fa fa-circle text-warning"/>
                                                                 Cancelled
