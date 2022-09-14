@@ -17,9 +17,9 @@
                                     <t t-if="expense_ids" t-call="portal.portal_table">
                                         <thead>
                                             <tr class="active">
-                                                <th>Reference</th>
-                                                <th>Start Date</th>
-                                                <th>End Date</th>
+                                                <th>Description</th>
+                                                <th>Date</th>
+                                                <th>Total Amount</th>
                                                 <th>Status</th>
                                             </tr>
                                         </thead>
@@ -32,34 +32,34 @@
                                                         </a>
                                                     </td>
                                                     <td>
-                                                        <span t-field="expense_id.date_start"/>
+                                                        <span t-field="expense_id.date"/>
                                                     </td>
                                                     <td>
-                                                        <span t-field="expense_id.date_end"/>
+                                                        <span t-field="expense_id.total_amount"/>
                                                     </td>
                                                     <td>
                                                         <t t-if="expense_id.state == 'draft'">
                                                             <span class="badge badge-pill badge-info">
                                                                 <i class="fa fa fa-pencil"/>
-                                                                New
+                                                                To Submit
                                                             </span>
                                                         </t>
-                                                        <t t-if="expense_id.state == 'open'">
+                                                        <t t-if="expense_id.state == 'reported'">
+                                                            <span class="badge badge-pill badge-info">
+                                                                <i class="fa fa fa-pencil"/>
+                                                                Submitted
+                                                            </span>
+                                                        </t>
+                                                        <t t-if="expense_id.state in ['approved', 'done']">
                                                             <span class="badge badge-pill badge-info">
                                                                 <i class="fa fa fa-circle text-success"/>
-                                                                Running
+                                                                Submitted
                                                             </span>
                                                         </t>
-                                                        <t t-if="expense_id.state == 'close'">
+                                                        <t t-if="expense_id.state == 'refused'">
                                                             <span class="badge badge-pill badge-secondary">
                                                                 <i class="fa fa fa-circle text-danger"/>
-                                                                Expired
-                                                            </span>
-                                                        </t>
-                                                        <t t-if="expense_id.state == 'cancel'">
-                                                            <span class="badge badge-pill badge-secondary">
-                                                                <i class="fa fa fa-circle text-warning"/>
-                                                                Cancelled
+                                                                refused
                                                             </span>
                                                         </t>
                                                     </td>

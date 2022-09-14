@@ -9,57 +9,57 @@
                         <div class="page-wrapper">
                             <!-- Page body start -->
                             <div class="page-body">
-                                <div name="emp_contract_lst" class="row">
+                                <div name="emp_payslip_lst" class="row">
                                     <t t-set="breadcrumbs_searchbar" t-value="True"/>
                                     <t t-call="portal.portal_searchbar">
-                                        <t t-set="title">Contract List</t>
+                                        <t t-set="title">Payslip List</t>
                                     </t>
-                                    <t t-if="contract_ids" t-call="portal.portal_table">
+                                    <t t-if="payslip_ids" t-call="portal.portal_table">
                                         <thead>
                                             <tr class="active">
                                                 <th>Reference</th>
-                                                <th>Start Date</th>
-                                                <th>End Date</th>
+                                                <th>Date From</th>
+                                                <th>Date To</th>
                                                 <th>Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <t t-foreach="contract_ids" t-as="contract_id">
+                                            <t t-foreach="payslip_ids" t-as="payslip_id">
                                                 <tr>
                                                     <td>
-                                                        <a t-attf-href="/portal/employee-contract/#{contract_id.id}?#{keep_query()}">
-                                                            <t t-esc="contract_id.name or contract_id.display_name"/>
+                                                        <a t-attf-href="/portal/employee-payslip/#{payslip_id.id}?#{keep_query()}">
+                                                            <t t-esc="payslip_id.number or payslip_id.display_name"/>
                                                         </a>
                                                     </td>
                                                     <td>
-                                                        <span t-field="contract_id.date_start"/>
+                                                        <span t-field="payslip_id.date_from"/>
                                                     </td>
                                                     <td>
-                                                        <span t-field="contract_id.date_end"/>
+                                                        <span t-field="payslip_id.date_to"/>
                                                     </td>
                                                     <td>
-                                                        <t t-if="contract_id.state == 'draft'">
+                                                        <t t-if="payslip_id.state == 'draft'">
                                                             <span class="badge badge-pill badge-info">
                                                                 <i class="fa fa fa-pencil"/>
-                                                                New
+                                                                Draft
                                                             </span>
                                                         </t>
-                                                        <t t-if="contract_id.state == 'open'">
+                                                        <t t-if="payslip_id.state == 'verify'">
+                                                            <span class="badge badge-pill badge-info">
+                                                                <i class="fa fa fa-pencil"/>
+                                                                Waiting
+                                                            </span>
+                                                        </t>
+                                                        <t t-if="payslip_id.state == 'done'">
                                                             <span class="badge badge-pill badge-info">
                                                                 <i class="fa fa fa-circle text-success"/>
-                                                                Running
+                                                                Done
                                                             </span>
                                                         </t>
-                                                        <t t-if="contract_id.state == 'close'">
-                                                            <span class="badge badge-pill badge-secondary">
-                                                                <i class="fa fa fa-circle text-danger"/>
-                                                                Expired
-                                                            </span>
-                                                        </t>
-                                                        <t t-if="contract_id.state == 'cancel'">
+                                                        <t t-if="payslip_id.state == 'cancel'">
                                                             <span class="badge badge-pill badge-secondary">
                                                                 <i class="fa fa fa-circle text-warning"/>
-                                                                Cancelled
+                                                                Rejected
                                                             </span>
                                                         </t>
                                                     </td>

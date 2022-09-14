@@ -226,7 +226,19 @@
                                         </li>
                                         <li>
                                             <a href="/portal/employee-contract">
-                                                Contacts
+                                                Contracts
+                                                <i class="feather icon-user"/>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/portal/employee-payslip">
+                                                Payslip
+                                                <i class="feather icon-user"/>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/portal/employee-expense">
+                                                Expense
                                                 <i class="feather icon-user"/>
                                             </a>
                                         </li>
