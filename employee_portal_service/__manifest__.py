@@ -33,7 +33,11 @@
         'views/pages/profile/profile_employee.xml',
         'views/pages/contract/contract_list.xml',
         'views/pages/contract/contract_view.xml',
-        'views/pages/transaction/transaction_list.xml'
+        'views/pages/transaction/transaction_list.xml',
+        'views/pages/expense/expense_list.xml',
+        'views/pages/expense/expense_view.xml',
+        'views/pages/payslip/payslip_list.xml',
+        'views/pages/payslip/payslip_view.xml',
     ],
     'installable': True,
     'auto_install': False,

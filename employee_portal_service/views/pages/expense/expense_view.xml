@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="view_expense_page" name="Expense Form">
+            <t t-call="employee_portal_service.employee_portal_layout">
+                <div class="pcoded-inner-content">
+                    <!-- Main-body start -->
+                    <div class="main-body text-left">
+                        <div class="page-wrapper">
+                            <!-- Page body start -->
+                            <div class="page-body">
+
+                                <input type="hidden" id="record_id" name="record_id" t-att-value="contract_id.id"/>
+                                <input type="hidden" id="model" name="model" t-att-value="contract_id._name"/>
+                                <t t-set="o_portal_fullwidth_alert" groups="base.group_user">
+                                    <t t-call="portal.portal_back_in_edit_mode">
+                                        <t t-set="backend_url"
+                                           t-value="'/web#model=hr.contract&amp;id=%s&amp;view_type=form' % (contract_id.id)"/>
+                                    </t>
+                                </t>
+                                <div class="container">
+                                    <div class="card">
+                                        <p class="alert alert-success mb-4" t-if="message" role="status">
+                                            <t t-esc="message"/>
+                                        </p>
+                                        <div class="card-header mb-3">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <h4>
+                                                        <span t-esc="contract_id.name or contract_id.display_name"/>
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+
+                                            <div class="row">
+                                                <div class="col-12 col-md-6">
+                                                    <strong>Employee:</strong>
+                                                    <span t-field="contract_id.employee_id"/>
+                                                </div>
+                                                <div class="col-12 col-md-6">
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-12 col-md-6">
+                                                    <strong>Department:</strong>
+                                                    <span t-field="contract_id.department_id.name"/>
+                                                </div>
+                                                <div class="col-12 col-md-6">
+                                                    <strong>Job:</strong>
+                                                    <span t-field="contract_id.job_id.name"/>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-md-6">
+                                                    <strong>From:</strong>
+                                                    <span t-field="contract_id.date_start" t-options='{"widget": "date"}'/>
+                                                </div>
+                                                <div class="col-12 col-md-6">
+                                                    <strong>To:</strong>
+                                                    <span t-field="contract_id.date_end" t-options='{"widget": "date"}'/>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-md-6">
+                                                    <strong>Wage:</strong>
+                                                    <span t-field="contract_id.wage"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Page body end -->
+                        </div>
+                    </div>
+                    <!-- Main-body end -->
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>
