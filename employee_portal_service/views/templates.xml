@@ -220,13 +220,13 @@
                                         </li>
                                         <li>
                                             <a href="/portal/employee-profile">
-                                                Info
+                                                Profile
                                                 <i class="feather icon-user"/>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="/portal/employee-contract">
-                                                Info
+                                                Contacts
                                                 <i class="feather icon-user"/>
                                             </a>
                                         </li>

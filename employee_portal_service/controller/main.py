@@ -14,6 +14,7 @@ from odoo.tools.safe_eval import safe_eval
 from collections import OrderedDict
 from operator import itemgetter
 from psycopg2 import IntegrityError
+from odoo.addons.portal.controllers.portal import CustomerPortal, pager as portal_pager, get_records_pager
 import logging
 
 _logger = logging.getLogger(__name__)
@@ -260,19 +261,11 @@ class EmployeePortal(http.Controller):
         return transactions_content
 
     @http.route(['/portal/transactions'], type='http', auth="user", website=True)
-    def list_waiting_transactions(self, filter_name='all', transaction_type='follow'):
-        """List of waiting transaction."""
+    def list_action_transactions(self, filter_name='all', transaction_type='follow'):
+        """List of transaction."""
         actions, actions_filters = self.get_transactions(filter_name, [transaction_type])
-        # smart buttons
-        smart_buttons = {'new_actions': 0, 'pending_actions': 0, 'all_actions': len(actions)}
-        for action in actions:
-            if action['state'] in ['new', 'draft']:
-                smart_buttons['new_actions'] += 1
-            elif action['state'] not in ['new', 'draft', 'finish', 'done', 'finished']:
-                smart_buttons['pending_actions'] += 1
-        return request.render('app_website_base.waiting_transactions_list_page', qcontext={
+        return request.render('employee_portal_service.transactions_list_page', qcontext={
             'actions': actions,
-            'smart_buttons': smart_buttons,
             'transaction_type': transaction_type,
             'has_employee': True,
             'actions_filters': actions_filters

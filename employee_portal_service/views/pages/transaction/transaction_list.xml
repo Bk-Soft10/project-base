@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="transactions_list_page" name="Requests List">
+            <t t-call="employee_portal_service.employee_portal_layout">
+                <div class="pcoded-inner-content">
+                    <!-- Main-body start -->
+                    <div class="main-body text-left">
+                        <div class="page-wrapper">
+                            <!-- Page body start -->
+                            <div class="page-body">
+                                <div name="req_transactions_lst" class="row">
+                                    <t t-set="breadcrumbs_searchbar" t-value="True"/>
+                                    <t t-call="portal.portal_searchbar">
+                                        <t t-set="title">Requests List</t>
+                                    </t>
+                                    <t t-if="contract_ids" t-call="portal.portal_table">
+                                        <thead>
+                                            <tr class="active">
+                                                <th>Name</th>
+                                                <th>Date</th>
+                                                <th t-if="transaction_type=='follow'">State</th>
+                                                <th t-if="transaction_type=='validate'" class="text-center">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-foreach="actions" t-as="action">
+                                                <t t-set="temp_record_id" t-value="action['record_id']"/>
+                                                <t t-set="temp_model" t-value="action['model']"/>
+                                                <tr>
+                                                    <td>
+                                                        <span t-esc="action['name']"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="action['ddate']" t-options='{"widget": "date"}'/>
+                                                    </td>
+                                                    <td t-if="transaction_type=='follow'">
+                                                        <span class="label label-info" t-esc="action['state_value']"/>
+                                                    </td>
+                                                    <td t-if="transaction_type=='validate'" class="text-left">
+                                                        <button type="button" id="transaction-accept-button"
+                                                                class="btn bg-success margin"
+                                                                data-toggle="modal"
+                                                                t-att-data-record="temp_record_id"
+                                                                t-att-data-model="temp_model">
+                                                                <i class="fa fa-check"></i>
+                                                                            Accept
+                                                        </button>
+                                                        <input type="hidden" id="record_id"
+                                                               name="record_id"/>
+                                                        <input type="hidden" id="model" name="model"/>
+                                                        <button type="button" id="refuse-alert-button"
+                                                                class="btn btn-danger margin"
+                                                                data-toggle="modal"
+                                                                t-att-data-record="temp_record_id"
+                                                                t-att-data-model="temp_model"
+                                                                data-target="#refuse-modal-alert">
+                                                                <i class="fa fa-ban"></i>
+                                                                         Reject
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </t>
+                                </div>
+                            </div>
+                            <!-- Page body end -->
+                        </div>
+                    </div>
+                    <!-- Main-body end -->
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

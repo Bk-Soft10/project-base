@@ -18,6 +18,8 @@
         'auth_signup',
         'hr',
         'hr_contract',
+        'hr_expense',
+        'om_hr_payroll',
     ],
     'data': [
         'security/portal_security.xml',
@@ -30,7 +32,8 @@
         'views/pages/portal_home.xml',
         'views/pages/profile/profile_employee.xml',
         'views/pages/contract/contract_list.xml',
-        'views/pages/contract/contract_view.xml'
+        'views/pages/contract/contract_view.xml',
+        'views/pages/transaction/transaction_list.xml'
     ],
     'installable': True,
     'auto_install': False,
