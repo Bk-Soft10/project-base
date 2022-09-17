@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <template id="website_assets_profil_frontend_table">
-            <!--foo table Grid-->
+        <!--<template id="website_assets_profil_frontend_table">
+            &lt;!&ndash;foo table Grid&ndash;&gt;
             <link rel="stylesheet" type="text/css"
                   href="/employee_portal_service/static/files/assets/pages/foo-table/css/footable.bootstrap.min.css"/>
             <link rel="stylesheet" type="text/css"
                   href="/employee_portal_service/static/files/assets/pages/foo-table/css/jquery.dataTables.min.css"/>
             <link rel="stylesheet" type="text/css"
                   href="/employee_portal_service/static/files/assets/pages/foo-table/css/footable.standalone.min.css"/>
-        </template>
+        </template>-->
 
         <template id="website_assets_profil_frontend_checkd">
             <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
@@ -74,6 +74,8 @@
                       href="/employee_portal_service/static/files/assets/css/jquery.mCustomScrollbar.css"/>
                 <link rel="stylesheet" type="text/css"
                       href="/employee_portal_service/static/files/customer_assets/css/style_update.css"/>
+                <!--<t t-call-assets="web.assets_common" t-js="false"/>
+                <t t-call-assets="web.assets_frontend" t-js="false"/>-->
             </head>
             <!--<t t-set="head_website">
                 <script type="text/javascript">
@@ -90,7 +92,7 @@
         </template>
 
         <template id="menu_group_portal">
-            <t t-foreach="user.company_id.portal_id.group_ids" t-as="group_portal">
+            <t t-foreach="res_company.portal_id.group_ids" t-as="group_portal">
                 <div class="pcoded-navigatio-lavel" menu-title-theme="theme5"><span t-field="group_portal.name"/></div>
                 <ul class="pcoded-item pcoded-left-item">
                     <li t-foreach="group_portal.page_ids" t-as="page_portal">

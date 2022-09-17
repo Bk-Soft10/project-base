@@ -46,7 +46,7 @@
                                             </div>
 
                                             <div class="row">
-                                                <t t-if="payslip_id" t-call="portal.portal_table">
+                                                <t t-call="portal.portal_table">
                                                     <thead>
                                                         <tr class="active">
                                                             <th>No</th>
