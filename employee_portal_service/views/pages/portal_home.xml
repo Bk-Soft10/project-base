@@ -10,12 +10,46 @@
                             <!-- Page body start -->
                             <div class="page-body">
                                 <div name="smart_card_info" class="row">
-                                    <div class="col-xl-3 col-md-6">
+                                    <div class="col-xl-3 col-md-6" name="contract_box">
+                                        <div class="card bg-c-lite-green update-card">
+                                            <div class="card-block">
+                                                <div class="row align-items-end">
+                                                    <div class="col-8">
+                                                        <h4 class="text-white"><span t-esc="smart_button['num_contract']"/></h4>
+                                                        <h6 class="text-white m-b-0">My Contract
+                                                        </h6>
+                                                    </div>
+                                                    <div class="col-4 text-left">
+                                                        <div class="chartjs-size-monitor">
+                                                            <div class="chartjs-size-monitor-expand">
+                                                                <div class=""></div>
+                                                            </div>
+                                                            <div class="chartjs-size-monitor-shrink">
+                                                                <div class=""></div>
+                                                            </div>
+                                                        </div>
+                                                        <canvas id="update-chart-4" height="100"
+                                                                width="156"
+                                                                class="chartjs-render-monitor"
+                                                                style="display: block; width: 78px; height: 50px;"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--<div class="card-footer">
+                                                <p class="text-white m-b-0">
+                                                    <i class="feather icon-clock text-white f-14 m-r-10"/>
+                                                    Last assignment
+                                                    :
+                                                </p>
+                                            </div>-->
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-md-6" name="leave_box">
                                         <div class="card bg-c-yellow update-card">
                                             <div class="card-block">
                                                 <div class="row align-items-end">
                                                     <div class="col-8">
-                                                        <h4 class="text-white">Days</h4>
+                                                        <h4 class="text-white"><span t-esc="smart_button['leaves_balance']"/></h4>
                                                         <h6 class="text-white m-b-0">My holidays
                                                         </h6>
                                                     </div>
@@ -35,22 +69,22 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="card-footer">
+                                            <!--<div class="card-footer">
                                                 <p class="text-white m-b-0">
                                                     <i
                                                             class="feather icon-clock text-white f-14 m-r-10"/>
                                                     Last updated
                                                     :
                                                 </p>
-                                            </div>
+                                            </div>-->
                                         </div>
                                     </div>
-                                    <div class="col-xl-3 col-md-6">
+                                    <div class="col-xl-3 col-md-6" name="my_req_box">
                                         <div class="card bg-c-green update-card">
                                             <div class="card-block">
                                                 <div class="row align-items-end">
                                                     <div class="col-8">
-                                                        <h4 class="text-white">290+</h4>
+                                                        <h4 class="text-white"><span t-esc="smart_button['req_follow']"/></h4>
                                                         <h6 class="text-white m-b-0">My requests
                                                         </h6>
                                                     </div>
@@ -70,22 +104,22 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="card-footer">
+                                            <!--<div class="card-footer">
                                                 <p class="text-white m-b-0">
                                                     <i class="feather icon-clock text-white f-14 m-r-10"/>
                                                     Last request
                                                     :
                                                 </p>
-                                            </div>
+                                            </div>-->
                                         </div>
                                     </div>
-                                    <div class="col-xl-3 col-md-6">
+                                    <div class="col-xl-3 col-md-6" name="approve_req_box">
                                         <div class="card bg-c-pink update-card">
                                             <div class="card-block">
                                                 <div class="row align-items-end">
                                                     <div class="col-8">
-                                                        <h4 class="text-white">145</h4>
-                                                        <h6 class="text-white m-b-0">My courses</h6>
+                                                        <h4 class="text-white"><span t-esc="smart_button['req_validate']"/></h4>
+                                                        <h6 class="text-white m-b-0">To Approve</h6>
                                                     </div>
                                                     <div class="col-4 text-left">
                                                         <div class="chartjs-size-monitor">
@@ -103,46 +137,13 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="card-footer">
+                                            <!--<div class="card-footer">
                                                 <p class="text-white m-b-0">
                                                     <i class="feather icon-clock text-white f-14 m-r-10"/>
                                                     Last cycle
                                                     :
                                                 </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-md-6">
-                                        <div class="card bg-c-lite-green update-card">
-                                            <div class="card-block">
-                                                <div class="row align-items-end">
-                                                    <div class="col-8">
-                                                        <h4 class="text-white">12</h4>
-                                                        <h6 class="text-white m-b-0">My mandate</h6>
-                                                    </div>
-                                                    <div class="col-4 text-left">
-                                                        <div class="chartjs-size-monitor">
-                                                            <div class="chartjs-size-monitor-expand">
-                                                                <div class=""></div>
-                                                            </div>
-                                                            <div class="chartjs-size-monitor-shrink">
-                                                                <div class=""></div>
-                                                            </div>
-                                                        </div>
-                                                        <canvas id="update-chart-4" height="100"
-                                                                width="156"
-                                                                class="chartjs-render-monitor"
-                                                                style="display: block; width: 78px; height: 50px;"/>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card-footer">
-                                                <p class="text-white m-b-0">
-                                                    <i class="feather icon-clock text-white f-14 m-r-10"/>
-                                                    Last assignment
-                                                    :
-                                                </p>
-                                            </div>
+                                            </div>-->
                                         </div>
                                     </div>
                                 </div>

@@ -40,12 +40,418 @@
                                     </div>
                                     <!-- Page body start -->
                                     <div class="page-body">
-                                        <div class="col-sm-12">
+
+                                        <div class="row" role="form">
+                                            <input type="hidden" name="csrf_token"
+                                                   t-att-value="request.csrf_token()"/>
+                                            <input type="hidden" name="id"
+                                                   t-att-value="employee.id"/>
+                                            <div class="col-sm-4 bg-c-lite-green user-profile">
+                                                <div class="card-block text-center text-white">
+                                                    <div class="m-b-25">
+                                                        <img class="img-radius"
+                                                             style="width: 56%;"
+                                                             t-att-src="website.sudo().image_url(employee, 'image_128')"
+                                                             alt="User-Profile-Image"/>
+                                                    </div>
+                                                    <h2 class="f-w-600" t-if="employee">
+                                                        <t t-esc="employee.identification_id"/>
+                                                    </h2>
+                                                    <t t-set="full_name" t-value=""/>
+                                                    <t t-if="direction == 'ltr'">
+                                                        <t t-set="full_name"
+                                                           t-value="employee.name"/>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <t t-set="full_name"
+                                                           t-value="employee.name"/>
+                                                    </t>
+                                                    <h3 class="f-w-600" t-if="employee">
+                                                        <t t-esc="full_name"/>
+                                                    </h3>
+                                                    <h3 t-if="employee.department_id">
+                                                        <t t-esc="employee.department_id.name"/>
+                                                    </h3>
+                                                    <h3 t-if="employee.department_id">
+                                                        <t t-esc="employee.department_id.name"/>
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <div class="panel panel-default card-block">
+                                                    <div class="panel-body">
+                                                        <div id="myProfil" class="form-horizontal">
+                                                            <div class="card-block">
+                                                                <div class="row">
+                                                                    <div class="col-md-12 centent">
+                                                                        <div class="navbar-collapse collapse infor"
+                                                                             style="display: block;">
+                                                                            <ul class="nav nav-tabs"
+                                                                                id="myTab" role="tablist">
+                                                                                <li class="nav-item">
+                                                                                    <span class="bg-top"/>
+                                                                                    <a class="nav-link active"
+                                                                                       data-toggle="tab"
+                                                                                       href="#tab11"
+                                                                                       role="tab"
+                                                                                       aria-controls="home">
+                                                                                        Personal
+                                                                                        Information
+                                                                                    </a>
+                                                                                </li>
+                                                                                <li class="active">
+                                                                                    <span class="bg-top"/>
+                                                                                    <a class="nav-link"
+                                                                                       data-toggle="tab"
+                                                                                       href="#tab12"
+                                                                                       role="tab"
+                                                                                       aria-expanded="false"
+                                                                                       aria-controls="tab12">
+                                                                                        Functional
+                                                                                        Information
+                                                                                    </a>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="tab-content">
+                                                                <div class="tab-pane active" id="tab11">
+                                                                    <div class="col-xs-12 col-md-12 col-lg-12">
+                                                                        <div class="panel panel-default">
+                                                                            <div class="panel-body">
+                                                                                <div class="sTableHoldel">
+                                                                                    <div class="results results-striped">
+                                                                                        <div class="row">
+                                                                                            <div class="col-sm-6 col-md-12 col-lg-6">
+                                                                                                <div class="form-group">
+                                                                                                    <label for=""
+                                                                                                           class="col-xs-12 control-label">
+                                                                                                        Gender
+                                                                                                        <sup>
+                                                                                                            *
+                                                                                                        </sup>
+                                                                                                    </label>
+                                                                                                    <div class="col-xs-12">
+                                                                                                        <t t-if="employee.gender == 'male'">
+                                                                                                            <label class="radio-inline niceCheck">
+                                                                                                                <input type="radio"
+                                                                                                                       name="gendre"
+                                                                                                                       checked="checked"
+                                                                                                                       id="1"
+                                                                                                                       value="male"
+                                                                                                                       disabled="disabled"/>
+                                                                                                                Male
+                                                                                                            </label>
+                                                                                                            <label class="radio-inline niceCheck">
+                                                                                                                <input type="radio"
+                                                                                                                       name="gendre"
+                                                                                                                       id="2"
+                                                                                                                       value="female"
+                                                                                                                       disabled="disabled"/>
+                                                                                                                Female
+                                                                                                            </label>
+                                                                                                        </t>
+                                                                                                        <t t-if="employee.gender == 'female'">
+                                                                                                            <label class="radio-inline niceCheck">
+                                                                                                                <input type="radio"
+                                                                                                                       name="gendre"
+                                                                                                                       id="1"
+                                                                                                                       value="male"
+                                                                                                                       disabled="disabled"/>
+                                                                                                                Male
+                                                                                                            </label>
+                                                                                                            <label class="radio-inline niceCheck">
+                                                                                                                <input type="radio"
+                                                                                                                       checked="checked"
+                                                                                                                       name="gendre"
+                                                                                                                       id="2"
+                                                                                                                       value="female"
+                                                                                                                       disabled="disabled"/>
+                                                                                                                Female
+                                                                                                            </label>
+                                                                                                        </t>
+                                                                                                        <t t-if="employee.gender not in ['male','female']">
+                                                                                                            <label class="radio-inline niceCheck">
+                                                                                                                <input type="radio"
+                                                                                                                       checked="checked"
+                                                                                                                       name="gendre"
+                                                                                                                       id="1"
+                                                                                                                       value="male"
+                                                                                                                       disabled="disabled"/>
+                                                                                                                Male
+                                                                                                            </label>
+                                                                                                            <label class="radio-inline niceCheck">
+                                                                                                                <input type="radio"
+                                                                                                                       name="gendre"
+                                                                                                                       id="2"
+                                                                                                                       value="female"
+                                                                                                                       disabled="disabled"/>
+                                                                                                                Female
+                                                                                                            </label>
+                                                                                                        </t>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="row">
+                                                                                            <div class="col-sm-12">
+                                                                                                <div class="form-group">
+                                                                                                    <label for=""
+                                                                                                           class="col-xs-12 control-label">
+                                                                                                        Employee Name
+                                                                                                        <sup>
+                                                                                                            *
+                                                                                                        </sup>
+                                                                                                    </label>
+                                                                                                    <div class="col-xs-12">
+                                                                                                        <input type="text"
+                                                                                                               name="full_name"
+                                                                                                               class="form-control required"
+                                                                                                               id="inputEmail3"
+                                                                                                               placeholder="Full Name"
+                                                                                                               t-att-value="full_name"
+                                                                                                               disabled="disabled"/>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="row">
+                                                                                            <div class="col-sm-6 col-md-12 col-lg-6">
+                                                                                                <div id="socialStatus"
+                                                                                                     class="form-group">
+                                                                                                    <label for=""
+                                                                                                           class="col-xs-12 control-label">
+                                                                                                        Date Birth
+                                                                                                        <sup>
+                                                                                                            *
+                                                                                                        </sup>
+                                                                                                    </label>
+                                                                                                    <div class="col-xs-12 relative calendar">
+                                                                                                        <input type="text"
+                                                                                                               class="form-control required"
+                                                                                                               id=""
+                                                                                                               name="birthday"
+                                                                                                               placeholder="Date Birth"
+                                                                                                               t-att-value="employee.birthday"
+                                                                                                               disabled="disabled"/>
+                                                                                                        <div class="input-group-addon">
+                                                                                                            <i class="icon38-calendar"></i>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-sm-6 col-md-12 col-lg-6">
+                                                                                                <div class="form-group">
+                                                                                                    <label for=""
+                                                                                                           class="col-xs-12 control-label">
+                                                                                                        place
+                                                                                                        of
+                                                                                                        birth
+                                                                                                        <sup>
+                                                                                                            *
+                                                                                                        </sup>
+                                                                                                    </label>
+                                                                                                    <div class="col-xs-12">
+                                                                                                        <input type="text"
+                                                                                                               class="form-control required"
+                                                                                                               id=""
+                                                                                                               name="place_of_birth"
+                                                                                                               placeholder="place of birth"
+                                                                                                               t-att-value="employee.place_of_birth"
+                                                                                                               disabled="disabled"/>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="row">
+                                                                                            <div class="col-sm-6 col-md-12 col-lg-6">
+                                                                                                <div class="form-group">
+                                                                                                    <label for=""
+                                                                                                           class="col-xs-12 control-label">
+                                                                                                        Nationality
+                                                                                                        <sup>
+                                                                                                            *
+                                                                                                        </sup>
+                                                                                                    </label>
+                                                                                                    <div class="col-xs-12">
+                                                                                                        <select class="form-control required"
+                                                                                                                name="hr_citizenship"
+                                                                                                                disabled="disabled">
+                                                                                                            <option t-att-value="employee.country_id.id">
+                                                                                                                <t t-esc="employee.country_id.name"/>
+                                                                                                            </option>
+                                                                                                        </select>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                            <div class="col-sm-6 col-md-12 col-lg-6">
+                                                                                                <div class="form-group">
+                                                                                                    <label for=""
+                                                                                                           class="col-xs-12 control-label">
+                                                                                                        E-Mail
+                                                                                                        <sup>
+                                                                                                            *
+                                                                                                        </sup>
+                                                                                                    </label>
+                                                                                                    <div class="col-xs-12">
+                                                                                                        <input type="text"
+                                                                                                               class="form-control required"
+                                                                                                               id=""
+                                                                                                               name="work_email"
+                                                                                                               placeholder="contact@contact.sa"
+                                                                                                               t-att-value="employee.work_email"
+                                                                                                               disabled="disabled"/>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="row"></div>
+                                                                                        <div class="row">
+                                                                                            <div class="col-sm-6 col-md-12 col-lg-6">
+                                                                                                <div class="form-group">
+                                                                                                    <label for=""
+                                                                                                           class="col-xs-12 control-label">
+                                                                                                        Mobile Number
+                                                                                                        <sup>
+                                                                                                            *
+                                                                                                        </sup>
+                                                                                                    </label>
+                                                                                                    <div class="col-xs-12 relative">
+                                                                                                        <input type="text"
+                                                                                                               name="mobile_number"
+                                                                                                               class="form-control mobile required"
+                                                                                                               id=""
+                                                                                                               disabled="disabled"
+                                                                                                               placeholder="Mobile Number"
+                                                                                                               t-att-value="employee.mobile_phone"/>
+                                                                                                        <div class="input-group-addon">
+                                                                                                            <i class="icon38-mobile"></i>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="form-group">
+                                                                                                    <label for=""
+                                                                                                           class="col-xs-12 control-label">
+                                                                                                        Telephone number
+                                                                                                        <sup>
+                                                                                                            *
+                                                                                                        </sup>
+                                                                                                    </label>
+                                                                                                    <div class="col-xs-12 relative">
+                                                                                                        <input type="text"
+                                                                                                               name="mobile_phone"
+                                                                                                               class="form-control phone required"
+                                                                                                               id=""
+                                                                                                               placeholder="Telephone Number"
+                                                                                                               t-att-value="employee.mobile_phone"
+                                                                                                               disabled="disabled"/>
+                                                                                                        <div class="input-group-addon">
+                                                                                                            <i class="icon38-tel"></i>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-sm-6 col-md-12 col-lg-6">
+                                                                                                <div class="form-group">
+                                                                                                    <label for=""
+                                                                                                           class="col-xs-12 control-label">
+                                                                                                        Marital Status
+                                                                                                        <sup>
+                                                                                                            *
+                                                                                                        </sup>
+                                                                                                    </label>
+                                                                                                    <div class="col-xs-12">
+                                                                                                        <input type="text"
+                                                                                                               name="marital"
+                                                                                                               class="form-control required"
+                                                                                                               id=""
+                                                                                                               placeholder="Marital Status"
+                                                                                                               t-att-value="employee.marital"
+                                                                                                               disabled="disabled"/>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div><!-- /.panel-body -->
+
+                                                                                </div><!-- /#myProfil -->
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- end  -->
+                                                                </div>
+
+                                                                <div class="tab-pane" id="tab12">
+                                                                    <div class="col-xs-12 col-md-12 col-lg-12">
+                                                                        <div class="panel panel-default">
+                                                                            <div class="panel-body">
+                                                                                <div class="sTableHoldel">
+                                                                                    <div class="results results-striped">
+                                                                                        <div class="row">
+                                                                                            <div class="col-sm-6 col-md-12 col-lg-6">
+                                                                                                <div class="form-group">
+                                                                                                    <label for="" class="col-xs-12 control-label">
+                                                                                                        Department
+                                                                                                        <sup>
+                                                                                                            *
+                                                                                                        </sup>
+                                                                                                    </label>
+                                                                                                    <div class="col-xs-12">
+                                                                                                        <select class="form-control required"
+                                                                                                                name="department_id"
+                                                                                                                disabled="disabled">
+                                                                                                            <option t-att-value="employee.department_id.id">
+                                                                                                                <t t-esc="employee.department_id.name"/>
+                                                                                                            </option>
+                                                                                                        </select>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-sm-6 col-md-12 col-lg-6">
+                                                                                                <div class="form-group">
+                                                                                                    <label for="" class="col-xs-12 control-label">
+                                                                                                        Job Title
+                                                                                                        <sup>
+                                                                                                            *
+                                                                                                        </sup>
+                                                                                                    </label>
+                                                                                                    <div class="col-xs-12">
+                                                                                                        <select class="form-control required"
+                                                                                                                name="job_id"
+                                                                                                                disabled="disabled">
+                                                                                                            <option t-att-value="employee.job_id.id">
+                                                                                                                <t t-esc="employee.job_id.name"/>
+                                                                                                            </option>
+                                                                                                        </select>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div><!-- /.panel-body -->
+
+                                                                            </div><!-- /#myProfil -->
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- end  -->
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--<div class="col-sm-12">
                                             <div class="form-horizontal form-horizontal-update">
                                                 <form class="oe_login_form" role="form"
                                                       t-attf-action="/updat_profil"
                                                       enctype="multipart/form-data" method="post">
-                                                    <!-- /#quick -->
+
                                                     <div class="row">
                                                         <input type="hidden" name="csrf_token"
                                                                t-att-value="request.csrf_token()"/>
@@ -380,13 +786,13 @@
                                                                                                             </div>
                                                                                                         </div>
                                                                                                     </div>
-                                                                                                </div><!-- /.panel-body -->
+                                                                                                </div>&lt;!&ndash; /.panel-body &ndash;&gt;
 
-                                                                                            </div><!-- /#myProfil -->
+                                                                                            </div>&lt;!&ndash; /#myProfil &ndash;&gt;
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                                <!-- end  -->
+                                                                                &lt;!&ndash; end  &ndash;&gt;
                                                                             </div>
 
                                                                             <div class="tab-pane" id="tab12">
@@ -436,12 +842,12 @@
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
-                                                                                            </div><!-- /.panel-body -->
+                                                                                            </div>&lt;!&ndash; /.panel-body &ndash;&gt;
 
-                                                                                        </div><!-- /#myProfil -->
+                                                                                        </div>&lt;!&ndash; /#myProfil &ndash;&gt;
                                                                                     </div>
                                                                                 </div>
-                                                                                <!-- end  -->
+                                                                                &lt;!&ndash; end  &ndash;&gt;
                                                                             </div>
 
                                                                         </div>
@@ -450,10 +856,12 @@
                                                             </div>
                                                         </div>
                                                     </div>
+
                                                 </form>
                                             </div>
-                                            <!-- /.form-horizontal -->
-                                        </div>
+                                            &lt;!&ndash; /.form-horizontal &ndash;&gt;
+                                        </div>-->
+
                                     </div>
                                     <!-- Page body end -->
                                 </div>

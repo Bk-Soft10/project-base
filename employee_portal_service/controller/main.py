@@ -165,8 +165,10 @@ class EmployeePortal(http.Controller):
         transactions_content = self.get_transactions_page_contents('all')
         follow_transactions = transactions_content['follow_transactions']
         validate_transactions = transactions_content['validate_transactions']
-        smart_button['req_follow'] = len(follow_transactions)
-        smart_button['req_validate'] = len(validate_transactions)
+        smart_button['req_follow'] = len(follow_transactions) or 0
+        smart_button['req_validate'] = len(validate_transactions) or 0
+        smart_button['num_contract'] = len(employee_id.contract_ids) if employee_id else 0
+        smart_button['leaves_balance'] = round(employee_id.remaining_leaves, 2) if employee_id else 0
         page_content['smart_button'] = smart_button
         page_content['user'] = user
         page_content['employee'] = employee_id
