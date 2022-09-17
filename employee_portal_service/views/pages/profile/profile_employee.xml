@@ -85,10 +85,7 @@
                                                         <div class="col-sm-8">
                                                             <div class="panel panel-default card-block">
                                                                 <div class="panel-body">
-                                                                    <div id="myProfil"
-                                                                         class="form-horizontal">
-
-                                                                        <!-- Nav tabs -->
+                                                                    <div id="myProfil" class="form-horizontal">
                                                                         <div class="card-block">
                                                                             <div class="row">
                                                                                 <div class="col-md-12 centent">
@@ -447,10 +444,10 @@
                                                                                 <!-- end  -->
                                                                             </div>
 
-                                                                        </div><!-- /.tab-content -->
-                                                                    </div><!-- /.form-horizontal -->
-                                                                </div><!-- /.panel-body -->
-                                                            </div><!-- /#myProfil -->
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </form>

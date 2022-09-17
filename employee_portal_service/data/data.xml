@@ -1,9 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<odoo noupdate="1">
-    <record id="menu_home" model="website.menu">
-        <field name="name">Home</field>
-        <field name="url">/web/login</field>
-        <field name="parent_id" ref="website.main_menu"/>
+<odoo noupdate="0">
+
+    <record id="portal_index_conf" model="portal.website">
+        <field name="name">Employee Portal</field>
+    </record>
+
+    <record id="base.main_company" model="res.company">
+        <field name="portal_id" ref="employee_portal_service.portal_index_conf"/>
+    </record>
+
+    <!-- ###################################################################################################
+    ###################################################################################################### -->
+
+    <record id="portal_profile_group" model="portal.group.page">
+        <field name="name">Profile</field>
+        <field name="portal_id" ref="portal_index_conf"/>
+        <field name="sequence" type="int">3</field>
+    </record>
+
+    <!-- ################################################################################################### -->
+
+    <record id="portal_profile_page" model="portal.page">
+        <field name="name">My Profile</field>
+        <field name="group_id" ref="portal_profile_group"/>
+        <field name="page_url">/portal/employee-profile</field>
+        <field name="fa_icon">feather icon-menu</field>
+        <field name="sequence" type="int">1</field>
+    </record>
+
+    <record id="portal_contract_page" model="portal.page">
+        <field name="name">My Contract</field>
+        <field name="group_id" ref="portal_profile_group"/>
+        <field name="page_url">/portal/employee-contract</field>
+        <field name="fa_icon">feather icon-menu</field>
+        <field name="sequence" type="int">3</field>
+    </record>
+
+    <record id="portal_payslip_page" model="portal.page">
+        <field name="name">My Payslip</field>
+        <field name="group_id" ref="portal_profile_group"/>
+        <field name="page_url">/portal/employee-payslip</field>
+        <field name="fa_icon">feather icon-menu</field>
+        <field name="sequence" type="int">5</field>
+    </record>
+
+    <!-- ###################################################################################################
+    ###################################################################################################### -->
+
+    <record id="portal_transaction_group" model="portal.group.page">
+        <field name="name">Requests</field>
+        <field name="portal_id" ref="portal_index_conf"/>
+        <field name="sequence" type="int">5</field>
+    </record>
+
+    <!-- ################################################################################################### -->
+
+    <record id="portal_follow_req_page" model="portal.page">
+        <field name="name">My Requests</field>
+        <field name="group_id" ref="portal_transaction_group"/>
+        <field name="page_url">/portal/transactions?filter_name=all&amp;transaction_type=follow</field>
+        <field name="fa_icon">feather icon-menu</field>
+        <field name="sequence" type="int">1</field>
+    </record>
+
+    <record id="portal_validate_req_page" model="portal.page">
+        <field name="name">To Approve</field>
+        <field name="group_id" ref="portal_transaction_group"/>
+        <field name="page_url">/portal/transactions?filter_name=all&amp;transaction_type=validate</field>
+        <field name="fa_icon">feather icon-menu</field>
+        <field name="sequence" type="int">3</field>
+    </record>
+
+    <!-- ###################################################################################################
+    ###################################################################################################### -->
+
+    <record id="portal_service_group" model="portal.group.page">
+        <field name="name">My Services</field>
+        <field name="portal_id" ref="portal_index_conf"/>
         <field name="sequence" type="int">10</field>
+    </record>
+
+    <!-- ################################################################################################### -->
+
+    <record id="portal_expense_page" model="portal.page">
+        <field name="name">My Expense</field>
+        <field name="group_id" ref="portal_service_group"/>
+        <field name="page_url">/portal/employee-expense</field>
+        <field name="fa_icon">feather icon-menu</field>
+        <field name="sequence" type="int">95</field>
     </record>
 </odoo>

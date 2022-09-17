@@ -14,7 +14,7 @@
                                     <t t-call="portal.portal_searchbar">
                                         <t t-set="title">Requests List</t>
                                     </t>
-                                    <t t-if="contract_ids" t-call="portal.portal_table">
+                                    <t t-call="portal.portal_table">
                                         <thead>
                                             <tr class="active">
                                                 <th>Name</th>

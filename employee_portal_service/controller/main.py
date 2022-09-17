@@ -15,6 +15,7 @@ from collections import OrderedDict
 from operator import itemgetter
 from psycopg2 import IntegrityError
 from odoo.addons.portal.controllers.portal import CustomerPortal, pager as portal_pager, get_records_pager
+from odoo.addons.employee_portal_service.common import invalid_response, valid_response, return_response, record_fields_dict
 import logging
 
 _logger = logging.getLogger(__name__)
@@ -75,6 +76,46 @@ def get_records_pager(ids, current):
 
 class EmployeePortal(http.Controller):
     _items_per_page = 20
+
+    def _perpare_get_transactions_vals(self, post):
+        if not post:
+            post = json.loads(request.httprequest.data)
+        params = ["transaction_type"]
+        vals = {key: post.get(key) for key in params if post.get(key)}
+        transaction_type = (
+            vals.get("transaction_type") if 'transaction_type' in vals else False,
+        )
+        _parms_includes_in_body = all([transaction_type])
+        if not _parms_includes_in_body:
+            headers = request.httprequest.headers
+            vals = {key: headers.get(key) for key in params if headers.get(key)}
+            transaction_type = (
+                vals.get("transaction_type") if 'transaction_type' in vals else False,
+            )
+            _parms_includes_in_headers = all([transaction_type])
+            if not _parms_includes_in_headers:
+                return_response(msg='either of the following are missing [transaction_type]', code=403, data=[])
+        return vals
+
+    @http.route('/api/get_transactions', methods=['GET'], type='json', auth='user', csrf=False)
+    def get_transactions_records(self, **post):
+        try:
+            vals = self._perpare_get_transactions_vals(post) or {}
+            transaction_type = vals.get("transaction_type") if 'transaction_type' in vals else False
+
+            if request.jsonrequest and transaction_type:
+                transactions = self.get_transactions('all', transaction_type)[0]
+                if transactions:
+                    return return_response(msg='Successfully', code=200,
+                                           data=transactions)
+                else:
+                    return return_response(msg='No Data', code=200,
+                                           data=[])
+            else:
+                return return_response(msg='Missing Values', code=403, data=[])
+
+        except Exception as ex:
+            return return_response(msg=ex, code=403, data=[])
 
     def _document_check_access(self, model_name, document_id, access_token=None):
         document = request.env[model_name].browse([document_id])
@@ -263,10 +304,12 @@ class EmployeePortal(http.Controller):
     @http.route(['/portal/transactions'], type='http', auth="user", website=True)
     def list_action_transactions(self, filter_name='all', transaction_type='follow'):
         """List of transaction."""
+        employee = request.env['hr.employee'].sudo().search([('user_id', '=', request.uid)], limit=1)
         actions, actions_filters = self.get_transactions(filter_name, [transaction_type])
         return request.render('employee_portal_service.transactions_list_page', qcontext={
             'actions': actions,
             'transaction_type': transaction_type,
+            'employee': employee,
             'has_employee': True,
             'actions_filters': actions_filters
         })

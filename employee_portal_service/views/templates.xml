@@ -89,7 +89,23 @@
             </t>-->
         </template>
 
-        <template id="slnee_header_navbar_profil_modal" name="Main Profil Header Modal">
+        <template id="menu_group_portal">
+            <t t-foreach="user.company_id.portal_id.group_ids" t-as="group_portal">
+                <div class="pcoded-navigatio-lavel" menu-title-theme="theme5"><span t-field="group_portal.name"/></div>
+                <ul class="pcoded-item pcoded-left-item">
+                    <li t-foreach="group_portal.page_ids" t-as="page_portal">
+                        <a t-att-href="page_portal.page_url">
+                            <span class="pcoded-micon">
+                                <i t-attf-class="#{page_portal.fa_icon}"/>
+                            </span>
+                            <span class="pcoded-mtext" t-field="page_portal.name"/>
+                        </a>
+                    </li>
+                </ul>
+            </t>
+        </template>
+
+        <template id="portal_header_navbar_profil_modal" name="Main Profil Header Modal">
             <t t-set="direction"
                t-value="request.env['res.lang'].search([('code', '=', request.env.lang)]).direction"/>
             <nav class="navbar header-navbar pcoded-header">
@@ -347,7 +363,7 @@
             </div>
         </template>
 
-        <template id="slnee_header_menu_profil_modal" name="Main Profil Header Modal">
+        <template id="portal_header_menu_profil_modal" name="Main Profil Header Modal">
             <nav class="pcoded-navbar">
                 <div class="pcoded-inner-navbar main-menu">
                     <ul class="pcoded-item pcoded-left-item">
@@ -360,110 +376,12 @@
                             </a>
                         </li>
                     </ul>
-                    <div class="pcoded-navigatio-lavel" menu-title-theme="theme5">My services</div>
-                    <ul class="pcoded-item pcoded-left-item">
-                        <li>
-                            <a href="javascript:void(0)" id="my_dues_id">
-                                <span class="pcoded-micon">
-                                    <i class="feather icon-menu"/>
-                                </span>
-                                <span class="pcoded-mtext">My dues</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" id="my_cards_id">
-                                <span class="pcoded-micon">
-                                    <i class="feather icon-credit-card"/>
-                                </span>
-                                <span class="pcoded-mtext">My cards</span>
-                            </a>
-                        </li>
-                        <li id="li_holidays">
-                            <a href="javascript:void(0)" id="my_holidays_id">
-                                <span class="pcoded-micon">
-                                    <i class="feather icon-sun"/>
-                                </span>
-                                <span class="pcoded-mtext">My holidays</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" id="my_mandate_id">
-                                <span class="pcoded-micon">
-                                    <i class="feather icon-feather"/>
-                                </span>
-                                <span class="pcoded-mtext">My mandate</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" id="my_posts_tasks_id">
-                                <span class="pcoded-micon">
-                                    <i class="feather icon-feather"/>
-                                </span>
-                                <span class="pcoded-mtext">Posts and assignments</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" id="my_loan_id">
-                                <span class="pcoded-micon">
-                                    <i class="feather icon-feather"></i>
-                                </span>
-                                <span class="pcoded-mtext">Loan Registration</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" id="my_list_retirement_services_id">
-                                <span class="pcoded-micon">
-                                    <i class="feather icon-feather"></i>
-                                </span>
-                                <span class="pcoded-mtext">Retirement Services</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" id="my_list_resignation_services_id">
-                                <span class="pcoded-micon">
-                                    <i class="feather icon-feather"></i>
-                                </span>
-                                <span class="pcoded-mtext">Resignation Services</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" id="my_list_hr_medail_id">
-                                <span class="pcoded-micon">
-                                    <i class="feather icon-feather"></i>
-                                </span>
-                                <span class="pcoded-mtext">Medals and Badges</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" id="out_of_service_id">
-                                <span class="pcoded-micon">
-                                    <i class="feather icon-feather"></i>
-                                </span>
-                                <span class="pcoded-mtext">Out of Service</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" id="confirm_out_of_service_id">
-                                <span class="pcoded-micon">
-                                    <i class="feather icon-feather"></i>
-                                </span>
-                                <span class="pcoded-mtext">Accreditation Out of Service</span>
-                            </a>
-                        </li>
-                        <li id="li_promotion">
-                            <a href="javascript:void(0)" id="my_promotions_id">
-                                <span class="pcoded-micon">
-                                    <i class="feather icon-award"></i>
-                                </span>
-                                <span class="pcoded-mtext">My promotions</span>
-                            </a>
-                        </li>
-                    </ul>
+                    <t t-call="employee_portal_service.menu_group_portal"/>
                 </div>
             </nav>
         </template>
 
-        <template id="slnee_profil_assets_body">
+        <template id="portal_profil_assets_body">
             <t t-set="direction"
                t-value="request.env['res.lang'].search([('code', '=', request.env.lang)]).direction"/>
             <!-- Required Jquery -->
@@ -581,10 +499,10 @@
             <div id="pcoded" class="pcoded">
                 <div class="pcoded-overlay-box"></div>
                 <div class="pcoded-container navbar-wrapper">
-                    <t t-call="employee_portal_service.slnee_header_navbar_profil_modal"/>
+                    <t t-call="employee_portal_service.portal_header_navbar_profil_modal"/>
                     <div class="pcoded-main-container">
                         <div class="pcoded-wrapper">
-                            <t t-call="employee_portal_service.slnee_header_menu_profil_modal"/>
+                            <t t-call="employee_portal_service.portal_header_menu_profil_modal"/>
                             <div class="pcoded-content">
                                 <t t-raw="0"/>
                             </div>
@@ -592,7 +510,7 @@
                     </div>
                 </div>
             </div>
-            <t t-call="employee_portal_service.slnee_profil_assets_body"/>
+            <t t-call="employee_portal_service.portal_profil_assets_body"/>
             <!--            </t>-->
         </template>
     </data>

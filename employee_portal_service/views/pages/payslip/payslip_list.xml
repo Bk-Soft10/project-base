@@ -14,7 +14,7 @@
                                     <t t-call="portal.portal_searchbar">
                                         <t t-set="title">Payslip List</t>
                                     </t>
-                                    <t t-if="payslip_ids" t-call="portal.portal_table">
+                                    <t t-call="portal.portal_table">
                                         <thead>
                                             <tr class="active">
                                                 <th>Reference</th>

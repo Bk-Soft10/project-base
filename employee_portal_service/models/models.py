@@ -9,6 +9,8 @@ class PortalWebsite(models.Model):
 
     name = fields.Char(string='Name', required=True, translate=True)
     portal_logo = fields.Binary('Portal Portal')
+    group_ids = fields.One2many('portal.group.page', 'portal_id', string='Groups')
+    page_ids = fields.One2many('portal.page', 'portal_id', string='Pages')
 
 #######################################################################################################################
 ######################################################################################################################

@@ -36,22 +36,22 @@
 
                                             <div class="row">
                                                 <div class="col-12 col-md-6">
-                                                    <strong>Employee:</strong>
+                                                    <label><strong>Employee:</strong></label>
                                                     <span t-field="expense_id.employee_id"/>
                                                 </div>
                                                 <div class="col-12 col-md-6">
-                                                    <strong>Date:</strong>
+                                                    <label><strong>Date:</strong></label>
                                                     <span t-field="expense_id.date" t-options='{"widget": "date"}'/>
                                                 </div>
                                             </div>
 
                                             <div class="row">
                                                 <div class="col-12 col-md-6">
-                                                    <strong>Description:</strong>
+                                                    <label><strong>Description:</strong></label>
                                                     <span t-field="expense_id.name"/>
                                                 </div>
                                                 <div class="col-12 col-md-6">
-                                                    <strong>Product:</strong>
+                                                    <label><strong>Product:</strong></label>
                                                     <span t-field="expense_id.product_id.name"/>
                                                 </div>
                                             </div>

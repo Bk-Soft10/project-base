@@ -253,8 +253,332 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
+
+                                <div name="transaction_info" class="row">
+                                    <div class="col-md-6">
+                                        <div class="card user-activity-card scroll">
+                                            <div class="card-header">
+                                                <h5>Follow-up Requests</h5>
+                                            </div>
+                                            <div class="card-block">
+                                                <div class="row" id="transaction_follow">
+                                                    <!--<table class="table rounded mb-0 bg-white table-responsive o_portal_my_doc_table common_datatable">-->
+                                                    <t t-if="follow_transactions" t-call="portal.portal_table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>NO</th>
+                                                                <th>Name</th>
+                                                                <th>Date</th>
+                                                                <th>State</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <t t-foreach="follow_transactions" t-as="action">
+                                                                <t t-set="temp_record_id" t-value="action['record_id']"/>
+                                                                <t t-set="temp_model" t-value="action['model']"/>
+                                                                <tr>
+                                                                    <td>
+                                                                        <a t-att-href="action['details_url'] if action['details_url'] else '#'">
+                                                                            <t t-esc="action['number']"/>
+                                                                        </a>
+                                                                    </td>
+                                                                    <td>
+                                                                        <t t-esc="action['name']"/>
+                                                                    </td>
+                                                                    <td>
+                                                                        <t t-esc="action['ddate']"/>
+                                                                    </td>
+                                                                    <td>
+                                                                        <t t-if="action['state'] in ['draft', 'new']">
+                                                                            <span
+                                                                                    class="label label-warning"
+                                                                                    t-esc="action['state_value']">
+                                                                            </span>
+                                                                        </t>
+                                                                        <t t-if="action['state'] in ['done', 'finish', 'finished']">
+                                                                            <span
+                                                                                    class="label label-success"
+                                                                                    t-esc="action['state_value']">
+                                                                            </span>
+                                                                        </t>
+                                                                        <t t-if="action['state'] in ['refuse', 'refused','cancel','cancelled']">
+                                                                            <span
+                                                                                    class="label label-danger"
+                                                                                    t-esc="action['state_value']">
+                                                                            </span>
+                                                                        </t>
+                                                                        <t t-if="action['state'] not in ['refuse', 'refused','done', 'finish', 'finished','draft', 'new','cancel']">
+                                                                            <span
+                                                                                    class="label label-info"
+                                                                                    t-esc="action['state_value']">
+                                                                            </span>
+                                                                        </t>
+                                                                    </td>
+                                                                </tr>
+                                                            </t>
+                                                        </tbody>
+                                                    </t>
+                                                    <!--</table>-->
+                                                </div>
+                                                <t t-if="follow_transactions">
+                                                    <div class="card-footer">
+                                                        <a href="/portal/transactions?filter_name=all&amp;transaction_type=follow" class="btn btn-default" title="">View All</a>
+                                                    </div>
+                                                </t>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card user-activity-card scroll ">
+                                            <div class="card-header">
+                                                <h5>To Approve</h5>
+                                            </div>
+                                            <div class="card-block">
+                                                <div class="row" id="transaction_validate">
+                                                    <!--<table class="table rounded mb-0 bg-white table-responsive o_portal_my_doc_table common_datatable">-->
+                                                    <t t-if="validate_transactions" t-call="portal.portal_table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>NO</th>
+                                                                <th>Name</th>
+                                                                <th>Date</th>
+                                                                <th class="text-center">Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <t t-foreach="validate_transactions" t-as="action">
+                                                                <t t-set="temp_record_id" t-value="action['record_id']"/>
+                                                                <t t-set="temp_model" t-value="action['model']"/>
+                                                                <tr>
+                                                                    <td>
+                                                                        <a t-att-href="action['details_url'] if action['details_url'] else '#'">
+                                                                            <t t-esc="action['number']"/>
+                                                                        </a>
+                                                                    </td>
+                                                                    <td>
+                                                                        <t t-esc="action['name']"/>
+                                                                    </td>
+                                                                    <td>
+                                                                        <t t-esc="action['ddate']"/>
+                                                                    </td>
+                                                                    <td class="text-left">
+                                                                        <button type="button" id="transaction-accept-button"
+                                                                                class="btn bg-success margin"
+                                                                                data-toggle="modal"
+                                                                                t-att-data-record="temp_record_id"
+                                                                                t-att-data-model="temp_model">
+                                                                                <i class="fa fa-check"></i>
+                                                                                            Accept
+                                                                        </button>
+
+                                                                        <!-- those two hidden input will be filled each time refuse-alert-button is clicked -->
+                                                                        <input type="hidden" id="record_id"
+                                                                               name="record_id"/>
+                                                                        <input type="hidden" id="model" name="model"/>
+                                                                        <button type="button" id="refuse-alert-button"
+                                                                                class="btn btn-danger margin"
+                                                                                data-toggle="modal"
+                                                                                t-att-data-record="temp_record_id"
+                                                                                t-att-data-model="temp_model"
+                                                                                data-target="#refuse-modal-alert">
+                                                                                <i class="fa fa-ban"></i>
+                                                                                         Reject
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                                            </t>
+                                                        </tbody>
+                                                    </t>
+                                                    <!--</table>-->
+                                                </div>
+                                                <t t-if="validate_transactions">
+                                                    <div class="card-footer">
+                                                        <a href="/portal/transactions?filter_name=all&amp;transaction_type=validate" class="btn btn-default" title="">Veiw All</a>
+                                                        <button id="accept-all-transactions" class="btn btn-primary">
+                                                            <i class="fa fa-check"></i>Accept All
+                                                        </button>
+                                                    </div>
+                                                </t>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--<div class="row">
+                                    <div class="col-md-12 centent">
+                                        <div class="navbar-collapse collapse infor"
+                                             style="display: block;">
+                                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                                <li class="nav-item">
+                                                    <span class="bg-top"/>
+                                                    <a class="nav-link active"
+                                                       data-toggle="tab"
+                                                       href="#tab11"
+                                                       role="tab"
+                                                       aria-controls="home">
+                                                        Follow-up Requests
+                                                    </a>
+                                                </li>
+                                                <li class="active">
+                                                    <span class="bg-top"/>
+                                                    <a class="nav-link"
+                                                       data-toggle="tab"
+                                                       href="#tab12"
+                                                       role="tab"
+                                                       aria-expanded="false"
+                                                       aria-controls="tab12">
+                                                        To Approve
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="tab11">
+                                            <div class="col-xs-12 col-md-12 col-lg-12">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-body">
+                                                        <div class="sTableHoldel">
+                                                            <div class="results results-striped">
+                                                                <div class="row">
+                                                                    <t t-if="follow_transactions" t-call="portal.portal_table">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>NO</th>
+                                                                                <th>Name</th>
+                                                                                <th>Date</th>
+                                                                                <th>State</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <t t-foreach="follow_transactions" t-as="action">
+                                                                                <t t-set="temp_record_id" t-value="action['record_id']"/>
+                                                                                <t t-set="temp_model" t-value="action['model']"/>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <a t-att-href="action['details_url'] if action['details_url'] else '#'">
+                                                                                            <t t-esc="action['number']"/>
+                                                                                        </a>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <t t-esc="action['name']"/>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <t t-esc="action['ddate']"/>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <t t-if="action['state'] in ['draft', 'new']">
+                                                                                            <span
+                                                                                                    class="label label-warning"
+                                                                                                    t-esc="action['state_value']">
+                                                                                            </span>
+                                                                                        </t>
+                                                                                        <t t-if="action['state'] in ['done', 'finish', 'finished']">
+                                                                                            <span
+                                                                                                    class="label label-success"
+                                                                                                    t-esc="action['state_value']">
+                                                                                            </span>
+                                                                                        </t>
+                                                                                        <t t-if="action['state'] in ['refuse', 'refused','cancel','cancelled']">
+                                                                                            <span
+                                                                                                    class="label label-danger"
+                                                                                                    t-esc="action['state_value']">
+                                                                                            </span>
+                                                                                        </t>
+                                                                                        <t t-if="action['state'] not in ['refuse', 'refused','done', 'finish', 'finished','draft', 'new','cancel']">
+                                                                                            <span
+                                                                                                    class="label label-info"
+                                                                                                    t-esc="action['state_value']">
+                                                                                            </span>
+                                                                                        </t>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </t>
+                                                                        </tbody>
+                                                                    </t>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            &lt;!&ndash; end  &ndash;&gt;
+                                        </div>
+
+                                        <div class="tab-pane" id="tab12">
+                                            <div class="col-xs-12 col-md-12 col-lg-12">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-body">
+                                                        <div class="sTableHoldel">
+                                                            <div class="results results-striped">
+                                                                <div class="row">
+                                                                    <t t-if="validate_transactions" t-call="portal.portal_table">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>NO</th>
+                                                                                <th>Name</th>
+                                                                                <th>Date</th>
+                                                                                <th class="text-center">Action</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <t t-foreach="validate_transactions" t-as="action">
+                                                                                <t t-set="temp_record_id" t-value="action['record_id']"/>
+                                                                                <t t-set="temp_model" t-value="action['model']"/>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <a t-att-href="action['details_url'] if action['details_url'] else '#'">
+                                                                                            <t t-esc="action['number']"/>
+                                                                                        </a>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <t t-esc="action['name']"/>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <t t-esc="action['ddate']"/>
+                                                                                    </td>
+                                                                                    <td class="text-left">
+                                                                                        <button type="button" id="transaction-accept-button"
+                                                                                                class="btn bg-success margin"
+                                                                                                data-toggle="modal"
+                                                                                                t-att-data-record="temp_record_id"
+                                                                                                t-att-data-model="temp_model">
+                                                                                                <i class="fa fa-check"></i>
+                                                                                                            Accept
+                                                                                        </button>
+
+                                                                                        &lt;!&ndash; those two hidden input will be filled each time refuse-alert-button is clicked &ndash;&gt;
+                                                                                        <input type="hidden" id="record_id"
+                                                                                               name="record_id"/>
+                                                                                        <input type="hidden" id="model" name="model"/>
+                                                                                        <button type="button" id="refuse-alert-button"
+                                                                                                class="btn btn-danger margin"
+                                                                                                data-toggle="modal"
+                                                                                                t-att-data-record="temp_record_id"
+                                                                                                t-att-data-model="temp_model"
+                                                                                                data-target="#refuse-modal-alert">
+                                                                                                <i class="fa fa-ban"></i>
+                                                                                                         Reject
+                                                                                        </button>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </t>
+                                                                        </tbody>
+                                                                    </t>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            &lt;!&ndash; end  &ndash;&gt;
+                                        </div>
+
+                                    </div>
+                                </div>-->
                             </div>
                             <!-- Page body end -->
                         </div>
