@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <odoo>
+          <record id="res_partner_from_inherit_id" model="ir.ui.view">
+            <field name="name">res.partner.form.custom</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='category_id']" position="after">
+                     <field name="license_plate" attrs="{'invisible': [('is_company', '=', True)]}"/>
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <record id="pos_order_search_inherit_id" model="ir.ui.view">
+              <field name="name">pos.order.list.select</field>
+              <field name="model">pos.order</field>
+              <field name="inherit_id" ref="point_of_sale.view_pos_order_filter"/>
+                    <field name="arch" type="xml">
+                        <search string="Search Sales Order">
+                                <field name="name"/>
+                                <field name="pos_reference"/>
+                                <field name="date_order"/>
+                                <field name="user_id"/>
+                                <field name="plate"/>
+                                <field name="customer_phone"/>
+                                <field name="partner_id"/>
+                                <field name="session_id"/>
+                                <filter string="Invoiced" name="invoiced" domain="[('state', '=', 'invoiced')]"/>
+                                <filter string="Posted" name="posted" domain="[('state', '=', 'done')]"/>
+                                <separator/>
+                                <filter string="Order Date" name="order_date" date="date_order"/>
+                                <group expand="0" string="Group By">
+                                    <filter string="Session" name="session" domain="[]" context="{'group_by': 'session_id'}"/>
+                                    <filter string="User" name="user_id" domain="[]" context="{'group_by': 'user_id'}"/>
+                                    <filter string="Customer" name="customer" domain="[]" context="{'group_by': 'partner_id'}"/>
+                                    <filter string="Status" name="status" domain="[]" context="{'group_by': 'state'}"/>
+                                    <filter string="Order Date" name="order_month" domain="[]" context="{'group_by': 'date_order'}"/>
+                                </group>
+                            </search>
+                    </field>
+        </record>
+    </odoo>
+
