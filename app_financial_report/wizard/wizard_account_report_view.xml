@@ -12,6 +12,7 @@
                 <field name="target_move"/>
                 <field name="debit_credit"/>
                 <field name="without_zero"/>
+                <field name="show_summary"/>
                 <field name="report_type" invisible="0"/>
             </group>
             <group colspan="4">
