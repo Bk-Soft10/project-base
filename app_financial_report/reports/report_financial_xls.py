@@ -179,8 +179,8 @@ class ReportFinancialXls(models.AbstractModel):
 
     def _get_bal_accounts(self, wizard, report, account_ids):
         account_lines = []
-        # data_account_line, dict_bal = self.getFilterdValue(wizard, account_ids.ids)
-        data_account_line, dict_bal = self._compute_account_balance(account_ids)
+        data_account_line, dict_bal = self.getFilterdValue(wizard, account_ids)
+        # data_account_line, dict_bal = self._compute_account_balance(account_ids)
 
 
         val_ids = [id for id in dict_bal]
@@ -189,8 +189,8 @@ class ReportFinancialXls(models.AbstractModel):
                 dict_bal[item] = {'account_id': item, 'debit_sum': 0, 'credit_sum': 0, 'balance_sum': 0}
 
         if wizard.opening_balance == True:
-            # data_account_op, dict_op_bal = self.getOPFilterdValue(wizard, account_ids.ids)
-            data_account_op, dict_op_bal = self._compute_account_op_balance(account_ids)
+            data_account_op, dict_op_bal = self.getOPFilterdValue(wizard, account_ids)
+            # data_account_op, dict_op_bal = self._compute_account_op_balance(account_ids)
             for key in dict_bal:
                 if key not in dict_op_bal:
                     dict_op_bal[key] = {'account_id': key, 'op_debit_sum': 0, 'op_credit_sum': 0, 'op_balance_sum': 0}
