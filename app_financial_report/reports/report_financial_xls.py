@@ -260,7 +260,7 @@ class ReportFinancialXls(models.AbstractModel):
 
         self.env.cr.execute(query_all)
 
-        result = self.env.cr.dictfetchall() or False
+        result = self.env.cr.dictfetchall()
         result2 = {}
         for row in result:
             result2[row['account_id']] = row
@@ -301,7 +301,7 @@ class ReportFinancialXls(models.AbstractModel):
 
         self.env.cr.execute(query_all)
 
-        result = self.env.cr.dictfetchall() or False
+        result = self.env.cr.dictfetchall()
         result2 = {}
         for row in result:
             result2[row['account_id']] = row
