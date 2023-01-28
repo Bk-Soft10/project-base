@@ -135,7 +135,8 @@ class AccountReport(models.AbstractModel):
         mv_lines = self._compute_account_balance_summary(wizard, accounts)
         result2 = {}
         for row in result:
-            row.update(lines=mv_lines if 'account_id' in mv_lines and mv_lines['account_id'] == row['account_id'] else [])
+            lines = [mv_line for mv_line in mv_lines if 'account_id' in mv_line and mv_line['account_id'] == row['account_id']]
+            row.update(lines=lines)
             result2[row['account_id']] = row
         if not result:
             for key in account_ids:
@@ -255,10 +256,10 @@ class AccountReport(models.AbstractModel):
 
         result = self.env.cr.dictfetchall()
         mv_lines = self._compute_partner_balance_summary(wizard, partners)
-        print(mv_lines)
         result2 = {}
         for row in result:
-            row.update(lines=mv_lines if 'partner_id' in mv_lines and mv_lines['partner_id'] == row['partner_id'] else [])
+            lines = [mv_line for mv_line in mv_lines if 'partner_id' in mv_line and mv_line['partner_id'] == row['partner_id']]
+            row.update(lines=lines)
             result2[row['partner_id']] = row
         if not result:
             for key in partner_ids:
@@ -296,7 +297,6 @@ class AccountReport(models.AbstractModel):
             query_all = query_all + query_where + " order by m_line.date "
         else:
             query_all = query_all + " order by m_line.date "
-        print(query_all)
 
         self.env.cr.execute(query_all)
 
@@ -369,8 +369,6 @@ class AccountReport(models.AbstractModel):
             if not partner_ids:
                 partner_ids = self.env['res.partner'].search([])
             val_lines = self.update_partners_bal_values(wizard, wizard.opening_balance, partner_ids)
-            for vv in val_lines.values():
-                print(vv, "YYYYYYYYYY")
 
         if wizard.without_zero:
             lines = [item for item in val_lines.values() if 'balance' in item and item['balance'] != 0]

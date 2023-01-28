@@ -176,15 +176,62 @@ class ReportAccountLedgerXls(models.AbstractModel):
             query_all = query_all + " group by m_line.account_id order by m_line.account_id "
 
         self.env.cr.execute(query_all)
+        mv_lines = self._compute_account_balance_summary(wizard, accounts)
 
         result = self.env.cr.dictfetchall()
         result2 = {}
         for row in result:
+            lines = [mv_line for mv_line in mv_lines if 'account_id' in mv_line and mv_line['account_id'] == row['account_id']]
+            row.update(lines=lines)
             result2[row['account_id']] = row
         if not result:
             for key in account_ids:
-                result2[key] = {'account_id': key, 'debit': 0, 'credit': 0, 'balance': 0}
+                result2[key] = {'account_id': key, 'debit': 0, 'credit': 0, 'balance': 0, 'lines': []}
         return result2
+
+    def _compute_account_balance_summary(self, wizard, accounts):
+        query_where = "where m_line.move_id = m.id "
+        account_ids = accounts.ids or []
+        if account_ids:
+            if len(account_ids) == 1:
+                query_where += " and m_line.account_id = %s " % (account_ids[0])
+            else:
+                query_where += " and m_line.account_id IN %s " % (tuple(account_ids),)
+
+        query_where += self.where_sql(wizard, False)
+
+        query_all = """
+                SELECT m_line.account_id as account_id,
+                acc.code as account_code,
+                m_line.date,
+                m_line.ref,
+                j.code,
+                m_line.debit,
+                m_line.credit,
+                (m_line.debit-m_line.credit) as balance
+                FROM account_move_line m_line
+                JOIN account_move m ON
+                m_line.move_id = m.id
+                JOIN account_account acc ON
+                m_line.account_id = acc.id
+                JOIN account_journal j ON
+                m_line.journal_id = j.id
+                """
+        if query_where:
+            query_all = query_all + query_where + " order by m_line.date "
+        else:
+            query_all = query_all + " order by m_line.date "
+
+        self.env.cr.execute(query_all)
+
+        result = self.env.cr.dictfetchall() or []
+        # result2 = {}
+        # for row in result:
+        #     result2[row['account_id']] = row
+        # if not result:
+        #     for key in account_ids:
+        #         result2[key] = {'account_id': key, 'debit': 0, 'credit': 0, 'balance': 0, 'date': False, 'ref': '', 'journal_code': ''}
+        return result
 
     def _compute_partner_op_balance(self, wizard, partners):
         query_where = "WHERE act.type IN ('receivable','payable') AND m_line.move_id = m.id "
@@ -252,13 +299,59 @@ class ReportAccountLedgerXls(models.AbstractModel):
         self.env.cr.execute(query_all)
 
         result = self.env.cr.dictfetchall()
+        mv_lines = self._compute_partner_balance_summary(wizard, partners)
         result2 = {}
         for row in result:
+            lines = [mv_line for mv_line in mv_lines if 'partner_id' in mv_line and mv_line['partner_id'] == row['partner_id']]
+            row.update(lines=lines)
             result2[row['partner_id']] = row
         if not result:
             for key in partner_ids:
-                result2[key] = {'partner_id': key, 'debit': 0, 'credit': 0, 'balance': 0}
+                result2[key] = {'partner_id': key, 'debit': 0, 'credit': 0, 'balance': 0, 'lines': []}
         return result2
+
+    def _compute_partner_balance_summary(self, wizard, partners):
+        query_where = "WHERE act.type IN ('receivable','payable') "
+        partner_ids = partners.ids or []
+
+        # partners_account = partners.mapped('')
+        if partner_ids:
+            if (len(partner_ids) == 1):
+                query_where += " and m_line.partner_id = %s " % (partner_ids[0])
+            else:
+                query_where += " and m_line.partner_id IN %s " % (tuple(partner_ids),)
+
+        query_where += self.where_sql(wizard, False)
+
+        query_all = """
+                SELECT m_line.partner_id,
+                m_line.date,
+                m_line.ref,
+                j.code,
+                m_line.debit,
+                m_line.credit,
+                (m_line.debit-m_line.credit) as balance
+                FROM account_move_line m_line
+                JOIN account_move m ON m_line.move_id = m.id
+                JOIN account_journal j ON m_line.journal_id = j.id
+                LEFT JOIN account_account a ON (m_line.account_id=a.id)
+                LEFT JOIN account_account_type act ON (a.user_type_id=act.id)
+                """
+        if query_where:
+            query_all = query_all + query_where + " order by m_line.date "
+        else:
+            query_all = query_all + " order by m_line.date "
+
+        self.env.cr.execute(query_all)
+
+        result = self.env.cr.dictfetchall()
+        # result2 = {}
+        # for row in result:
+        #     result2[row['partner_id']] = row
+        # if not result:
+        #     for key in partner_ids:
+        #         result2[key] = {'partner_id': key, 'debit': 0, 'credit': 0, 'balance': 0, 'date': False, 'ref': '', 'journal_code': ''}
+        return result
 
     def update_accounts_bal_values(self, wizard, op_bal, account_ids):
         bal_vals = self._compute_account_balance(wizard, account_ids)

@@ -16,7 +16,7 @@ class WizLedgerReport(models.TransientModel):
                           required=False)
     opening_balance = fields.Boolean('Opening Balance')
     without_zero = fields.Boolean('Without Zero Balance')
-    show_summary = fields.Boolean(string='Show Summary')
+    show_summary = fields.Boolean(string='Show Details')
     partner_ids = fields.Many2many('res.partner', string='Partners')
     account_ids = fields.Many2many('account.account', string='Accounts')
     debit_credit = fields.Boolean(string='Display Debit/Credit Columns', help="This option allows you to get more details about the way your balances are computed. Because it is space consuming, we do not allow to use it while doing a comparison.")
