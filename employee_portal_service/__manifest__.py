@@ -19,7 +19,7 @@
         'hr',
         'hr_contract',
         'hr_expense',
-        'om_hr_payroll',
+        'hr_payroll_community',
     ],
     'data': [
         'security/portal_security.xml',

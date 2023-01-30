@@ -87,6 +87,6 @@ class EmployeePayslip(EmployeePortal):
             [('employee_id.user_id', '=', request.uid), ('id', '=', payslip_id)], limit=1)
         if not payslip_row:
             return werkzeug.utils.redirect("/portal/home")
-        pdf, _ = request.env.ref('om_hr_payroll.action_report_payslip').sudo().render_qweb_pdf([int(payslip_id)])
+        pdf, _ = request.env.ref('hr_payroll_community.action_report_payslip').sudo().render_qweb_pdf([int(payslip_id)])
         pdfhttpheaders = [('Content-Type', 'application/pdf'), ('Content-Length', u'%s' % len(pdf)), ("Content-Disposition", 'filename="reportbk.pdf"')]
         return request.make_response(pdf, headers=pdfhttpheaders)

@@ -141,6 +141,8 @@
                                         <td>
                                             <span>SUM</span>
                                         </td>
+                                        <td t-if="o.show_summary"/>
+                                        <td t-if="o.show_summary"/>
                                         <td t-if="data['opening_balance']" class="text-right" style="white-space: text-nowrap;">
                                             <span t-esc="'{0:,.2f}'.format(round(sum_op_balance,2))"/>
                                         </td>
