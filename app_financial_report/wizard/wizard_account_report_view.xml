@@ -17,6 +17,7 @@
             </group>
             <group colspan="4">
                 <field name="group_by"/>
+                <field name="partner_type" attrs="{'invisible': [('group_by', '!=', 'partner')]}"/>
                 <field name="partner_ids" attrs="{'invisible': [('group_by', '!=', 'partner')]}" options="{'no_create':True}" widget="many2many_tags"/>
                 <field name="account_ids" attrs="{'invisible': [('group_by', '!=', 'account')]}" options="{'no_create':True}" widget="many2many_tags"/>
                 <field name="opening_balance"/>

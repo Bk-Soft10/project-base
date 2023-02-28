@@ -233,9 +233,21 @@ class ReportAccountLedgerXls(models.AbstractModel):
         #         result2[key] = {'account_id': key, 'debit': 0, 'credit': 0, 'balance': 0, 'date': False, 'ref': '', 'journal_code': ''}
         return result
 
+    def _where_partner_accounts(self, wizard, partners):
+        query_where = ' '
+        # if wizard.partner_type in ['receivable']:
+        #     query_where += " and m_line.account_id = r_partner.property_account_receivable_id "
+        # elif wizard.partner_type in ['payable']:
+        #     query_where += " and m_line.account_id = r_partner.property_account_payable_id "
+        # else:
+        #     query_where += " and m_line.account_id in (r_partner.property_account_payable_id,r_partner.property_account_receivable_id) "
+        return query_where
+
     def _compute_partner_op_balance(self, wizard, partners):
         query_where = "WHERE act.type IN ('receivable','payable') AND m_line.move_id = m.id "
+        query_where += self._where_partner_accounts(wizard, partners) or ''
         partner_ids = partners.ids or []
+
         if partner_ids:
             if (len(partner_ids) == 1):
                 query_where += " and m_line.partner_id = %s " % (partner_ids[0])
@@ -253,6 +265,7 @@ class ReportAccountLedgerXls(models.AbstractModel):
                 JOIN account_move m ON m_line.move_id = m.id
                 LEFT JOIN account_account a ON (m_line.account_id=a.id)
                 LEFT JOIN account_account_type act ON (a.user_type_id=act.id)
+                LEFT JOIN res_partner r_partner ON (m_line.partner_id=r_partner.id)
                 """
         if query_where:
             query_all = query_all + query_where + " group by m_line.partner_id "
@@ -272,7 +285,9 @@ class ReportAccountLedgerXls(models.AbstractModel):
 
     def _compute_partner_balance(self, wizard, partners):
         query_where = "WHERE act.type IN ('receivable','payable') AND m_line.move_id = m.id "
+        query_where += self._where_partner_accounts(wizard, partners) or ''
         partner_ids = partners.ids or []
+
         if partner_ids:
             if (len(partner_ids) == 1):
                 query_where += " and m_line.partner_id = %s " % (partner_ids[0])
@@ -290,6 +305,7 @@ class ReportAccountLedgerXls(models.AbstractModel):
                 JOIN account_move m ON m_line.move_id = m.id
                 LEFT JOIN account_account a ON (m_line.account_id=a.id)
                 LEFT JOIN account_account_type act ON (a.user_type_id=act.id)
+                LEFT JOIN res_partner r_partner ON (m_line.partner_id=r_partner.id)
                 """
         if query_where:
             query_all = query_all + query_where + " group by m_line.partner_id "
@@ -312,9 +328,9 @@ class ReportAccountLedgerXls(models.AbstractModel):
 
     def _compute_partner_balance_summary(self, wizard, partners):
         query_where = "WHERE act.type IN ('receivable','payable') "
+        query_where += self._where_partner_accounts(wizard, partners) or ''
         partner_ids = partners.ids or []
 
-        # partners_account = partners.mapped('')
         if partner_ids:
             if (len(partner_ids) == 1):
                 query_where += " and m_line.partner_id = %s " % (partner_ids[0])
@@ -336,6 +352,7 @@ class ReportAccountLedgerXls(models.AbstractModel):
                 JOIN account_journal j ON m_line.journal_id = j.id
                 LEFT JOIN account_account a ON (m_line.account_id=a.id)
                 LEFT JOIN account_account_type act ON (a.user_type_id=act.id)
+                LEFT JOIN res_partner r_partner ON (m_line.partner_id=r_partner.id)
                 """
         if query_where:
             query_all = query_all + query_where + " order by m_line.date "
@@ -410,7 +427,12 @@ class ReportAccountLedgerXls(models.AbstractModel):
         if wizard.group_by == 'partner':
             partner_ids = wizard.partner_ids
             if not partner_ids:
-                partner_ids = self.env['res.partner'].search([])
+                partner_domain = []
+                if wizard.partner_type in ['receivable']:
+                    partner_domain.append(('customer_rank', '>', 0))
+                if wizard.partner_type in ['payable']:
+                    partner_domain.append(('supplier_rank', '>', 0))
+                partner_ids = self.env['res.partner'].search(partner_domain)
             val_lines = self.update_partners_bal_values(wizard, wizard.opening_balance, partner_ids)
         if wizard.without_zero:
             lines = [item for item in val_lines.values() if 'balance' in item and item['balance'] != 0]
