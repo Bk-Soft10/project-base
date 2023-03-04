@@ -189,16 +189,28 @@ class AccountReport(models.AbstractModel):
 
     def _where_partner_accounts(self, wizard, partners):
         query_where = ' '
-        # if wizard.partner_type in ['receivable']:
-        #     query_where += " and m_line.account_id = r_partner.property_account_receivable_id "
-        # elif wizard.partner_type in ['payable']:
-        #     query_where += " and m_line.account_id = r_partner.property_account_payable_id "
-        # else:
-        #     query_where += " and m_line.account_id in (r_partner.property_account_payable_id,r_partner.property_account_receivable_id) "
+        receivable_accounts = partners.mapped('property_account_receivable_id').ids or []
+        payable_accounts = partners.mapped('property_account_payable_id').ids or []
+        partner_accounts = receivable_accounts + payable_accounts
+        if wizard.partner_type in ['receivable'] and receivable_accounts:
+            if len(receivable_accounts) == 1:
+                query_where += " AND act.type IN ('receivable') AND m_line.account_id = %s " % (receivable_accounts[0])
+            else:
+                query_where += " AND act.type IN ('receivable') AND m_line.account_id IN %s " % (tuple(receivable_accounts),)
+        elif wizard.partner_type in ['payable'] and payable_accounts:
+            if len(payable_accounts) == 1:
+                query_where += " AND act.type IN ('payable') AND m_line.account_id = %s " % (payable_accounts[0])
+            else:
+                query_where += " AND act.type IN ('payable') AND m_line.account_id IN %s " % (tuple(payable_accounts),)
+        elif receivable_accounts and payable_accounts and partner_accounts:
+            if len(partner_accounts) == 1:
+                query_where += " AND act.type IN ('receivable', 'payable') AND m_line.account_id = %s " % (partner_accounts[0])
+            else:
+                query_where += " AND act.type IN ('receivable', 'payable') AND m_line.account_id IN %s " % (tuple(partner_accounts),)
         return query_where
 
     def _compute_partner_op_balance(self, wizard, partners):
-        query_where = "WHERE act.type IN ('receivable','payable') AND m_line.move_id = m.id "
+        query_where = "WHERE m_line.move_id = m.id "
         query_where += self._where_partner_accounts(wizard, partners) or ''
         partner_ids = partners.ids or []
 
@@ -238,7 +250,7 @@ class AccountReport(models.AbstractModel):
         return result2
 
     def _compute_partner_balance(self, wizard, partners):
-        query_where = "WHERE act.type IN ('receivable','payable') AND m_line.move_id = m.id "
+        query_where = "WHERE m_line.move_id = m.id "
         query_where += self._where_partner_accounts(wizard, partners) or ''
         partner_ids = partners.ids or []
 
@@ -281,7 +293,7 @@ class AccountReport(models.AbstractModel):
         return result2
 
     def _compute_partner_balance_summary(self, wizard, partners):
-        query_where = "WHERE act.type IN ('receivable','payable') "
+        query_where = "WHERE m_line.move_id = m.id "
         query_where += self._where_partner_accounts(wizard, partners) or ''
         partner_ids = partners.ids or []
 
