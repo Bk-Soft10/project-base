@@ -60,6 +60,10 @@ class AccountReport(models.AbstractModel):
 
         if wizard.target_move == 'posted':
             whare_str += " AND m_line.parent_state in ('posted') "
+        if wizard.reconciled:
+            whare_str += " AND m_line.full_reconcile_id IS NOT NULL "
+        if not wizard.reconciled:
+            whare_str += " AND m_line.full_reconcile_id IS NULL "
         return whare_str
 
     def _compute_account_op_balance(self, wizard, accounts):
@@ -193,20 +197,23 @@ class AccountReport(models.AbstractModel):
         payable_accounts = partners.mapped('property_account_payable_id').ids or []
         partner_accounts = receivable_accounts + payable_accounts
         if wizard.partner_type in ['receivable'] and receivable_accounts:
-            if len(receivable_accounts) == 1:
-                query_where += " AND act.type IN ('receivable') AND m_line.account_id = %s " % (receivable_accounts[0])
-            else:
-                query_where += " AND act.type IN ('receivable') AND m_line.account_id IN %s " % (tuple(receivable_accounts),)
+            query_where += " AND act.type IN ('receivable')"
+            # if len(receivable_accounts) == 1:
+            #     query_where += " AND m_line.account_id = %s " % (receivable_accounts[0])
+            # else:
+            #     query_where += " AND m_line.account_id IN %s " % (tuple(receivable_accounts),)
         elif wizard.partner_type in ['payable'] and payable_accounts:
-            if len(payable_accounts) == 1:
-                query_where += " AND act.type IN ('payable') AND m_line.account_id = %s " % (payable_accounts[0])
-            else:
-                query_where += " AND act.type IN ('payable') AND m_line.account_id IN %s " % (tuple(payable_accounts),)
+            query_where += " AND act.type IN ('payable')"
+            # if len(payable_accounts) == 1:
+            #     query_where += " AND m_line.account_id = %s " % (payable_accounts[0])
+            # else:
+            #     query_where += " AND m_line.account_id IN %s " % (tuple(payable_accounts),)
         elif receivable_accounts and payable_accounts and partner_accounts:
-            if len(partner_accounts) == 1:
-                query_where += " AND act.type IN ('receivable', 'payable') AND m_line.account_id = %s " % (partner_accounts[0])
-            else:
-                query_where += " AND act.type IN ('receivable', 'payable') AND m_line.account_id IN %s " % (tuple(partner_accounts),)
+            query_where += " AND act.type IN ('receivable', 'payable')"
+            # if len(partner_accounts) == 1:
+            #     query_where += " AND m_line.account_id = %s " % (partner_accounts[0])
+            # else:
+            #     query_where += " AND m_line.account_id IN %s " % (tuple(partner_accounts),)
         return query_where
 
     def _compute_partner_op_balance(self, wizard, partners):
@@ -249,91 +256,50 @@ class AccountReport(models.AbstractModel):
                 result2[key] = {'partner_id': key, 'op_debit': 0, 'op_credit': 0, 'op_balance': 0}
         return result2
 
-    def _compute_partner_balance(self, wizard, partners):
-        query_where = "WHERE m_line.move_id = m.id "
-        query_where += self._where_partner_accounts(wizard, partners) or ''
-        partner_ids = partners.ids or []
-
-        if partner_ids:
-            if (len(partner_ids) == 1):
-                query_where += " and m_line.partner_id = %s " % (partner_ids[0])
-            else:
-                query_where += " and m_line.partner_id IN %s " % (tuple(partner_ids),)
-
-        query_where += self.where_sql(wizard, False)
-
-        query_all = """
-                SELECT m_line.partner_id as partner_id,
-                SUM(m_line.debit) as debit,
-                SUM(m_line.credit) as credit,
-                (SUM(m_line.debit)-SUM(m_line.credit)) as balance
-                FROM account_move_line m_line
-                JOIN account_move m ON m_line.move_id = m.id
-                LEFT JOIN account_account a ON (m_line.account_id=a.id)
-                LEFT JOIN account_account_type act ON (a.user_type_id=act.id)
-                LEFT JOIN res_partner r_partner ON (m_line.partner_id=r_partner.id)
-                """
-        if query_where:
-            query_all = query_all + query_where + " group by m_line.partner_id "
-        else:
-            query_all = query_all + " group by m_line.partner_id "
-
-        self.env.cr.execute(query_all)
-
-        result = self.env.cr.dictfetchall()
-        mv_lines = self._compute_partner_balance_summary(wizard, partners)
-        result2 = {}
-        for row in result:
-            lines = [mv_line for mv_line in mv_lines if 'partner_id' in mv_line and mv_line['partner_id'] == row['partner_id']]
-            row.update(lines=lines)
-            result2[row['partner_id']] = row
-        if not result:
-            for key in partner_ids:
-                result2[key] = {'partner_id': key, 'debit': 0, 'credit': 0, 'balance': 0, 'lines': []}
-        return result2
-
     def _compute_partner_balance_summary(self, wizard, partners):
-        query_where = "WHERE m_line.move_id = m.id "
-        query_where += self._where_partner_accounts(wizard, partners) or ''
-        partner_ids = partners.ids or []
-
-        if partner_ids:
-            if (len(partner_ids) == 1):
-                query_where += " and m_line.partner_id = %s " % (partner_ids[0])
+        result_all = []
+        result = {}
+        for partner_id in partners:
+            query_where = "WHERE m_line.move_id = m.id "
+            query_where += self._where_partner_accounts(wizard, partner_id) or ''
+            query_where += " and m_line.partner_id = %s " % (partner_id.id)
+            query_where += self.where_sql(wizard, False)
+            query_all = """
+                    SELECT m_line.partner_id,
+                    m_line.date,
+                    m_line.ref,
+                    j.code,
+                    m_line.debit,
+                    m_line.credit,
+                    (m_line.debit-m_line.credit) as balance
+                    FROM account_move_line m_line
+                    JOIN account_move m ON m_line.move_id = m.id
+                    JOIN account_journal j ON m_line.journal_id = j.id
+                    LEFT JOIN account_account a ON (m_line.account_id=a.id)
+                    LEFT JOIN account_account_type act ON (a.user_type_id=act.id)
+                    LEFT JOIN res_partner r_partner ON (m_line.partner_id=r_partner.id)
+                    """
+            if query_where:
+                query_all = query_all + query_where + " order by m_line.date "
             else:
-                query_where += " and m_line.partner_id IN %s " % (tuple(partner_ids),)
+                query_all = query_all + " order by m_line.date "
+            self.env.cr.execute(query_all)
 
-        query_where += self.where_sql(wizard, False)
-
-        query_all = """
-                SELECT m_line.partner_id,
-                m_line.date,
-                m_line.ref,
-                j.code,
-                m_line.debit,
-                m_line.credit,
-                (m_line.debit-m_line.credit) as balance
-                FROM account_move_line m_line
-                JOIN account_move m ON m_line.move_id = m.id
-                JOIN account_journal j ON m_line.journal_id = j.id
-                LEFT JOIN account_account a ON (m_line.account_id=a.id)
-                LEFT JOIN account_account_type act ON (a.user_type_id=act.id)
-                LEFT JOIN res_partner r_partner ON (m_line.partner_id=r_partner.id)
-                """
-        if query_where:
-            query_all = query_all + query_where + " order by m_line.date "
-        else:
-            query_all = query_all + " order by m_line.date "
-
-        self.env.cr.execute(query_all)
-
-        result = self.env.cr.dictfetchall()
-        # result2 = {}
-        # for row in result:
-        #     result2[row['partner_id']] = row
-        # if not result:
-        #     for key in partner_ids:
-        #         result2[key] = {'partner_id': key, 'debit': 0, 'credit': 0, 'balance': 0, 'date': False, 'ref': '', 'journal_code': ''}
+            partner_result = self.env.cr.dictfetchall()
+            debit = 0
+            credit = 0
+            balance = 0
+            for res in partner_result:
+                debit += res['debit']
+                credit += res['credit']
+                balance += res['balance']
+            result[partner_id.id] = {
+                'debit': debit,
+                'credit': credit,
+                'balance': balance,
+                'lines': partner_result
+            }
+            result_all.append(result)
         return result
 
     def update_accounts_bal_values(self, wizard, op_bal, account_ids):
@@ -361,7 +327,7 @@ class AccountReport(models.AbstractModel):
         return bal_vals
 
     def update_partners_bal_values(self, wizard, op_bal, partner_ids):
-        bal_vals = self._compute_partner_balance(wizard, partner_ids)
+        bal_vals = self._compute_partner_balance_summary(wizard, partner_ids)
 
         val_ids = [id for id in bal_vals]
         for item in partner_ids.ids:
@@ -372,7 +338,7 @@ class AccountReport(models.AbstractModel):
             op_bal_vals = self._compute_partner_op_balance(wizard, partner_ids)
             for key in bal_vals:
                 if key not in op_bal_vals:
-                    op_bal_vals[key] = {'partner_id': item, 'op_debit': 0, 'op_credit': 0, 'op_balance': 0}
+                    op_bal_vals[key] = {'partner_id': item, 'op_debit': 0, 'op_credit': 0, 'op_balance': 0, 'lines': []}
                 if key in op_bal_vals:
                     bal_vals[key].update(op_bal_vals[key])
                     bal_vals[key]['fn_balance'] = bal_vals[key].get('balance', 0) + bal_vals[key].get('op_balance', 0)

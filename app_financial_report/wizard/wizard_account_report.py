@@ -14,6 +14,7 @@ class WizLedgerReport(models.TransientModel):
     date_from = fields.Date('F-Date', default=time.strftime('%Y-%m-01'), required=False)
     date_to = fields.Date('T-Date', default=str(datetime.now() + relativedelta.relativedelta(months=+1, day=1, days=-1))[:10],
                           required=False)
+    reconciled = fields.Boolean('Reconciled Entries')
     opening_balance = fields.Boolean('Opening Balance')
     without_zero = fields.Boolean('Without Zero Balance')
     show_summary = fields.Boolean(string='Show Details')
@@ -40,8 +41,8 @@ class WizLedgerReport(models.TransientModel):
 
     def print_report(self):
         if self.report_type == 'pdf' or not self.report_type:
-            data = self.read(['date_from', 'date_to', 'opening_balance', 'report_type', 'target_move', 'debit_credit', 'without_zero', 'group_by', 'partner_ids', 'account_ids', 'show_summary', 'partner_type'])[0]
+            data = self.read(['reconciled', 'date_from', 'date_to', 'opening_balance', 'report_type', 'target_move', 'debit_credit', 'without_zero', 'group_by', 'partner_ids', 'account_ids', 'show_summary', 'partner_type'])[0]
             return self.env.ref('app_financial_report.action_account_report').report_action(self, data=data)
         else:
-            data = self.read(['date_from', 'date_to', 'opening_balance', 'report_type', 'target_move', 'debit_credit', 'without_zero', 'group_by', 'partner_ids', 'account_ids', 'show_summary', 'partner_type'])[0]
+            data = self.read(['reconciled', 'date_from', 'date_to', 'opening_balance', 'report_type', 'target_move', 'debit_credit', 'without_zero', 'group_by', 'partner_ids', 'account_ids', 'show_summary', 'partner_type'])[0]
             return self.env.ref('app_financial_report.report_ledger_xlsx').with_context(landscape=True).report_action(self, data=data)
