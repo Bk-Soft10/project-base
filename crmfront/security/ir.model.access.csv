@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_crm_lead_category,access.crm.lead.category,model_crm_lead_category,,1,1,1,1
+access_crm_lead_stage,access.crm.lead.stage,model_crm_lead_stage,,1,1,1,1
+access_product_template_portal,access.product.template.portal,model_product_template,base.group_portal,1,0,0,0
+access_hr_employee_business_admin,access.hr.employee.business.admin,hr.model_hr_employee,crmfront.business_admin,1,1,1,1

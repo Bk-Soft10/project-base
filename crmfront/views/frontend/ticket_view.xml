@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="crm_ticket" name="My Ticket" >
+        <xpath expr="//t[@t-call='portal.portal_layout']" position="replace">
+            <html lang="en">
+                <t t-call="crmfront.crm_dashboard_head" />
+                <body id="page-top">
+                    <!-- Page Wrapper -->
+                    <div id="wrapwrap">
+                        <div id="wrapper">
+
+
+                            <t t-call="crmfront.crm_dashboard_sidebar" />
+                            <!-- Content Wrapper -->
+                            <div id="content-wrapper" class="d-flex flex-column">
+                                <!-- Main Content -->
+                                <div id="content">
+                                    <t t-call="crmfront.crm_dashboard_topbar" />
+                                    <nav aria-label="breadcrumb" class="m-3">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item">
+                                                <a href="/">Home</a>
+                                            </li>
+                                            <li class="breadcrumb-item">
+                                                <a href="/my/leads">Leads</a>
+                                            </li>
+                                            <li class="breadcrumb-item active" aria-current="page">
+                                                <span t-field="ticket.number" />
+                                            </li>
+                                        </ol>
+                                    </nav>
+
+                                    <!-- Begin Page Content -->
+
+                                    <section id="ticket-card" class="container">
+                                        <div class="row">
+                                            <article class="card fl-left">
+                                                <div t-if="ticket.stage_id.name == 'New'" class="ribbon ribbon-top-right ">
+                                                    <span style="background-color: #3498db;">pending</span>
+                                                </div>
+                                                <div t-if="ticket.stage_id.name == 'In Progress'" class="ribbon ribbon-top-right t-warning">
+                                                    <span style="background-color: #f6c23e;" t-esc="ticket.stage_id.name" />
+                                                </div>
+
+                                                <div t-if="ticket.stage_id.name == 'Done'" class="ribbon ribbon-top-right t-success">
+                                                    <span style="background-color: #1cc88a;" t-esc="ticket.stage_id.name" />
+                                                </div>
+                                                <div t-if="ticket.stage_id.name == 'Cancelled'" class="ribbon ribbon-top-right t-cancelled">
+                                                    <span style="background-color: #e74a3b;" t-esc="ticket.stage_id.name" />
+                                                </div>
+                                                <section class="date">
+                                                    <time datetime="23th feb">
+                                                        <span t-field="ticket.number" />
+
+                                                    </time>
+                                                </section>
+                                                <section class="card-cont">
+                                                    <table style="font-size:.9rem; text-transform: capitalize;">
+                                                        <tbody>
+                                                            <tr>
+                                                                <th style="" class="mr-1">
+                                                                    <i class="fa fa-calendar mr-1"></i>
+                                                                    Datekkk:
+                                                                </th>
+                                                                <td>
+                                                                    <span t-field="ticket.create_date" />
+
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="mr-1">
+                                                                    <i class="fa fa-list-alt  mr-1"></i>
+                                                                    Service:
+                                                                </th>
+
+                                                                <td>
+                                                                    <t t-esc="ticket.service_id.name" />
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th class="mr-1">
+                                                                    <i class="fa fa-list-alt  mr-1"></i>
+                                                                    Category:
+                                                                </th>
+
+                                                                <td>
+                                                                    <t t-esc="ticket.category_id.name" />
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <th class="mr-1">
+                                                                    <i class="fa fa-window-maximize mr-1"></i>
+                                                                    Stage:
+                                                                </th>
+                                                                <td>
+                                                                    <t t-esc="ticket.stage_id.name" />
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <th class="mr-1">
+                                                                    <i class="fa fa-calendar mr-1"></i>
+                                                                    Description:
+                                                                </th>
+                                                                <td>
+                                                                    <t t-esc="ticket.description" />
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </section>
+                                            </article>
+                                        </div>
+                                    </section>
+                                    <div class="container-fluid">
+                                        <!-- Page Heading -->
+                                        <div class="d-sm-flex float-left mt-1 mb-4" style="position:relative;margin-left:-.7rem;">
+                                            <t t-foreach="closed_stages" t-as="stage">
+                                                <form method="GET" t-if="not ticket.closed_date" t-attf-action="/request/close" class="ribbon-bottom-right" style="display:inline;">
+                                                    <input type="hidden" name="ticket_id" t-attf-value="#{ticket.id}" />
+                                                    <input type="hidden" name="stage_id" t-attf-value="#{stage.id}" />
+
+                                                    <button t-if="stage.name == 'Done'" style="background-color:#1cc88a !important;" class="d-sm-inline-block btn btn-sm btn-success shadow-sm mr-3">
+                                                        <span t-field="stage.name" />
+                                                    </button>
+                                                    <button t-if="stage.name == 'Cancelled'" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm mr-2">
+                                                        <span>Cancel</span>
+                                                    </button>
+                                                </form>
+                                            </t>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container" style="display:block;">
+                                    <t t-call="crmfront.comment_section" />
+                                </div>
+
+                                <!-- End of Main Content -->
+
+                                <!-- Footer -->
+                                <t t-call="crmfront.crm_dashboard_footer" />
+                                <!-- End of Footer -->
+
+                            </div>
+                            <!-- End of Content Wrapper -->
+
+
+                            <!-- Scroll to Top Button-->
+                            <a class="scroll-to-top rounded" href="#page-top">
+                                <i class="fas fa-angle-up"></i>
+                            </a>
+
+                            <!-- Logout Modal-->
+
+                        </div>
+                    </div>
+                </body>
+                <t t-call="crmfront.crm_dashboard_scripts" />
+            </html>
+
+        </xpath>
+    </template>
+
+
+</odoo>

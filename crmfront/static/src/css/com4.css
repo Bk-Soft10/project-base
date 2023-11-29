@@ -1,0 +1,170 @@
+/* 
+    Body, #comment_div button, comment-thread, and utilities
+
+    Notes:
+        - This section sets some basic styles. You can ignore this part and 
+        go directly to the comment styles.
+*/
+
+#comment_div button {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  font-size: 14px;
+  padding: 4px 8px;
+  color: rgba(0, 0, 0, 0.85);
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+#comment_div button:hover,
+#comment_div button:focus,
+#comment_div button:active {
+  cursor: pointer;
+  background-color: #ecf0f1;
+}
+#comment_div .comment-thread {
+  width: 100%;
+  max-width: 100%;
+  margin: auto;
+  padding: 0 30px;
+  background-color: #fff;
+  border: 1px solid transparent; /* Removes margin collapse */
+}
+#comment_div .m-0 {
+  margin: 0;
+}
+#comment_div .sr-only {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Comment */
+
+#comment_div .comment {
+  position: relative;
+  margin: 20px auto;
+}
+#comment_div .comment-heading {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  font-size: 14px;
+}
+#comment_div .comment-voting {
+  width: 20px;
+  height: 32px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+#comment_div .comment-voting button {
+  display: block;
+  width: 100%;
+  height: 50%;
+  padding: 0;
+  border: 0;
+  font-size: 10px;
+}
+#comment_div .comment-info {
+  color: rgba(0, 0, 0, 0.5);
+  margin-left: 10px;
+}
+#comment_div .comment-author {
+  color: rgba(0, 0, 0, 0.85);
+  font-weight: bold;
+  text-decoration: none;
+}
+#comment_div .comment-author:hover {
+  color: #4e73df;
+}
+#comment_div .replies {
+  margin-left: 20px;
+}
+
+/* Adjustments for the comment border links */
+
+#comment_div .comment-border-link {
+  display: block;
+  position: absolute;
+  top: 50px;
+  left: -2;
+  width: 12px;
+  height: calc(100% - 50px);
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  background-color: rgba(0, 0, 0, 0.1);
+  background-clip: padding-box;
+}
+#comment_div .comment-border-link:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+#comment_div .comment-body {
+  padding: 0 20px;
+  padding-left: 28px;
+}
+#comment_div .replies {
+  margin-left: 28px;
+}
+
+/* Adjustments for toggleable comments */
+
+#comment_div details.comment summary {
+  position: relative;
+  list-style: none;
+  cursor: pointer;
+}
+#comment_div details.comment summary::-webkit-details-marker {
+  display: none;
+}
+#comment_div details.comment:not([open]) .comment-heading {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+#comment_div .comment-heading::after {
+  display: inline-block;
+  position: absolute;
+  right: 5px;
+  align-self: center;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.55);
+}
+#comment_div details.comment[open] .comment-heading::after {
+  content: "Click to hide";
+}
+#comment_div details.comment:not([open]) .comment-heading::after {
+  content: "Click to show";
+}
+
+/* Adjustment for Internet Explorer */
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  /* Resets cursor, and removes prompt text on Internet Explorer */
+  #comment_div .comment-heading {
+    cursor: default;
+  }
+  #comment_div details.comment[open] .comment-heading::after,
+  #comment_div details.comment:not([open]) .comment-heading::after {
+    content: " ";
+  }
+}
+
+/* Styling the reply to comment form */
+
+#comment_div .reply-form textarea {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 0.8rem;
+  width: 100%;
+  max-width: 100%;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+#comment_div .d-none {
+  display: none;
+}
+#comment_div span p {
+  margin-top: -0.4rem !important;
+}

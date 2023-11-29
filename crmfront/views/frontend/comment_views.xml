@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="request_field_id" name="request field ">
+        <input type="hidden" name="lead_id" t-attf-value="#{lead.id}" />
+    </template>
+    <template id="comment_section" name="comment and reply section">
+        <div class="mb-5  shadow-sm" style="margin-left:-10px;,margin-right:-10px;" id="comment_div">
+
+            <form class="p-3" style="background-color:#fff;" action="/new/comment" method="POST">
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+                <div class="form-group">
+                    <label for="comment">Write Your Comment</label>
+                    <textarea class="form-control mb-2" id="comment" name="comment" rows="3"></textarea>
+                    <t t-call="crmfront.request_field_id" />
+                    <input type="submit" value="Submit" class="btn btn-primary btn-sm" />
+
+                </div>
+            </form>
+            <h6 t-if="total_comments >1 " style="color:#000;" class="mt-3 ml-4">
+                Comments(
+                <t t-esc="total_comments" />
+                )
+            </h6>
+            <h6 t-if="total_comments == 1 " style="color:#000;" class="mt-3 ml-4">
+                Comment(
+                <t t-esc="total_comments" />
+                )
+            </h6>
+            <t t-foreach="comments" t-as="comment">
+                <div class="comment-thread">
+                    <!-- Comment 1 start -->
+                    <details open="open" class="comment" id="comment-1">
+                        <a href="#comment-1" class="comment-border-link">
+                            <span class="sr-only">Jump to comment-1</span>
+                        </a>
+                        <summary>
+                            <div class="comment-heading">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="user d-flex flex-row align-items-center">
+                                        <t t-if = "comment.author_id.image_1920">
+                                            <img class="rounded-circle oe_topbar_avatar" 
+                                                t-att-src="image_data_uri(comment.author_id.image_1920)" 
+                                                height="35" width="35" style="margin-left: -12px;" alt=" User" 
+                                            />
+                                        </t>
+                                        <t t-if = "not comment.author_id.image_1920">
+                                            <img class="rounded-circle oe_topbar_avatar" 
+                                            src="/crmfront/static/src/img/user.png"
+                                            height="35" width="35" alt=" User" 
+                                            />
+                                        </t>
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="comment-info">
+                                    <span style="color:#4e73df;" class="comment-author">
+                                        <t t-esc="comment.author_id.name" />
+                                    </span>
+                                    <small style="font-size:0.75rem;" class="ml-1">
+                                        <t t-set="timeFromNow" t-attf-value="#{comment.create_date - now}" />
+                                        <t t-if="((now - comment.create_date).days) >= 1">
+                                            <t t-if="((now - comment.create_date).days) > 1">
+                                                <t t-esc="(now - comment.create_date).days " />
+                                                days ago.
+                                            </t>
+                                            <t t-else="">
+                                                <t t-esc="(now - comment.create_date).days " />
+                                                day ago.
+                                            </t>
+                                        </t>
+                                        <t t-elif="((now - comment.create_date).seconds//3600) >= 1">
+                                            <t t-if="((now - comment.create_date).seconds // 3600) > 1">
+                                                <t t-esc="((now - comment.create_date).seconds//3600) " />
+                                                hours ago.
+                                            </t>
+
+                                            <t t-else="">
+                                                <t t-esc="((now - comment.create_date).seconds//3600) " />
+                                                hour ago.
+                                            </t>
+                                        </t>
+                                        <t t-elif="(((now - comment.create_date).seconds//60) % 60) >= 1">
+                                            <t t-if="(((now - comment.create_date).seconds//60) % 60) > 1">
+                                                <t t-esc="(((now - comment.create_date).seconds//60) % 60) " />
+                                                minutes ago.
+                                            </t>
+
+                                            <t t-else="">
+                                                <t t-esc="(((now - comment.create_date).seconds//60) % 60) " />
+                                                minute ago.
+                                            </t>
+
+                                        </t>
+
+                                        <t t-else="">
+                                            just now.
+                                        </t>
+
+
+                                    </small>
+                                </div>
+                            </div>
+                        </summary>
+
+                        <div class="comment-body">
+                            <span style="font-size:0.8rem !important ;margin-top:-0.4rem !important;margin-left: 0.2rem;">
+                                <t t-raw="comment.body" />
+                            </span>
+                            <!-- Reply form end -->
+                        </div>
+                    </details>
+                    <!-- Comment 1 end -->
+                </div>
+
+            </t>
+        </div>
+    </template>
+</odoo>

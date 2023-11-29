@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="1">
+        <!--Email template -->
+        <record id="assignment_email_template" model="mail.template">
+            <field name="name">Lead Assignment</field>
+            <field name="model_id" ref="model_crm_lead" />
+            <field name="email_from">${object.company_id.partner_id.email}</field>
+            <field
+                name="email_cc"
+            >${not object.partner_id and object.partner_email or ''|safe},</field>
+            <field
+                name="subject"
+            >${object.company_id.name} Ticket Assignment (Ref ${object.lead_number or 'n/a' })</field>
+            <field name="partner_to">${object.partner_id.id}</field>
+            <field name="auto_delete" eval="False" />
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="body_html" type="xml">
+                <p>Hello ${object.user_id.name},</p>
+                <p>The lead ${object.lead_number} has been assigned to you.</p>
+            </field>
+        </record>
+        <record id="closed_lead_template" model="mail.template">
+            <field name="name">Helpdesk Closed Ticket Notification Email</field>
+            <field name="model_id" ref="crmfront.model_crm_lead" />
+            <field name="email_from">${object.company_id.partner_id.email}</field>
+            <field
+                name="email_cc"
+            >${not object.partner_id and object.partner_email or ''|safe},</field>
+            <field name="subject">The lead ${object.lead_number} has been closed.</field>
+            <field name="partner_to">${object.partner_id.id}</field>
+            <field name="auto_delete" eval="False" />
+            <field name="lang">${object.partner_id.lang}</field>
+            <field
+                name="body_html"
+            ><![CDATA[<html>
+                <head></head>
+                <body style="margin: 0; padding: 0;">
+                <table border="0" width="100%" cellpadding="0" bgcolor="#ededed" style="padding: 20px; background-color: #ededed; border-collapse:separate;">
+                    <tbody>
+                      <!-- HEADER -->
+                      <tr>
+                        <td align="center" style="min-width: 590px;">
+                          <table width="590" border="0" cellpadding="0" bgcolor="#875A7B" style="min-width: 590px; background-color: rgb(135,90,123); padding: 20px; border-collapse:separate;">
+                            <tr>
+                              <td valign="middle" align="right">
+                                <img src="/logo.png?company=${object.company_id}" style="padding: 0px; margin: 0px; height: auto; width: 80px;" alt="${object.company_id.name}">
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                      <!-- CONTENT -->
+                      <tr>
+                        <td align="center" style="min-width: 590px;">
+                          <table width="590" border="0" cellpadding="0" bgcolor="#ffffff" style="min-width: 590px; background-color: rgb(255, 255, 255); padding: 20px; border-collapse:separate;">
+                            <tbody>
+                              <td valign="top" style="font-family:Arial,Helvetica,sans-serif; color: #555; font-size: 14px;">
+                                <p>Hello ${object.user_id.name},</p>
+                                <p>The lead ${object.lead_number} has been closed.</p>
+                              </td>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                      <!-- FOOTER -->
+                      <tr>
+                        <td align="center" style="min-width: 590px;">
+                          <table width="590" border="0" cellpadding="0" bgcolor="#875A7B" style="min-width: 590px; background-color: rgb(135,90,123); padding: 20px; border-collapse:separate;">
+                            <tr>
+                              <td valign="middle" align="left" style="color: #fff; padding-top: 10px; padding-bottom: 10px; font-size: 12px;">
+                                ${object.company_id.phone}
+                              </td>
+                              <td valign="middle" align="left" style="color: #fff; padding-top: 10px; padding-bottom: 10px; font-size: 12px;">
+                                ${object.company_id.email}
+                              </td>
+                              <td valign="middle" align="left" style="color: #fff; padding-top: 10px; padding-bottom: 10px; font-size: 12px;">
+                                ${object.company_id.website}
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                </table>
+                </body>
+                </html>
+            ]]></field>
+        </record>
+        
+        <!-- Sequence -->
+        <record id="crm_lead_sequence" model="ir.sequence">
+            <field name="name">CRM Lead Sequence</field>
+            <field name="code">crm.lead.sequence</field>
+            <field name="prefix">LD</field>
+            <field name="padding">5</field>
+            <field name="company_id" />
+        </record>
+        
+        <!-- Stages -->
+
+        <record id="crm_lead_stage_new" model="crm.lead.stage">
+            <field name="sequence">1</field>
+            <field name="name">New</field>
+            <field name="unattended">True</field>
+            <field name="closed">False</field>
+            <field name="company_id" />
+        </record>
+        <record id="crm_lead_stage_in_progress" model="crm.lead.stage">
+            <field name="sequence">2</field>
+            <field name="name">In Progress</field>
+            <field name="unattended">False</field>
+            <field name="closed">False</field>
+            <field name="company_id" />
+        </record>
+        <record id="crm_lead_stage_awaiting" model="crm.lead.stage">
+            <field name="sequence">3</field>
+            <field name="name">Awaiting</field>
+            <field name="unattended">False</field>
+            <field name="closed">False</field>
+            <field name="company_id" />
+        </record>
+        <record id="crm_lead_stage_done" model="crm.lead.stage">
+            <field name="sequence">4</field>
+            <field name="name">Done</field>
+            <field name="unattended">False</field>
+            <field name="closed">True</field>
+            <field name="fold">True</field>
+            <field name="mail_template_id" ref="crmfront.closed_lead_template" />
+            <field name="company_id" />
+        </record>
+        <record id="crm_lead_stage_cancelled" model="crm.lead.stage">
+            <field name="sequence">5</field>
+            <field name="name">Cancelled</field>
+            <field name="unattended">False</field>
+            <field name="closed">True</field>
+            <field name="fold">True</field>
+            <field name="mail_template_id" ref="crmfront.closed_lead_template" />
+            <field name="company_id" />
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <record id="crm_lead_view_tree" model="ir.ui.view">
+        <field name="name">crm.lead.tree</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_tree_view_leads" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position='before'>
+                <field name="lead_number"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="crm_lead_view_form" model="ir.ui.view">
+        <field name="name">crm.lead.form</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button class="oe_stat_button" name="action_view_comments" type="object" icon="fa-comments">
+                    <field name="comments_count" widget="statinfo" />
+                </button>
+            </xpath>
+
+            <xpath expr="//field[@name='website']" position='replace'>
+                <field name="website" widget="url" placeholder="e.g. https://www.kolapro.com" />
+            </xpath>
+
+            <xpath expr="//field[@name='website']" position='after'>
+                <field name="service_id" attrs="{'required': [('type', '=', 'lead')]}" />
+                <field name="category_id" attrs="{'required': [('type', '=', 'lead')]}" />
+            </xpath>
+            <xpath expr="//field[@name='lang_id']" position='replace'>
+                <field name="lead_number" readonly="1" />
+            </xpath>
+
+             <field name="partner_id" position="replace">
+                <field name="partner_id" domain="[
+                    ('customer','=',True)]"
+                />
+            </field>
+            
+            <xpath expr="//field[@name='user_id']" position='attributes'>
+                <attribute name="domain">
+                    [("company_id","=",allowed_company_ids[0])]
+                </attribute>
+            </xpath>
+            
+            <!--================remove partner name====================-->
+            <xpath expr="//field[@name='partner_name']" position='attributes'>
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            
+            <!--===============remove contact column====================-->
+            <label for="contact_name" position="replace">
+                <label for="title" string = "Title"/>
+            </label>
+            <xpath expr="//field[@name='contact_name']" position='attributes'>
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--form-->
+    <record id="lead_category_view_form" model="ir.ui.view">
+        <field name="name">lead_category_view_form</field>
+        <field name="model">crm.lead.category</field>
+        <field name="arch" type="xml">
+            <form string="Categories">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" />
+                        <h1>
+                            <field name="name" required="1" />
+                        </h1>
+                    </div>
+                    <group name="main">
+                        <group>
+                            <field name="active" widget='boolean_toggle'/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>  
+        </field>
+    </record>
+
+    <!--search-->
+    <record id="view_crm_lead_category_search" model="ir.ui.view">
+        <field name="name">crm.lead.category.search</field>
+        <field name="model">crm.lead.category</field>
+        <field name="arch" type="xml">
+            <search string="Lead Category Search">
+                <filter
+                    string="Archived"
+                    name="inactive"
+                    domain="[('active','=',False)]"
+                />
+                <separator />
+                <field name="name" filter_domain="[('name', 'ilike', self)]" />
+            </search>
+        </field>
+    </record>
+    
+    <!--tree-->
+    <record id="view_lead_category_tree" model="ir.ui.view">
+        <field name="name">view.lead_category.tree</field>
+        <field name="model">crm.lead.category</field>
+        <field name="arch" type="xml">
+            <tree string="Category">
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+    <!--action-->
+    <record id="crm_lead_category_action" model="ir.actions.act_window">
+        <field name="name">Categories</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">crm.lead.category</field>
+        <field name="view_mode">tree,form</field>
+    </record> 
+</odoo>

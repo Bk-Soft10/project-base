@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="auth_signup.res_users_view_form" model="ir.ui.view">
+        <field name="name">res.users.form.inherit</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <!-- add state field in header -->
+            <xpath expr="//header" position="inside">
+                <button string="Send Password Reset Instructions" type="object" name="action_reset_password" attrs="{'invisible': [('state', '!=', 'active')]}"/>
+                <button string="Send an Invitation Email" type="object" name="action_reset_password" context="{'create_user': 1}" attrs="{'invisible': [('state', '!=', 'new')]}"/>
+                <!--<button string="Create Customer" type="object" name="action_make_customer"   attrs="{'invisible': ['|', ('id', '=', False), ('customer', '!=', False)]}"/>-->
+                <field name="state" widget="statusbar"/>
+                <field name="customer" invisible="1"
+                 />
+            </xpath>
+
+            <xpath expr="//sheet" position="before">
+                <div class="alert alert-success text-center o_form_header" attrs="{'invisible': [('signup_valid', '!=', True)]}" role="status">
+                    <a class="close" data-dismiss="alert" href="#" aria-label="Close">x</a>
+                    <div attrs="{'invisible': [('state', '!=', 'active')]}">
+                        <strong>A password reset has been requested for this user. An email containing the following link has been sent:</strong>
+                    </div>
+                    <div attrs="{'invisible': [('state', '!=', 'new')]}">
+                        <strong>An invitation email containing the following subscription link has been sent:</strong>
+                    </div>
+                    <div>
+                        <field name="signup_url" widget="url"/>
+                    </div>
+                    <field name="signup_valid" invisible="1"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_users_form" model="ir.ui.view">
+        <field name="name">res.users.inherited</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <!--<xpath expr="//button[@name='action_create_employee']" position="replace"/>-->   
+            <!--<xpath expr="//button[@name='action_make_customer']" position="replace"/>-->       
+            <xpath expr="//div[hasclass('oe_title')]/group" position="inside">
+                <field name="role_id" required = "1"/>
+                <group string="Multi Companies" attrs="{'invisible': [('companies_count', '&lt;=', 1)]}">
+                    <field string="Allowed Companies" name="company_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                    <field string="Default Company" name="company_id" context="{'user_preference': 0}"/>
+                    <field string="Companies count" name="companies_count" invisible="1"/>
+                </group>
+                                
+            </xpath>  
+            <xpath expr="//notebook" position="attributes">
+                <attribute name='invisible'>1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_users_tree" model="ir.ui.view">
+        <field name="name">res.users.tree.inherited</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[@name='company_id']" position="after">
+                <field name="role_id"/>
+            </xpath>  
+        </field>
+    </record>
+
+</odoo>

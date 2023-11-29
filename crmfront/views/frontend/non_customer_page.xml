@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="non_customer_template" name="Non customer Page">
+        <t t-call="crmfront.cep_dashboard_head" />
+        <div class="container">
+            <div class="d-flex justify-content-center mt-5">
+                Sorry!, Only customers can access this page,                
+                Go to <a class="ml-1" href="/"> Home</a>
+            </div>
+        </div>
+    </template>
+</odoo>
