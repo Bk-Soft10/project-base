@@ -13,7 +13,7 @@
 
 {
     'name': 'AI Chatbot | ChatGPT Live chat Support with your own data | AI powered chatbot with custom knowledge',
-    'version': '17.0.1.0.0',
+    'version': '1.0',
     'category': 'Website',
     'sequence': 40,
     'author': 'Terabits Technolab',

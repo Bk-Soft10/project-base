@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
 {
     'name': 'Restrict Concurrent User Logins',
-    'version': '17.0.1',
+    'version': '1.0',
     'summary': 'Restrict concurrent sessions, User force logout, Automatic session expiry',
     'description': 'Restrict concurrent sessions, User force logout, Automatic session expiry',
     'author': 'Livedigital Technologies Private Limited',

@@ -23,7 +23,7 @@
 {
     'name': 'ERP HR Addon',
     'summary': 'Install HR modules package in single click',
-    'version': '17.0.1.0',
+    'version': '1.0',
     'author': 'Jupical Technologies Pvt. Ltd.',
     'maintainer': 'Jupical Technologies Pvt. Ltd.',
     'website': 'http://www.jupical.com',

@@ -1,6 +1,6 @@
 {
     "name": "Database Upgrade",
-    "version": "17.0.0.0.0",
+    "version": "1.0",
     "depends": ["web"],
     "author": "Smile",
     "license": "AGPL-3",
@@ -9,7 +9,7 @@
     "website": "",
     "category": "Tools",
     "sequence": 20,
-    "auto_install": True,
+    "auto_install": False,
     "installable": True,
     "application": False,
     "assets": {

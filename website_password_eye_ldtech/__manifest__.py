@@ -1,6 +1,6 @@
 {
     "name": "Website Password Eye",
-    "version": "17.0.1",
+    "version": "1.0",
     "category": "Website",
     "author": "Livedigital Technologies Private Limited",
     "summary": "Website Password Eye",
