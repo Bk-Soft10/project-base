@@ -567,12 +567,13 @@ class AccountAssetAsset(models.Model):
             return depreciation_ids.create_grouped_move()
         return depreciation_ids.create_move()
 
-    @api.model
-    def create(self, vals):
-        asset = super(AccountAssetAsset,
-                      self.with_context(mail_create_nolog=True)).create(vals)
-        asset.sudo().compute_depreciation_board()
-        return asset
+    @api.model_create_multi
+    def create(self, vals_list):
+        assets = super(AccountAssetAsset,
+                      self.with_context(mail_create_nolog=True)).create(vals_list)
+        for asset in assets:
+            asset.sudo().compute_depreciation_board()
+        return assets
 
     def write(self, vals):
         res = super(AccountAssetAsset, self).write(vals)

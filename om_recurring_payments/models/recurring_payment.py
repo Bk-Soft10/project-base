@@ -93,7 +93,7 @@ class RecurringPayment(models.Model):
                     'recurring.payment') or _('New')
             else:
                 vals['name'] = self.env['ir.sequence'].next_by_code('recurring.payment') or _('New')
-        return super(RecurringPayment, self).create(vals)
+        return super(RecurringPayment, self).create(vals_list)
 
     @api.constrains('amount')
     def _check_amount(self):
