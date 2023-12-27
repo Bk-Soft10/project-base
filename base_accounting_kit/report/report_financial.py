@@ -116,7 +116,7 @@ class AccountFinancialReport(models.Model):
             ("expense_direct_cost", "Cost of Revenue"),
             ("off_balance", "Off-Balance Sheet"),
         ],
-        string="Type",
+        string="Account Type",
         help="These types are defined according to your country. The type contains more information " \
              "about the account and its specificities."
     )

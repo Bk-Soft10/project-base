@@ -71,6 +71,7 @@ class AccountCommonReport(models.Model):
                                     ('all', 'All Entries'),
                                     ], string='Target Moves',
                                    required=True, default='posted')
+    filter_journals = fields.Boolean(string="Journals Filter")
 
     @api.onchange('company_id')
     def _onchange_company_id(self):
