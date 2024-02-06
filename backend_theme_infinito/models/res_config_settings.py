@@ -27,7 +27,7 @@ class ResConfigSettings(models.TransientModel):
 
     is_user_edit = fields.Boolean('User edit', default=False)
     is_sidebar_enabled = fields.Boolean('Sidebar Enabled', default=False)
-    is_fullscreen_enabled = fields.Boolean('Full screen Enabled', default=False)
+    is_fullscreen_enabled = fields.Boolean('Full screen Enabled', default=True)
     is_sidebar_icon = fields.Boolean('Sidebar icon Enabled', default=True)
     is_sidebar_name = fields.Boolean('Sidebar name Enabled', default=True)
     is_sidebar_company = fields.Boolean('Sidebar Company Enabled', default=False)
@@ -53,7 +53,7 @@ class ResConfigSettings(models.TransientModel):
         get_param = self.env['ir.config_parameter'].sudo().get_param
         res['is_user_edit'] = get_param('backend_theme_infinito.is_user_edit', default=False)
         res['is_sidebar_enabled'] = get_param('backend_theme_infinito.is_sidebar_enabled', default=False)
-        res['is_fullscreen_enabled'] = get_param('backend_theme_infinito.is_fullscreen_enabled', default=False)
+        res['is_fullscreen_enabled'] = get_param('backend_theme_infinito.is_fullscreen_enabled', default=True)
         res['is_sidebar_icon'] = get_param('backend_theme_infinito.is_sidebar_icon', default=False)
         res['is_sidebar_name'] = get_param('backend_theme_infinito.is_sidebar_name', default=False)
         res['is_sidebar_company'] = get_param('backend_theme_infinito.is_sidebar_company', default=False)

@@ -26,7 +26,7 @@ class User(models.Model):
     _inherit = 'res.users'
 
     is_sidebar_enabled = fields.Boolean('Sidebar Enabled', default=False)
-    is_fullscreen_enabled = fields.Boolean('Full screen Enabled', default=False)
+    is_fullscreen_enabled = fields.Boolean('Full screen Enabled', default=True)
     is_sidebar_icon = fields.Boolean('Sidebar icon Enabled', default=True)
     is_sidebar_name = fields.Boolean('Sidebar name Enabled', default=True)
     is_sidebar_company = fields.Boolean('Sidebar Company Enabled',
