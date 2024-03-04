@@ -71,7 +71,7 @@
                     </div>
                     <h6 class="sidebar_head">MENU</h6>
                     <ul class="sidebar_menu">
-                        <t t-foreach="menuService.getApps()" t-as="app">
+                        <t t-foreach="menuService.getApps()" t-as="app" t-key="app">
                             <li>
                                 <a role="menuitem"
                                    t-attf-href="#menu_id={{app.id}}"
@@ -139,7 +139,7 @@
                         </div>
                         <div class="apps">
                             <ul>
-                                <t t-foreach="menuService.getApps()" t-as="app">
+                                <t t-foreach="menuService.getApps()" t-as="app" t-key="app">
                                     <li>
                                         <a t-attf-href="#menu_id={{app.id}}"
                                            t-on-click="onClick"
@@ -162,7 +162,7 @@
         </span>
     </t>
     <t t-name="backend_theme_infinito.SearchResults">
-        <t t-foreach="results" t-as="result">
+        <t t-foreach="results" t-as="result" t-key="result">
             <div class="search_icons">
                 <a t-attf-class="o-menu-search-result dropdown-item col-12 ml-auto mr-auto #{result_first ? 'active' : ''}"
                    t-attf-style="background-image:url('data:image/png;base64,#{result.webIconData}')"

@@ -142,13 +142,13 @@ class ThemeStudio(http.Controller):
         set_param = request.env['ir.config_parameter'].sudo().set_param
         set_param('backend_theme_infinito.is_user_edit', vals['userEdit'])
         set_param('backend_theme_infinito.is_sidebar_enabled', vals['sidebar'])
-        set_param('backend_theme_infinito.is_fullscreen_enabled', vals['fullscreen'])
+        set_param('backend_theme_infinito.is_fullscreen_enabled', vals.get('fullscreen', False))
         set_param('backend_theme_infinito.is_sidebar_icon', vals['sidebarIcon'])
         set_param('backend_theme_infinito.is_sidebar_name', vals['sidebarName'])
         set_param('backend_theme_infinito.is_sidebar_company', vals['sidebarCompany'])
         set_param('backend_theme_infinito.is_sidebar_user', vals['sidebarUser'])
         set_param('backend_theme_infinito.is_recent_apps', vals['recentApps'])
-        set_param('backend_theme_infinito.is_fullscreen_app', vals['fullScreenApp'])
+        set_param('backend_theme_infinito.is_fullscreen_app', vals.get('fullScreenApp', True))
         set_param('backend_theme_infinito.is_rtl', vals['infinitoRtl'])
         set_param('backend_theme_infinito.is_dark', vals['infinitoDark'])
         set_param('backend_theme_infinito.dark_mode', vals['infinitoDarkMode'])
@@ -161,13 +161,13 @@ class ThemeStudio(http.Controller):
     def set_advanced_data_user(self, vals):
         request.env.user.write({
             'is_sidebar_enabled': vals['sidebar'],
-            'is_fullscreen_enabled': vals['fullscreen'],
+            'is_fullscreen_enabled': vals.get('fullscreen', False),
             'is_sidebar_icon': vals['sidebarIcon'],
             'is_sidebar_name': vals['sidebarName'],
             'is_sidebar_company': vals['sidebarCompany'],
             'is_sidebar_user': vals['sidebarUser'],
             'is_recent_apps': vals['recentApps'],
-            'is_fullscreen_app': vals['fullScreenApp'],
+            'is_fullscreen_app': vals.get('fullScreenApp', True),
             'is_rtl': vals['infinitoRtl'],
             'is_dark': vals['infinitoDark'],
             'dark_mode': vals['infinitoDarkMode'],

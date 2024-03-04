@@ -26,7 +26,7 @@ class User(models.Model):
     _inherit = 'res.users'
 
     is_sidebar_enabled = fields.Boolean('Sidebar Enabled', default=False)
-    is_fullscreen_enabled = fields.Boolean('Full screen Enabled', default=True)
+    is_fullscreen_enabled = fields.Boolean('Full screen Enabled', default=False)
     is_sidebar_icon = fields.Boolean('Sidebar icon Enabled', default=True)
     is_sidebar_name = fields.Boolean('Sidebar name Enabled', default=True)
     is_sidebar_company = fields.Boolean('Sidebar Company Enabled',
@@ -34,7 +34,7 @@ class User(models.Model):
     is_sidebar_user = fields.Boolean('Sidebar User Enabled', default=False)
     is_recent_apps = fields.Boolean('Recent Apps Enabled', default=False)
     is_fullscreen_app = fields.Boolean('Full screen Apps Enabled',
-                                       default=False)
+                                       default=True)
     is_rtl = fields.Boolean('Rtl Enabled', default=False)
     is_dark = fields.Boolean('Dark mode Enabled', default=False)
     is_menu_bookmark = fields.Boolean('Menu Bookmark mode Enabled',

@@ -32,7 +32,7 @@
         <field name="arch" type="xml">
             <xpath expr="//div[@id='about']" position="replace">
 
-            </xpath>     
-            </field> 
-    </record>            
+            </xpath>
+            </field>
+    </record>
 </odoo>

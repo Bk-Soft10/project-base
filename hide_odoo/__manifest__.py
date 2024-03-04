@@ -16,10 +16,12 @@
             With this module it is possible to hide the two promotional link in the Portal purchase invoice view.            
             Hide Powered By Odoo On Settings.
                     """,
-    'depends': ['web','portal','auth_signup','mail','base_setup', 'base','sale'],
+    'depends': ['web','portal','auth_signup','mail','base_setup', 'base'],
     'data': [
-         'views/login_templates.xml',
-           
+        # 'pre_install.xml',
+        'views/login_templates.xml',
+        'views/webclient_templates.xml',
+        'views/mail_channel_data.xml',
     ],
     'images': [
         'static/description/banner.png'
@@ -28,7 +30,12 @@
     'application': True,
     'installable': True,
     'auto_install': False,
-    'assets': {},
+    'assets': {
+        'web.assets_backend': [
+            '/hide_odoo/static/src/js/base.js',
+            '/hide_odoo/static/src/js/extended_user_menu.js'
+        ],
+    },
     'license': 'LGPL-3',
     'website':'https://www.doyenhub.com/',
 }

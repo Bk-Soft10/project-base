@@ -69,7 +69,7 @@ class IrHttp(models.AbstractModel):
                 res['recentApps'] = get_param(
                     'backend_theme_infinito.is_recent_apps', default=False)
                 res['fullScreenApp'] = get_param(
-                    'backend_theme_infinito.is_fullscreen_app', default=False)
+                    'backend_theme_infinito.is_fullscreen_app', default=True)
                 res['infinitoRtl'] = get_param(
                     'backend_theme_infinito.is_rtl', default=False)
                 res['infinitoDark'] = get_param(
