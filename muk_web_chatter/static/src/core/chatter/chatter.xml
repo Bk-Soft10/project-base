@@ -54,6 +54,6 @@
         </xpath>-->
         <xpath expr="//button[hasclass('o-mail-Chatter-activity')]/span" position="attributes">
             <attribute name="class" add="d-none d-sm-inline" separator=" " />
-        </xpath>
+        </xpath>-->
     </t>
 </templates>
