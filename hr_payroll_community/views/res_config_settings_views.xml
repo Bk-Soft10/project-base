@@ -11,62 +11,50 @@
     </record>
 <!--    Form view of Settings-->
     <record id="res_config_settings_view_form" model="ir.ui.view">
-        <field name="name">res.config.settings.view.form.inherit.hr.payroll
-        </field>
+        <field name="name">res.config.settings.view.form.inherit.hr.payroll</field>
         <field name="model">res.config.settings</field>
         <field name="priority" eval="45"/>
         <field name="inherit_id" ref="base.res_config_settings_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//form" position="inside">
-                <div class="app_settings_block" data-string="Payroll"
-                     string="Payroll"
-                     data-key="hr_payroll_community"
+                <app data-string="Payroll" string="Payroll" name="hr_payroll_community"
                      groups="hr_payroll_community.group_hr_payroll_community_manager">
                     <field name="module_l10n_fr_hr_payroll" invisible="1"/>
                     <field name="module_l10n_be_hr_payroll" invisible="1"/>
                     <field name="module_l10n_in_hr_payroll" invisible="1"/>
-                    <h2>Payroll</h2>
-                    <div class="row mt16 o_settings_container"
-                         id="hr_payroll_localization">
-                        <div class="col-lg-6 col-12 o_setting_box">
-                            <div class="o_setting_right_pane">
-                                <span class="o_form_label">Payroll Rules</span>
-                                <div class="text-muted">
-                                    Payroll rules that apply to your country
-                                </div>
-                                <div class="mt16" id="localization_text">
-                                    <button name="%(action_open_payroll)d"
-                                            icon="fa-arrow-right" type="action"
-                                            string="Choose a Payroll Localization"
-                                            class="btn-link"/>
-                                </div>
+                    <block title="Payroll" id="hr_payroll_localization"
+                           invisible="module_l10n_fr_hr_payroll or module_l10n_be_hr_payroll or module_l10n_in_hr_payroll">
+                        <setting string="Payroll Rules" help="Payroll rules that apply to your country">
+                            <div class="mt8" id="localization_text">
+                                <button name="%(action_open_payroll)d" icon="oi-arrow-right" type="action"
+                                        string="Choose a Payroll Localization" class="btn-link"/>
                             </div>
-                        </div>
-                    </div>
-                    <h2>Accounting</h2>
-                    <div class="row mt16 o_settings_container"
-                         id="hr_payroll_accountant">
-                        <div class="col-lg-6 col-12 o_setting_box">
-                            <div class="o_setting_left_pane">
-                                <field name="module_account_accountant"
-                                       widget="upgrade_boolean"/>
-                            </div>
-                            <div class="o_setting_right_pane">
-                                <label for="module_account_accountant"
-                                       string="Payroll Entries"/>
-                                <div class="text-muted">
-                                    Post payroll slips in accounting
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        </setting>
+                    </block>
+                    <block title="Accounting" id="hr_payroll_accountant">
+                        <setting name="module_hr_payroll_account_community" string="Payroll Entries" help="Post payroll slips in accounting">
+                            <field name="module_hr_payroll_account_community" force_save="1"/>
+                        </setting>
+                    </block>
+                    <!--<block title="Payroll" id="hr_payroll_settings">
+                        <setting string="Contract Expiration Notice Period" id="contract_notice_period"
+                            title="Number of days prior to the contract end date that a contract expiration warning is triggered.">
+                            <field name="contract_expiration_notice_period" class="w-25"/><span>Days</span>
+                        </setting>
+                        <setting string="Payslip PDF Display" help="Display Payslip PDF File on a payslip form" id="display_payslip">
+                            <field name="group_payslip_display"/>
+                        </setting>
+                        <setting string="Work Permit Expiration Notice Period" id="work_permit_notice_period"
+                            title="Number of days prior to the work permit expiration date that a warning is triggered.">
+                            <field name="work_permit_expiration_notice_period" class="w-25"/><span>Days</span>
+                        </setting>
+                    </block>-->
+                </app>
             </xpath>
         </field>
     </record>
 <!--    Window action for Settings-->
-    <record id="res_config_settings_action"
-            model="ir.actions.act_window">
+    <record id="res_config_settings_action" model="ir.actions.act_window">
         <field name="name">Settings</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">res.config.settings</field>
