@@ -41,20 +41,21 @@ class DashboardMenu(models.Model):
                                        help="Client action of the "
                                             "corresponding dashboard menu")
 
-    @api.model
-    def create(self, vals):
-        """Function to create new dashboard menu"""
-        action_id = self.env['ir.actions.client'].create([{
-            'name': vals['name'],
-            'tag': 'OdooDynamicDashboard',
-        }])
-        vals['client_action_id'] = action_id.id
-        self.env['ir.ui.menu'].create([{
-            'name': vals['name'],
-            'parent_id': vals['menu_id'],
-            'action': 'ir.actions.client,%d' % (action_id.id,)
-        }])
-        return super(DashboardMenu, self).create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            """Function to create new dashboard menu"""
+            action_id = self.env['ir.actions.client'].create([{
+                'name': vals['name'],
+                'tag': 'OdooDynamicDashboard',
+            }])
+            vals['client_action_id'] = action_id.id
+            self.env['ir.ui.menu'].create([{
+                'name': vals['name'],
+                'parent_id': vals['menu_id'],
+                'action': 'ir.actions.client,%d' % (action_id.id,)
+            }])
+        return super(DashboardMenu, self).create(vals_list)
 
     def write(self, vals):
         """Function to save edited data in dashboard menu"""

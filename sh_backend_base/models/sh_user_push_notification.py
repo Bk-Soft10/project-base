@@ -44,8 +44,7 @@ class UserPushNotification(models.Model):
 
     def create_user_notification(self, user='', name='', description='', res_model='', res_id=''):
         if self.env.company.enable_bell_notification:
-            self.env['bus.bus']._sendone(user.partner_id,
-                                         'sh.user.push.notifications', {})
+            self.env['bus.bus']._sendone(user.partner_id, 'sh.user.push.notifications', {})
             self.env['sh.user.push.notification'].sudo().create({
                 'user_id': user.id,
                 'name': name,

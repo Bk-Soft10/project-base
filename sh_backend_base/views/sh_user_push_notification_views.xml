@@ -32,7 +32,6 @@
     <record id="sh_backend_base_action" model="ir.actions.act_window">
         <field name="name">Notifications</field>
         <field name="res_model">sh.user.push.notification</field>
-        <field name="type">ir.actions.act_window</field>
         <field name='view_mode'>form,list</field>
     </record>
 

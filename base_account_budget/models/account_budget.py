@@ -30,15 +30,9 @@ class AccountBudgetPost(models.Model):
     _description = "Budgetary Position"
 
     name = fields.Char('Name', required=True)
-    account_ids = fields.Many2many('account.account', 'account_budget_rel',
-                                   'budget_id', 'account_id', 'Accounts',
-                                   domain=[('deprecated', '=', False)])
-    budget_line = fields.One2many('budget.lines', 'general_budget_id',
-                                  'Budget Lines')
-    company_id = fields.Many2one('res.company', 'Company', required=True,
-                                 default=lambda self: self.env[
-                                     'res.company']._company_default_get(
-                                     'account.budget.post'))
+    account_ids = fields.Many2many('account.account', 'account_budget_rel', 'budget_id', 'account_id', 'Accounts', domain=[('deprecated', '=', False)])
+    budget_line = fields.One2many('budget.lines', 'general_budget_id', 'Budget Lines')
+    company_id = fields.Many2one('res.company', 'Company', required=True, default=lambda self: self.env['res.company']._company_default_get('account.budget.post'))
 
     def _check_account_ids(self, vals):
         if 'account_ids' in vals:
@@ -49,14 +43,15 @@ class AccountBudgetPost(models.Model):
             raise ValidationError(
                 _('The budget must have at least one account.'))
 
-    @api.model
-    def create(self, vals):
-        self._check_account_ids(vals)
-        return super(AccountBudgetPost, self).create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            self._check_account_ids(vals)
+        return super().create(vals_list)
 
     def write(self, vals):
         self._check_account_ids(vals)
-        return super(AccountBudgetPost, self).write(vals)
+        return super().write(vals)
 
 
 class Budget(models.Model):
@@ -65,8 +60,7 @@ class Budget(models.Model):
     _inherit = ['mail.thread']
 
     name = fields.Char('Budget Name', required=True)
-    creating_user_id = fields.Many2one('res.users', 'Responsible',
-                                       default=lambda self: self.env.user)
+    creating_user_id = fields.Many2one('res.users', 'Responsible', default=lambda self: self.env.user)
     date_from = fields.Date('Start Date', required=True)
     date_to = fields.Date('End Date', required=True)
     state = fields.Selection([

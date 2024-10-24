@@ -49,24 +49,25 @@ class CustomDashboardBoard(models.Model):
         }
         return return_dict
 
-    @api.model
-    def create(self, vals):
-        res = super(CustomDashboardBoard, self).create(vals)
-        if 'ir_ui_menu_id' in vals and 'dashboard_menu_name' in vals:
-            action_id = {
-                'name': vals['dashboard_menu_name'] + " Action",
-                'res_model': 'custom.dashboard.board',
-                'tag': 'custom_dashboard_client_action',
-                'params': {'dashboard_board_id': res.id},
-            }
-            res.ir_action_client_id = self.env['ir.actions.client'].sudo().create(action_id)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            res = super(CustomDashboardBoard, self).create(vals)
+            if 'ir_ui_menu_id' in vals and 'dashboard_menu_name' in vals:
+                action_id = {
+                    'name': vals['dashboard_menu_name'] + " Action",
+                    'res_model': 'custom.dashboard.board',
+                    'tag': 'custom_dashboard_client_action',
+                    'params': {'dashboard_board_id': res.id},
+                }
+                res.ir_action_client_id = self.env['ir.actions.client'].sudo().create(action_id)
 
-            res.menu_id = self.env['ir.ui.menu'].sudo().create({
-                'name': vals['dashboard_menu_name'],
-                'active': True,
-                'parent_id': vals['ir_ui_menu_id'],
-                'action': "ir.actions.client," + str(res.ir_action_client_id.id),
-                'groups_id': vals.get('res_group_ids', False),
-                'sequence': 10,
-            })
+                res.menu_id = self.env['ir.ui.menu'].sudo().create({
+                    'name': vals['dashboard_menu_name'],
+                    'active': True,
+                    'parent_id': vals['ir_ui_menu_id'],
+                    'action': "ir.actions.client," + str(res.ir_action_client_id.id),
+                    'groups_id': vals.get('res_group_ids', False),
+                    'sequence': 10,
+                })
         return res
