@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates>
+    <t t-name="KpiTile">
+            <div t-attf-style="background: #{background_color};color:#{text_color};border-color:#{background_color};" t-attf-class="inforide #{layout}  #{tile_kpi_theme}">
+                <div class="main-tile-item">
+                    <div class="tile-icon rideone" t-attf-style="background: #{icon_bgcolor};color:#{text_color}">
+                        <div class="icon-box">
+                            <t t-if="tile_image_type == 'default_icons'">
+                                <i t-attf-class="fa #{tile_icon} fa-4x mt-2 ml-4" t-attf-style="color:#{icon_color}"/>
+                            </t>
+                            <t t-else="">
+                                <img alt="Product image" class="tile_image_margin mt-2 ml-4" t-attf-src="#{image_url}"
+                                     style="width:60px;height:60px;"/>
+                            </t>
+                        </div>
+                    </div>
+                    <div class="title-icon-circle"></div>
+                    <div class="tile-btm-circle"></div>
+                    <div class="inner-tile-content fontsty">
+                        <h4 t-attf-style="font-size: #{title_font};" style="font-size=18px;">
+                            <span t-attf-style="color:#{text_color}">
+                                <t t-esc="title"/>
+                            </span>
+                        </h4>
+                        <h2 t-attf-style="color:#{text_color}">
+                            <t t-if="kpi_model_id">
+                                <t t-if="kpi_data_calculation_type == 'none'">
+                                    <span t-attf-style="color:#{text_color}"><t t-esc="value.value"/>/
+                                        <t t-esc="value.kpi_value"/>
+                                    </span>
+                                </t>
+                                <t t-elif="kpi_data_calculation_type == 'percentage'">
+                                    <span t-attf-style="color:#{text_color}"><t t-esc="value.value"/>%
+                                    </span>
+                                </t>
+                                <t t-elif="kpi_data_calculation_type == 'ratio'">
+                                    <span t-attf-style="color:#{text_color}">
+                                        <t t-esc="value.value"/>
+                                    </span>
+                                </t>
+                                <t t-else="">
+                                    <span t-attf-style="color:#{text_color}">
+                                        <t t-esc="value.value"/>
+                                        <t t-esc="tile_unit"/>
+                                    </span>
+                                </t>
+                            </t>
+                            <t t-else="">
+                                <span t-attf-style="color:#{text_color}">
+                                    <t t-esc="value"/>
+                                    <t t-esc="tile_unit"/>
+                                </span>
+                            </t>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+    </t>
+</templates>
+

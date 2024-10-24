@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates>
+    <t t-name="ChartUpdateButton">
+        <ul class="list-inline my-hover-list">
+            <li class="list-inline-item chart-update-button-list-item edit-item-chart" t-att-data-chart-item-id="id">
+                <i class="fa fa-pencil-square-o"/>
+            </li>
+            <li class="list-inline-item chart-update-button-list-item delete-item-chart" t-att-data-chart-item-id="id">
+                <i class="fa fa-trash-o"/>
+            </li>
+        </ul>
+    </t>
+</templates>

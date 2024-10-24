@@ -1,0 +1,97 @@
+html .o_web_client.o_fullscreen .o_main_navbar {
+    display: block;
+}
+.dashboard-item-name {
+        background: white;
+        box-shadow: 0px 0px 6px 0px rgb(0 0 0 / 10%);
+}
+.page-content.dashboard-item-content {
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: relative;
+    padding: 50px 0;
+}
+.item-title h2 {
+    margin: 0;
+    padding: 12px 20px;
+    font-size: 24px;
+}
+@media (min-width: 768px)
+{
+    .dashboard-item-box{
+        position:relative;
+        background: white;
+        box-shadow: 0px 0px 6px 0px rgb(0 0 0 / 10%);
+        border-radius: 2px;
+        display:block;
+    }
+}
+.m-top
+{
+    margin-top:30px;
+}
+.chart-box {
+    padding: 30px 0;
+}
+.data-type label {
+    font-weight: bold;
+    width: 150px;
+}
+.form-wrapped {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+.row.data-table-info {
+    margin: 0;
+}
+.tabs-option .nav-item {
+    background: #efefef;
+}
+/*.eChart-box {
+    width: 800px;
+    height: 300px;
+}*/
+.list-chart-container ul.list-inline.my-hover-list,.kanban-chart-container ul.list-inline.my-hover-list{
+    display: none!important;
+}
+/*list-view*/
+.custom-preview.grid-stack-static {
+    margin: 0 auto;
+    height: auto!important;
+}
+.chart-container.box.tile-box.list-chart-container {
+    height: 400px;
+    overflow: auto;
+    width: 98%;
+    margin: 0 auto;
+}
+div#custom-chart-preview {
+    padding: inherit;
+    box-shadow: inherit;
+    border: inherit;
+   margin: 0 auto;
+}
+.kanban-chart-container .inner-tile-content.fontsty {
+    padding: 15px;
+}
+.kanban-chart-container {
+    width: 96%;
+    margin: 0 auto;
+}
+/**/
+#save_dashboard
+{
+    display:none;
+}
+li.nav-item.action-menu-list.show-save #save_dashboard
+{
+    display:block;
+}
+li.nav-item.action-menu-list.show-save #save_dashboard div#edit_dashboard
+{
+    display:none!important;
+}

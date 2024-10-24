@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<template xml:space="preserve">
+    <t t-name="CustomDashboardBoard">
+        <div class="main-div">
+            <div class="navbar navbar-expand-md navbar-light bg-light mb-4 border-bottom fixed-top" role="navigation">
+                <span class="hamburger-icon icon-button-pointer align-middle" id="back_kanaban_view">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+                <span class="navbar-brand" id="dashboard_template_name">
+                    <t t-esc="widget.dashboard_data.name"/>
+                </span>
+                <input class="form-control mr-sm-2" type="text" id="dashboard_template_name_input"
+                       t-att-value="widget.dashboard_data.name"/>
+                <button class="navbar-toggler" id="open-sidebar-menu" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+
+                    <span class="menu-icon fa fa-bars "/>
+                    <span class="close-sidebar fa fa-times"/>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto">
+                    </ul>
+                    <form class="form-inline mt-2 mt-md-0">
+                        <div class="btn-group" id="show-search">
+                            <input class="form-control mr-sm-2" type="text" placeholder="Search" id="search-input-chart"
+                                   aria-label="Search"/>
+                            <span id="searchclear">
+                                <i class='fa fa-times'/>
+                            </span>
+                        </div>
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="search-button"><i class="fa fa-search"></i></button>
+<!--                        <div class="dropdown ml-3">-->
+<!--                            <button class="btn btn-secondary dropdown-toggle" type="button" id="addChartMenuButton"-->
+<!--                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--                                Add Chart-->
+<!--                            </button>-->
+<!--                            <div class="dropdown-menu" aria-labelledby="addChartMenuButton" id="chart-type-selection">-->
+<!--                                <span class="dropdown-item" data-chart-type="bar">Bar</span>-->
+<!--                                <span class="dropdown-item" data-chart-type="pie">Pie</span>-->
+<!--                                <span class="dropdown-item" data-chart-type="column">Column</span>-->
+<!--&lt;!&ndash;                                <span class="dropdown-item" data-chart-type="donut">Donut</span>&ndash;&gt;-->
+<!--                                <span class="dropdown-item" data-chart-type="line">Line</span>-->
+<!--                                <span class="dropdown-item" data-chart-type="area">Area</span>-->
+<!--                                <span class="dropdown-item" data-chart-type="treemap">Treemap</span>-->
+<!--                                <span class="dropdown-item" data-chart-type="radar">Radar</span>-->
+<!--                                <span class="dropdown-item" data-chart-type="polarArea">Polar Area</span>-->
+<!--                                <span class="dropdown-item" data-chart-type="tiles">Tile</span>-->
+<!--                                <span class="dropdown-item" data-chart-type="kpi">KPI</span>-->
+<!--                                <span class="dropdown-item" data-chart-type="list">List</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <t t-if="widget.dashboard_data.group_custom_dashboard_manager">-->
+<!--                            <button class="btn btn-outline-primary my-2 ml-3 mx-2 my-sm-0" type="button" id="edit_dashboard"><i class="fa fa-pencil pr-2"></i>-->
+<!--                                Dashboard-->
+<!--                            </button>-->
+<!--                            <button class="btn btn-outline-primary my-2 ml-3 mx-2 my-sm-0" type="button" id="save_dashboard">Save-->
+<!--                                Dashboard-->
+<!--                            </button>-->
+<!--                        </t>-->
+                    </form>
+                </div>
+            </div>
+            <div id="sidebar-wrapper">
+                    <div class="sidebar-menu-icon dicon">
+                                    <a href="#" class="close-icon-button" id="menu-toggle-close"><i class="fa fa-times"></i></a>
+                    </div>
+                    <div class="sidebar-menu">
+                        <ul class="sidebar-nav">
+<!--                            <li class="nav-item">-->
+<!--                                <div class="nav-link menu-link"><i class="fa fa-print"></i><span>Print Picking Operations</span></div>-->
+<!--                                <t t-if="widget.dashboard_data.group_custom_dashboard_manager">-->
+<!--                                <button class="btn btn-outline-primary my-2 ml-3 mx-2 my-sm-0" type="button" id="edit_dashboard"><i class="fa fa-pencil pr-2"></i>-->
+<!--                                    Dashboard-->
+<!--                                </button>-->
+<!--                                <button class="btn btn-outline-primary my-2 ml-3 mx-2 my-sm-0" type="button" id="save_dashboard">Save-->
+<!--                                    Dashboard-->
+<!--                                </button>-->
+<!--                                </t>-->
+<!--                            </li>-->
+                            <li class="nav-item">
+                                <div class="nav-link menu-link">
+
+                                        <img src="/eg_ai_smart_dashboard_lite/static/src/img/pie-chart.png"/>
+                                        <span>Add Chart</span>
+
+                                </div>
+                                <div class="collapse menu-dropdown" id="sidebarLanding">
+                                    <ul class="nav nav-sm flex-column">
+                                        <li class="nav-item" aria-labelledby="addChartMenuButton" id="chart-type-selection">
+                                                <span class="dropdown-item" data-chart-type="bar">Bar</span>
+                                                <span class="dropdown-item" data-chart-type="pie">Pie</span>
+                                                <span class="dropdown-item" data-chart-type="column">Column</span>
+                                                <span class="dropdown-item" data-chart-type="line">Line</span>
+                                                <span class="dropdown-item" data-chart-type="area">Area</span>
+                                                <span class="dropdown-item" data-chart-type="treemap">Treemap</span>
+                                                <span class="dropdown-item" data-chart-type="radar">Radar</span>
+                                                <span class="dropdown-item" data-chart-type="polarArea">Polar Area</span>
+                                                <span class="dropdown-item" data-chart-type="funnel">Funnel Chart</span>
+                                                <span class="dropdown-item" data-chart-type="tiles">Tile</span>
+                                                <span class="dropdown-item" data-chart-type="kpi">KPI</span>
+                                                <span class="dropdown-item" data-chart-type="list">List</span>
+                                        </li>
+                                    </ul>
+                            </div>
+                            </li>
+                            <li class="nav-item action-menu-list">
+                                <div class="nav-link menu-link edit-action" id="edit_dashboard">
+                                    <i class="fa fa-pencil"></i>
+                                    <span>Edit Dashboard</span>
+                                </div>
+                                 <div class="nav-link menu-link save-action" id="save_dashboard">
+                                    <i class="fa fa-check"></i>
+                                    <span>Save Dashboard</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            <div class="container-fluid-dashboard">
+                <div class="main-container">
+                    <div class="grid-stack" id="grid-stack">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</template>

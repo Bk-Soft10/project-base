@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates>
+    <t t-name="DashboardTiles">
+        <div class="inforide" t-attf-style="background: #{background_color};color:#{text_color}">
+            <div class="main-tile-item">
+                <div class="tile-icon rideone">
+                    <t t-if="tile_image_type == 'default_icons'">
+                        <i t-attf-class="fa #{tile_icon} fa-4x mt-2 ml-4"/>
+                    </t>
+                    <t t-else="">
+                        <img alt="Product image" class="tile_image_margin mt-2 ml-4" t-attf-src="#{image_url}"
+                             style="width:60px;height:60px;"/>
+                    </t>
+                </div>
+                <div class="title-icon-circle"></div>
+                <div class="tile-btm-circle"></div>
+                <div class="inner-tile-content fontsty">
+                    <h4 t-attf-style="color:#{text_color}">
+                        <t t-esc="title"/>
+                    </h4>
+                    <h2>
+                        <span t-attf-style="color:#{text_color}">
+                            <t t-esc="value"/>
+                            <t t-esc="tile_unit"/>
+                        </span>
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

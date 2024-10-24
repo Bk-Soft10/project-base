@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates>
+    <t t-name="CustomChartListView">
+        <div class="custom_chart_list_scroll">
+            <table class="table table-bordered table-striped table_full_height" id="custom_chart_list_data">
+                <thead>
+                    <tr>
+                        <t t-foreach="header_list" t-as="header">
+                            <th scope="col">
+                                <t t-esc="header"/>
+                            </th>
+                        </t>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="measure_field_list" t-as="measure">
+                        <tr>
+                            <t t-foreach="measure" t-as="measure_item">
+                                <td>
+                                    <t t-esc="measure_item"/>
+                                </td>
+                            </t>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </div>
+    </t>
+</templates>
