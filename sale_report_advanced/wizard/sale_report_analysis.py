@@ -23,6 +23,7 @@ import json
 import io
 from odoo.tools import json_default
 from odoo import fields, models
+
 try:
     from odoo.tools.misc import xlsxwriter
 except ImportError:

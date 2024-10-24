@@ -1,5 +1,6 @@
 from odoo import api, fields, models
 import logging
+
 logger = logging.getLogger(__name__)
 
 
@@ -17,8 +18,8 @@ class ExportTemplateWizard(models.TransientModel):
         res.update({
             'message': 'Make sure you have set the correct signature in WhatsApp -> Select Instance -> Signature. As once WhatsApp template is exported, WhatsApp template signature cannot change',
         })
-        record = self.env[self.env.context.get('active_model','')].browse(self.env.context.get('active_id',''))
-        if self.env.context.get('active_model','') == 'whatsapp.templates':
+        record = self.env[self.env.context.get('active_model', '')].browse(self.env.context.get('active_id', ''))
+        if self.env.context.get('active_model', '') == 'whatsapp.templates':
             res.update({'source': 'template', 'whatsapp_instance_id': record.whatsapp_instance_id.id})
         else:
             res.update({'source': 'instance', 'whatsapp_instance_id': record.id})
@@ -30,7 +31,8 @@ class ExportTemplateWizard(models.TransientModel):
             res_id = self.env.context.get('active_id')
             record = self.env[active_model].browse(res_id)
             whatsapp_template_ids = self.env['whatsapp.templates'].search(
-                [('whatsapp_instance_id', '=', record.id), ('approval_state', 'not in', ['approved', 'APPROVED', 'submitted', 'rejected'])])
+                [('whatsapp_instance_id', '=', record.id),
+                 ('approval_state', 'not in', ['approved', 'APPROVED', 'submitted', 'rejected'])])
             for whatsapp_template_id in whatsapp_template_ids:
                 try:
                     if whatsapp_template_id.send_template:
@@ -45,7 +47,8 @@ class ExportTemplateWizard(models.TransientModel):
                     logger.exception("Error in creating 1msg template------------>\n" + str(exception))
 
         elif self.source == 'template':
-            record_whatsapp_template_id = self.env[self.env.context.get('active_model')].browse(self.env.context.get('active_id'))
+            record_whatsapp_template_id = self.env[self.env.context.get('active_model')].browse(
+                self.env.context.get('active_id'))
             signature = ''
             if record_whatsapp_template_id.whatsapp_instance_id.signature:
                 signature = record_whatsapp_template_id.whatsapp_instance_id.signature

@@ -37,6 +37,7 @@ def _response_inherit(self, result=None, error=None):
 
     return request.make_json_response(response)
 
+
 def make_json_response_inherit(self, data, headers=None, cookies=None, status=200):
     """ Helper for JSON responses, it json-serializes ``data`` and
     sets the Content-Type header accordingly if none is provided.
@@ -55,6 +56,7 @@ def make_json_response_inherit(self, data, headers=None, cookies=None, status=20
         headers['Content-Type'] = 'application/json; charset=utf-8'
 
     return self.make_response(data, headers.to_wsgi_list(), cookies, status)
+
 
 def make_response(self, data, headers=None, cookies=None, status=200):
     """ Helper for non-HTML responses, or HTML responses with custom
@@ -109,9 +111,10 @@ class WhatsappBase(http.Controller):
             for whatsapp_message_dict in response_dict.get('messages'):
                 message_dict = {}
                 if whatsapp_message_dict.get('quotedMsgId'):
-                    whatsapp_messages_id = whatsapp_message_obj.sudo().search([('message_id', '=', whatsapp_message_dict.get('quotedMsgId'))])
+                    whatsapp_messages_id = whatsapp_message_obj.sudo().search(
+                        [('message_id', '=', whatsapp_message_dict.get('quotedMsgId'))])
                     whatsapp_instance_id = request.env['whatsapp.instance'].sudo().search([('status', '!=', 'disable')],
-                                                                                       limit=1)
+                                                                                          limit=1)
                     if whatsapp_messages_id and whatsapp_messages_id.partner_id:
                         message_dict.update({
                             'partner_id': whatsapp_messages_id.partner_id.id,
@@ -123,25 +126,36 @@ class WhatsappBase(http.Controller):
                     message_dict = self.create_message_dict(whatsapp_message_dict, message_dict)
 
                 elif not whatsapp_message_dict.get('quotedMsgId') and not whatsapp_message_dict.get('fromMe'):
-                    if '@c.us' in whatsapp_message_dict['chatId']:  # @c.us is for normal conversation & @g.us is for group conversation
+                    if '@c.us' in whatsapp_message_dict[
+                        'chatId']:  # @c.us is for normal conversation & @g.us is for group conversation
                         # Creating Partner in odoo
                         res_partner_obj = request.env['res.partner']
-                        res_partner_id = res_partner_obj.sudo().search([('chatId', '=', whatsapp_message_dict['chatId'])], limit=1)
+                        res_partner_id = res_partner_obj.sudo().search(
+                            [('chatId', '=', whatsapp_message_dict['chatId'])], limit=1)
                         if res_partner_id:
-                            message_dict.update({'partner_id': res_partner_id.id, 'model': 'res.partner', 'res_id': res_partner_id.id})
+                            message_dict.update(
+                                {'partner_id': res_partner_id.id, 'model': 'res.partner', 'res_id': res_partner_id.id})
                         else:
-                            country_with_mobile = self.sanitized_country_mobile_from_chat_id(whatsapp_message_dict.get('chatId'))
-                            res_partner_id = self.create_res_partner_against_whatsapp(whatsapp_message_dict['chatId'], whatsapp_message_dict.get('senderName'),
-                                                                                      country_with_mobile[0], country_with_mobile[1])
-                            message_dict.update({'partner_id': res_partner_id, 'model': 'res.partner', 'res_id': res_partner_id})
+                            country_with_mobile = self.sanitized_country_mobile_from_chat_id(
+                                whatsapp_message_dict.get('chatId'))
+                            res_partner_id = self.create_res_partner_against_whatsapp(whatsapp_message_dict['chatId'],
+                                                                                      whatsapp_message_dict.get(
+                                                                                          'senderName'),
+                                                                                      country_with_mobile[0],
+                                                                                      country_with_mobile[1])
+                            message_dict.update(
+                                {'partner_id': res_partner_id, 'model': 'res.partner', 'res_id': res_partner_id})
 
                         # Creating whatsapp message in odoo
                         message_dict = self.create_message_dict(whatsapp_message_dict, message_dict)
-                whatsapp_instance_id = request.env['whatsapp.instance'].sudo().search([('status', '!=', 'disable')], limit=1)
-                if whatsapp_instance_id and message_dict :
-                    message_dict.update({'whatsapp_instance_id': whatsapp_instance_id.id, 'whatsapp_message_provider': whatsapp_instance_id.provider})
+                whatsapp_instance_id = request.env['whatsapp.instance'].sudo().search([('status', '!=', 'disable')],
+                                                                                      limit=1)
+                if whatsapp_instance_id and message_dict:
+                    message_dict.update({'whatsapp_instance_id': whatsapp_instance_id.id,
+                                         'whatsapp_message_provider': whatsapp_instance_id.provider})
                 whatsapp_message_id = whatsapp_message_obj.sudo().search(
-                    [('message_id', '=', whatsapp_message_dict.get('id')), ('whatsapp_instance_id', '=', whatsapp_instance_id.id)])
+                    [('message_id', '=', whatsapp_message_dict.get('id')),
+                     ('whatsapp_instance_id', '=', whatsapp_instance_id.id)])
                 if not whatsapp_message_id and message_dict:
                     # If message in document format then create attachment, whatsapp message
                     whatsapp_message_id = whatsapp_message_obj.sudo().create(message_dict)
@@ -156,7 +170,8 @@ class WhatsappBase(http.Controller):
                             'res_id': whatsapp_message_id.id
                         }
                         attachment_id = request.env['ir.attachment'].sudo().create(message_attachment_dict)
-                        _logger.info("Attachment is created in odoo when creating whatsapp message attachment id %s: ", str(attachment_id))
+                        _logger.info("Attachment is created in odoo when creating whatsapp message attachment id %s: ",
+                                     str(attachment_id))
                         whatsapp_message_id.sudo().write({'attachment_id': attachment_id.id})
                 elif whatsapp_message_id and message_dict:
                     # If message in document format then create attachment, whatsapp message
@@ -172,7 +187,8 @@ class WhatsappBase(http.Controller):
                             'res_id': whatsapp_message_id.id
                         }
                         attachment_id = request.env['ir.attachment'].sudo().create(message_attachment_dict)
-                        _logger.info("Attachment is created in odoo when updating whatsapp message attachment id %s: ", str(attachment_id))
+                        _logger.info("Attachment is created in odoo when updating whatsapp message attachment id %s: ",
+                                     str(attachment_id))
                         whatsapp_message_id.sudo().write({'attachment_id': attachment_id.id})
         return True
 
@@ -203,11 +219,13 @@ class WhatsappBase(http.Controller):
         })
         # if whatsapp message is in image format then update message body
         if whatsapp_message_dict.get('type') == 'image':
-            image_data = base64.b64encode(requests.get(whatsapp_message_dict.get('body').strip()).content).replace(b'\n', b'')
+            image_data = base64.b64encode(requests.get(whatsapp_message_dict.get('body').strip()).content).replace(
+                b'\n', b'')
             message_dict.update({'message_body': whatsapp_message_dict.get('caption'), 'msg_image': image_data})
 
         # if whatsapp message is in text,video,audio format then update message body
-        if whatsapp_message_dict.get('type') == 'chat' or whatsapp_message_dict.get('type') == 'video' or whatsapp_message_dict.get(
+        if whatsapp_message_dict.get('type') == 'chat' or whatsapp_message_dict.get(
+                'type') == 'video' or whatsapp_message_dict.get(
                 'type') == 'audio':
             message_dict.update({'message_body': whatsapp_message_dict.get('body')})
 
@@ -233,12 +251,12 @@ class WhatsappBase(http.Controller):
         country_code = mobile_country_code.country_code
         res_country_id = request.env['res.country'].sudo().search([('phone_code', '=', country_code)], limit=1)
         return country_code, mobile_country_code.national_number
-    
+
     def sanitized_country_mobile_from_meta_chat_id(self, whatsapp_id):
         # Santized country & mobile from chat id
         mobile_country_code = phonenumbers.parse('+' + whatsapp_id, None)
         country_code = mobile_country_code.country_code
-        number = '+'+ str(country_code)
+        number = '+' + str(country_code)
         return number, mobile_country_code.national_number
 
     @http.route('/gupshup/response/message', type='json', auth='public')
@@ -250,10 +268,11 @@ class WhatsappBase(http.Controller):
             whatsapp_message_obj = request.env['whatsapp.messages']
             whatsapp_messages_dict = {}
             data_payload = data['payload']
-            if data_payload.get('context'):     # If quoted message id from response
-                whatsapp_messages_id = whatsapp_message_obj.sudo().search([('message_id', '=', data_payload['context'].get('gsId'))])
+            if data_payload.get('context'):  # If quoted message id from response
+                whatsapp_messages_id = whatsapp_message_obj.sudo().search(
+                    [('message_id', '=', data_payload['context'].get('gsId'))])
                 whatsapp_instance_id = request.env['whatsapp.instance'].sudo().search([('status', '!=', 'disable')],
-                                                                                   limit=1)
+                                                                                      limit=1)
                 if whatsapp_messages_id and whatsapp_messages_id.partner_id:
                     whatsapp_messages_dict.update({
                         'partner_id': whatsapp_messages_id.partner_id.id,
@@ -265,21 +284,28 @@ class WhatsappBase(http.Controller):
                     whatsapp_messages_dict = self.gupshup_create_whatsapp_message_dict(data, whatsapp_messages_dict)
             else:
                 res_partner_obj = request.env['res.partner']
-                country_with_mobile = self.sanitized_country_mobile_from_chat_id(data_payload.get('sender').get('phone'))
-                res_partner_id = res_partner_obj.sudo().search([('mobile', '=', str(country_with_mobile[0])+str(country_with_mobile[1]))], limit=1)
+                country_with_mobile = self.sanitized_country_mobile_from_chat_id(
+                    data_payload.get('sender').get('phone'))
+                res_partner_id = res_partner_obj.sudo().search(
+                    [('mobile', '=', str(country_with_mobile[0]) + str(country_with_mobile[1]))], limit=1)
                 if not res_partner_id:
-                    res_partner_id = self.gupshup_create_res_partner_against_whatsapp(data_payload.get('sender').get('name'), country_with_mobile[0], country_with_mobile[1])
-                whatsapp_messages_dict.update({'partner_id': res_partner_id.id, 'model': 'res.partner', 'res_id': res_partner_id.id})
+                    res_partner_id = self.gupshup_create_res_partner_against_whatsapp(
+                        data_payload.get('sender').get('name'), country_with_mobile[0], country_with_mobile[1])
+                whatsapp_messages_dict.update(
+                    {'partner_id': res_partner_id.id, 'model': 'res.partner', 'res_id': res_partner_id.id})
 
                 whatsapp_messages_dict = self.gupshup_create_whatsapp_message_dict(data, whatsapp_messages_dict)
             whatsapp_instance_id = request.env['whatsapp.instance'].sudo().search([('status', '!=', 'disable')],
-                                                                               limit=1)
+                                                                                  limit=1)
             if whatsapp_instance_id and whatsapp_messages_dict:
-                whatsapp_messages_dict.update({'whatsapp_instance_id': whatsapp_instance_id.id, 'whatsapp_message_provider': whatsapp_instance_id.provider})
-            whatsapp_message_id = whatsapp_message_obj.sudo().search([('message_id', '=', data_payload.get('id')), ('whatsapp_instance_id', '=', whatsapp_instance_id.id)])
+                whatsapp_messages_dict.update({'whatsapp_instance_id': whatsapp_instance_id.id,
+                                               'whatsapp_message_provider': whatsapp_instance_id.provider})
+            whatsapp_message_id = whatsapp_message_obj.sudo().search(
+                [('message_id', '=', data_payload.get('id')), ('whatsapp_instance_id', '=', whatsapp_instance_id.id)])
             if whatsapp_message_id and whatsapp_messages_dict:
                 whatsapp_message_id.sudo().write(whatsapp_messages_dict)
-                _logger.info("Whatsapp message updated in odoo from gupshup whatsapp message id %s: ", str(whatsapp_message_id.id))
+                _logger.info("Whatsapp message updated in odoo from gupshup whatsapp message id %s: ",
+                             str(whatsapp_message_id.id))
                 if whatsapp_message_id and data_payload.get('type') == 'file':
                     data_base64 = base64.b64encode(requests.get(data_payload.get('payload').get('url').strip()).content)
                     message_attachment_dict = {
@@ -290,11 +316,14 @@ class WhatsappBase(http.Controller):
                         'res_id': whatsapp_message_id.id
                     }
                     attachment_id = request.env['ir.attachment'].sudo().create(message_attachment_dict)
-                    _logger.info("Attachment is created in odoo when updating whatsapp message from gupshup attachment id %s: ", str(attachment_id.id))
+                    _logger.info(
+                        "Attachment is created in odoo when updating whatsapp message from gupshup attachment id %s: ",
+                        str(attachment_id.id))
                     whatsapp_message_id.sudo().write({'attachment_id': attachment_id.id})
             elif not whatsapp_message_id and whatsapp_messages_dict:
                 whatsapp_message_id = whatsapp_message_obj.sudo().create(whatsapp_messages_dict)
-                _logger.info("Whatsapp Message created in odoo from gupshup Whatsapp message id %s: ", str(whatsapp_message_id.id))
+                _logger.info("Whatsapp Message created in odoo from gupshup Whatsapp message id %s: ",
+                             str(whatsapp_message_id.id))
                 if whatsapp_message_id and data_payload.get('type') == 'file':
                     data_base64 = base64.b64encode(requests.get(data_payload.get('payload').get('url').strip()).content)
                     message_attachment_dict = {
@@ -305,7 +334,9 @@ class WhatsappBase(http.Controller):
                         'res_id': whatsapp_message_id.id
                     }
                     attachment_id = request.env['ir.attachment'].sudo().create(message_attachment_dict)
-                    _logger.info("Attachment is created in odoo when creating whatsapp message from gupshup attachment id %s: ", str(attachment_id))
+                    _logger.info(
+                        "Attachment is created in odoo when creating whatsapp message from gupshup attachment id %s: ",
+                        str(attachment_id))
                     whatsapp_message_id.sudo().write({'attachment_id': attachment_id.id})
         _response_inherit(data)
         # request._json_response = _json_response_inherit.__get__(request, JsonRequest)
@@ -327,8 +358,10 @@ class WhatsappBase(http.Controller):
             'state': 'received',
         })
         # if whatsapp message is in image format then update message body
-        if webhook_payload.get('type') == 'image' or webhook_payload.get('type') == 'audio' or webhook_payload.get('type') == 'video' or webhook_payload.get('type') == 'file':
-            image_data = base64.b64encode(requests.get(webhook_payload.get('payload').get('url').strip()).content).replace(b'\n', b'')
+        if webhook_payload.get('type') == 'image' or webhook_payload.get('type') == 'audio' or webhook_payload.get(
+                'type') == 'video' or webhook_payload.get('type') == 'file':
+            image_data = base64.b64encode(
+                requests.get(webhook_payload.get('payload').get('url').strip()).content).replace(b'\n', b'')
             whatsapp_messages_dict.update({'msg_image': image_data})
             if webhook_payload.get('payload').get('caption'):
                 whatsapp_messages_dict.update({'message_body': webhook_payload.get('payload').get('caption')})
@@ -350,20 +383,19 @@ class WhatsappBase(http.Controller):
     def gupshup_convert_epoch_to_unix_timestamp(self, msg_time):
         current_date_time = datetime.datetime.fromtimestamp(int(msg_time) / 1000)
         return current_date_time
-    
-    def create_res_partner_against_meta_whatsapp(self,number,sender_name, country_code, mobile):
+
+    def create_res_partner_against_meta_whatsapp(self, number, sender_name, country_code, mobile):
         # Creation of partner
         partner_dict = {}
         res_country_id = request.env['res.country'].sudo().search([('phone_code', '=', country_code)], limit=1)
         if res_country_id:
             partner_dict['country_id'] = res_country_id.id
-        partner_dict.update({'name': sender_name, 'mobile': str(country_code) + str(mobile),'chatId': str(number)})
+        partner_dict.update({'name': sender_name, 'mobile': str(country_code) + str(mobile), 'chatId': str(number)})
         res_partner_id = request.env['res.partner'].sudo().create(partner_dict)
         _logger.info("Res partner is created in odoo from meta res_partner id %s: ", str(res_partner_id.id))
         return res_partner_id
-    
-    
-    def meta_create_message_dict(self, whatsapp_message_dict, message_dict,data):
+
+    def meta_create_message_dict(self, whatsapp_message_dict, message_dict, data):
         # creation of whatsapp message dict
         message_dict.update({
             'name': whatsapp_message_dict.get('text').get('body') if whatsapp_message_dict.get('text') else '',
@@ -371,7 +403,8 @@ class WhatsappBase(http.Controller):
             # 'to': whatsapp_message_dict.get('chatName') if whatsapp_message_dict.get('fromMe') else 'To Me',
             'chatId': whatsapp_message_dict.get('from'),
             'type': whatsapp_message_dict.get('type'),
-            'senderName': data.get('entry')[0].get('changes')[0].get('value').get('contacts')[0].get('profile').get('name'),
+            'senderName': data.get('entry')[0].get('changes')[0].get('value').get('contacts')[0].get('profile').get(
+                'name'),
             'chatName': whatsapp_message_dict.get('from'),
             # 'author': whatsapp_message_dict.get('author'),
             'time': self.convert_epoch_to_unix_timestamp(int(whatsapp_message_dict.get('timestamp'))),
@@ -382,16 +415,18 @@ class WhatsappBase(http.Controller):
             mime_type = data['entry'][0]['changes'][0]['value']['messages'][0]['image']['mime_type']
             media_id = data['entry'][0]['changes'][0]['value']['messages'][0]['image']['id']
             # caption = attachment["caption"]
-            whatsapp_instance_id = request.env['whatsapp.instance'].sudo().search([('whatsapp_meta_phone_number_id', 'like', '%' + str(data.get('entry')[0].get('changes')[0].get('value').get('metadata').get('phone_number_id')))], limit=1)
+            whatsapp_instance_id = request.env['whatsapp.instance'].sudo().search([('whatsapp_meta_phone_number_id',
+                                                                                    'like', '%' + str(
+                data.get('entry')[0].get('changes')[0].get('value').get('metadata').get('phone_number_id')))], limit=1)
             url = "https://graph.facebook.com/v16.0/{}".format(media_id)
             page_access_token = whatsapp_instance_id.whatsapp_meta_api_token
             # page_access_token = 'EAAHu0PZB8phkBALXzHoBrZAWR4LcMCFN6noNiBvXK3J5vPXjPpb33XtKKExH5jCanKZAcstaNb0IDqfVyCJp51vazYsib0QUiNkrnO1elj3vW2UnrtQdhVXb1AjqEYcPBU8zBSTpBeWP1AMp8lFXiWpBAnLefZCmVpQxWphooLVyMX4CHCdGaPp6EiL5N2K6lHIOKuAbTQZDZD'
             headers = {
-            "Authorization": "Bearer {}".format(page_access_token)
+                "Authorization": "Bearer {}".format(page_access_token)
             }
             image = requests.get(url.strip(), headers=headers).json()
             image_datas = base64.b64encode(requests.get(image["url"], headers=headers).content)
-            message_dict.update({'message_body': '', 'msg_image':  image_datas})
+            message_dict.update({'message_body': '', 'msg_image': image_datas})
 
         # if whatsapp message is in text,video,audio format then update message body
         # if whatsapp_message_dict.get('type') == 'text' or whatsapp_message_dict.get('type') == 'video' or whatsapp_message_dict.get(
@@ -408,13 +443,12 @@ class WhatsappBase(http.Controller):
 
         # if whatsapp message is in document format then update message body
         if whatsapp_message_dict['type'] == 'document':
-            
             message_dict.update({'message_body': whatsapp_message_dict.get('document').get('filename')})
 
         return message_dict
-    
-    
-    @http.route('/whatsapp_meta/response/message',type='http',auth='public',methods=['GET', 'POST'], website=True,csrf=False)
+
+    @http.route('/whatsapp_meta/response/message', type='http', auth='public', methods=['GET', 'POST'], website=True,
+                csrf=False)
     def whatsapp_meta_webhook(self):
         if request.httprequest.method == 'GET':
             _logger.info("In whatsapp integration controller verification")
@@ -452,9 +486,10 @@ class WhatsappBase(http.Controller):
             for whatsapp_message_dict in data.get('entry')[0].get('changes')[0].get('value').get('messages'):
                 message_dict = {}
                 if whatsapp_message_dict.get('context'):
-                    whatsapp_messages_id = whatsapp_message_obj.sudo().search([('message_id', '=', whatsapp_message_dict.get('id'))])
+                    whatsapp_messages_id = whatsapp_message_obj.sudo().search(
+                        [('message_id', '=', whatsapp_message_dict.get('id'))])
                     whatsapp_instance_id = request.env['whatsapp.instance'].sudo().search([('status', '!=', 'disable')],
-                                                                                       limit=1)
+                                                                                          limit=1)
                     if whatsapp_messages_id and whatsapp_messages_id.partner_id:
                         message_dict.update({
                             'partner_id': whatsapp_messages_id.partner_id.id,
@@ -463,26 +498,35 @@ class WhatsappBase(http.Controller):
                             'whatsapp_instance_id': whatsapp_instance_id.id,
                             'whatsapp_message_provider': whatsapp_instance_id.provider
                         })
-                    message_dict = self.meta_create_message_dict(whatsapp_message_dict, message_dict,data)
+                    message_dict = self.meta_create_message_dict(whatsapp_message_dict, message_dict, data)
                 else:
-                        res_partner_obj = request.env['res.partner']
-                        res_partner_id = res_partner_obj.sudo().search([('chatId', '=', whatsapp_message_dict.get('from'))], limit=1)
-                        if res_partner_id:
-                            message_dict.update({'partner_id': res_partner_id.id, 'model': 'res.partner', 'res_id': res_partner_id.id})
-                        else:
-                            country_with_mobile = self.sanitized_country_mobile_from_meta_chat_id(whatsapp_message_dict.get('from'))
-                            res_partner_id = self.create_res_partner_against_meta_whatsapp(whatsapp_message_dict.get('from'),data.get('entry')[0].get('changes')[0].get('value').get('contacts')[0].get('profile').get('name'),
-                                                                                    country_with_mobile[0], country_with_mobile[1])
-                            message_dict.update({'partner_id': res_partner_id.id, 'model': 'res.partner', 'res_id': res_partner_id.id})
+                    res_partner_obj = request.env['res.partner']
+                    res_partner_id = res_partner_obj.sudo().search([('chatId', '=', whatsapp_message_dict.get('from'))],
+                                                                   limit=1)
+                    if res_partner_id:
+                        message_dict.update(
+                            {'partner_id': res_partner_id.id, 'model': 'res.partner', 'res_id': res_partner_id.id})
+                    else:
+                        country_with_mobile = self.sanitized_country_mobile_from_meta_chat_id(
+                            whatsapp_message_dict.get('from'))
+                        res_partner_id = self.create_res_partner_against_meta_whatsapp(
+                            whatsapp_message_dict.get('from'),
+                            data.get('entry')[0].get('changes')[0].get('value').get('contacts')[0].get('profile').get(
+                                'name'),
+                            country_with_mobile[0], country_with_mobile[1])
+                        message_dict.update(
+                            {'partner_id': res_partner_id.id, 'model': 'res.partner', 'res_id': res_partner_id.id})
 
-                        # Creating whatsapp message in odoo
-                        message_dict = self.meta_create_message_dict(whatsapp_message_dict, message_dict,data)
+                    # Creating whatsapp message in odoo
+                    message_dict = self.meta_create_message_dict(whatsapp_message_dict, message_dict, data)
                 whatsapp_instance_id = request.env['whatsapp.instance'].sudo().search([('status', '!=', 'disable')],
-                                                                                   limit=1)
-                if whatsapp_instance_id and message_dict :
-                    message_dict.update({'whatsapp_instance_id': whatsapp_instance_id.id, 'whatsapp_message_provider': whatsapp_instance_id.provider})
+                                                                                      limit=1)
+                if whatsapp_instance_id and message_dict:
+                    message_dict.update({'whatsapp_instance_id': whatsapp_instance_id.id,
+                                         'whatsapp_message_provider': whatsapp_instance_id.provider})
                 whatsapp_message_id = whatsapp_message_obj.sudo().search(
-                    [('message_id', '=', whatsapp_message_dict.get('id')), ('whatsapp_instance_id', '=', whatsapp_instance_id.id)])
+                    [('message_id', '=', whatsapp_message_dict.get('id')),
+                     ('whatsapp_instance_id', '=', whatsapp_instance_id.id)])
                 if not whatsapp_message_id and message_dict:
                     # If message in document format then create attachment, whatsapp message
                     whatsapp_message_id = whatsapp_message_obj.sudo().create(message_dict)
@@ -494,7 +538,7 @@ class WhatsappBase(http.Controller):
                         page_access_token = whatsapp_instance_id.whatsapp_meta_api_token
                         # page_access_token = 'EAAHu0PZB8phkBALXzHoBrZAWR4LcMCFN6noNiBvXK3J5vPXjPpb33XtKKExH5jCanKZAcstaNb0IDqfVyCJp51vazYsib0QUiNkrnO1elj3vW2UnrtQdhVXb1AjqEYcPBU8zBSTpBeWP1AMp8lFXiWpBAnLefZCmVpQxWphooLVyMX4CHCdGaPp6EiL5N2K6lHIOKuAbTQZDZD'
                         headers = {
-                        "Authorization": "Bearer {}".format(page_access_token)
+                            "Authorization": "Bearer {}".format(page_access_token)
                         }
                         image = requests.get(url.strip(), headers=headers).json()
                         image_datas = base64.b64encode(requests.get(image["url"], headers=headers).content)
@@ -506,7 +550,8 @@ class WhatsappBase(http.Controller):
                             'res_id': whatsapp_message_id.id
                         }
                         attachment_id = request.env['ir.attachment'].sudo().create(message_attachment_dict)
-                        _logger.info("Attachment is created in odoo when creating whatsapp message attachment id %s: ", str(attachment_id))
+                        _logger.info("Attachment is created in odoo when creating whatsapp message attachment id %s: ",
+                                     str(attachment_id))
                         whatsapp_message_id.sudo().write({'attachment_id': attachment_id.id})
                 elif whatsapp_message_id and message_dict:
                     # If message in document format then create attachment, whatsapp message
@@ -519,7 +564,7 @@ class WhatsappBase(http.Controller):
                         page_access_token = whatsapp_instance_id.whatsapp_meta_api_token
                         # page_access_token = 'EAAHu0PZB8phkBALXzHoBrZAWR4LcMCFN6noNiBvXK3J5vPXjPpb33XtKKExH5jCanKZAcstaNb0IDqfVyCJp51vazYsib0QUiNkrnO1elj3vW2UnrtQdhVXb1AjqEYcPBU8zBSTpBeWP1AMp8lFXiWpBAnLefZCmVpQxWphooLVyMX4CHCdGaPp6EiL5N2K6lHIOKuAbTQZDZD'
                         headers = {
-                        "Authorization": "Bearer {}".format(page_access_token)
+                            "Authorization": "Bearer {}".format(page_access_token)
                         }
                         image = requests.get(url.strip(), headers=headers).json()
                         image_datas = base64.b64encode(requests.get(image["url"], headers=headers).content)
@@ -532,7 +577,8 @@ class WhatsappBase(http.Controller):
                             'res_id': whatsapp_message_id.id
                         }
                         attachment_id = request.env['ir.attachment'].sudo().create(message_attachment_dict)
-                        _logger.info("Attachment is created in odoo when updating whatsapp message attachment id %s: ", str(attachment_id))
+                        _logger.info("Attachment is created in odoo when updating whatsapp message attachment id %s: ",
+                                     str(attachment_id))
                         whatsapp_message_id.sudo().write({'attachment_id': attachment_id.id})
-                
+
         # return True

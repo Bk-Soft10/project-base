@@ -7,10 +7,10 @@
         <field name="inherit_id" ref="sale.view_sales_order_filter"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='user_id']" position="after">
-                <field name="subscription_status"/>                
+                <field name="subscription_status"/>
             </xpath>
             <xpath expr="//filter[@name='salesperson']" position="after">
-                <filter name="subscription_state" string="status" context="{'group_by': 'subscription_status'}" />
+                <filter name="subscription_state" string="status" context="{'group_by': 'subscription_status'}"/>
             </xpath>
         </field>
     </record>
@@ -38,7 +38,7 @@
         <field name="name">sale.order.line.</field>
         <field name="model">sale.order.line</field>
         <field name="arch" type="xml">
-            <pivot string="Subscription Lines" >
+            <pivot string="Subscription Lines">
                 <field name="order_id" type="row"/>
                 <field name="product_id" type="col"/>
                 <!-- <field name="subscription_status" type="measure"/> -->
@@ -63,7 +63,7 @@
             </pivot>
         </field>
     </record>
-    
+
     <!-- subscription_pivot_action action window -->
     <record id="subscription_so_line_pivot_action" model="ir.actions.act_window">
         <field name="name">subscription</field>
@@ -75,12 +75,16 @@
     </record>
 
     <menuitem id="sttl_subscription_menu_act" name="Subscriptions" sequence="40"/>
-    <menuitem id="sttl_subscription_submenu_act" parent="sttl_subscription_menu_act" name="Subscriptions" sequence="1"  />
-    <menuitem id="sttl_subscription_submenu1_act1" parent="sttl_subscription_submenu_act" name="Subscriptions" action="sttl_subscription_action" sequence="1"/>
-    <menuitem id="quotations_menu_act" name="Quotations" parent="sttl_subscription_submenu_act" action="sttl_subscription_quote_action" sequence="2"/>
-    <menuitem id="sttl_subscription_config_menu_act" name="Configuration" parent="sttl_subscription_menu_act" sequence="4"/>
+    <menuitem id="sttl_subscription_submenu_act" parent="sttl_subscription_menu_act" name="Subscriptions" sequence="1"/>
+    <menuitem id="sttl_subscription_submenu1_act1" parent="sttl_subscription_submenu_act" name="Subscriptions"
+              action="sttl_subscription_action" sequence="1"/>
+    <menuitem id="quotations_menu_act" name="Quotations" parent="sttl_subscription_submenu_act"
+              action="sttl_subscription_quote_action" sequence="2"/>
+    <menuitem id="sttl_subscription_config_menu_act" name="Configuration" parent="sttl_subscription_menu_act"
+              sequence="4"/>
 
-    <menuitem id="subscription_reporting_menu_act" name="Reporting" parent="sttl_subscription_menu_act"  sequence="3"/>
-    <menuitem id="subscription_reporting_submenu_act" name="Reporting" parent="subscription_reporting_menu_act" action="subscription_so_line_pivot_action"  sequence="3"/>
+    <menuitem id="subscription_reporting_menu_act" name="Reporting" parent="sttl_subscription_menu_act" sequence="3"/>
+    <menuitem id="subscription_reporting_submenu_act" name="Reporting" parent="subscription_reporting_menu_act"
+              action="subscription_so_line_pivot_action" sequence="3"/>
 
 </odoo>

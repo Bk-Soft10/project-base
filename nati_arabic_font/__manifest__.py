@@ -1,4 +1,4 @@
- # -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 {
     'name': "Nati arabic font",
 
@@ -34,7 +34,6 @@
             'nati_arabic_font/static/src/scss/cairofont.scss',
             'nati_arabic_font/static/src/scss/droidfont.scss',
         ],
-
 
     },
 }

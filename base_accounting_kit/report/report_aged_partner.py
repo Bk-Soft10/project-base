@@ -133,7 +133,7 @@ class ReportAgedPartnerBalance(models.AbstractModel):
             if partner_id not in undue_amounts:
                 undue_amounts[partner_id] = 0.0
             line_amount = ResCurrency._get_conversion_rate(line.company_id.currency_id,
-                                               user_currency, line.balance)
+                                                           user_currency, line.balance)
             if user_currency.is_zero(line_amount):
                 continue
             for partial_line in line.matched_debit_ids:
@@ -158,13 +158,13 @@ class ReportAgedPartnerBalance(models.AbstractModel):
         history = []
         for i in range(5):
             args_list = (
-            tuple(move_state), tuple(account_type), tuple(partner_ids),)
+                tuple(move_state), tuple(account_type), tuple(partner_ids),)
             dates_query = '(COALESCE(l.date_maturity,l.date)'
 
             if periods[str(i)]['start'] and periods[str(i)]['stop']:
                 dates_query += ' BETWEEN %s AND %s)'
                 args_list += (
-                periods[str(i)]['start'], periods[str(i)]['stop'])
+                    periods[str(i)]['start'], periods[str(i)]['stop'])
             elif periods[str(i)]['start']:
                 dates_query += ' >= %s)'
                 args_list += (periods[str(i)]['start'],)
@@ -190,7 +190,7 @@ class ReportAgedPartnerBalance(models.AbstractModel):
                 if partner_id not in partners_amount:
                     partners_amount[partner_id] = 0.0
                 line_amount = ResCurrency._get_conversion_rate(line.company_id.currency_id,
-                                                   user_currency, line.balance)
+                                                               user_currency, line.balance)
                 if user_currency.is_zero(line_amount):
                     continue
                 for partial_line in line.matched_debit_ids:

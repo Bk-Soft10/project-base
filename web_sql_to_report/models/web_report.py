@@ -1,41 +1,43 @@
 import base64
 import re
-import xlsxwriter
-from io import BytesIO
 from datetime import datetime, timedelta
-from odoo import models, fields, api, _
+from io import BytesIO
+
+import xlsxwriter
+from odoo import models, fields, api
 from odoo.exceptions import Warning
+
 
 class WebReport(models.TransientModel):
     _name = "web.report"
     _description = "Report Utils"
 
     @api.model
-    def _get_default_datetime_plus_7(self): 
+    def _get_default_datetime_plus_7(self):
         return datetime.now() + timedelta(hours=7)
 
     name = fields.Char(string='Name')
     report_file = fields.Binary('File', readonly=True)
 
-    def custom_title(self,text):
+    def custom_title(self, text):
         return re.sub(r"(?:(?<=\W)|^)\w(?=\w)", lambda x: x.group(0).upper(), text)
 
     wbf = {}
 
     def generate_report(self
-        , report_name 
-        , data
-        , start_date=False
-        , end_date=False
-        , header=True
-        , header_color = '#FFFF00'
-        , capitalize=True
-        , numbering=True
-        , auto_filter=True
-        , freeze_panes=True
-        , freeze_panes_column=0
-        , bottom_remark=True
-        ):
+                        , report_name
+                        , data
+                        , start_date=False
+                        , end_date=False
+                        , header=True
+                        , header_color='#FFFF00'
+                        , capitalize=True
+                        , numbering=True
+                        , auto_filter=True
+                        , freeze_panes=True
+                        , freeze_panes_column=0
+                        , bottom_remark=True
+                        ):
         """ Return XLSX Report from the given 'List of Dictionary' data.
             :param report_name: File name of the report before given datetime at the end of it
             :param data: data with 'List of Dictionary' type, the key will be Header and the value will be inserted into each row 
@@ -55,15 +57,15 @@ class WebReport(models.TransientModel):
             raise Warning("There is no data available.")
 
         fp = BytesIO()
-        workbook = xlsxwriter.Workbook(fp)       
-        workbook = self.add_workbook_format(workbook,header_color)
+        workbook = xlsxwriter.Workbook(fp)
+        workbook = self.add_workbook_format(workbook, header_color)
         wbf = self.wbf
 
         # Give Report name 
-        report_name = report_name.replace("/"," ")
+        report_name = report_name.replace("/", " ")
         worksheet = workbook.add_worksheet(report_name)
-        filename = report_name.lower()+"_"+ str(self._get_default_datetime_plus_7())+'.xlsx'
-        
+        filename = report_name.lower() + "_" + str(self._get_default_datetime_plus_7()) + '.xlsx'
+
         # Initialize params
         column_size = []
         header_len = len(list(data[0].keys()))
@@ -78,12 +80,12 @@ class WebReport(models.TransientModel):
             header_row = 3
 
             # Setup title
-            worksheet.merge_range(row,col,row,header_len, report_name, wbf['title_doc'])
+            worksheet.merge_range(row, col, row, header_len, report_name, wbf['title_doc'])
             time_title = str(start_date)
             if end_date:
-                time_title += ' - '+str(end_date)
+                time_title += ' - ' + str(end_date)
             row += 1
-            worksheet.merge_range(row,col,row,header_len, time_title, wbf['title_doc'])
+            worksheet.merge_range(row, col, row, header_len, time_title, wbf['title_doc'])
 
             row += 2
 
@@ -91,27 +93,27 @@ class WebReport(models.TransientModel):
             col = 0
             # Handle header (First data)
             if header and number == 1:
-                
+
                 # Give column number
                 if numbering:
                     worksheet.write(row, col, "No", wbf['header'])
                     column_size.append(2)
                     col += 1
-                
+
                 # Loop key for Header/Title
                 for key in line:
                     # Wirte Header Title with key from dictionary
-                    formated_header_string = key.replace('_',' ')
+                    formated_header_string = key.replace('_', ' ')
                     # IF capitalize params is true and not all word is uppercase, capitalize words
                     if capitalize and not formated_header_string.isupper():
                         formated_header_string = formated_header_string.capitalize()
 
                     worksheet.write(row, col, formated_header_string, wbf['header'])
-                    
+
                     # Write initial column size
                     column_size.append(len(str(formated_header_string)))
-                    col+=1
-                row +=1
+                    col += 1
+                row += 1
                 col = 0
 
             # Give column number
@@ -134,54 +136,57 @@ class WebReport(models.TransientModel):
                 if column_size[current_column_index] < len(str(line[key])):
                     column_size[current_column_index] = (len(str(line[key])))
 
-                col+=1
-            
-            row +=1
-            number +=1
-        
+                col += 1
+
+            row += 1
+            number += 1
+
         # set column width
         for i in range(0, len(column_size)):
-            worksheet.set_column(i, i, column_size[i]+2)
+            worksheet.set_column(i, i, column_size[i] + 2)
 
         # set auto_filter (only if worksheet have header)
         if header and auto_filter:
-            worksheet.autofilter(header_row, 0, row-1, col-1)
+            worksheet.autofilter(header_row, 0, row - 1, col - 1)
 
         # freeze panes (only if worksheet have header)
         if header and freeze_panes:
             # Handle freeze_panes_column params, and check format 
             to_freeze_column = 0
-            if isinstance(freeze_panes_column,int):
+            if isinstance(freeze_panes_column, int):
                 to_freeze_column = freeze_panes_column
 
-            worksheet.freeze_panes(header_row+1, to_freeze_column)
-        
+            worksheet.freeze_panes(header_row + 1, to_freeze_column)
+
         # Set bottom remark
         if bottom_remark:
-            worksheet.merge_range('A%s:D%s'%(row+2,row+2), '%s - %s' % (self.sudo().env.user.name, str(self._get_default_datetime_plus_7())) , wbf['footer']) 
-            
+            worksheet.merge_range('A%s:D%s' % (row + 2, row + 2),
+                                  '%s - %s' % (self.sudo().env.user.name, str(self._get_default_datetime_plus_7())),
+                                  wbf['footer'])
+
         workbook.close()
-        out=base64.encodebytes(fp.getvalue())
+        out = base64.encodebytes(fp.getvalue())
         report = self.sudo().create({
-            'report_file' : out,
-            'name' : filename,
+            'report_file': out,
+            'name': filename,
         })
-        
+
         fp.close()
         return {
             'type': 'ir.actions.act_url',
             'name': 'contract',
             'url': '/web/content/web.report/%s/report_file/%s?download=true' % (report.id, filename)
-        }  
-    
+        }
+
     def add_workbook_format(self, workbook, header_color):
-        
-        self.wbf['title_doc'] = workbook.add_format({'bold': 1,'align': 'left'})
+
+        self.wbf['title_doc'] = workbook.add_format({'bold': 1, 'align': 'left'})
         self.wbf['title_doc'].set_font_size(12)
 
-        self.wbf['footer'] = workbook.add_format({'align':'left'})
+        self.wbf['footer'] = workbook.add_format({'align': 'left'})
 
-        self.wbf['header'] = workbook.add_format({'bg_color':header_color,'bold': 1,'align': 'center','font_color': '#000000'})
+        self.wbf['header'] = workbook.add_format(
+            {'bg_color': header_color, 'bold': 1, 'align': 'center', 'font_color': '#000000'})
         self.wbf['header'].set_top(2)
         self.wbf['header'].set_bottom()
         self.wbf['header'].set_left()
@@ -189,26 +194,25 @@ class WebReport(models.TransientModel):
         self.wbf['header'].set_font_size(11)
         self.wbf['header'].set_align('vcenter')
 
-        self.wbf['content'] = workbook.add_format({'align': 'left','font_color': '#000000'})
+        self.wbf['content'] = workbook.add_format({'align': 'left', 'font_color': '#000000'})
         self.wbf['content'].set_left()
         self.wbf['content'].set_right()
         self.wbf['content'].set_top()
         self.wbf['content'].set_bottom()
-        self.wbf['content'].set_font_size(10)                
+        self.wbf['content'].set_font_size(10)
 
-        self.wbf['content_float'] = workbook.add_format({'align': 'right','num_format': '#,##0.00'})
-        self.wbf['content_float'].set_right() 
+        self.wbf['content_float'] = workbook.add_format({'align': 'right', 'num_format': '#,##0.00'})
+        self.wbf['content_float'].set_right()
         self.wbf['content_float'].set_left()
         self.wbf['content_float'].set_top()
         self.wbf['content_float'].set_bottom()
-        self.wbf['content_float'].set_font_size(10)                
-        
-        self.wbf['content_int'] = workbook.add_format({'align': 'right','num_format': '#,##0'})
-        self.wbf['content_int'].set_right() 
+        self.wbf['content_float'].set_font_size(10)
+
+        self.wbf['content_int'] = workbook.add_format({'align': 'right', 'num_format': '#,##0'})
+        self.wbf['content_int'].set_right()
         self.wbf['content_int'].set_left()
         self.wbf['content_int'].set_top()
         self.wbf['content_int'].set_bottom()
-        self.wbf['content_int'].set_font_size(10)                
-        
-        return workbook   
-    
+        self.wbf['content_int'].set_font_size(10)
+
+        return workbook

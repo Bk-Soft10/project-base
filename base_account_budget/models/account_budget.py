@@ -175,7 +175,7 @@ class BudgetLines(models.Model):
                     elapsed_timedelta = date_to - date_from
                     if elapsed_timedelta.days > 0:
                         theo_amt = (
-                                               elapsed_timedelta.total_seconds() / line_timedelta.total_seconds()) * line.planned_amount
+                                           elapsed_timedelta.total_seconds() / line_timedelta.total_seconds()) * line.planned_amount
             else:
                 if line.paid_date:
                     if fields.Datetime.from_string(
@@ -197,7 +197,7 @@ class BudgetLines(models.Model):
                             today) < fields.Datetime.from_string(line.date_to):
                         total_days = (line.date_to - line.date_from).days + 1
                         days_over = (
-                                                fields.Date.today() - line.date_from).days + 1
+                                            fields.Date.today() - line.date_from).days + 1
                         # If today is between the budget line date_from and date_to
                         theo_amt = line.planned_amount / total_days * days_over
                     else:

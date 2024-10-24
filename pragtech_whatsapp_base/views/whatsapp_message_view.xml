@@ -28,7 +28,7 @@
                     </group>
                     <group string="Attachments">
                         <field name="attachment_data" filename="message_body" invisible="attachment_data == False"
-                             nolabel="1"/>
+                               nolabel="1"/>
                         <field name="msg_image" widget="image" invisible="msg_image == False" nolabel="1"/>
                         <field name="attachment_id" invisible="1"/>
                     </group>

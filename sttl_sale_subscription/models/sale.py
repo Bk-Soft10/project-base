@@ -1,4 +1,4 @@
-from odoo import fields,models,api
+from odoo import fields, models, api
 import datetime
 from datetime import date
 from odoo.exceptions import UserError
@@ -11,8 +11,8 @@ class Sale(models.Model):
     recurr_until = fields.Date(string='Until')
     next_invoice_date = fields.Date(string='Next Invoice Date')
     recurring_started = fields.Boolean(string='Recurring Started')
-    subscription_status = fields.Selection(string='Subscription Status', selection=[('a', 'Pending'), ('b', 'Running'),('c','End')],default="a")
-    
+    subscription_status = fields.Selection(string='Subscription Status',
+                                           selection=[('a', 'Pending'), ('b', 'Running'), ('c', 'End')], default="a")
 
     @api.onchange("order_line")
     def onchange_line_ids(self):
@@ -24,11 +24,11 @@ class Sale(models.Model):
                 else:
                     non_recurring = True
         if recuring and non_recurring:
-            raise UserError("Currently we don't support recurring and non recurring products togather")                
+            raise UserError("Currently we don't support recurring and non recurring products togather")
 
     @api.model_create_multi
-    def create(self,vals):
-        result = super(Sale,self).create(vals)
+    def create(self, vals):
+        result = super(Sale, self).create(vals)
         for rec in result:
             recuring = non_recurring = False
             for line in rec.order_line:
@@ -40,9 +40,9 @@ class Sale(models.Model):
             if recuring and non_recurring:
                 raise UserError("Currently we don't support recurring and non recurring products togather")
         return result
-    
-    def write(self,vals):
-        result = super(Sale,self).write(vals)
+
+    def write(self, vals):
+        result = super(Sale, self).write(vals)
         for rec in self:
             recuring = non_recurring = False
             for line in rec.order_line:
@@ -52,7 +52,7 @@ class Sale(models.Model):
                     else:
                         non_recurring = True
             if recuring and non_recurring:
-                raise UserError("Currently we don't support recurring and non recurring products together")  
+                raise UserError("Currently we don't support recurring and non recurring products together")
         return result
 
     @api.onchange('recurrance_id')
@@ -60,8 +60,10 @@ class Sale(models.Model):
         if self.recurrance_id:
             for rec in self.order_line:
                 if rec.product_id.is_recurring:
-                    price = self.env['product.subscription.pricing'].search([('period_id','=',rec.order_id.recurrance_id.id),('product_id','=',rec.product_id.id)],limit=1).price
-                    rec.price_unit = price       
+                    price = self.env['product.subscription.pricing'].search(
+                        [('period_id', '=', rec.order_id.recurrance_id.id), ('product_id', '=', rec.product_id.id)],
+                        limit=1).price
+                    rec.price_unit = price
 
     def action_create_recurring_invoices(self):
         to_invoice_found = False
@@ -87,24 +89,27 @@ class Sale(models.Model):
 
     def generate_recurring_invoices(self):
 
-        orders = self.env['sale.order'].search([('next_invoice_date','=',datetime.datetime.today().date()),('state','=','sale'),('subscription_status','=','b')])
+        orders = self.env['sale.order'].search(
+            [('next_invoice_date', '=', datetime.datetime.today().date()), ('state', '=', 'sale'),
+             ('subscription_status', '=', 'b')])
         for order in orders:
             do_copied = False
             do_cpy = False
             for line in order.order_line:
-                if not do_copied and line.product_id.is_recurring and line.invoice_status != "to invoice" :
+                if not do_copied and line.product_id.is_recurring and line.invoice_status != "to invoice":
                     if line.product_id.type != 'service':
-                        do_cpy = line.move_ids[0].picking_id.copy() #Copying 1 picking in order to avoid multiple pickings with same delivery 
-                        do_cpy.state = 'assigned' # Change state to ready
+                        do_cpy = line.move_ids[
+                            0].picking_id.copy()  # Copying 1 picking in order to avoid multiple pickings with same delivery
+                        do_cpy.state = 'assigned'  # Change state to ready
                         do_copied = True
-                        #Assign done qtties in order to validate automatically  
+                        # Assign done qtties in order to validate automatically
                         for move in do_cpy.move_ids_without_package:
                             move.quantity = move.product_uom_qty
                     else:
                         if line.product_id.invoice_policy == 'order':
                             if not line.prev_added_qty:
                                 line.prev_added_qty = line.product_uom_qty
-                            line.product_uom_qty = line.product_uom_qty +  line.prev_added_qty
+                            line.product_uom_qty = line.product_uom_qty + line.prev_added_qty
                         else:
                             line.qty_delivered += line.product_uom_qty
                 if line.product_id.invoice_policy == 'order':
@@ -121,17 +126,16 @@ class Sale(models.Model):
             #     do_cpy.button_validate()
             #     order.invoice_status = 'to invoice'  
 
-            self.action_invoice(order)         
+            self.action_invoice(order)
             # self.env.cr.commit()
-            
 
             # End subscription is today is last recurring date
-            if order.recurr_until and order.next_invoice_date:        
+            if order.recurr_until and order.next_invoice_date:
                 if order.recurr_until <= order.next_invoice_date:
                     order.subscription_status = 'c'
 
-    def action_invoice(self,order):
-        #Create Invoice if order is ready to be invoiced            
+    def action_invoice(self, order):
+        # Create Invoice if order is ready to be invoiced
         if order.invoice_status == 'to invoice':
             # invoice = self.env['sale.advance.payment.inv'] \
             # .with_context({
@@ -159,7 +163,8 @@ class Sale(models.Model):
     def send_notification(self):
         default_duration = 10
         sale_orders = self.search([('next_invoice_date', '!=', False), ('subscription_status', '=', 'b')])
-        notification_duration = self.env['ir.config_parameter'].get_param('sttl_sale_subscription.notification_duration')
+        notification_duration = self.env['ir.config_parameter'].get_param(
+            'sttl_sale_subscription.notification_duration')
         if notification_duration == False:
             notification_duration = default_duration
         for order in sale_orders:
@@ -170,13 +175,13 @@ class Sale(models.Model):
                 template.send_mail(order.id, force_send=True)
 
 
-
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
     prev_added_qty = fields.Float(string='Previous Added Qty')
-    subscription_status = fields.Selection(string='Subscription Status', selection=[('a', 'Pending'), ('b', 'Running'),('c','End')],related="order_id.subscription_status",store=True)
-
+    subscription_status = fields.Selection(string='Subscription Status',
+                                           selection=[('a', 'Pending'), ('b', 'Running'), ('c', 'End')],
+                                           related="order_id.subscription_status", store=True)
 
     def _compute_price_unit(self):
         super(SaleOrderLine, self)._compute_price_unit()
@@ -184,7 +189,10 @@ class SaleOrderLine(models.Model):
             if rec.product_template_id:
                 if rec.product_template_id.is_recurring:
                     if rec.order_id.recurrance_id:
-                        price = self.env['product.subscription.pricing'].search([('period_id','=',rec.order_id.recurrance_id.id),('product_id','=',rec.product_id.id)],limit=1).price
+                        price = self.env['product.subscription.pricing'].search(
+                            [('period_id', '=', rec.order_id.recurrance_id.id), ('product_id', '=', rec.product_id.id)],
+                            limit=1).price
                         rec.price_unit = price
-                        self.env['product.subscription.pricing'].search([('period_id','=',rec.order_id.recurrance_id.id)])
-                        self.env['product.subscription.pricing'].search([('product_id','=',rec.product_id.id)])
+                        self.env['product.subscription.pricing'].search(
+                            [('period_id', '=', rec.order_id.recurrance_id.id)])
+                        self.env['product.subscription.pricing'].search([('product_id', '=', rec.product_id.id)])

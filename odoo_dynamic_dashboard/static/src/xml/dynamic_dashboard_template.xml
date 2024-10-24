@@ -80,10 +80,11 @@
                 <div class="search-group" style="margin-right: 30px;padding-top:20px;">
                     <!-- Search Bar -->
                     <div class="navbar-items btn-group search-box">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Search" id="search-input-chart" aria-label="Search"/>
+                        <input class="form-control mr-sm-2" type="text" placeholder="Search" id="search-input-chart"
+                               aria-label="Search"/>
                         <span id="searchclear" t-on-click="clearSearch">
                             <i class="fa fa-times search-clear"
-                              style="margin-left:-25px;margin-top:9px;"/>
+                               style="margin-left:-25px;margin-top:9px;"/>
                         </span>
                     </div>
                     <button class="btn btn-outline-success my-2 my-sm-0"
@@ -92,19 +93,19 @@
                             type="button">Search
                     </button>
                 </div>
-                        <!-- Date Inputs -->
+                <!-- Date Inputs -->
                 <div class="date-inputs"
                      style="position: absolute; right: 34.5em; font-size: smaller;font-family: monospace; padding-top:inherit; ">
                     <label for="start-date" class="date-label"
                            style="color: black;">Start Date:</label>
-                            <input type="date" id="start-date" name="start-date"
-                                   t-on-change="dateFilter"
-                                   style="color: black; border: 1px solid #4e4e4e; background-color: white; padding: 5px 10px; border-radius: 5px;"/>
-                            <label for="end-date" class="date-label"
-                                   style="color: black; margin-left: 10px;">End Date:</label>
-                            <input type="date" id="end-date" name="end-date"
-                                   t-on-change="dateFilter"
-                                   style="color: black; border: 1px solid #4e4e4e; background-color: white; padding: 5px 10px; border-radius: 5px;"/>
+                    <input type="date" id="start-date" name="start-date"
+                           t-on-change="dateFilter"
+                           style="color: black; border: 1px solid #4e4e4e; background-color: white; padding: 5px 10px; border-radius: 5px;"/>
+                    <label for="end-date" class="date-label"
+                           style="color: black; margin-left: 10px;">End Date:</label>
+                    <input type="date" id="end-date" name="end-date"
+                           t-on-change="dateFilter"
+                           style="color: black; border: 1px solid #4e4e4e; background-color: white; padding: 5px 10px; border-radius: 5px;"/>
                 </div>
                 <div class="o-dropdown dropdown theme">
                     <select class="form-select"
@@ -123,7 +124,7 @@
             <div class="all_items" style="display:grid;">
                 <div class="items"/>
             </div>
-                <!--CONTAINER FOR CONTENT GENERATION :TILE & CHART(FROM DynamicDashboardTile & DynamicDashboardChart-->
+            <!--CONTAINER FOR CONTENT GENERATION :TILE & CHART(FROM DynamicDashboardTile & DynamicDashboardChart-->
         </div>
     </t>
 </templates>

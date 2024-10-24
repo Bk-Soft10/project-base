@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-<!--    Res Partner FollowUp Form View-->
+    <!--    Res Partner FollowUp Form View-->
     <record id="res_partner_followup_view_form" model="ir.ui.view">
         <field name="name">res.partner.followup.view.form</field>
         <field name="model">res.partner</field>
@@ -61,7 +61,7 @@
             </form>
         </field>
     </record>
-<!--    Res Partner Statements Form View-->
+    <!--    Res Partner Statements Form View-->
     <record id="res_partner_statements_view_tree" model="ir.ui.view">
         <field name="name">res.partner.statements.view.tree</field>
         <field name="model">res.partner</field>
@@ -76,7 +76,7 @@
             </list>
         </field>
     </record>
-<!--Res Partner Search View Inherit-->
+    <!--Res Partner Search View Inherit-->
     <record id="view_res_partner_filter" model="ir.ui.view">
         <field name="name">res.partner.view.search.inherit.base.accounting.kit</field>
         <field name="model">res.partner</field>
@@ -97,7 +97,7 @@
             </filter>
         </field>
     </record>
-<!--Action follow-up report  -->
+    <!--Action follow-up report  -->
     <record id="action_view_list_customer_statements" model="ir.actions.act_window">
         <field name="name">Follow-up Reports</field>
         <field name="res_model">res.partner</field>
@@ -112,7 +112,7 @@
             </p>
         </field>
     </record>
-<!--Follow-up Reports MenuItem-->
+    <!--Follow-up Reports MenuItem-->
     <menuitem id="customer_statements_menu" name="Follow-up Reports"
               parent="account.menu_finance_receivables"
               action="action_view_list_customer_statements" sequence="20"

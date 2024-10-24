@@ -38,7 +38,8 @@ class AccountTaxReport(models.TransientModel):
                                           relation="account_tax_report_section_rel",
                                           column1="main_report_id",
                                           column2="sub_report_id")
-    company_id = fields.Many2one('res.company', string='Company', required=True, readonly=True, default=lambda self: self.env.company)
+    company_id = fields.Many2one('res.company', string='Company', required=True, readonly=True,
+                                 default=lambda self: self.env.company)
     name = fields.Char(string="Tax Report", default="Tax Report",
                        required=True, translate=True)
     date_from = fields.Date(string='Start Date')

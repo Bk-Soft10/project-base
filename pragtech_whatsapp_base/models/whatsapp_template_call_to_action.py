@@ -11,4 +11,3 @@ class WhatsappTemplateCallToAction(models.Model):
     phone = fields.Char(string='Phone')
     url = fields.Char(string='URL')
     url_type = fields.Selection([('static', 'Static'), ('dynamic', 'Dynamic')], default='static', string='URL Type')
-

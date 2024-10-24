@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-<!--    Views for sale report indent views -->
+    <!--    Views for sale report indent views -->
     <record id="indent_wizard" model="ir.ui.view">
         <field name="name">Product Sales Indent</field>
         <field name="model">sale.report.indent</field>

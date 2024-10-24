@@ -19,7 +19,7 @@
             <field name="name">The subscription was renewed with a new plan</field>
             <field name="desc">The subscription was renewed with a new plan</field>
         </record>
-        
+
         <record id="close_reason_5" model="close.reason">
             <field name="name">Subscription reached its end date</field>
             <field name="desc">Subscription reached its end date</field>

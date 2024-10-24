@@ -45,7 +45,8 @@ class ResCompany(models.Model):
                     'type': 'ir.actions.act_window',
                     'domain': [('id', 'in', draft_entries.ids)],
                     'search_view_id': [self.env.ref('account.view_account_move_filter').id, 'search'],
-                    'views': [[self.env.ref('account.view_move_tree').id, 'list'], [self.env.ref('account.view_move_form').id, 'form']],
+                    'views': [[self.env.ref('account.view_move_tree').id, 'list'],
+                              [self.env.ref('account.view_move_form').id, 'form']],
                 }
                 raise RedirectWarning(error_msg, action_error, _('Show unposted entries'))
 
@@ -57,7 +58,7 @@ class ResCompany(models.Model):
             ])
             if unreconciled_statement_lines:
                 error_msg = _("There are still unreconciled bank statement lines in the period you want to lock."
-                            "You should either reconcile or delete them.")
+                              "You should either reconcile or delete them.")
                 action_error = {
                     'view_mode': 'kanban',
                     'name': 'Unreconciled Transactions',

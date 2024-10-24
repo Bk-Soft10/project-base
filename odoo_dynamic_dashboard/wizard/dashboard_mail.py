@@ -37,9 +37,9 @@ class DashboardMail(models.TransientModel):
         """
         for user in self.user_ids:
             mail_content = (
-                           'Hi %s, <br/> '
-                           'I hope this mail finds you well. I am pleased to share the <b>Dashboard Report</b> with you.<br/>'
-                           'Please find the attachment<br/>') % user.name
+                               'Hi %s, <br/> '
+                               'I hope this mail finds you well. I am pleased to share the <b>Dashboard Report</b> with you.<br/>'
+                               'Please find the attachment<br/>') % user.name
             mail_values = {
                 'subject': 'Dashboard Report',
                 'author_id': self.env.user.partner_id.id,

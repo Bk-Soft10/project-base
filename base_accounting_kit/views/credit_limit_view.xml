@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-<!--  Partner View Form Inherited -->
+    <!--  Partner View Form Inherited -->
     <record id="view_partner_form" model="ir.ui.view">
         <field name="name">res.partner.view.form.inherit.base.accounting.kit</field>
         <field name="model">res.partner</field>
@@ -18,7 +18,7 @@
             </xpath>
         </field>
     </record>
-<!--  Sale Order Form View Inherited  -->
+    <!--  Sale Order Form View Inherited  -->
     <record id="view_order_form" model="ir.ui.view">
         <field name="name">sale.order.view.form.inherit.base.accounting.kit</field>
         <field name="model">sale.order</field>
@@ -31,7 +31,11 @@
             <xpath expr="//header" position="after">
                 <div class="alert alert-info" role="alert" style="height: 40px; margin-bottom:10px;"
                      invisible="not has_due">
-                    This Customer's due amount is <strong><field name="due_amount"/></strong>.
+                    This Customer's due amount is
+                    <strong>
+                        <field name="due_amount"/>
+                    </strong>
+                    .
                 </div>
             </xpath>
             <xpath expr="//sheet/div[@name='button_box']" position="after">

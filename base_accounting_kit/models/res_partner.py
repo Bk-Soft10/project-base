@@ -32,8 +32,8 @@ class ResPartner(models.Model):
                                    string="Invoice Details",
                                    readonly=True,
                                    domain=(
-                                   [('payment_state', '=', 'not_paid'),
-                                    ('move_type', '=', 'out_invoice')]))
+                                       [('payment_state', '=', 'not_paid'),
+                                        ('move_type', '=', 'out_invoice')]))
     total_due = fields.Monetary(compute='_compute_for_followup', store=False,
                                 readonly=True)
     next_reminder_date = fields.Date(compute='_compute_for_followup',
@@ -45,7 +45,7 @@ class ResPartner(models.Model):
          ('with_overdue_invoices', 'With overdue invoices'),
          ('no_action_needed', 'No action needed')],
         string='Followup status',
-        )
+    )
 
     warning_stage = fields.Float(string='Warning Amount',
                                  help="A warning message will appear once the "

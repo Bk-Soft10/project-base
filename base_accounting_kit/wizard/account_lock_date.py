@@ -29,12 +29,15 @@ class AccountUpdateLockDate(models.TransientModel):
 
     company_id = fields.Many2one(comodel_name='res.company', string="Company",
                                  required=True)
-    sale_lock_date = fields.Date(string="Sales Lock Date", help='Prevents creating and modifying invoices up to the date.')
-    purchase_lock_date = fields.Date(string="Purchase Lock date", help='Prevents creating and modifying bills up to the date.')
+    sale_lock_date = fields.Date(string="Sales Lock Date",
+                                 help='Prevents creating and modifying invoices up to the date.')
+    purchase_lock_date = fields.Date(string="Purchase Lock date",
+                                     help='Prevents creating and modifying bills up to the date.')
     hard_lock_date = fields.Date(string="Lock Everyone",
-                                       help="No users, including Advisers, can edit accounts prior to and "
-                                            "inclusive of this date. Use it for fiscal year locking for "
-                                            "example.")
+                                 help="No users, including Advisers, can edit accounts prior to and "
+                                      "inclusive of this date. Use it for fiscal year locking for "
+                                      "example.")
+
     @api.model
     def default_get(self, field_list):
         res = super(AccountUpdateLockDate, self).default_get(field_list)

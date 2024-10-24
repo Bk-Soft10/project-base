@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-<!--    Menu for advanced sale report  -->
+    <!--    Menu for advanced sale report  -->
     <menuitem id="sale_advanced_report_root"
               parent="sale.menu_sale_report"
               name="Sale Advanced Reports"

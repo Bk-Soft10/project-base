@@ -6,9 +6,8 @@ import tempfile
 from contextlib import closing
 from itertools import islice
 
-from lxml import etree
 from PyPDF2 import PdfFileReader, PdfFileWriter
-
+from lxml import etree
 from odoo import api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools import pdf, split_every
@@ -159,7 +158,7 @@ class IrActionsReport(models.Model):
         # If type is 'company' or type is not set then search
         # configuration in all company.
         elif (
-            self.custom_report_type == "company" or not self.custom_report_type
+                self.custom_report_type == "company" or not self.custom_report_type
         ) and self.get_company_without_custom_bg():
             # If any attachment not set in the any company then raise warning.
             raise UserError(
@@ -245,8 +244,8 @@ class IrActionsReport(models.Model):
         # Get the custom background if company and Lang are both matched. #T5886
         custom_background = self.per_report_com_lang_bg_ids.filtered(
             lambda bg: bg.type_attachment == "background"
-            and bg.lang_id.code == lang_code
-            and bg.company_id.id == company.id
+                       and bg.lang_id.code == lang_code
+                       and bg.company_id.id == company.id
         )
         if custom_background:
             return custom_background[:1].background_pdf
@@ -254,8 +253,8 @@ class IrActionsReport(models.Model):
         # Get the custom background if company matched but Lang is not set. #T5886
         custom_bg_only_with_company = self.per_report_com_lang_bg_ids.filtered(
             lambda bg: bg.type_attachment == "background"
-            and bg.company_id.id == company.id
-            and not bg.lang_id.code
+                       and bg.company_id.id == company.id
+                       and not bg.lang_id.code
         )
         if custom_bg_only_with_company:
             return custom_bg_only_with_company[:1].background_pdf
@@ -263,8 +262,8 @@ class IrActionsReport(models.Model):
         # Get the custom background if Lang matched but company is not set. #T5886
         custom_bg_only_with_lang = self.per_report_com_lang_bg_ids.filtered(
             lambda bg: bg.type_attachment == "background"
-            and bg.lang_id.code == lang_code
-            and not bg.company_id
+                       and bg.lang_id.code == lang_code
+                       and not bg.company_id
         )
         if custom_bg_only_with_lang:
             return custom_bg_only_with_lang[:1].background_pdf
@@ -272,8 +271,8 @@ class IrActionsReport(models.Model):
         # Get the custom background if Lang is not set and company is not set. #T5886
         default_custom_bg = self.per_report_com_lang_bg_ids.filtered(
             lambda bg: bg.type_attachment == "background"
-            and not bg.lang_id
-            and not bg.company_id
+                       and not bg.lang_id
+                       and not bg.company_id
         )
         if default_custom_bg:
             return default_custom_bg[:1].background_pdf
@@ -326,10 +325,10 @@ class IrActionsReport(models.Model):
         lang_domain = []
         temporary_files = []
         if (
-            report
-            and report.custom_report_background
-            and report.custom_report_type
-            in ["dynamic", "dynamic_per_report_company_lang"]
+                report
+                and report.custom_report_background
+                and report.custom_report_type
+                in ["dynamic", "dynamic_per_report_company_lang"]
         ):
             temp_report_id, temp_report_path = tempfile.mkstemp(
                 suffix=".pdf", prefix="with_back_report.tmp."
@@ -429,9 +428,9 @@ class IrActionsReport(models.Model):
                         limit=1,
                     )
                     if (
-                        fixed_page
-                        and fixed_page.fall_back_to_company
-                        and company_background
+                            fixed_page
+                            and fixed_page.fall_back_to_company
+                            and company_background
                     ):
                         # Start. #22260
                         # If is_bg_per_lang then get custom bg from the company.
@@ -451,9 +450,9 @@ class IrActionsReport(models.Model):
                         nocopy=True,
                     )
                     if (
-                        expression.fall_back_to_company
-                        and company_background
-                        and eval_dict.get("result", False)
+                            expression.fall_back_to_company
+                            and company_background
+                            and eval_dict.get("result", False)
                     ):
                         # Start. #22260
                         # If is_bg_per_lang then get custom bg from the company.
@@ -467,8 +466,8 @@ class IrActionsReport(models.Model):
                     else:
                         if remaining_pages:
                             if (
-                                remaining_pages.fall_back_to_company
-                                and company_background
+                                    remaining_pages.fall_back_to_company
+                                    and company_background
                             ):
                                 # Start. #22260
                                 # If is_bg_per_lang then get
@@ -510,9 +509,9 @@ class IrActionsReport(models.Model):
             custom_background = False
             # From Report Type.
             if (
-                report
-                and report.custom_report_background
-                and report.custom_report_type == "report"
+                    report
+                    and report.custom_report_background
+                    and report.custom_report_type == "report"
             ):
                 # 222760 Starts.If background per lang is True then call method for
                 # get custom background based on different languages.
@@ -526,13 +525,13 @@ class IrActionsReport(models.Model):
                 # 222760 Ends.
             # From Company Type.
             if (
-                report.custom_report_background
-                and not custom_background
-                and (
+                    report.custom_report_background
+                    and not custom_background
+                    and (
                     report.custom_report_type == "company"
                     or not report.custom_report_type
-                )
-                and self._context.get("background_company")  # #19896
+            )
+                    and self._context.get("background_company")  # #19896
             ):
                 # report background will be displayed based on the current
                 # company #19896
@@ -570,11 +569,11 @@ class IrActionsReport(models.Model):
         return lang_domain, pdf_report_path
 
     def _build_wkhtmltopdf_args(
-        self,
-        paperformat_id,
-        landscape,
-        specific_paperformat_args=None,
-        set_viewport_size=False,
+            self,
+            paperformat_id,
+            landscape,
+            specific_paperformat_args=None,
+            set_viewport_size=False,
     ):
         command_args = super()._build_wkhtmltopdf_args(
             paperformat_id,
@@ -587,14 +586,14 @@ class IrActionsReport(models.Model):
 
     @api.model
     def _run_wkhtmltopdf(  # noqa: C901
-        self,
-        bodies,
-        report_ref=False,
-        header=None,
-        footer=None,
-        landscape=False,
-        specific_paperformat_args=None,
-        set_viewport_size=False,
+            self,
+            bodies,
+            report_ref=False,
+            header=None,
+            footer=None,
+            landscape=False,
+            specific_paperformat_args=None,
+            set_viewport_size=False,
     ):
         report = self._get_report(report_ref)
         # Build the base command args for wkhtmltopdf bin
@@ -627,10 +626,10 @@ class IrActionsReport(models.Model):
 
         # BAD Customization start. T6622
         if (
-            report
-            and report.custom_report_background
-            and report.custom_report_type
-            in ["dynamic", "dynamic_per_report_company_lang"]
+                report
+                and report.custom_report_background
+                and report.custom_report_type
+                in ["dynamic", "dynamic_per_report_company_lang"]
         ):
             if report.custom_report_type == "dynamic":
                 # search append attachment record. #T6622

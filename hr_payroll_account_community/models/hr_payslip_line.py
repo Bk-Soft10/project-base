@@ -38,11 +38,11 @@ class HrPayslipLine(models.Model):
         if credit_account:
             if (register_partner_id or
                     self.salary_rule_id.account_credit_id.account_type in (
-                    'asset_receivable', 'liability_payable')):
+                            'asset_receivable', 'liability_payable')):
                 return register_partner_id.id
         else:
             if (register_partner_id or
                     self.salary_rule_id.account_debit_id.account_type in (
-                    'asset_receivable', 'liability_payable')):
+                            'asset_receivable', 'liability_payable')):
                 return register_partner_id.id
         return False

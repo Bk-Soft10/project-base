@@ -24,6 +24,7 @@ import io
 from odoo.exceptions import ValidationError
 from odoo import fields, models
 from odoo.tools import json_default
+
 try:
     from odoo.tools.misc import xlsxwriter
 except ImportError:
@@ -38,10 +39,10 @@ class SaleReportAdvance(models.TransientModel):
 
     customer_ids = fields.Many2many('res.partner',
                                     string="Customers", help="Select specific"
-                                    " customers for the report.")
+                                                             " customers for the report.")
     product_ids = fields.Many2many('product.product',
                                    string='Products', help="Select specific"
-                                   " products for the report.")
+                                                           " products for the report.")
     from_date = fields.Date(string="Start Date", help="Specify the start date "
                                                       "of the report period.")
     to_date = fields.Date(string="End Date", help="Specify the end date of the "
@@ -96,7 +97,7 @@ class SaleReportAdvance(models.TransientModel):
                             lines.product_id.list_price - lines.product_id.standard_price,
                             2)
                         if lines.product_id.standard_price != 0:
-                            margin = round((profit * 100) / lines.product_id.standard_price,2)
+                            margin = round((profit * 100) / lines.product_id.standard_price, 2)
                         res = {
                             'sequence': lines.order_id.name,
                             'date': lines.order_id.date_order,

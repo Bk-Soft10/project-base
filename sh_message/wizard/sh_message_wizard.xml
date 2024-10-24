@@ -5,10 +5,10 @@
         <field name="model">sh.message.wizard</field>
         <field name="arch" type="xml">
             <form string="Message">
-                <field name="name" />
+                <field name="name"/>
 
                 <footer>
-                    <button string="OK" class="btn-primary" special="cancel" />
+                    <button string="OK" class="btn-primary" special="cancel"/>
                 </footer>
             </form>
         </field>

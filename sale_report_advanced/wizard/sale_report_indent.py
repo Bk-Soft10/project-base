@@ -218,12 +218,12 @@ class SaleReportIndent(models.TransientModel):
                 count += 2
                 c_col = 12
                 col = 9
-                sheet.merge_range(c_row, c_col-5, c_row, c_col, cat['name'],
+                sheet.merge_range(c_row, c_col - 5, c_row, c_col, cat['name'],
                                   format1)
-                sheet.merge_range(row, c_col-5,row, c_col, 'Product', format4)
+                sheet.merge_range(row, c_col - 5, row, c_col, 'Product', format4)
                 sheet.set_column('J:J', 17)
                 col += 1
-                sheet.merge_range(row, c_col-5, row, c_col, 'Quantity', format4)
+                sheet.merge_range(row, c_col - 5, row, c_col, 'Quantity', format4)
                 sheet.set_column('K:K', 17)
                 row_number += 2
                 c_count = 0
@@ -233,12 +233,12 @@ class SaleReportIndent(models.TransientModel):
                         count += 1
                         column_number = 9
                         column_number1 = 12
-                        sheet.merge_range(row_number, column_number-2,row_number, column_number,
-                                    val['product_id'], format1)
+                        sheet.merge_range(row_number, column_number - 2, row_number, column_number,
+                                          val['product_id'], format1)
                         sheet.set_column('J:J', 17)
                         column_number += 1
-                        sheet.merge_range(row_number, column_number1-2, row_number, column_number1, val['quantity'],
-                                    format1)
+                        sheet.merge_range(row_number, column_number1 - 2, row_number, column_number1, val['quantity'],
+                                          format1)
                         sheet.set_column('K:K', 17)
                         row_number += 1
                 row = row + c_count + 2

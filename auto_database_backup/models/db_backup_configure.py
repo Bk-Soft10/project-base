@@ -48,7 +48,7 @@ ONEDRIVE_SCOPE = ['offline_access openid Files.ReadWrite.All']
 MICROSOFT_GRAPH_END_POINT = "https://graph.microsoft.com"
 GOOGLE_AUTH_ENDPOINT = 'https://accounts.google.com/o/oauth2/auth'
 GOOGLE_TOKEN_ENDPOINT = 'https://accounts.google.com/o/oauth2/token'
-GOOGLE_API_BASE_URL = 'https://www.googleapis.com'  
+GOOGLE_API_BASE_URL = 'https://www.googleapis.com'
 
 
 class DbBackupConfigure(models.Model):
@@ -654,7 +654,7 @@ class DbBackupConfigure(models.Model):
                         ftp_server.cwd(rec.ftp_path)
                     with open(temp.name, "wb+") as tmp:
                         self.dump_data(rec.db_name, tmp,
-                                                rec.backup_format)
+                                       rec.backup_format)
                     ftp_server.storbinary('STOR %s' % backup_filename,
                                           open(temp.name, "rb"))
                     if rec.auto_remove:
@@ -726,7 +726,7 @@ class DbBackupConfigure(models.Model):
                         suffix='.%s' % rec.backup_format)
                     with open(temp.name, "wb+") as tmp:
                         self.dump_data(rec.db_name, tmp,
-                                                rec.backup_format)
+                                       rec.backup_format)
                     try:
                         headers = {
                             "Authorization": "Bearer %s" % rec.gdrive_access_token}
@@ -787,7 +787,7 @@ class DbBackupConfigure(models.Model):
                     suffix='.%s' % rec.backup_format)
                 with open(temp.name, "wb+") as tmp:
                     self.dump_data(rec.db_name, tmp,
-                                            rec.backup_format)
+                                   rec.backup_format)
                 try:
                     dbx = dropbox.Dropbox(
                         app_key=rec.dropbox_client_key,
@@ -916,7 +916,7 @@ class DbBackupConfigure(models.Model):
                                 suffix='.%s' % rec.backup_format)
                             with open(temp.name, "wb+") as tmp:
                                 self.dump_data(rec.db_name, tmp,
-                                                        rec.backup_format)
+                                               rec.backup_format)
                             backup_file_path = temp.name
                             remote_file_path = f"/{folder_name}/{rec.db_name}_" \
                                                f"{backup_time}.{rec.backup_format}"
@@ -927,7 +927,7 @@ class DbBackupConfigure(models.Model):
                                 suffix='.%s' % rec.backup_format)
                             with open(temp.name, "wb+") as tmp:
                                 self.dump_data(rec.db_name, tmp,
-                                                        rec.backup_format)
+                                               rec.backup_format)
                             backup_file_path = temp.name
                             remote_file_path = f"/{folder_name}/{rec.db_name}_" \
                                                f"{backup_time}.{rec.backup_format}"
@@ -987,7 +987,7 @@ class DbBackupConfigure(models.Model):
                                 suffix='.%s' % rec.backup_format)
                             with open(temp.name, "wb+") as tmp:
                                 self.dump_data(rec.db_name, tmp,
-                                                        rec.backup_format)
+                                               rec.backup_format)
                             backup_file_path = temp.name
                             remote_file_path = f"{rec.aws_folder_name}/{rec.db_name}_" \
                                                f"{backup_time}.{rec.backup_format}"
@@ -1017,7 +1017,8 @@ class DbBackupConfigure(models.Model):
         if cron_user_id != self.env.user.id:
             _logger.error(
                 'Unauthorized database operation. Backups should only be available from the cron job.')
-            raise ValidationError("Unauthorized database operation. Backups should only be available from the cron job.")
+            raise ValidationError(
+                "Unauthorized database operation. Backups should only be available from the cron job.")
 
         _logger.info('DUMP DB: %s format %s', db_name, backup_format)
         cmd = [find_pg_tool('pg_dump'), '--no-owner', db_name]
@@ -1025,7 +1026,7 @@ class DbBackupConfigure(models.Model):
         if backup_format == 'zip':
             with tempfile.TemporaryDirectory() as dump_dir:
                 filestore = odoo.tools.config.filestore(db_name)
-                cmd.insert(-1,'--file=' + os.path.join(dump_dir, 'dump.sql'))
+                cmd.insert(-1, '--file=' + os.path.join(dump_dir, 'dump.sql'))
                 subprocess.run(cmd, env=env, stdout=subprocess.DEVNULL,
                                stderr=subprocess.STDOUT, check=True)
                 if os.path.exists(filestore):
@@ -1048,7 +1049,7 @@ class DbBackupConfigure(models.Model):
                     t.seek(0)
                     return t
         else:
-            cmd.insert(-1,'--format=c')
+            cmd.insert(-1, '--format=c')
             process = subprocess.Popen(cmd, env=env, stdout=subprocess.PIPE)
             stdout, _ = process.communicate()
             if stream:

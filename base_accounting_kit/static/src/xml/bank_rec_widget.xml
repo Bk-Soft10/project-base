@@ -10,18 +10,18 @@
         </xpath>
     </t>
     <t t-name="base_accounting_kit.BankRecKanbanRenderer"
-        t-inherit="web.KanbanRenderer" t-inherit-mode="primary" owl="1">
-            <xpath expr="//div[hasclass('o_kanban_renderer')]"
+       t-inherit="web.KanbanRenderer" t-inherit-mode="primary" owl="1">
+        <xpath expr="//div[hasclass('o_kanban_renderer')]"
                position="before">
-            </xpath>
-            <xpath expr="//div[hasclass('o_kanban_renderer')]"
+        </xpath>
+        <xpath expr="//div[hasclass('o_kanban_renderer')]"
                position="attributes">
-                <attribute name="class">o_kanban_renderer o_custom_class</attribute>
-            </xpath>
-            <xpath expr="//div[hasclass('o_custom_class')]"
-                   position="attributes">
-                <attribute name="style">width:30%;</attribute>
-            </xpath>
+            <attribute name="class">o_kanban_renderer o_custom_class</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('o_custom_class')]"
+               position="attributes">
+            <attribute name="style">width:30%;</attribute>
+        </xpath>
     </t>
     <t t-name="base_accounting_kit.BankReconcileKanbanRecord"
        t-inherit="web.KanbanRecord" t-inherit-mode="primary" owl="1">

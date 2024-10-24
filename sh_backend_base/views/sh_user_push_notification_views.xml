@@ -35,5 +35,5 @@
         <field name="type">ir.actions.act_window</field>
         <field name='view_mode'>form,list</field>
     </record>
-    
+
 </odoo>

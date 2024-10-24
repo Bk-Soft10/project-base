@@ -41,7 +41,7 @@ services:
       - ./data:/var/lib/odoo
     restart: always
 ]]></field>
-             <field name="variable_ids" eval="[
+            <field name="variable_ids" eval="[
             (5, 0, 0),
             (0, 0, {
                 'name': '{{POSTGRES-VERSION}}',

@@ -19,7 +19,7 @@
 
     "description": """Backend Base""",
 
-    "depends": ['base_setup','sale'],
+    "depends": ['base_setup', 'sale'],
 
     "data": [
         "security/ir.model.access.csv",
@@ -32,7 +32,7 @@
             # pyeval domain
             # "sh_backend_base/static/src/lib/pyeval.js",
 
-            #Notification
+            # Notification
             'sh_backend_base/static/src/xml/notification_menu.xml',
             'sh_backend_base/static/src/scss/notification.scss',
             'sh_backend_base/static/src/js/systray_activity_menu.js',

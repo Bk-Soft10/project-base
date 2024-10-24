@@ -9,8 +9,8 @@
             <form string="">
                 <sheet>
                     <group>
-                        <field name="name"/>                        
-                        <field name="desc"/>                        
+                        <field name="name"/>
+                        <field name="desc"/>
                     </group>
                 </sheet>
             </form>
@@ -23,12 +23,12 @@
         <field name="model">close.reason</field>
         <field name="arch" type="xml">
             <list>
-                <field name="name"/>                        
-                <field name="desc"/>             
+                <field name="name"/>
+                <field name="desc"/>
             </list>
         </field>
     </record>
-    
+
     <!-- close_reason action window -->
     <record id="close_reason_action" model="ir.actions.act_window">
         <field name="name">Close Reasons</field>
@@ -38,6 +38,7 @@
     </record>
 
     <!-- This Menu Item must have a parent and an action -->
-    <menuitem id="close_reason_menu_act" name="Close Reason" parent="sttl_subscription_config_menu_act" action="close_reason_action" sequence="2"/>
+    <menuitem id="close_reason_menu_act" name="Close Reason" parent="sttl_subscription_config_menu_act"
+              action="close_reason_action" sequence="2"/>
 
 </odoo>

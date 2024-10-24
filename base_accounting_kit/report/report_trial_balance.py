@@ -54,11 +54,11 @@ class ReportTrialBalance(models.AbstractModel):
         filters = " AND ".join(wheres)
         # compute the balance, debit and credit for the provided accounts
         request = (
-                    "SELECT account_id AS id, SUM(debit) AS debit, "
-                    "SUM(credit) AS credit, (SUM(debit) - SUM(credit)) "
-                    "AS balance" +
-                    " FROM " + tables + " WHERE account_id IN %s " +
-                    filters + " GROUP BY account_id")
+                "SELECT account_id AS id, SUM(debit) AS debit, "
+                "SUM(credit) AS credit, (SUM(debit) - SUM(credit)) "
+                "AS balance" +
+                " FROM " + tables + " WHERE account_id IN %s " +
+                filters + " GROUP BY account_id")
         params = (tuple(accounts.ids),) + tuple(where_params)
         self.env.cr.execute(request, params)
         for row in self.env.cr.dictfetchall():
@@ -83,7 +83,7 @@ class ReportTrialBalance(models.AbstractModel):
                 account_res.append(res)
             if display_account == 'movement' and (
                     not currency.is_zero(res['debit']) or not currency.is_zero(
-                    res['credit'])):
+                res['credit'])):
                 account_res.append(res)
         return account_res
 

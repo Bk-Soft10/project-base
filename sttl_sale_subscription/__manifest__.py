@@ -6,7 +6,7 @@
     "website": "https://www.silvertouch.com",
     'category': 'Sales',
     'depends': [
-        'sale_management','product','stock', 'sale_pdf_quote_builder'
+        'sale_management', 'product', 'stock', 'sale_pdf_quote_builder'
     ],
     'data': [
         "data/email_template.xml",
@@ -21,7 +21,7 @@
         "views/res_config.xml",
         "wizard/close_reason_wizard.xml"
     ],
-    'license':'LGPL-3',
+    'license': 'LGPL-3',
     'installable': True,
     'auto_install': False,
     'application': False,

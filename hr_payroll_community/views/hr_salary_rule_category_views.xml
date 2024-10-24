@@ -17,7 +17,7 @@
             </form>
         </field>
     </record>
-        <!-- Salary Categories tree view-->
+    <!-- Salary Categories tree view-->
     <record id="hr_salary_rule_category_view_tree" model="ir.ui.view">
         <field name="name">hr.salary.rule.category.view.list</field>
         <field name="model">hr.salary.rule.category</field>

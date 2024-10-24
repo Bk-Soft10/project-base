@@ -73,4 +73,4 @@ class DashboardBoard(http.Controller):
         if item_id:
             return item_id.unlink()
         else:
-            return  False
+            return False

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-<!--Account Print Journal Form View-->
+    <!--Account Print Journal Form View-->
     <record id="account_common_report_inherited" model="ir.ui.view">
         <field name="name">account.print.journal.view.form.inherit.base.accounting.kit</field>
         <field name="model">account.print.journal</field>
@@ -13,7 +13,7 @@
             </xpath>
         </field>
     </record>
-<!--Action Account Print Journal-->
+    <!--Action Account Print Journal-->
     <record id="action_account_print_journal_menu" model="ir.actions.act_window">
         <field name="name">Journals Audit</field>
         <field name="type">ir.actions.act_window</field>
@@ -22,7 +22,7 @@
         <field name="view_id" ref="account_common_report_inherited"/>
         <field name="target">new</field>
     </record>
-<!--Menu Journals Audit-->
+    <!--Menu Journals Audit-->
     <menuitem id="menu_print_journal"
               name="Journals Audit"
               sequence="9"

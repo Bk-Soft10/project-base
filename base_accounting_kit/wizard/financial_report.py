@@ -50,7 +50,6 @@ class FinancialReport(models.TransientModel):
         default='vertical',
         string="Format")
 
-
     def _build_contexts(self, data):
         result = {}
         result['journal_ids'] = 'journal_ids' in data['form'] and data['form'][
@@ -220,15 +219,18 @@ class FinancialReport(models.TransientModel):
                 ])
                 if report.name == "Expenses":
                     accounts = self.env['account.account'].search([
-                        ('account_type', 'in', ["expense","expense_depreciation","expense_direct_cost"])
+                        ('account_type', 'in', ["expense", "expense_depreciation", "expense_direct_cost"])
                     ])
                 if report.name == "Liability":
                     accounts = self.env['account.account'].search([
-                        ('account_type', 'in', ["liability_payable","equity","liability_current","liability_non_current"])
+                        ('account_type', 'in',
+                         ["liability_payable", "equity", "liability_current", "liability_non_current"])
                     ])
                 if report.name == "Assets":
                     accounts = self.env['account.account'].search([
-                        ('account_type', 'in', ["asset_receivable","asset_cash","asset_current","asset_non_current","asset_prepayments","asset_fixed"])
+                        ('account_type', 'in',
+                         ["asset_receivable", "asset_cash", "asset_current", "asset_non_current", "asset_prepayments",
+                          "asset_fixed"])
                     ])
 
                 res[report.id]['account'] = self._compute_account_balance(

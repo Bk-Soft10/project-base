@@ -11,7 +11,8 @@
                             class="oe_highlight o_button_icon o_icon_play"/>
                     <button string="Stop Instance" type="object" name="stop_instance" invisible="state != 'running'"
                             class="o_button_icon o_icon_stop"/>
-                    <button string="Restart Instance" type="object" name="restart_instance" invisible="state != 'running'"
+                    <button string="Restart Instance" type="object" name="restart_instance"
+                            invisible="state != 'running'"
                             class="o_button_icon o_icon_refresh"/>
                     <field name="state" widget="statusbar"/>
                 </header>
@@ -72,7 +73,7 @@
                                 <h2>Docker:</h2>
                                 <ol>
                                     <li>Visit the official Docker website for installation instructions: <a
-                                        href="https://docs.docker.com/get-docker/">Docker Installation Guide</a>.
+                                            href="https://docs.docker.com/get-docker/">Docker Installation Guide</a>.
                                     </li>
                                     <li>Choose the appropriate installation method for your operating system (Windows,
                                         macOS, or Linux).
@@ -90,7 +91,8 @@
                                         install Docker Compose:
                                     </li>
                                     <li>Follow the official Docker Compose installation guide: <a
-                                        href="https://docs.docker.com/compose/install/">Docker Compose Installation</a>.
+                                            href="https://docs.docker.com/compose/install/">Docker Compose
+                                        Installation</a>.
                                     </li>
                                     <li>Select the instructions relevant to your operating system.</li>
                                     <li>Confirm the installation by running <code>docker-compose --version</code>.
@@ -101,7 +103,7 @@
                                 <ol>
                                     <li>Git is a distributed version control system. To install Git:</li>
                                     <li>Visit the Git website and download the appropriate installer for your OS: <a
-                                        href="https://git-scm.com/downloads">Git Downloads</a>.
+                                            href="https://git-scm.com/downloads">Git Downloads</a>.
                                     </li>
                                     <li>Follow the installation instructions provided.</li>
                                     <li>Verify Git's installation by running <code>git --version</code>.
@@ -124,7 +126,8 @@
                                     processes for all users. Thank you for your support!
                                 </p>
                                 <p>For more information, please contact us at <a
-                                    href="mailto:davidmonterocrespo24@gmail.com"></a> : davidmonterocrespo24@gmail.com
+                                        href="mailto:davidmonterocrespo24@gmail.com"></a> :
+                                    davidmonterocrespo24@gmail.com
                                 </p>
                             </div>
                         </page>
@@ -176,7 +179,7 @@
                             <div class="o_kanban_record_bottom">
                                 <div class="oe_kanban_bottom_right">
                                     <span
-                                        t-attf-class="badge #{['draft', 'error'].indexOf(record.state.raw_value) > -1 ? 'badge-secondary' : ['stopped'].indexOf(record.state.raw_value) > -1 ? 'badge-danger' : ['running'].indexOf(record.state.raw_value) > -1 ? 'badge-success' : ''}">
+                                            t-attf-class="badge #{['draft', 'error'].indexOf(record.state.raw_value) > -1 ? 'badge-secondary' : ['stopped'].indexOf(record.state.raw_value) > -1 ? 'badge-danger' : ['running'].indexOf(record.state.raw_value) > -1 ? 'badge-success' : ''}">
                                         <field name="state"/>
                                     </span>
                                 </div>

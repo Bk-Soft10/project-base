@@ -60,6 +60,7 @@ def get_query(self, args, operation, field, start_date=None, end_date=None,
     else:
         end_date_query = ''
     query_str = 'SELECT %s FROM ' % data + from_clause + join + where_str + start_date_query + end_date_query + group_by_str
+
     def format_param(x):
         if not isinstance(x, tuple):
             return "'" + str(x) + "'"
@@ -67,6 +68,9 @@ def get_query(self, args, operation, field, start_date=None, end_date=None,
             return "(" + str(x[0]) + ")"
         else:
             return str(x)
+
     exact_query = query_str % tuple(map(format_param, where_clause_params))
     return exact_query
+
+
 models.BaseModel.get_query = get_query

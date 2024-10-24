@@ -20,9 +20,12 @@
                         <field name="element_name" readonly="1"/>
                         <field name="template_format" readonly="1"/>
                         <field name="interactive_actions" readonly="1"/>
-                        <field name="quick_reply1" readonly="1" invisible="interactive_actions in ['none', 'call_to_action']"/> 
-                        <field name="add_sample_media_message" readonly="1" invisible="template_type in ['text', 'location']"/>
-                        <field name="sample_url" widget="url" readonly="1" invisible="template_type in ['text', 'location']"/>
+                        <field name="quick_reply1" readonly="1"
+                               invisible="interactive_actions in ['none', 'call_to_action']"/>
+                        <field name="add_sample_media_message" readonly="1"
+                               invisible="template_type in ['text', 'location']"/>
+                        <field name="sample_url" widget="url" readonly="1"
+                               invisible="template_type in ['text', 'location']"/>
 
                         <field name="sample_message" readonly="1"/>
                         <footer>

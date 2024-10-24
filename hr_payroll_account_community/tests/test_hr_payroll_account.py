@@ -66,17 +66,17 @@ class TestHrPayrollAccount(common.TransactionCase):
                 (6, 0,
                  [self.ref(
                      'hr_payroll_community.hr_salary_rule_houserentallowance1'),
-                  self.ref(
-                     'hr_payroll_community.hr_salary_rule_convanceallowance1'),
-                  self.ref(
-                     'hr_payroll_community.hr_salary_rule_professionaltax1'),
-                  self.ref(
-                      'hr_payroll_community.hr_salary_rule_providentfund1'),
-                  self.ref(
-                      'hr_payroll_community.hr_salary_rule_meal_voucher'),
-                  self.ref(
-                      'hr_payroll_community.hr_salary_rule_sales_commission')
-            ])],
+                     self.ref(
+                         'hr_payroll_community.hr_salary_rule_convanceallowance1'),
+                     self.ref(
+                         'hr_payroll_community.hr_salary_rule_professionaltax1'),
+                     self.ref(
+                         'hr_payroll_community.hr_salary_rule_providentfund1'),
+                     self.ref(
+                         'hr_payroll_community.hr_salary_rule_meal_voucher'),
+                     self.ref(
+                         'hr_payroll_community.hr_salary_rule_sales_commission')
+                 ])],
         })
         # Create account journal.
         self.hr_contract_john = self.env['hr.contract'].create({

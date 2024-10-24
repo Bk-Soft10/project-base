@@ -147,7 +147,7 @@ class HrPayslip(models.Model):
                     'journal_id': slip.journal_id.id,
                     'date': slip.date or slip.date_to,
                     'debit': 0.0,
-                    'credit':  slip.company_id.currency_id.round(
+                    'credit': slip.company_id.currency_id.round(
                         debit_sum - credit_sum),
                 })
                 line_ids.append(adjust_credit)
@@ -165,7 +165,7 @@ class HrPayslip(models.Model):
                     'account_id': acc_id,
                     'journal_id': slip.journal_id.id,
                     'date': slip.date or slip.date_to,
-                    'debit':  slip.company_id.currency_id.round(
+                    'debit': slip.company_id.currency_id.round(
                         credit_sum - debit_sum),
                     'credit': 0.0,
                 })

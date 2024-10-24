@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-<!--Cash Flow Report Form View-->
+    <!--Cash Flow Report Form View-->
     <record id="cash_flow_report_view" model="ir.ui.view">
         <field name="name">cash.flow.report.view.form.inherit.base.accounting.kit</field>
         <field name="model">cash.flow.report</field>
@@ -34,7 +34,7 @@
             <field name="journal_ids" position="replace"/>
         </field>
     </record>
-<!--Action Cash Flow Report-->
+    <!--Action Cash Flow Report-->
     <record id="action_cash_flow_report" model="ir.actions.act_window">
         <field name="name">Cash Flow Statement</field>
         <field name="res_model">cash.flow.report</field>
@@ -45,7 +45,7 @@
         <field name="context"
                eval="{'default_account_report_id':ref('base_accounting_kit.account_financial_report_cash_flow0')}"/>
     </record>
-<!--Menu Cash Flow Statement-->
+    <!--Menu Cash Flow Statement-->
     <menuitem id="menu_account_cash_flow_report"
               name="Cash Flow Statement"
               sequence="5"

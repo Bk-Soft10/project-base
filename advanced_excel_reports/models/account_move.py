@@ -134,14 +134,14 @@ class AccountMove(models.Model):
             sheet.write('H16', 'Subtotal', txt_border)
             row = 17
             self._add_invoice_line_to_excel(sheet, account_move, row, border, txt_border,
-                               currency_symbol)
+                                            currency_symbol)
         workbook.close()
         output.seek(0)
         response.stream.write(output.read())
         output.close()
 
     def _add_invoice_line_to_excel(self, sheet, account_move, row, border, txt_border,
-                      currency_symbol):
+                                   currency_symbol):
         """
         Function to add invoice line values to the Excel file
         :param sheet: Current Excel sheet where data to be added

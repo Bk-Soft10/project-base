@@ -77,8 +77,8 @@ class AccountAssetDepreciationLine(models.Model):
             company_currency = line.asset_id.company_id.currency_id
             current_currency = line.asset_id.currency_id
             amount = current_currency._convert(line.amount, company_currency,
-                                      line.asset_id.company_id,
-                                      depreciation_date)
+                                               line.asset_id.company_id,
+                                               depreciation_date)
             asset_name = line.asset_id.name + ' (%s/%s)' % (line.sequence, len(line.asset_id.depreciation_line_ids))
             partner = self.env['res.partner']._find_accounting_partner(line.asset_id.partner_id)
             move_line_1 = {
@@ -207,6 +207,7 @@ class AccountAssetDepreciationLine(models.Model):
 
     def log_message_when_posted(self):
         """Format and post messages for asset depreciation lines that are posted."""
+
         def _format_message(message_description, tracked_values):
             message = ''
             if message_description:

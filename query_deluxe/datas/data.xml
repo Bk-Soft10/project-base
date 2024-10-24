@@ -32,7 +32,9 @@
 
     <record id="update_res_partner_email" model="querydeluxe">
         <field name="name">UPDATE res_partner AS a SET email = CONCAT(a.name,'@company_mail.com');</field>
-        <field name="note">Modify all the email of the contact within the rule 'name of the contact'+'@company_mail.com'</field>
+        <field name="note">Modify all the email of the contact within the rule 'name of the
+            contact'+'@company_mail.com'
+        </field>
     </record>
 
     <record id="update_res_users_password" model="querydeluxe">
@@ -42,20 +44,24 @@
 
     <record id="with_product_table" model="querydeluxe">
         <field name="name">
-WITH temporary_table AS (
-    SELECT pt.id AS pt_id, pp.id AS pp_id
-    FROM product_template pt
-    LEFT JOIN product_product pp
-    ON pp.product_tmpl_id = pt.id
-)
-SELECT * FROM temporary_table ORDER BY pt_id;
+            WITH temporary_table AS (
+            SELECT pt.id AS pt_id, pp.id AS pp_id
+            FROM product_template pt
+            LEFT JOIN product_product pp
+            ON pp.product_tmpl_id = pt.id
+            )
+            SELECT * FROM temporary_table ORDER BY pt_id;
         </field>
         <field name="note">Associate each product template with their product variant</field>
     </record>
 
     <record id="select_sale_order" model="querydeluxe">
-        <field name="name">SELECT * FROM sale_order WHERE partner_id IN (SELECT id FROM res_partner WHERE name ILIKE '%Johnson%') LIMIT 5;</field>
-        <field name="note">Show only the 5 first records of sale.order's model where their client have 'Johnson' in their name</field>
+        <field name="name">SELECT * FROM sale_order WHERE partner_id IN (SELECT id FROM res_partner WHERE name ILIKE
+            '%Johnson%') LIMIT 5;
+        </field>
+        <field name="note">Show only the 5 first records of sale.order's model where their client have 'Johnson' in
+            their name
+        </field>
     </record>
 
     <record id="select_versions" model="querydeluxe">

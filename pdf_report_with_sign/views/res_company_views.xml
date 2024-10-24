@@ -6,12 +6,12 @@
         <field name="model">res.company</field>
         <field name="inherit_id" ref="base.view_company_form"/>
         <field name="arch" type="xml">
-             <xpath expr="//field[@name='currency_id']" position="after">
+            <xpath expr="//field[@name='currency_id']" position="after">
                 <field name="signature"/>
                 <field name="signed_user_id"/>
                 <field name="job_id"/>
                 <field name="signed_time"/>
-             </xpath>
+            </xpath>
         </field>
     </record>
 </odoo>

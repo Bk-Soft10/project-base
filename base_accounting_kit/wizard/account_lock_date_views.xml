@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-<!--Account Lock Date Form View-->
+    <!--Account Lock Date Form View-->
     <record model="ir.ui.view" id="account_lock_date_view_form">
         <field name="name">account.lock.date.view.form</field>
         <field name="model">account.lock.date</field>
@@ -10,11 +10,17 @@
                     <field name="company_id" invisible="1"/>
                     <label for="sale_lock_date"/>
                     <div class="d-flex">
-                        <field name="sale_lock_date" class="oe_inline"/><span class="text-muted"><i>to lock invoices</i></span>
+                        <field name="sale_lock_date" class="oe_inline"/>
+                        <span class="text-muted">
+                            <i>to lock invoices</i>
+                        </span>
                     </div>
                     <label for="purchase_lock_date"/>
                     <div class="d-flex">
-                        <field name="purchase_lock_date" class="oe_inline"/><span class="text-muted"><i>to lock bills</i></span>
+                        <field name="purchase_lock_date" class="oe_inline"/>
+                        <span class="text-muted">
+                            <i>to lock bills</i>
+                        </span>
                     </div>
                     <field name="hard_lock_date" class="oe_inline"/>
                 </group>
@@ -25,14 +31,14 @@
             </form>
         </field>
     </record>
-<!--Action Account Lock Date-->
+    <!--Action Account Lock Date-->
     <record model="ir.actions.act_window" id="account_update_lock_date_act_window">
         <field name="name">Lock your Fiscal Period</field>
         <field name="res_model">account.lock.date</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>
-<!--Menu Lock Dates-->
+    <!--Menu Lock Dates-->
     <menuitem id="actions_menu"
               name="Actions"
               sequence="500"

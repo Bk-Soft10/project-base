@@ -45,7 +45,7 @@ class ResCompany(models.Model):
             ).filtered(lambda r: r.fall_back_to_company)
         # If fall_back_to_company and custom bg per lang is not set then raise warning.
         if is_fall_back_to_company and not (
-            self.is_bg_per_lang and self.bg_per_lang_ids
+                self.is_bg_per_lang and self.bg_per_lang_ids
         ):
             raise UserError(
                 _(

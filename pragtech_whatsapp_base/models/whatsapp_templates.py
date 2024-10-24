@@ -2,6 +2,7 @@ import logging
 import requests
 import json
 from odoo import fields, models, _
+
 _logger = logging.getLogger(__name__)
 from odoo.exceptions import UserError
 
@@ -18,7 +19,8 @@ class WhatsappTemplates(models.Model):
     name = fields.Char(string='Name')
     languages = fields.Many2one('res.lang', string='Template Languages', default=_get_default)
     category = fields.Char(string='Category')
-    header = fields.Selection([('text', 'Text'), ('media_image', 'Media:Image'), ('media_document', 'Media:Document'), ('media_video', 'Media:Video'), ('location', 'Location')],
+    header = fields.Selection([('text', 'Text'), ('media_image', 'Media:Image'), ('media_document', 'Media:Document'),
+                               ('media_video', 'Media:Video'), ('location', 'Location')],
                               default="text", string='Template Header')
     body = fields.Text(string='Body')
     state = fields.Selection([('draft', 'Draft'), ('post', 'Posted')], string="State", default="draft", required=True)
@@ -27,13 +29,16 @@ class WhatsappTemplates(models.Model):
     sample_message = fields.Text(string="Sample Message")
     header_text = fields.Char(string="Header Text")
     template_type = fields.Selection(
-        [('simple', 'Simple Template'), ('add_sign', 'Add Signature'), ('add_chatter_msg', 'Add Chater Message'), ('add_order_product_details', 'Add Product Details'),
+        [('simple', 'Simple Template'), ('add_sign', 'Add Signature'), ('add_chatter_msg', 'Add Chater Message'),
+         ('add_order_product_details', 'Add Product Details'),
          ('add_order_info', 'Add Order infor')], string="Template Type", default="add_sign", required=True)
     footer = fields.Text(string="Footer")
     approval_state = fields.Char(string="Approval State")
-    interactive_actions = fields.Selection([('none', 'None'), ('call_to_action', 'Call To Action'), ('quick_replies', 'Quick Replies')], default='none',
-                                           string='Interactive Actions')
-    whatsapp_call_to_action_ids = fields.One2many('whatsapp.template.call.to.action', 'whatsapp_template_id', string='Call To Action')
+    interactive_actions = fields.Selection(
+        [('none', 'None'), ('call_to_action', 'Call To Action'), ('quick_replies', 'Quick Replies')], default='none',
+        string='Interactive Actions')
+    whatsapp_call_to_action_ids = fields.One2many('whatsapp.template.call.to.action', 'whatsapp_template_id',
+                                                  string='Call To Action')
     template_id = fields.Char(string='Template Id')
     provider = fields.Selection([('whatsapp_chat_api', '1msg'), ('meta', 'Meta')], string="Provider")
     default_template = fields.Boolean(string='Default Template')
@@ -59,8 +64,9 @@ class WhatsappTemplates(models.Model):
 
     def import_template_from_chat_api(self):
         # Import templates from 1msg if name is exists in odoo then it will add its approval state & namespace
-        response = requests.get(self.whatsapp_instance_id.whatsapp_endpoint + '/templates?token=' + self.whatsapp_instance_id.whatsapp_token,
-                                headers={"Content-Type": "application/json"})
+        response = requests.get(
+            self.whatsapp_instance_id.whatsapp_endpoint + '/templates?token=' + self.whatsapp_instance_id.whatsapp_token,
+            headers={"Content-Type": "application/json"})
         if response.status_code == 200:
             for template in response.json()['templates']:
                 if template['name'] == self.name:
@@ -71,7 +77,8 @@ class WhatsappTemplates(models.Model):
 
     def import_template_from_gupshup(self):
         # Import templates from gupshup if name is exists in odoo then it will add its id,approval state & corresponding details
-        headers = {"Content-Type": "application/x-www-form-urlencoded", "apikey": self.whatsapp_instance_id.whatsapp_gupshup_api_key}
+        headers = {"Content-Type": "application/x-www-form-urlencoded",
+                   "apikey": self.whatsapp_instance_id.whatsapp_gupshup_api_key}
         url = "https://api.gupshup.io/sm/api/v1/template/list/" + self.whatsapp_instance_id.whatsapp_gupshup_app_name
         response = requests.get(url, headers=headers)
         if response.status_code == 200:
@@ -116,7 +123,8 @@ class WhatsappTemplates(models.Model):
                 template_data.update({
                     "components": [
                         {
-                            "example": {"header_handle": ["https://www.pragtech.co.in/pdf/whatsapp/pragmatic_core_values.mp4"]},
+                            "example": {
+                                "header_handle": ["https://www.pragtech.co.in/pdf/whatsapp/pragmatic_core_values.mp4"]},
                             "format": "VIDEO",
                             "type": "HEADER"
                         },
@@ -186,7 +194,8 @@ class WhatsappTemplates(models.Model):
             })
         template_data.update({"language": self.languages.iso_code, "name": self.name})
         if self.quick_reply1:
-            template_data.get('components').append({"buttons": [{'text': self.quick_reply1, 'type': 'QUICK_REPLY'}], "type": "BUTTONS"})
+            template_data.get('components').append(
+                {"buttons": [{'text': self.quick_reply1, 'type': 'QUICK_REPLY'}], "type": "BUTTONS"})
         if self.footer:
             template_data.get('components').append({"text": self.footer, "type": "FOOTER"})
         url = f"{self.whatsapp_instance_id.whatsapp_endpoint}{'/addTemplate'}?token={self.whatsapp_instance_id.whatsapp_token}"
@@ -195,10 +204,13 @@ class WhatsappTemplates(models.Model):
         if add_template_response.status_code == 201 or add_template_response.status_code == 200:
             json_add_template_response = add_template_response.json()
             if not json_add_template_response.get('message') and not json_add_template_response.get('error'):
-                _logger.info("\nAdd templates successfully in 1msg add_template_response from whatsapp templates form view %s" % str(json_add_template_response))
+                _logger.info(
+                    "\nAdd templates successfully in 1msg add_template_response from whatsapp templates form view %s" % str(
+                        json_add_template_response))
                 self.state = "post"
                 if json_add_template_response.get('status'):
-                    if json_add_template_response.get('status') == 'submitted' and json_add_template_response.get('namespace'):
+                    if json_add_template_response.get('status') == 'submitted' and json_add_template_response.get(
+                            'namespace'):
                         self.namespace = json_add_template_response['namespace']
                     self.approval_state = json_add_template_response['status']
             else:
@@ -224,7 +236,8 @@ class WhatsappTemplates(models.Model):
                 'name': 'Message',
                 'res_model': 'export.template.wizard',
                 'view_mode': 'form',
-                'view_id': self.env['ir.model.data']._xmlid_to_res_id('pragtech_whatsapp_base.export_template_wizard_form'),
+                'view_id': self.env['ir.model.data']._xmlid_to_res_id(
+                    'pragtech_whatsapp_base.export_template_wizard_form'),
                 'target': 'new',
                 'nodestroy': True,
             }
@@ -243,7 +256,8 @@ class WhatsappTemplates(models.Model):
         context['default_quick_reply1'] = self.quick_reply1
         context['default_sample_message'] = self.gupshup_sample_message
         if self.sample_url:
-            context['default_add_sample_media_message'] = 'Download the document from the Sample URL and upload it to gupshup'
+            context[
+                'default_add_sample_media_message'] = 'Download the document from the Sample URL and upload it to gupshup'
             context['default_sample_url'] = self.sample_url
 
         return {
@@ -251,7 +265,8 @@ class WhatsappTemplates(models.Model):
             'name': 'View Gupshup Template1333',
             'res_model': 'whatsapp.gupshup.templates',
             'view_mode': 'form',
-            'view_id': self.env['ir.model.data']._xmlid_to_res_id('pragtech_whatsapp_base.whatsapp_gupshup_templates_wizard_form'),
+            'view_id': self.env['ir.model.data']._xmlid_to_res_id(
+                'pragtech_whatsapp_base.whatsapp_gupshup_templates_wizard_form'),
             'target': 'new',
             'nodestroy': True,
             'context': context,

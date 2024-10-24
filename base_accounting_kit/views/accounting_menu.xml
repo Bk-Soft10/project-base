@@ -4,7 +4,7 @@
     <record model="ir.ui.menu" id="account.menu_finance">
         <field name="name">Accounting</field>
     </record>
-<!--    Menu Generic Statements-->
+    <!--    Menu Generic Statements-->
     <menuitem id="account_reports_generic_statements" sequence="1"
               name="Generic Statements"
               parent="account.menu_finance_reports"/>

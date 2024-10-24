@@ -35,7 +35,7 @@ class AccountTypes(models.Model):
         ('payable', 'Payable'),
         ('liquidity', 'Liquidity'),
     ], required=True, default='other',
-        help="The 'Internal Type' is used for features available on " 
+        help="The 'Internal Type' is used for features available on "
              "different types of accounts: liquidity type is for cash or "
              "bank accounts" \
              ", payable/receivable is for vendor/customer accounts.")

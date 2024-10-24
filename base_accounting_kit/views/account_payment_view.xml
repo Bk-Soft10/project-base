@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-<!--  Inheriting Account Payment Form View  -->
+    <!--  Inheriting Account Payment Form View  -->
     <record id="view_account_payment_form" model="ir.ui.view">
         <field name="name">account.payment.view.form.inherit.base.accounting.kit</field>
         <field name="model">account.payment</field>
@@ -23,7 +23,7 @@
                        invisible="payment_method_code not in ['check_printing','pdc'] or state != 'draft'"
                        groups="base.group_no_one"/>
             </xpath>
-<!--            <xpath expr="//field[@name='ref']" position="after">-->
+            <!--            <xpath expr="//field[@name='ref']" position="after">-->
             <xpath expr="//field[@name='date']" position="after">
                 <field name="check_manual_sequencing" invisible="1"/>
                 <field name="check_number"

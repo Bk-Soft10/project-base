@@ -11,8 +11,9 @@
                         <field name="reason_id" options="{'no_open': True, 'no_create': True}"/>
                     </group>
                     <footer>
-                        <button name="action_close_subs" class="oe_right oe_highlight"  type="object" string="Close Subscription"/>
-                        <button  class="oe_right" string="Cancel" special="cancel"/>
+                        <button name="action_close_subs" class="oe_right oe_highlight" type="object"
+                                string="Close Subscription"/>
+                        <button class="oe_right" string="Cancel" special="cancel"/>
                     </footer>
                 </sheet>
             </form>

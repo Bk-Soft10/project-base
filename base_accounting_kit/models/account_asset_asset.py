@@ -74,9 +74,9 @@ class AccountAssetAsset(models.Model):
     method_period = fields.Integer(string='Number of Months in a Period',
                                    required=True, readonly=True, default=12,
                                    help="The amount of time between two depreciation's, in months")
-    method_end = fields.Date(string='Ending Date', readonly=True,)
+    method_end = fields.Date(string='Ending Date', readonly=True, )
     method_progress_factor = fields.Float(string='Degressive Factor',
-                                          readonly=True, default=0.3,)
+                                          readonly=True, default=0.3, )
     value_residual = fields.Float(compute='_amount_residual',
                                   digits=0, string='Residual Value')
     method_time = fields.Selection(
@@ -90,7 +90,7 @@ class AccountAssetAsset(models.Model):
     depreciation_line_ids = fields.One2many('account.asset.depreciation.line',
                                             'asset_id',
                                             string='Depreciation Lines',
-                                            readonly=True,)
+                                            readonly=True, )
     salvage_value = fields.Float(string='Salvage Value', digits=0,
                                  readonly=True,
                                  help="It is the amount you plan to have that you cannot depreciate.")

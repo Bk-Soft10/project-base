@@ -24,6 +24,7 @@ import io
 from odoo.tools import json_default
 from odoo.exceptions import ValidationError
 from odoo import fields, models
+
 try:
     from odoo.tools.misc import xlsxwriter
 except ImportError:
@@ -120,7 +121,7 @@ class SaleReportCategory(models.TransientModel):
         category = []
         for rec in self.category_ids:
             data = {'id': rec,
-                 'name': rec.complete_name}
+                    'name': rec.complete_name}
             category.append(data)
         return category
 

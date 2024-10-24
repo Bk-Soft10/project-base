@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-<!--Account Report Partner Ledger Form View-->
+    <!--Account Report Partner Ledger Form View-->
     <record id="account_report_partner_ledger_view" model="ir.ui.view">
         <field name="name">account.report.partner.ledger.view.form.inherit.base.accounting.kit</field>
         <field name="model">account.report.partner.ledger</field>
@@ -15,7 +15,7 @@
             </xpath>
         </field>
     </record>
-<!--Action Account Report Partner Ledger-->
+    <!--Action Account Report Partner Ledger-->
     <record id="action_partner_leadger" model="ir.actions.act_window">
         <field name="name">Partner Ledger</field>
         <field name="res_model">account.report.partner.ledger</field>
@@ -24,7 +24,7 @@
         <field name="view_id" ref="account_report_partner_ledger_view"/>
         <field name="target">new</field>
     </record>
-<!--Menu Partner Ledger-->
+    <!--Menu Partner Ledger-->
     <menuitem name="Partner Ledger"
               id="menu_partner_ledger" sequence="1"
               parent="base_accounting_kit.account_reports_partner"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-<!--  Account Move Line Tree View  -->
+    <!--  Account Move Line Tree View  -->
     <record id="account_move_line_view_tree"
             model="ir.ui.view">
         <field name="name">account.move.line.view.tree</field>

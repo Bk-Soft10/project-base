@@ -24,6 +24,7 @@ import io
 from odoo.tools import json_default
 from odoo.exceptions import ValidationError
 from odoo import fields, models, _
+
 try:
     from odoo.tools.misc import xlsxwriter
 except ImportError:
@@ -63,7 +64,7 @@ class SaleReportWeekly(models.TransientModel):
         datas = self._get_data()
         return self.env.ref(
             'sale_report_advanced.action_sales_weekly').report_action([],
-                                                        data=datas)
+                                                                      data=datas)
 
     def _get_data(self):
         """ Function for getting data for report """
@@ -86,7 +87,7 @@ class SaleReportWeekly(models.TransientModel):
             for time_id, time_name in times.items():
                 if rec.date_order.hour > self._get_time_start(
                         time_id) and rec.date_order.hour <= self._get_time_end(
-                        time_id):
+                    time_id):
                     res = {
                         'order': rec.name,
                         'amount': amount,

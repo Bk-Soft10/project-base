@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-<!--    Financial report common form view    -->
+    <!--    Financial report common form view    -->
     <record id="financial_report_view_form" model="ir.ui.view">
         <field name="name">financial.report.view.form</field>
         <field name="model">financial.report</field>
@@ -28,7 +28,7 @@
             </form>
         </field>
     </record>
-<!--    Action for profit and loss    -->
+    <!--    Action for profit and loss    -->
     <record id="action_profit_and_loss_report" model="ir.actions.act_window">
         <field name="name">Profit and Loss</field>
         <field name="res_model">financial.report</field>
@@ -50,8 +50,8 @@
         <field name="context"
                eval="{'default_account_report_id':ref('base_accounting_kit.account_financial_report_balancesheet0')}"/>
     </record>
-<!--Menu Balance Sheet And Profit and Loss-->
-     <menuitem id="account_financial_reports_profit_loss" sequence="1"
+    <!--Menu Balance Sheet And Profit and Loss-->
+    <menuitem id="account_financial_reports_profit_loss" sequence="1"
               name="Profit and Loss" parent="base_accounting_kit.account_reports_generic_statements"
               action="action_profit_and_loss_report"/>
     <menuitem id="_account_financial_reports_balance_sheet" sequence="2"

@@ -12,15 +12,15 @@
                     </group>
 
                     <group invisible="understand">
-						<field name="understand" widget="boolean_toggle" style="color: blue"/>
-					</group>
+                        <field name="understand" widget="boolean_toggle" style="color: blue"/>
+                    </group>
 
                     <group>
                         <field name="query_id" invisible="1"/>
                         <field name="name" invisible="0" readonly="1"/>
                         <field name="orientation" widget="radio" options="{'horizontal': true}"/>
-					</group>
-				</sheet>
+                    </group>
+                </sheet>
 
                 <footer>
                     <button string="Print" name="print_pdf" type="object" class="oe_highlight"/>

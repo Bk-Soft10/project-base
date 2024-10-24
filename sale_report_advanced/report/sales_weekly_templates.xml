@@ -37,16 +37,16 @@
                             <tbody>
                                 <tr t-foreach="form" t-as="order" t-key="order">
                                     <t t-if="order['time'] == t">
-                                    <td>
-                                        <t t-esc="order['order']"/>
-                                    </td>
-                                    <td>
-                                        <t t-esc="order['date']"/>
-                                    </td>
-                                    <td>
-                                        <t t-esc="order['amount']"/>
-                                        <t t-set="t_amt" t-value="t_amt + order['amount']"/>
-                                    </td>
+                                        <td>
+                                            <t t-esc="order['order']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="order['date']"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="order['amount']"/>
+                                            <t t-set="t_amt" t-value="t_amt + order['amount']"/>
+                                        </td>
                                     </t>
                                 </tr>
                                 <tr>

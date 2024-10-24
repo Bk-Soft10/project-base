@@ -3,6 +3,7 @@ from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
 import requests
 import logging
+
 _logger = logging.getLogger(__name__)
 from requests.structures import CaseInsensitiveDict
 from werkzeug.urls import url_join
@@ -16,12 +17,14 @@ class WhatsappInstance(models.Model):
         return self.search([], order='sequence desc', limit=1).sequence + 1
 
     name = fields.Char('Name', required=True)
-    status = fields.Selection([('enable', 'Enable'), ('disable', 'Disable')], string='Status', default='disable', copy=False)
+    status = fields.Selection([('enable', 'Enable'), ('disable', 'Disable')], string='Status', default='disable',
+                              copy=False)
     provider = fields.Selection([('whatsapp_chat_api', '1msg'), ('meta', 'Meta')], string="Whatsapp Service Provider",
                                 default='whatsapp_chat_api')
     whatsapp_endpoint = fields.Char('Whatsapp Endpoint', help="1msg endpoint url with instance id", copy=False)
     whatsapp_token = fields.Char('Whatsapp Token', help="1msg token", copy=False)
-    send_whatsapp_through_template = fields.Boolean(string='Send Message Through Template', help='Send Message Through Template Using Respective Provider')
+    send_whatsapp_through_template = fields.Boolean(string='Send Message Through Template',
+                                                    help='Send Message Through Template Using Respective Provider')
     whatsapp_gupshup_api_key = fields.Char('Gupshup Api Key', copy=False)
     whatsapp_gupshup_app_name = fields.Char('Gupshup App Name', copy=False)
     gupshup_source_number = fields.Char('Gupshup Phone Number', copy=False)
@@ -36,7 +39,7 @@ class WhatsappInstance(models.Model):
     res_company_ids = fields.One2many('res.company', 'whatsapp_instance_id', string='Connected Companies')
     whatsapp_template_ids = fields.One2many('whatsapp.templates', 'whatsapp_instance_id', string='Whatsapp Templates')
     sequence = fields.Char(string="Sequence", readonly=True, required=True, copy=False, default='New')
-    #integrating meta and its credential fields
+    # integrating meta and its credential fields
     whatsapp_meta_api_token = fields.Char('Meta Api Token', copy=False)
     whatsapp_meta_webhook_token = fields.Char('Meta Webhook Verify Token', copy=False)
     whatsapp_meta_phone_number_id = fields.Char('Meta Phone Number Id', copy=False)
@@ -49,35 +52,44 @@ class WhatsappInstance(models.Model):
     def create(self, vals):
         res = super(WhatsappInstance, self).create(vals)
         # Allow provider wise only one default instance is true
-        module = self.env['ir.module.module'].sudo().search([('name' , '=', 'pragtech_whatsapp_messenger'), ('state', '=', 'installed')])
+        module = self.env['ir.module.module'].sudo().search(
+            [('name', '=', 'pragtech_whatsapp_messenger'), ('state', '=', 'installed')])
         if module:
             Param_set = self.env['ir.config_parameter'].sudo()
             if res.provider == 'meta':
-                Param_set.set_param("pragtech_whatsapp_messenger.whatsapp_phone_number", res.whatsapp_meta_phone_number_id)
+                Param_set.set_param("pragtech_whatsapp_messenger.whatsapp_phone_number",
+                                    res.whatsapp_meta_phone_number_id)
                 Param_set.set_param("pragtech_whatsapp_messenger.whatsapp_meta_token", res.whatsapp_meta_api_token)
-                Param_set.set_param("pragtech_whatsapp_messenger.whatsapp_meta_webhook_token", res.whatsapp_meta_webhook_token)
+                Param_set.set_param("pragtech_whatsapp_messenger.whatsapp_meta_webhook_token",
+                                    res.whatsapp_meta_webhook_token)
             elif res.provider == 'whatsapp_chat_api':
                 Param_set.set_param("pragtech_whatsapp_messenger.whatsapp_endpoint", res.whatsapp_endpoint)
                 Param_set.set_param("pragtech_whatsapp_messenger.whatsapp_token", res.whatsapp_token)
         if 'default_instance' in vals and vals.get('provider'):
             if vals.get('default_instance'):
-                for whatsapp_instance_id in self.env['whatsapp.instance'].sudo().search([('provider', '=', vals.get('provider'))]):
+                for whatsapp_instance_id in self.env['whatsapp.instance'].sudo().search(
+                        [('provider', '=', vals.get('provider'))]):
                     if whatsapp_instance_id.default_instance:
-                        raise UserError(_('You already added default instance to another instance for %s provider') % whatsapp_instance_id.provider)
+                        raise UserError(
+                            _('You already added default instance to another instance for %s provider') % whatsapp_instance_id.provider)
         return res
 
     def write(self, vals):
         # Allow provider wise only one default instance is true
-        module = self.env['ir.module.module'].sudo().search([('name' , '=', 'pragtech_whatsapp_messenger'), ('state', '=', 'installed')])
+        module = self.env['ir.module.module'].sudo().search(
+            [('name', '=', 'pragtech_whatsapp_messenger'), ('state', '=', 'installed')])
         if module:
             Param_set = self.env['ir.config_parameter'].sudo()
             if self.provider == 'meta':
                 if 'whatsapp_meta_phone_number_id' in vals:
-                    Param_set.set_param("pragtech_whatsapp_messenger.whatsapp_phone_number", vals['whatsapp_meta_phone_number_id'])
+                    Param_set.set_param("pragtech_whatsapp_messenger.whatsapp_phone_number",
+                                        vals['whatsapp_meta_phone_number_id'])
                 if 'whatsapp_meta_api_token' in vals:
-                    Param_set.set_param("pragtech_whatsapp_messenger.whatsapp_meta_token", vals['whatsapp_meta_api_token'])
+                    Param_set.set_param("pragtech_whatsapp_messenger.whatsapp_meta_token",
+                                        vals['whatsapp_meta_api_token'])
                 if 'whatsapp_meta_webhook_token' in vals:
-                    Param_set.set_param("pragtech_whatsapp_messenger.whatsapp_meta_webhook_token", vals['whatsapp_meta_webhook_token'])
+                    Param_set.set_param("pragtech_whatsapp_messenger.whatsapp_meta_webhook_token",
+                                        vals['whatsapp_meta_webhook_token'])
                 if 'status' in vals and vals['status'] != 'disable':
                     Param_set.set_param("pragtech_whatsapp_messenger.use_meta_api", True)
                 elif 'status' in vals and vals['status'] == 'disable':
@@ -92,9 +104,10 @@ class WhatsappInstance(models.Model):
                 if not vals['default_instance']:
                     vals['default_instance'] = False
                 elif whatsapp_instance_id.default_instance:
-                    raise UserError(_('You already added default instance to another instance for %s provider') % whatsapp_instance_id.provider)
+                    raise UserError(
+                        _('You already added default instance to another instance for %s provider') % whatsapp_instance_id.provider)
         return super(WhatsappInstance, self).write(vals)
-    
+
     # def set_dashboard_config(self):
     #     module = self.env['ir.module.module'].sudo().search([('name' , '=', 'pragtech_whatsapp_messenger'), ('state', '=', 'installed')])
     #     if module:
@@ -112,7 +125,8 @@ class WhatsappInstance(models.Model):
                 return whatsapp_instance_id
 
         if not self._context.get('skip_error'):
-            raise UserError(_('Please select atleast one default instance or add %s user in whatsapp instance in users or companies') % self.env.user.name)
+            raise UserError(
+                _('Please select atleast one default instance or add %s user in whatsapp instance in users or companies') % self.env.user.name)
 
     def _get_whatsapp_instance(self, provider):
         # Select instance based on following condition:
@@ -120,13 +134,14 @@ class WhatsappInstance(models.Model):
         # 2) If instance is not getting from 1st condition then check for company same as user
         # 3) If user, company is not getting from 1st & 2nd condition then we check for default instance
         whatsapp_instance_id = self.sudo().search([('user_ids', '=', self.env.user.id), ('provider', '=', provider),
-                                                    ('status', '=', 'enable')], limit=1)
+                                                   ('status', '=', 'enable')], limit=1)
 
         if whatsapp_instance_id:
             return whatsapp_instance_id
         else:
-            whatsapp_instance_id = self.sudo().search([('res_company_ids', '=', self.env.user.company_id.id), ('provider', '=', provider),
-                                                        ('status', '=', 'enable')], limit=1)
+            whatsapp_instance_id = self.sudo().search(
+                [('res_company_ids', '=', self.env.user.company_id.id), ('provider', '=', provider),
+                 ('status', '=', 'enable')], limit=1)
             if whatsapp_instance_id:
                 return whatsapp_instance_id
             else:
@@ -137,7 +152,8 @@ class WhatsappInstance(models.Model):
         # 1) In whatsapp instance search for any instance have default instance true & provider is corresponding provide
         # 2) If not getting instance from 1st condition then we check for whatsapp instance which has status enable
         # 3) If 1st & 2nd condition is not satisfied then raise an user error
-        whatsapp_instance_id = self.sudo().search([('default_instance', '=', True), ('provider', '=', provider)], limit=1)
+        whatsapp_instance_id = self.sudo().search([('default_instance', '=', True), ('provider', '=', provider)],
+                                                  limit=1)
         if whatsapp_instance_id:
             return whatsapp_instance_id
         else:
@@ -188,7 +204,7 @@ class WhatsappInstance(models.Model):
                 headers["Content-Type"] = "application/json"
                 meta_test = 'https://graph.facebook.com/v15.0/'
                 url = url_join(meta_test, self.whatsapp_meta_phone_number_id)
-                response = requests.get(url , headers=headers)
+                response = requests.get(url, headers=headers)
             except Exception as e_log:
                 _logger.exception(e_log)
                 raise UserError(_('Please add proper whatsapp endpoint or whatsapp token'))
@@ -201,7 +217,6 @@ class WhatsappInstance(models.Model):
                 return self.wizard_message("Invalid Credentials")
             else:
                 raise Warning("CONNECTION UNSUCCESSFUL")
-
 
     def wizard_message(self, message):
         return {
@@ -294,7 +309,6 @@ class WhatsappInstance(models.Model):
             raise ValidationError("Meta WhatsApp Business Account ID")
         return True
 
-
     def import_template_from_chat_api(self):
         # Import templates from 1msg
         url = self.whatsapp_endpoint + '/templates?token=' + self.whatsapp_token
@@ -302,7 +316,8 @@ class WhatsappInstance(models.Model):
         response = requests.post(url, headers=headers)
         if response.status_code == 200 or response.status_code == 201:
             for template in response.json()['templates']:
-                vals = {'namespace': template['namespace'], 'state': 'post', 'name': template['name'], 'provider': 'whatsapp_chat_api'}
+                vals = {'namespace': template['namespace'], 'state': 'post', 'name': template['name'],
+                        'provider': 'whatsapp_chat_api'}
                 if template['category']:
                     vals['category'] = template['category']
                 for components in template['components']:
@@ -317,20 +332,24 @@ class WhatsappInstance(models.Model):
                         vals.update({'body': components['text']})
                 vals.update({'approval_state': template['status'], 'whatsapp_instance_id': self.id})
                 language_id = self.env['res.lang'].search(
-                    ['|', ('code', '=', template['language']), ('iso_code', '=', template['language']), '|', ('active', '=', True), ('active', '=', False)], limit=1)
+                    ['|', ('code', '=', template['language']), ('iso_code', '=', template['language']), '|',
+                     ('active', '=', True), ('active', '=', False)], limit=1)
                 if language_id:
                     vals.update({'languages': language_id.id})
                 whatsapp_templates_id = self.env['whatsapp.templates'].sudo().search(
-                    [('name', '=', template.get('name')), ('languages', '=', language_id.id), ('provider', '=', 'whatsapp_chat_api')], limit=1)
+                    [('name', '=', template.get('name')), ('languages', '=', language_id.id),
+                     ('provider', '=', 'whatsapp_chat_api')], limit=1)
                 if whatsapp_templates_id:
                     whatsapp_template_update_record = whatsapp_templates_id.write(vals)
                     self._cr.commit()
                     if whatsapp_template_update_record:
-                        _logger.info("Whatsapp Template is updated into odoo ----------- " + str(whatsapp_templates_id.id))
+                        _logger.info(
+                            "Whatsapp Template is updated into odoo ----------- " + str(whatsapp_templates_id.id))
                 else:
                     whatsapp_template_id = self.env['whatsapp.templates'].create(vals)
                     if whatsapp_template_id:
-                        _logger.info("Whatsapp Template is created into odoo ----------- " + str(whatsapp_template_id.id))
+                        _logger.info(
+                            "Whatsapp Template is created into odoo ----------- " + str(whatsapp_template_id.id))
 
     def import_template_from_gupshup(self):
         # Import templates from gupshup
@@ -380,21 +399,25 @@ class WhatsappInstance(models.Model):
 
                 if template.get('status') == 'APPROVED':
                     values['state'] = 'post'
-                whatsapp_templates_id = self.env['whatsapp.templates'].sudo().search([('name', '=', template['elementName']), ('whatsapp_instance_id', '=', self.id)], limit=1)
+                whatsapp_templates_id = self.env['whatsapp.templates'].sudo().search(
+                    [('name', '=', template['elementName']), ('whatsapp_instance_id', '=', self.id)], limit=1)
                 if whatsapp_templates_id:
                     whatsapp_template_update_record = whatsapp_templates_id.write(values)
                     if whatsapp_template_update_record:
-                        _logger.info("Whatsapp Template is updated into odoo from gupshup ----------- " + str(whatsapp_templates_id.id))
+                        _logger.info("Whatsapp Template is updated into odoo from gupshup ----------- " + str(
+                            whatsapp_templates_id.id))
                 else:
                     whatsapp_template_id = self.env['whatsapp.templates'].create(values)
                     if whatsapp_template_id:
-                        _logger.info("Whatsapp Template is created into odoo from gupshup----------- " + str(whatsapp_template_id.id))
+                        _logger.info("Whatsapp Template is created into odoo from gupshup----------- " + str(
+                            whatsapp_template_id.id))
         return True
 
     def action_export_templates(self):
         # Export template if template have signature then open wizard & from wizard add current instance signature else export templates
         whatsapp_template_ids = self.env['whatsapp.templates'].sudo().search(
-            [('whatsapp_instance_id', '=', self.id), ('approval_state', 'not in', ['approved', 'APPROVED', 'submitted', 'rejected'])])
+            [('whatsapp_instance_id', '=', self.id),
+             ('approval_state', 'not in', ['approved', 'APPROVED', 'submitted', 'rejected'])])
         template_signature = False
         for whatsapp_template_id in whatsapp_template_ids:
             if whatsapp_template_id.send_template:
@@ -405,7 +428,8 @@ class WhatsappInstance(models.Model):
                 'name': 'Message',
                 'res_model': 'export.template.wizard',
                 'view_mode': 'form',
-                'view_id': self.env['ir.model.data']._xmlid_to_res_id('pragtech_whatsapp_base.export_template_wizard_form'),
+                'view_id': self.env['ir.model.data']._xmlid_to_res_id(
+                    'pragtech_whatsapp_base.export_template_wizard_form'),
                 'target': 'new',
                 'nodestroy': True,
             }

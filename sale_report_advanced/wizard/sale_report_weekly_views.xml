@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-<!--    Views for sale report weekly  -->
+    <!--    Views for sale report weekly  -->
     <record id="sale_report_weekly_view_form" model="ir.ui.view">
         <field name="name">sale.report.weekly.view.form</field>
         <field name="model">sale.report.weekly</field>
@@ -15,7 +15,7 @@
                 </group>
                 <footer>
                     <button name="action_get_weekly_report" string="PDF Report"
-                                                type="object" class="btn-primary"/>
+                            type="object" class="btn-primary"/>
                     <button name="action_get_excel_weekly_report" string="XLSX Report"
                             type="object" class="btn-primary"/>
                 </footer>

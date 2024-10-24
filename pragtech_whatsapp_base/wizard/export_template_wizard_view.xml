@@ -8,7 +8,8 @@
                 <form string="Export Template Alert">
                     <field name="message"/>
                     <footer>
-                        <button string="Continue" type="object" class="btn-secondary" name="action_export_templates_from_wizard"/>
+                        <button string="Continue" type="object" class="btn-secondary"
+                                name="action_export_templates_from_wizard"/>
                         <button string="Cancel" class="btn-secondary" special="cancel"/>
                     </footer>
                 </form>

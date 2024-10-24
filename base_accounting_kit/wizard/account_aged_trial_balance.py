@@ -40,7 +40,8 @@ class AccountAgedTrialBalance(models.TransientModel):
                                           relation="account_aged_trail_report_section_rel",
                                           column1="main_report_id",
                                           column2="sub_report_id")
-    name = fields.Char(string="Account Aged Trial balance Report", default="Account Aged Trial balance Report", required=True, translate=True)
+    name = fields.Char(string="Account Aged Trial balance Report", default="Account Aged Trial balance Report",
+                       required=True, translate=True)
 
     journal_ids = fields.Many2many('account.journal', string='Journals',
                                    required=True)
@@ -64,9 +65,9 @@ class AccountAgedTrialBalance(models.TransientModel):
             stop = start - relativedelta(days=period_length - 1)
             res[str(i)] = {
                 'name': (i != 0 and (
-                            str((5 - (i + 1)) * period_length) + '-' + str(
-                        (5 - i) * period_length)) or (
-                                     '+' + str(4 * period_length))),
+                        str((5 - (i + 1)) * period_length) + '-' + str(
+                    (5 - i) * period_length)) or (
+                                 '+' + str(4 * period_length))),
                 'stop': start.strftime('%Y-%m-%d'),
                 'start': (i != 0 and stop.strftime('%Y-%m-%d') or False),
             }

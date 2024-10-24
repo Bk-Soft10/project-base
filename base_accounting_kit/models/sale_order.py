@@ -57,7 +57,7 @@ class SaleOrder(models.Model):
             self.has_due = True
         else:
             self.has_due = False
-        if self.partner_id and self.partner_id.active_limit\
+        if self.partner_id and self.partner_id.active_limit \
                 and self.partner_id.enable_credit_limit:
             if self.due_amount >= self.partner_id.warning_stage:
                 if self.partner_id.warning_stage != 0:

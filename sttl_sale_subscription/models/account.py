@@ -1,5 +1,6 @@
-from odoo import models,api,fields
+from odoo import models, api, fields
 import datetime
+
 
 class Account(models.Model):
     _inherit = 'account.move'
@@ -7,7 +8,7 @@ class Account(models.Model):
     def action_post(self):
         for rec in self:
             if rec.invoice_origin and rec.invoice_origin.startswith("S"):
-                rec = self.env['sale.order'].search([('name','=',rec.invoice_origin)],limit=1)
+                rec = self.env['sale.order'].search([('name', '=', rec.invoice_origin)], limit=1)
                 if rec:
                     if rec.recurrance_id:
                         next_date = False
@@ -18,7 +19,7 @@ class Account(models.Model):
                         if period.unit == 'weeks':
                             next_date = today + datetime.timedelta(weeks=period.duration)
                         if period.unit == 'month':
-                            next_date = today + datetime.timedelta(period.duration* 365 /12)
+                            next_date = today + datetime.timedelta(period.duration * 365 / 12)
                         if period.unit == 'year':
                             next_date = today + datetime.timedelta(days=365 * period.duration)
                         if next_date:
@@ -28,4 +29,4 @@ class Account(models.Model):
                         #     rec.next_invoice_date = datetime.datetime.today().date()
                         #     rec.subscription_status = "b" 
 
-        super(Account,self).action_post()
+        super(Account, self).action_post()

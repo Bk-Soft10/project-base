@@ -63,7 +63,7 @@ class DayBookPdfReport(models.AbstractModel):
                      ORDER BY l.date DESC
         ''')
         params = (
-        tuple(accounts.ids), tuple(form_data['journal_ids']), pass_date)
+            tuple(accounts.ids), tuple(form_data['journal_ids']), pass_date)
         cr.execute(sql, params)
         data = cr.dictfetchall()
         res = {}

@@ -40,7 +40,7 @@ class HrPayslipRun(models.Model):
         ('draft', 'Draft'),
         ('close', 'Close'),
     ], string='Status', index=True, readonly=True, copy=False, default='draft',
-                               help="Status for Payslip Batches")
+        help="Status for Payslip Batches")
     date_start = fields.Date(string='Date From', required=True,
                              help="start date for batch",
                              default=lambda self: fields.Date.to_string(

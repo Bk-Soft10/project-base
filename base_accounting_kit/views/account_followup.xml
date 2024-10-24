@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-<!--  FollowUp View Form  -->
+    <!--  FollowUp View Form  -->
     <record id="account_followup_view_form" model="ir.ui.view">
         <field name="name">account.followup.view.form</field>
         <field name="model">account.followup</field>
         <field name="arch" type="xml">
             <form string="Follow-up">
-                <h1><field name="name"/></h1>
+                <h1>
+                    <field name="name"/>
+                </h1>
                 <label for="company_id" groups="base.group_multi_company"/>
                 <field name="company_id" options="{'no_create': True}" class="oe_inline"
                        groups="base.group_multi_company"/>
@@ -24,17 +26,17 @@
             </form>
         </field>
     </record>
-<!--  FollowUp View Tree  -->
+    <!--  FollowUp View Tree  -->
     <record id="account_followup_view_tree" model="ir.ui.view">
         <field name="name">account.followup.view.tree</field>
         <field name="model">account.followup</field>
         <field name="arch" type="xml">
             <list string="Follow-up">
-                <field name="company_id" />
+                <field name="company_id"/>
             </list>
         </field>
     </record>
-<!--  FollowUp Search View  -->
+    <!--  FollowUp Search View  -->
     <record id="account_followup_view_search" model="ir.ui.view">
         <field name="name">account.followup.view.search</field>
         <field name="model">account.followup</field>
@@ -44,7 +46,7 @@
             </search>
         </field>
     </record>
-<!--  FollowUp Kanban View  -->
+    <!--  FollowUp Kanban View  -->
     <record id="account_followup_view_kanban" model="ir.ui.view">
         <field name="name">account.followup.view.kanban</field>
         <field name="model">account.followup</field>
@@ -55,7 +57,10 @@
                     <t t-name="kanban-box">
                         <div t-attf-class="oe_kanban_global_click">
                             <div>
-                                <strong><i class="fa fa-building" role="img" aria-label="Enterprise"/> <t t-esc="record.name.value"/></strong>
+                                <strong>
+                                    <i class="fa fa-building" role="img" aria-label="Enterprise"/>
+                                    <t t-esc="record.name.value"/>
+                                </strong>
                             </div>
                         </div>
                     </t>
@@ -63,7 +68,7 @@
             </kanban>
         </field>
     </record>
-<!--  Action FollowUp  -->
+    <!--  Action FollowUp  -->
     <record id="action_account_followup_definition_form" model="ir.actions.act_window">
         <field name="name">Payment Follow-ups</field>
         <field name="type">ir.actions.act_window</field>
@@ -81,7 +86,7 @@
             </p>
         </field>
     </record>
-<!--  FollowUp MenuItem  -->
+    <!--  FollowUp MenuItem  -->
     <menuitem action="action_account_followup_definition_form" id="account_followup_menu"
               parent="account.account_management_menu" name="Follow-up Levels"
               groups="account.group_account_manager" sequence="2"/>

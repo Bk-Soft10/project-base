@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-<!--    Window action for Payroll-->
+    <!--    Window action for Payroll-->
     <record id="action_open_payroll" model="ir.actions.act_window">
         <field name="name">Payroll</field>
         <field name="res_model">ir.module.module</field>
@@ -9,7 +9,7 @@
                eval="{'search_default_category_id': ref('base.module_category_accounting_localizations'), 'search_default_name': 'Payroll'}"/>
         <field name="search_view_id" ref="base.view_module_filter"/>
     </record>
-<!--    Form view of Settings-->
+    <!--    Form view of Settings-->
     <record id="res_config_settings_view_form" model="ir.ui.view">
         <field name="name">res.config.settings.view.form.inherit.hr.payroll
         </field>
@@ -64,7 +64,7 @@
             </xpath>
         </field>
     </record>
-<!--    Window action for Settings-->
+    <!--    Window action for Settings-->
     <record id="res_config_settings_action"
             model="ir.actions.act_window">
         <field name="name">Settings</field>

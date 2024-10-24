@@ -4,6 +4,7 @@ Base module for Backend developments.
 
 Installation
 ============
+
 1) Copy module files to addon folder.
 2) Restart odoo service (sudo service odoo-server restart).
 3) Go to your odoo instance and open apps (make sure to activate debug mode).

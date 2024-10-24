@@ -71,8 +71,8 @@ class HrContract(models.Model):
     def get_attribute(self, code, attribute):
         """Function for return code for Contract"""
         return self.env['hr.contract.advantage.template'].search(
-                [('code', '=', code)],
-                limit=1)[attribute]
+            [('code', '=', code)],
+            limit=1)[attribute]
 
     def set_attribute_value(self, code, active):
         """Function for set code for Contract"""

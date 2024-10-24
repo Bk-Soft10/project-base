@@ -3,22 +3,22 @@
     <record id="product_product_form_inh_sttl" model="ir.ui.view">
         <field name="name">product_product_form_inh_sttl.inherit.view.form</field>
         <field name="model">product.product</field>
-        <field name="inherit_id" ref="product.product_normal_form_view" />
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
         <field name="arch" type="xml">
             <xpath expr="//div[@name='options']" position="inside">
                 <span class="d-inline-block">
-                    <field name="is_recurring" />
-                    <label for="is_recurring" />
+                    <field name="is_recurring"/>
+                    <label for="is_recurring"/>
                 </span>
             </xpath>
             <xpath expr="//notebook" position="inside">
                 <page name="time_based_pricing" string="Time Based Pricing"
-                    invisible="is_recurring == False">
+                      invisible="is_recurring == False">
                     <field name="subscription_price_ids" nolabel="1">
                         <list editable="bottom">
-                            <field name="period_id" />
-                            <field name="price" />
-                            <field name="product_id" invisible="1" />
+                            <field name="period_id"/>
+                            <field name="price"/>
+                            <field name="product_id" invisible="1"/>
                         </list>
                     </field>
                 </page>
@@ -29,22 +29,22 @@
     <record id="product_template_form_inh_sttl" model="ir.ui.view">
         <field name="name">product_product_form_inh_sttl.inherit.view.form</field>
         <field name="model">product.template</field>
-        <field name="inherit_id" ref="product.product_template_only_form_view" />
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
         <field name="arch" type="xml">
             <xpath expr="//div[@name='options']" position="inside">
                 <span class="d-inline-block">
-                    <field name="is_recurring" />
-                    <label for="is_recurring" />
+                    <field name="is_recurring"/>
+                    <label for="is_recurring"/>
                 </span>
             </xpath>
             <xpath expr="//notebook" position="inside">
                 <page name="time_based_pricing" string="Time Based Pricing"
-                    invisible="is_recurring == False">
+                      invisible="is_recurring == False">
                     <field name="subscription_price_ids" nolabel="1">
                         <list editable="bottom">
-                            <field name="period_id" />
-                            <field name="price" />
-                            <field name="product_id" invisible="1" />
+                            <field name="period_id"/>
+                            <field name="price"/>
+                            <field name="product_id" invisible="1"/>
                         </list>
                     </field>
                 </page>
@@ -60,9 +60,9 @@
             <form string="">
                 <sheet>
                     <group>
-                        <field name="name" />
-                        <field name="duration" />
-                        <field name="unit" />
+                        <field name="name"/>
+                        <field name="duration"/>
+                        <field name="unit"/>
                         <!-- <field name="price"/>                         -->
                         <!-- <field name="period_id"/>                         -->
                     </group>
@@ -70,8 +70,8 @@
                         <page name="pricing" string="Pricing">
                             <field name="price_ids">
                                 <list editable="top">
-                                    <field name="product_id" />
-                                    <field name="price" />
+                                    <field name="product_id"/>
+                                    <field name="price"/>
                                 </list>
                             </field>
                         </page>
@@ -99,11 +99,11 @@
         <field name="context">{'default_is_recurring': True}</field>
     </record>
 
-    <menuitem id="product_menu_act" name="Products" parent="sttl_subscription_menu_act" sequence="2" />
+    <menuitem id="product_menu_act" name="Products" parent="sttl_subscription_menu_act" sequence="2"/>
     <menuitem id="subscription_product_menu_act" name="Products" parent="product_menu_act"
-        action="subscription_product_action" />
+              action="subscription_product_action"/>
     <menuitem id="recurring_plan_menu_act" name="Recurring Plans"
-        parent="sttl_sale_subscription.sttl_subscription_config_menu_act"
-        action="product_subscription_period_action" sequence="1" />
+              parent="sttl_sale_subscription.sttl_subscription_config_menu_act"
+              action="product_subscription_period_action" sequence="1"/>
 
 </odoo>

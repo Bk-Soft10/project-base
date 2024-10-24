@@ -1,5 +1,5 @@
 <odoo>
-<!--Res Config Settings Form View-->
+    <!--Res Config Settings Form View-->
     <record id="res_config_settings_view_form_base_accounting_kit" model="ir.ui.view">
         <field name="name">res.config.view.inherited.base.accounting.kit</field>
         <field name="model">res.config.settings</field>

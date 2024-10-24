@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-<!--Account Balance Report Form View-->
+    <!--Account Balance Report Form View-->
     <record id="account_report_balance_view" model="ir.ui.view">
         <field name="name">account.balance.report.view.form.inherit.base.accounting.kit</field>
         <field name="model">account.balance.report</field>
@@ -13,7 +13,7 @@
             </xpath>
         </field>
     </record>
-<!--Action Account Balance Report-->
+    <!--Action Account Balance Report-->
     <record id="action_account_balance_menu" model="ir.actions.act_window">
         <field name="name">Trial Balance</field>
         <field name="res_model">account.balance.report</field>
@@ -23,7 +23,7 @@
         <field name="target">new</field>
         <field name="binding_model_id" ref="account.model_account_account"/>
     </record>
-<!--Menu Trial Balance-->
+    <!--Menu Trial Balance-->
     <menuitem id="menu_Balance_report"
               name="Trial Balance"
               sequence="7"

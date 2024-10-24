@@ -378,7 +378,7 @@ class HrPayslip(models.Model):
                     AND hp.date_from >= %s AND hp.date_to <= %s AND hp.id = 
                     pi.payslip_id AND pi.code = %s""",
                                     (self.employee_id, from_date, to_date,
-                                        code))
+                                     code))
                 return self.env.cr.fetchone()[0] or 0.0
 
         class WorkedDays(BrowsableObject):
@@ -398,7 +398,7 @@ class HrPayslip(models.Model):
                     AND hp.date_from >= %s AND hp.date_to <= %s AND hp.id = 
                     pi.payslip_id AND pi.code = %s""",
                                     (self.employee_id, from_date, to_date,
-                                        code))
+                                     code))
                 return self.env.cr.fetchone()
 
             def sum(self, code, from_date, to_date=None):

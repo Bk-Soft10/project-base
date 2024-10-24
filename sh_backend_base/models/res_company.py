@@ -3,6 +3,7 @@
 
 from odoo import fields, models
 
+
 class ResCompany(models.Model):
     _inherit = 'res.company'
 
@@ -11,5 +12,3 @@ class ResCompany(models.Model):
     # api_key = fields.Char("Api Key")
     # vapid = fields.Char("Vapid",readonly=False)
     # config_details = fields.Text("Config Details")
-
-

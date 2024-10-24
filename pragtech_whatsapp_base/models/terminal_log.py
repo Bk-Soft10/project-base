@@ -14,9 +14,9 @@ class TerminalLog(models.Model):
     def log_info(self, log_message):
         whatsapp_instance_id = self.env['whatsapp.instance'].get_whatsapp_instance()
         self.create({
-             'timestamp': fields.Datetime.now(),
-             'log_message': log_message,
-             'terminal_log_id': whatsapp_instance_id.id,
+            'timestamp': fields.Datetime.now(),
+            'log_message': log_message,
+            'terminal_log_id': whatsapp_instance_id.id,
         })
 
     def _auto_delete_records(self):

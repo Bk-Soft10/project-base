@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-<!--    Actions for pdf report -->
+    <!--    Actions for pdf report -->
     <record id="action_sale_report" model="ir.actions.report">
         <field name="name">Sales</field>
         <field name="model">sale.report.advance</field>
