@@ -6,7 +6,7 @@
     'author': "David Montero Crespo",
     'website': "https://github.com/davidmonterocrespo24/odoo_micro_saas",
     'license': "AGPL-3",
-    'version': "17.0.1.2",
+    'version': "1.2",
     'depends': ["base"],
     'data': [
         "views/menu.xml",
