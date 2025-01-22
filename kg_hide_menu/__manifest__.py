@@ -13,7 +13,7 @@
     'description': """
         Restrict Menu Items from Specific Users""",
     'author': 'Klystron Global',
-    'maintainer':'Kiran K',
+    'maintainer': 'Kiran K',
     'website': "https://www.klystronglobal.com/",
     'images': ["static/description/banner.png"],
     'category': 'Extra Rights',

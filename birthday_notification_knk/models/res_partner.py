@@ -18,4 +18,3 @@ class ResPartner(models.Model):
                 if today == partner.birthday:
                     template_id = self.env.ref('birthday_notification_knk.contact_birthday_notification_template')
                     template_id.send_mail(partner.id, force_send=True)
-

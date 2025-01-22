@@ -36,4 +36,4 @@ class ResConfigSettings(models.TransientModel):
     module_l10n_in_hr_payroll = fields.Boolean(string='Indian Payroll',
                                                help="Is Indian Payroll")
     module_hr_payroll_account_community = fields.Boolean(string='Payroll with Accounting',
-                                               help="Is Payroll Accounting")
+                                                         help="Is Payroll Accounting")

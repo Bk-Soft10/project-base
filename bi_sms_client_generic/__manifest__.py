@@ -28,11 +28,11 @@ This Module was developped by SYLEAM and OpenERP SA in a first place.
 Then, it was updated to the 7.0 version by Julius Network Solutions.
     """,
     "author": "BrowseInfo",
-    "website" : "https://www.browseinfo.com",
+    "website": "https://www.browseinfo.com",
     "price": 000,
     "currency": 'EUR',
     'license': 'LGPL-3',
-    "depends": ["base","mail","partner_autocomplete"],
+    "depends": ["base", "mail", "partner_autocomplete"],
     "demo": [],
     "data": [
         "security/groups.xml",
@@ -46,8 +46,8 @@ Then, it was updated to the 7.0 version by Julius Network Solutions.
     ],
     "auto_install": False,
     "installable": True,
-    "live_test_url":'https://youtu.be/xK2U9TESNe0',
-    "images":['static/description/Banner.png'],
+    "live_test_url": 'https://youtu.be/xK2U9TESNe0',
+    "images": ['static/description/Banner.png'],
 }
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -64,8 +64,7 @@ class HrSalaryRule(models.Model):
                                      help="Choose Hr Salary Rule")
     company_id = fields.Many2one('res.company', string='Company',
                                  help="Choose Company",
-                                 default=lambda self:
-                                 self.env['res.company']._company_default_get())
+                                 default=lambda self: self.env.company)
     condition_select = fields.Selection([
         ('none', 'Always True'),
         ('range', 'Range'),
@@ -96,9 +95,9 @@ class HrSalaryRule(models.Model):
     # Note: returned value have to be set in the variable 'result'
 
     result = rules.NET > categories.NET * 0.10''',
-                   help='Applied this rule for calculation'
-                        ' if condition is true. You can specify'
-                        ' condition like basic > 1000.')
+                                   help='Applied this rule for calculation'
+                                        ' if condition is true. You can specify'
+                                        ' condition like basic > 1000.')
     condition_range_min = fields.Float(string='Minimum Range',
                                        help="The minimum amount, applied for"
                                             " this rule.")

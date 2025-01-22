@@ -5,24 +5,10 @@
         <field name="model">res.config.settings</field>
         <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//div[@id='product_get_pic_setting']" position="after">
-                <!-- <div class="col-12 col-lg-6 o_setting_box">
-                    <div class="o_setting_left_pane">
-                        <field name="show_chat_bot"/>
-                    </div>
-                    <div class="o_setting_right_pane">
-                        <div>
-                            <label for="show_chat_bot"/>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-lg-6 o_setting_box">
-                    <div class="o_setting_right_pane" attrs="{'invisible': [('show_chat_bot','=',False)]}">
-                        <label for="chat_bot_id"/>
-                        <field name="chat_bot_id" class="w-75" attrs="{'required': [('show_chat_bot','=',True)]}"/>
-                    </div>    
-                </div> -->
-                <div class="col-12 col-lg-6 o_setting_box" id="recaptcha">
+            <block name="integration" position="inside">
+                <!--<block name="recaptcha" id="recaptcha" string="ChatGpt Setup" help="Use ChatGpt"></block>-->
+                <setting string="ChatGpt Setup" help="Use ChatGpt" documentation="https://www.whisperchat.ai"
+                         id="recaptcha">
                     <div class="o_setting_left_pane">
                         <field name="show_chat_bot"/>
                     </div>
@@ -31,11 +17,14 @@
                         <div class="text-muted">
                             Add AI powered chatbot to your odoo software.
                         </div>
-                        <div class="content-group" invisible="show_chat_bot == False">
+                        <div class="content-group" invisible="not show_chat_bot">
                             <div class="mt16 row">
                                 <label for="chat_bot_id" class="col-3 o_light_label"/>
                                 <field name="chat_bot_id" required="show_chat_bot == True"/>
-                                <a href="https://www.whisperchat.ai" class="oe_link" target="_blank"><i class="fa fa-arrow-right"></i> Generate chatbot ID</a>
+                                <a href="https://www.whisperchat.ai" class="oe_link" target="_blank">
+                                    <i class="fa fa-arrow-right"/>
+                                    Generate chatbot ID
+                                </a>
                                 <div class="o_setting_box">
                                     <div class="o_setting_left_pane">
                                         <field name="show_chat_bot_f"/>
@@ -47,7 +36,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                  <div class="o_setting_box">
+                                <div class="o_setting_box">
                                     <div class="o_setting_left_pane">
                                         <field name="show_chat_bot_b"/>
                                     </div>
@@ -61,8 +50,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </xpath>
+                </setting>
+            </block>
         </field>
     </record>
 </odoo>

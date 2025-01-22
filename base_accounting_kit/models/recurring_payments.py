@@ -176,5 +176,3 @@ class GetAllRecurringEntries(models.TransientModel):
     template_name = fields.Char('Name')
     amount = fields.Float('Amount')
     tmpl_id = fields.Many2one('account.recurring.payments', string='id')
-
-

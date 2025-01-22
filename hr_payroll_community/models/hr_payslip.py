@@ -81,8 +81,7 @@ class HrPayslip(models.Model):
                                help="Choose Payslip for line")
     company_id = fields.Many2one('res.company', string='Company',
                                  copy=False, help="Choose Company for line",
-                                 default=lambda self: self.env[
-                                     'res.company']._company_default_get())
+                                 default=lambda self: self.env.company)
     worked_days_line_ids = fields.One2many('hr.payslip.worked.days',
                                            'payslip_id',
                                            string='Payslip Worked Days',
@@ -346,7 +345,7 @@ class HrPayslip(models.Model):
             localdict['categories'].dict[category.code] \
                 = category.code in localdict[
                 'categories'].dict and localdict['categories'].dict[
-                category.code] + amount or amount
+                      category.code] + amount or amount
             return localdict
 
         class BrowsableObject(object):

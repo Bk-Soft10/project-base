@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record model="ir.ui.view" id="res_company_form_view_scheduled_msg_whatsapp">
+        <field name="name">res.company.scheduled.form.view</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form" />
+        <field name="arch" type="xml">
+            <notebook>
+                <page name="whatsapp" string="Whatsapp">
+                    <group>
+                        <group>
+                            <field name="use_whatsapp_server"/>
+                            <field name="whatsapp_access_token" placeholder="Whatsapp Access Token" modifiers ="{'invisible': [('use_whatsapp_server', '=', False)], 'required': [('use_whatsapp_server', '!=', False)]}"/>
+                            <field name="instance_id" placeholder="Instance Id" modifiers ="{'invisible': [('use_whatsapp_server', '=', False)], 'required': [('use_whatsapp_server', '!=', False)]}"/>
+                        </group>
+                        <group>
+                            <field name="whatsapp_url" placeholder="Whatsapp Url" modifiers ="{'invisible': [('use_whatsapp_server', '=', False)], 'required': [('use_whatsapp_server', '!=', False)]}"/>
+                            <field name="whatsapp_number" placeholder="Whatsapp Number" modifiers ="{'invisible': [('use_whatsapp_server', '=', False)]}"/>
+                            <button class="btn-primary" name="check_whatsapp_active" string="Test whatsapp" type="object" modifiers ="{'invisible':[('use_whatsapp_server','=',False)]}"/>
+                        </group>
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>

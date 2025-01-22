@@ -26,6 +26,7 @@ from odoo.http import request
 
 class OnedriveAuth(http.Controller):
     """Controller for handling authentication with OneDrive and Google Drive."""
+
     @http.route('/onedrive/authentication', type='http', auth="public")
     def oauth2callback(self, **kw):
         """

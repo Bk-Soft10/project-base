@@ -2,6 +2,7 @@
 # Part of Softhealer Technologies.
 from odoo import fields, models
 
+
 class ShMessageWizard(models.TransientModel):
     _name = "sh.message.wizard"
     _description = "Message wizard to display warnings, alert ,success messages"

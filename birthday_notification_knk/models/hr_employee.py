@@ -15,4 +15,3 @@ class HrEmployee(models.Model):
             if employee.company_id.send_employee_birthday_notification and today == employee.birthday:
                 template_id = self.env.ref('birthday_notification_knk.employee_birthday_notification_template')
                 template_id.send_mail(employee.id, force_send=True)
-

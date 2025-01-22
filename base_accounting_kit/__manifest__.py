@@ -1,24 +1,3 @@
-# -*- coding: utf-8 -*-
-#############################################################################
-#
-#    Cybrosys Technologies Pvt. Ltd.
-#
-#    Copyright (C) 2023-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
-#    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
-#
-#    You can modify it under the terms of the GNU LESSER
-#    GENERAL PUBLIC LICENSE (LGPL v3), Version 3.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU LESSER GENERAL PUBLIC LICENSE (LGPL v3) for more details.
-#
-#    You should have received a copy of the GNU LESSER GENERAL PUBLIC LICENSE
-#    (LGPL v3) along with this program.
-#    If not, see <http://www.gnu.org/licenses/>.
-#
-#############################################################################
 {
     'name': 'Odoo 17 Full Accounting Kit',
     'version': '1.0',
@@ -33,8 +12,13 @@
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
     'website': "https://www.cybrosys.com",
-    'depends': ['account', 'sale', 'account_check_printing',
-                'base_account_budget', 'analytic'],
+    'depends': [
+        'account',
+        'sale',
+        'account_check_printing',
+        'base_account_budget',
+        'analytic'
+    ],
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
@@ -95,4 +79,3 @@
     'auto_install': False,
     'application': True,
 }
-

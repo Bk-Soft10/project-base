@@ -21,22 +21,21 @@
 
 from odoo import api, fields, models, _
 
-
 form = '''<?xml version="1.0"?>
 <form string="Verify Code">
     <field name="code" colspan="4"/>
 </form>'''
 
 fields = {
-    'code': {'string': 'Verification Code', 'required': True, 
+    'code': {'string': 'Verification Code', 'required': True,
              'type': 'char', 'help': 'Enter the verification code that you get in your verification sms'}
 }
 
 
 class verifycode(models.TransientModel):
     _name = 'sms.smsclient.code.verify'
-    _description="verifycode"
-    
+    _description = "verifycode"
+
     def checkcode(self, cr, uid, data, context):
 
         gate = pooler.get_pool(cr.dbname).get('sms.smsclient').browse(cr, uid, data['id'], context)
@@ -52,13 +51,13 @@ class verifycode(models.TransientModel):
     states = {
         'init': {
             'actions': [],
-            'result': {'type': 'form', 'arch': form, 'fields': fields, 'state': [('end', 'Cancel'), ('check', 'Verify Code')]}
+            'result': {'type': 'form', 'arch': form, 'fields': fields,
+                       'state': [('end', 'Cancel'), ('check', 'Verify Code')]}
         },
         'check': {
             'actions': [checkcode],
             'result': {'type': 'state', 'state': 'end'}
         }
     }
-
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

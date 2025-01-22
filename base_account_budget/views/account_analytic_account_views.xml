@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-<!--    The form view of the Analytic accounts-->
+    <!--    The form view of the Analytic accounts-->
     <record id="view_account_analytic_account_form_inherit_budget" model="ir.ui.view">
         <field name="name">account.analytic.account.form.inherit.budget</field>
         <field name="model">account.analytic.account</field>

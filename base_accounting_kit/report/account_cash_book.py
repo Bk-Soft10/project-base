@@ -80,7 +80,7 @@ class ReportCashBook(models.AbstractModel):
             accounts = []
             for journal in journals:
                 accounts.append(journal.company_id.account_journal_payment_credit_account_id.id)
-            accounts = self.env['account.account'].search([('id','in',accounts)])
+            accounts = self.env['account.account'].search([('id', 'in', accounts)])
 
         # Get move lines base on sql query and Calculate the total balance of move lines
         sql = ('''SELECT l.id AS lid, l.account_id AS account_id, l.date AS ldate, j.code AS lcode, l.currency_id, l.amount_currency, l.ref AS lref, l.name AS lname, COALESCE(l.debit,0) AS debit, COALESCE(l.credit,0) AS credit, COALESCE(SUM(l.debit),0) - COALESCE(SUM(l.credit), 0) AS balance,\

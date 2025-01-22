@@ -40,7 +40,8 @@ class AccountingReport(models.TransientModel):
     name = fields.Char(string="Cash Flow Report", default="Cash Flow Report", required=True, translate=True)
     date_from = fields.Date(string='Start Date')
     date_to = fields.Date(string='End Date')
-    company_id = fields.Many2one('res.company', string='Company', required=True, readonly=True, default=lambda self: self.env.company)
+    company_id = fields.Many2one('res.company', string='Company', required=True, readonly=True,
+                                 default=lambda self: self.env.company)
     target_move = fields.Selection([('posted', 'All Posted Entries'),
                                     ('all', 'All Entries'),
                                     ], string='Target Moves', required=True, default='posted')

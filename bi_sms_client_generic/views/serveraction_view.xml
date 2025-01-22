@@ -9,19 +9,18 @@
             <field name="inherit_id" ref="base.view_server_action_form"/>
             <field name="arch" type="xml">
                 <field name="name" position="after">
-					<group>
-					<field name="action_type"/>
-					<field name="sms"/>
-					<field name="mobile"/>
-					</group>
-				</field>
-	
-			</field>
+                    <group>
+                        <field name="action_type"/>
+                        <field name="sms"/>
+                        <field name="mobile"/>
+                    </group>
+                </field>
+
+            </field>
         </record>
     </data>
 
 
-	
     <data>
         <record model="ir.ui.view" id="view_server_statistics_graph">
             <field name="name">ir.actions.server.form.inherit</field>
@@ -29,13 +28,13 @@
             <field name="inherit_id" ref="view_server_statistics_graph1"/>
             <field name="arch" type="xml">
                 <field name="mobile" position="after">
-                    <field name="sms_server" />
-                	<field name="sms_template_id" domain="[('sms_template','=',True)]" reuired='state == sms'/>
+                    <field name="sms_server"/>
+                    <field name="sms_template_id" domain="[('sms_template','=',True)]" reuired='state == sms'/>
                 </field>
                 <field name="sms" position="attributes">
-                 	<attribute name="invisible">1</attribute> 
-					<attribute name="required">0</attribute>
-					<attribute name="required">{}</attribute>
+                    <attribute name="invisible">1</attribute>
+                    <attribute name="required">0</attribute>
+                    <attribute name="required">{}</attribute>
                 </field>
             </field>
         </record>

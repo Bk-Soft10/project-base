@@ -58,14 +58,14 @@ msgstr ""
 "حساب دائن لقاعدة راتب واحدة على الأقل في هيكل الرواتب المختار."
 
 #. module: hr_payroll_account_community
-#: model:ir.model.fields,help:hr_payroll_account_community.field_hr_payslip_line__account_credit
-#: model:ir.model.fields,help:hr_payroll_account_community.field_hr_salary_rule__account_credit
+#: model:ir.model.fields,help:hr_payroll_account_community.field_hr_payslip_line__account_credit_id
+#: model:ir.model.fields,help:hr_payroll_account_community.field_hr_salary_rule__account_credit_id
 msgid "Credit account"
 msgstr "حساب الائتمان"
 
 #. module: hr_payroll_account_community
-#: model:ir.model.fields,field_description:hr_payroll_account_community.field_hr_payslip_line__account_credit
-#: model:ir.model.fields,field_description:hr_payroll_account_community.field_hr_salary_rule__account_credit
+#: model:ir.model.fields,field_description:hr_payroll_account_community.field_hr_payslip_line__account_credit_id
+#: model:ir.model.fields,field_description:hr_payroll_account_community.field_hr_salary_rule__account_credit_id
 msgid "Credit Account"
 msgstr "الحساب الدائن"
 
@@ -75,14 +75,14 @@ msgid "Date Account"
 msgstr "التاريخ المحاسبي"
 
 #. module: hr_payroll_account_community
-#: model:ir.model.fields,field_description:hr_payroll_account_community.field_hr_payslip_line__account_debit
-#: model:ir.model.fields,field_description:hr_payroll_account_community.field_hr_salary_rule__account_debit
+#: model:ir.model.fields,field_description:hr_payroll_account_community.field_hr_payslip_line__account_debit_id
+#: model:ir.model.fields,field_description:hr_payroll_account_community.field_hr_salary_rule__account_debit_id
 msgid "Debit Account"
 msgstr "الحساب المدين"
 
 #. module: hr_payroll_account_community
-#: model:ir.model.fields,help:hr_payroll_account_community.field_hr_payslip_line__account_debit
-#: model:ir.model.fields,help:hr_payroll_account_community.field_hr_salary_rule__account_debit
+#: model:ir.model.fields,help:hr_payroll_account_community.field_hr_payslip_line__account_debit_id
+#: model:ir.model.fields,help:hr_payroll_account_community.field_hr_salary_rule__account_debit_id
 msgid "Debit account"
 msgstr "حساب مدين"
 

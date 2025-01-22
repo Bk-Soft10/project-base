@@ -31,7 +31,7 @@ class UpgradeManager(object):
         self.modules_to_upgrade = list(set(sum(
             [upgrade.modules_to_upgrade for upgrade in self.upgrades], [])))
         self.modules_to_install_at_creation = self.upgrades and \
-            self.upgrades[-1].modules_to_install_at_creation or []
+                                              self.upgrades[-1].modules_to_install_at_creation or []
 
     def __enter__(self):
         return self
@@ -147,11 +147,11 @@ class UpgradeManager(object):
             try:
                 upgrade = Upgrade(dir_path, upgrade_infos)
                 if (not upgrade.databases or self.db_name in upgrade.databases
-                    ) and parse_version(self.db_version) \
-                    < parse_version(upgrade.version) \
-                    <= parse_version(self.code_version) \
-                    or (self.force_reload
-                        and upgrade.version == self.code_version):
+                ) and parse_version(self.db_version) \
+                        < parse_version(upgrade.version) \
+                        <= parse_version(self.code_version) \
+                        or (self.force_reload
+                            and upgrade.version == self.code_version):
                     return upgrade
             except Exception as e:
                 _logger.error(
@@ -248,6 +248,7 @@ class Upgrade(object):
             if isinstance(f, tuple):
                 return f[0], len(f) == 2 and f[1] or "raise"
             return f, "raise"
+
         _logger.debug("%sing %s upgrade...", mode, self.version)
         files_list = getattr(self, mode, [])
         for fname, error_management in map(format_files_list, files_list):

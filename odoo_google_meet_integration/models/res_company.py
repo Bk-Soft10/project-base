@@ -46,7 +46,7 @@ class ResCompany(models.Model):
         "Authorized redirect URIs", default=lambda self: self._default_hangout_redirect_uri(),
         help='GoogleAuthorized redirect URIs')
     hangout_company_access_token = fields.Char(
-        'Access Token', copy=False,help="Hangout access token")
+        'Access Token', copy=False, help="Hangout access token")
     hangout_company_access_token_expiry = fields.Datetime(
         string='Token expiry', help="Hangout access token expiry date")
     hangout_company_refresh_token = fields.Char(

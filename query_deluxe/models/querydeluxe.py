@@ -29,7 +29,9 @@ class QueryDeluxe(models.Model):
     html = fields.Html(string='HTML')
 
     name = fields.Text(string='Type a query : ', help="Type the query you want to execute.")
-    note = fields.Char(string="Note", help="Optional helpful note about the current query, what it does, the dangers, etc...", translate=True)
+    note = fields.Char(string="Note",
+                       help="Optional helpful note about the current query, what it does, the dangers, etc...",
+                       translate=True)
 
     def print_result_pdf(self):
         self.ensure_one()
@@ -48,7 +50,7 @@ class QueryDeluxe(models.Model):
 
     def print_result_excel(self):
         self.ensure_one()
-        self=self.sudo()
+        self = self.sudo()
 
         if not self.env['ir.module.module'].search([('name', '=', 'query_deluxe_xlsx'), ('state', '=', 'installed')]):
             raise exceptions.ValidationError(_("""
@@ -92,18 +94,21 @@ class QueryDeluxe(models.Model):
 
                 if headers and datas:
                     header_html = "<tr style='background-color: lightgrey'> <th style='background-color:white'/>"
-                    header_html += "".join(["<th style='border: 1px solid black'>"+str(header)+"</th>" for header in headers])
+                    header_html += "".join(
+                        ["<th style='border: 1px solid black'>" + str(header) + "</th>" for header in headers])
                     header_html += "</tr>"
 
                     body_html = ""
                     i = 0
                     for data in datas:
                         i += 1
-                        body_line = "<tr style='background-color: {0}'> <td style='border-right: 3px double; border-bottom: 1px solid black; background-color: yellow'>{1}</td>".format('cyan' if i%2 == 0 else 'white', i)
+                        body_line = "<tr style='background-color: {0}'> <td style='border-right: 3px double; border-bottom: 1px solid black; background-color: yellow'>{1}</td>".format(
+                            'cyan' if i % 2 == 0 else 'white', i)
                         for value in data:
                             display_value = ''
                             if value is not None:
-                                display_value = str(value).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+                                display_value = str(value).replace("&", "&amp;").replace("<", "&lt;").replace(">",
+                                                                                                              "&gt;")
                             body_line += "<td style='border: 1px solid black'>{0}</td>".format(display_value)
                         body_line += "</tr>"
                         body_html += body_line

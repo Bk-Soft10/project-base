@@ -23,7 +23,7 @@
             </graph>
         </field>
     </record>
- 
+
     <record id="view_asset_asset_report_search" model="ir.ui.view">
         <field name="name">asset.asset.report.search</field>
         <field name="model">asset.asset.report</field>
@@ -35,7 +35,8 @@
                 <filter string="Running" name="running" domain="[('state','=','open')]" help="Assets in running state"/>
                 <filter string="Not archived" name="only_active" domain="[('asset_id.active','=', True)]"/>
                 <separator/>
-                <filter string="Posted" name="posted" domain="[('move_check','=',True)]" help="Posted depreciation lines" context="{'unposted_value_visible': 0}"/>
+                <filter string="Posted" name="posted" domain="[('move_check','=',True)]"
+                        help="Posted depreciation lines" context="{'unposted_value_visible': 0}"/>
                 <field name="asset_id"/>
                 <field name="asset_category_id"/>
                 <group expand="0" string="Extended Filters...">
@@ -45,12 +46,13 @@
                 <group expand="1" string="Group By">
                     <filter string="Asset" name="asset" context="{'group_by':'asset_id'}"/>
                     <filter string="Asset Category" name="asset_category" context="{'group_by':'asset_category_id'}"/>
-                    <filter string="Company" name="company" context="{'group_by':'company_id'}" groups="base.group_multi_company"/>
+                    <filter string="Company" name="company" context="{'group_by':'company_id'}"
+                            groups="base.group_multi_company"/>
                     <separator/>
                     <filter string="Purchase Month" name="purchase_month" help="Date of asset purchase"
-                        context="{'group_by':'date:month'}"/>
+                            context="{'group_by':'date:month'}"/>
                     <filter string="Depreciation Month" name="deprecation_month" help="Date of depreciation"
-                        context="{'group_by':'depreciation_date:month'}"/>
+                            context="{'group_by':'depreciation_date:month'}"/>
                 </group>
             </search>
         </field>
@@ -64,13 +66,13 @@
         <field name="domain">[('asset_category_id.type', '=', 'purchase')]</field>
         <field name="context">{'search_default_only_active': 1}</field>
         <field name="help" type="html">
-          <p>
-            From this report, you can have an overview on all depreciations. The
-            search bar can also be used to personalize your assets depreciation reporting.
-          </p>
+            <p>
+                From this report, you can have an overview on all depreciations. The
+                search bar can also be used to personalize your assets depreciation reporting.
+            </p>
         </field>
     </record>
-    
+
     <menuitem name="Assets" action="action_asset_asset_report"
               id="menu_action_asset_asset_report"
               parent="account.account_reports_management_menu" sequence="21"/>

@@ -1,0 +1,384 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* base_account_budget
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-11-05 13:20+0000\n"
+"PO-Revision-Date: 2024-11-05 16:27+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#. module: base_account_budget
+#: model_terms:ir.actions.act_window,help:base_account_budget.act_budget_view
+msgid ""
+"A budget is a forecast of your company's income and/or expenses\n"
+"                expected for a period in the future. A budget is defined on\n"
+"                some\n"
+"                financial accounts and/or analytic accounts (that may represent\n"
+"                projects, departments, categories of products, etc.)"
+msgstr ""
+
+#. module: base_account_budget
+#: model:ir.model.fields,field_description:base_account_budget.field_account_budget_post__account_ids
+#: model_terms:ir.ui.view,arch_db:base_account_budget.view_budget_post_form
+msgid "Accounts"
+msgstr "الحسابات"
+
+#. module: base_account_budget
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_lines__percentage
+msgid "Achievement"
+msgstr "انجاز"
+
+#. module: base_account_budget
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_budget__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: base_account_budget
+#: model:ir.model,name:base_account_budget.model_account_analytic_account
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_lines__analytic_account_id
+msgid "Analytic Account"
+msgstr "الحساب التحليلي"
+
+#. module: base_account_budget
+#: model_terms:ir.ui.view,arch_db:base_account_budget.crossovered_budget_view_form
+msgid "Approve"
+msgstr "موافقة"
+
+#. module: base_account_budget
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_budget__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: base_account_budget
+#: model:ir.model,name:base_account_budget.model_budget_budget
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_lines__budget_id
+#: model_terms:ir.ui.view,arch_db:base_account_budget.budget_budget_view_tree
+#: model_terms:ir.ui.view,arch_db:base_account_budget.crossovered_budget_view_form
+msgid "Budget"
+msgstr "الميزانية"
+
+#. module: base_account_budget
+#: model_terms:ir.ui.view,arch_db:base_account_budget.view_account_analytic_account_form_inherit_budget
+msgid "Budget Items"
+msgstr "عناصر الميزانية"
+
+#. module: base_account_budget
+#: model:ir.model,name:base_account_budget.model_budget_lines
+msgid "Budget Line"
+msgstr "بند ميزانية"
+
+#. module: base_account_budget
+#: model:ir.model.fields,field_description:base_account_budget.field_account_analytic_account__budget_line
+#: model:ir.model.fields,field_description:base_account_budget.field_account_budget_post__budget_line
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_budget__budget_line
+#: model_terms:ir.ui.view,arch_db:base_account_budget.crossovered_budget_view_form
+#: model_terms:ir.ui.view,arch_db:base_account_budget.view_budget_line_form
+#: model_terms:ir.ui.view,arch_db:base_account_budget.view_budget_line_search
+#: model_terms:ir.ui.view,arch_db:base_account_budget.view_budget_line_tree
+msgid "Budget Lines"
+msgstr "بنود ميزانية"
+
+#. module: base_account_budget
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_budget__name
+#: model_terms:ir.ui.view,arch_db:base_account_budget.crossovered_budget_view_form
+msgid "Budget Name"
+msgstr "اسم الميزانية"
+
+#. module: base_account_budget
+#: model:ir.model,name:base_account_budget.model_account_budget_post
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_lines__general_budget_id
+#: model_terms:ir.ui.view,arch_db:base_account_budget.view_budget_post_form
+#: model_terms:ir.ui.view,arch_db:base_account_budget.view_budget_post_search
+#: model_terms:ir.ui.view,arch_db:base_account_budget.view_budget_post_tree
+msgid "Budgetary Position"
+msgstr "فاصل الميزانية"
+
+#. module: base_account_budget
+#: model:ir.actions.act_window,name:base_account_budget.open_budget_post_form
+#: model:ir.ui.menu,name:base_account_budget.menu_budget_post_form
+msgid "Budgetary Positions"
+msgstr "فواصل الميزانية"
+
+#. module: base_account_budget
+#: model:ir.actions.act_window,name:base_account_budget.act_budget_lines_view
+#: model:ir.actions.act_window,name:base_account_budget.act_budget_view
+#: model:ir.ui.menu,name:base_account_budget.menu_act_budget_view
+#: model:ir.ui.menu,name:base_account_budget.menu_act_crossovered_budget_lines_view
+msgid "Budgets"
+msgstr "الميزانية"
+
+#. module: base_account_budget
+#: model_terms:ir.actions.act_window,help:base_account_budget.act_budget_view
+msgid ""
+"By keeping track of where your money goes, you may be less\n"
+"                likely to overspend, and more likely to meet your financial\n"
+"                goals. Forecast a budget by detailing the expected revenue per\n"
+"                analytic account and monitor its evolution based on the actuals\n"
+"                realised during that period."
+msgstr ""
+
+#. module: base_account_budget
+#: model_terms:ir.ui.view,arch_db:base_account_budget.crossovered_budget_view_form
+msgid "Cancel Budget"
+msgstr "الغاء الميزانية"
+
+#. module: base_account_budget
+#: model:ir.model.fields.selection,name:base_account_budget.selection__budget_budget__state__cancel
+msgid "Cancelled"
+msgstr "ملغاة"
+
+#. module: base_account_budget
+#: model_terms:ir.actions.act_window,help:base_account_budget.act_budget_view
+msgid "Click to create a new budget."
+msgstr "اضغط انشاء لميزانية جديدة"
+
+#. module: base_account_budget
+#: model:ir.model.fields,field_description:base_account_budget.field_account_budget_post__company_id
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_budget__company_id
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_lines__company_id
+msgid "Company"
+msgstr "الشركة"
+
+#. module: base_account_budget
+#: model_terms:ir.ui.view,arch_db:base_account_budget.crossovered_budget_view_form
+msgid "Confirm"
+msgstr "تاكيد"
+
+#. module: base_account_budget
+#: model:ir.model.fields.selection,name:base_account_budget.selection__budget_budget__state__confirm
+msgid "Confirmed"
+msgstr "مؤكدة"
+
+#. module: base_account_budget
+#: model:ir.model.fields,field_description:base_account_budget.field_account_budget_post__create_uid
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_budget__create_uid
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_lines__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: base_account_budget
+#: model:ir.model.fields,field_description:base_account_budget.field_account_budget_post__create_date
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_budget__create_date
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_lines__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: base_account_budget
+#: model:ir.model.fields,field_description:base_account_budget.field_account_budget_post__display_name
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_budget__display_name
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_lines__display_name
+msgid "Display Name"
+msgstr "الاسم المعروض"
+
+#. module: base_account_budget
+#: model:ir.model.fields.selection,name:base_account_budget.selection__budget_budget__state__done
+#: model_terms:ir.ui.view,arch_db:base_account_budget.crossovered_budget_view_form
+msgid "Done"
+msgstr "معتمدة"
+
+#. module: base_account_budget
+#: model:ir.model.fields.selection,name:base_account_budget.selection__budget_budget__state__draft
+msgid "Draft"
+msgstr "مسودة"
+
+#. module: base_account_budget
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_budget__date_to
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_lines__date_to
+msgid "End Date"
+msgstr "تاريخ الانتهاء"
+
+#. module: base_account_budget
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_budget__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: base_account_budget
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_budget__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: base_account_budget
+#: model_terms:ir.ui.view,arch_db:base_account_budget.crossovered_budget_view_form
+msgid "From"
+msgstr "من"
+
+#. module: base_account_budget
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_budget__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: base_account_budget
+#: model:ir.model.fields,field_description:base_account_budget.field_account_budget_post__id
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_budget__id
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_lines__id
+msgid "ID"
+msgstr "معرف"
+
+#. module: base_account_budget
+#: model:ir.model.fields,help:base_account_budget.field_budget_budget__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: base_account_budget
+#: model:ir.model.fields,help:base_account_budget.field_budget_budget__message_has_error
+#: model:ir.model.fields,help:base_account_budget.field_budget_budget__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: base_account_budget
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_budget__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: base_account_budget
+#: model:ir.model.fields,field_description:base_account_budget.field_account_budget_post__write_uid
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_budget__write_uid
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_lines__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: base_account_budget
+#: model:ir.model.fields,field_description:base_account_budget.field_account_budget_post__write_date
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_budget__write_date
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_lines__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: base_account_budget
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_budget__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: base_account_budget
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_budget__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: base_account_budget
+#: model:ir.model.fields,field_description:base_account_budget.field_account_budget_post__name
+msgid "Name"
+msgstr "الاسم"
+
+#. module: base_account_budget
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_budget__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: base_account_budget
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_budget__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: base_account_budget
+#: model:ir.model.fields,help:base_account_budget.field_budget_budget__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr ""
+
+#. module: base_account_budget
+#: model:ir.model.fields,help:base_account_budget.field_budget_budget__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: base_account_budget
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_lines__paid_date
+msgid "Paid Date"
+msgstr "تاريخ الدفع"
+
+#. module: base_account_budget
+#: model_terms:ir.ui.view,arch_db:base_account_budget.crossovered_budget_view_form
+msgid "Period"
+msgstr "الفترة"
+
+#. module: base_account_budget
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_lines__planned_amount
+#: model_terms:ir.ui.view,arch_db:base_account_budget.crossovered_budget_view_form
+msgid "Planned Amount"
+msgstr "المبلغ المخطط"
+
+#. module: base_account_budget
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_lines__practical_amount
+#: model_terms:ir.ui.view,arch_db:base_account_budget.crossovered_budget_view_form
+#: model_terms:ir.ui.view,arch_db:base_account_budget.view_account_analytic_account_form_inherit_budget
+msgid "Practical Amount"
+msgstr "المبلغ العملي"
+
+#. module: base_account_budget
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_budget__rating_ids
+msgid "Ratings"
+msgstr ""
+
+#. module: base_account_budget
+#: model_terms:ir.ui.view,arch_db:base_account_budget.crossovered_budget_view_form
+msgid "Reset to Draft"
+msgstr "إعادة كمسودة"
+
+#. module: base_account_budget
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_budget__creating_user_id
+msgid "Responsible"
+msgstr "المسؤول"
+
+#. module: base_account_budget
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_budget__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: base_account_budget
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_budget__date_from
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_lines__date_from
+msgid "Start Date"
+msgstr "تاريخ البداية"
+
+#. module: base_account_budget
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_budget__state
+msgid "Status"
+msgstr "الحالة"
+
+#. module: base_account_budget
+#. odoo-python
+#: code:addons/SAAS/addons_download/base_account_budget/models/account_budget.py:0
+#: code:addons/base_account_budget/models/account_budget.py:0
+#, python-format
+msgid "The budget must have at least one account."
+msgstr "يجب أن تحتوي الميزانية على حساب واحد على الأقل."
+
+#. module: base_account_budget
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_lines__theoretical_amount
+#: model_terms:ir.ui.view,arch_db:base_account_budget.crossovered_budget_view_form
+#: model_terms:ir.ui.view,arch_db:base_account_budget.view_account_analytic_account_form_inherit_budget
+msgid "Theoretical Amount"
+msgstr "المبلغ النظري"
+
+#. module: base_account_budget
+#: model_terms:ir.ui.view,arch_db:base_account_budget.crossovered_budget_view_form
+msgid "To"
+msgstr "الي"
+
+#. module: base_account_budget
+#: model:ir.model.fields.selection,name:base_account_budget.selection__budget_budget__state__validate
+msgid "Validated"
+msgstr "تم التحقق"
+
+#. module: base_account_budget
+#: model:ir.model.fields,field_description:base_account_budget.field_budget_budget__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: base_account_budget
+#: model:ir.model.fields,help:base_account_budget.field_budget_budget__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: base_account_budget
+#: model_terms:ir.ui.view,arch_db:base_account_budget.view_budget_kanban
+msgid "image"
+msgstr ""

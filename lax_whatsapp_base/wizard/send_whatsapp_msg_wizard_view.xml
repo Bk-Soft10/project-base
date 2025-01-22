@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_send_whatsapp_wizard_form" model="ir.ui.view">
+        <field name="name">send.whatsapp.wizard.form</field>
+        <field name="model">send.whatsapp.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Send to WhatsApp">
+                <group>
+                    <group>
+                        <field name="mobile_number"/>
+                        <field name="message" required="1"/>
+                        <field name="mail_template_id" domain="[('model_id', '=', model_id)]" />
+                    </group>
+                    <group>
+                        <field name="model_id" invisible="1"/>
+                    </group>
+                </group>
+                <footer>
+                    <button string="Send" type="object" name="send_to_whatsapp" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_send_whatsapp_wizard" model="ir.actions.act_window">
+        <field name="name">Send to WhatsApp</field>
+        <field name="res_model">send.whatsapp.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_send_whatsapp_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

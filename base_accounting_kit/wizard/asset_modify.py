@@ -23,6 +23,8 @@
 from lxml import etree
 
 from odoo import api, fields, models, _
+
+
 # from odoo.addons.base.models.ir_ui_view import (transfer_field_to_modifiers, transfer_node_to_modifiers, transfer_modifiers_to_node)
 
 
@@ -108,5 +110,6 @@ class AssetModify(models.TransientModel):
         tracked_fields = self.env['account.asset.asset'].fields_get(['method_number', 'method_period', 'method_end'])
         changes, tracking_value_ids = asset._mail_track(tracked_fields, old_values)
         if changes:
-            asset.message_post(subject=_('Depreciation board modified'), body=self.name, tracking_value_ids=tracking_value_ids)
+            asset.message_post(subject=_('Depreciation board modified'), body=self.name,
+                               tracking_value_ids=tracking_value_ids)
         return {'type': 'ir.actions.act_window_close'}

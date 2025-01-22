@@ -103,7 +103,7 @@ class AccountPayment(models.Model):
     _inherit = "account.payment"
 
     bank_reference = fields.Char(string="Bank Reference", copy=False)
-    cheque_reference = fields.Char(string="Cheque Reference",copy=False)
+    cheque_reference = fields.Char(string="Cheque Reference", copy=False)
     effective_date = fields.Date('Effective Date',
                                  help='Effective date of PDC', copy=False,
                                  default=False)

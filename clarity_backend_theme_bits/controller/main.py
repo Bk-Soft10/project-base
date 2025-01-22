@@ -3,6 +3,7 @@ import pytz
 from odoo import http, models, fields, api, tools
 from odoo.http import request
 
+
 class BackThemeBits(http.Controller):
     @http.route(['/get/menu_data'], type='json', auth='public')
     def get_irmenu_icondata(self, **kw):

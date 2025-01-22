@@ -27,7 +27,7 @@ $cairo-font-path: '../fonts/Cairo';
 
 @mixin cairo-font-pair($type, $weight) {
     @include cairo-font('#{$type}', $weight, normal);
-    @include cairo-font('#{$type}Italic', $weight, italic);
+//     @include cairo-font('#{$type}Italic', $weight, italic);
 }
 
 

@@ -130,7 +130,7 @@ class AccountAssetAsset(models.Model):
     note = fields.Text()
     category_id = fields.Many2one('account.asset.category', string='Category',
                                   required=True, change_default=True,
-                                  readonly=True,)
+                                  readonly=True, )
     date = fields.Date(string='Date', required=True, readonly=True,
                        default=fields.Date.context_today)
     state = fields.Selection(
@@ -154,9 +154,9 @@ class AccountAssetAsset(models.Model):
     method_period = fields.Integer(string='Number of Months in a Period',
                                    required=True, readonly=True, default=12,
                                    help="The amount of time between two depreciations, in months")
-    method_end = fields.Date(string='Ending Date', readonly=True,)
+    method_end = fields.Date(string='Ending Date', readonly=True, )
     method_progress_factor = fields.Float(string='Degressive Factor',
-                                          readonly=True, default=0.3,)
+                                          readonly=True, default=0.3, )
     value_residual = fields.Float(compute='_amount_residual',
                                   digits=0, string='Residual Value')
     method_time = fields.Selection(
@@ -170,7 +170,7 @@ class AccountAssetAsset(models.Model):
     depreciation_line_ids = fields.One2many('account.asset.depreciation.line',
                                             'asset_id',
                                             string='Depreciation Lines',
-                                            readonly=True,)
+                                            readonly=True, )
     salvage_value = fields.Float(string='Salvage Value', digits=0,
                                  readonly=True,
                                  help="It is the amount you plan to have that you cannot depreciate.")
@@ -566,7 +566,7 @@ class AccountAssetAsset(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         assets = super(AccountAssetAsset,
-                      self.with_context(mail_create_nolog=True)).create(vals_list)
+                       self.with_context(mail_create_nolog=True)).create(vals_list)
         for asset in assets:
             asset.sudo().compute_depreciation_board()
         return assets

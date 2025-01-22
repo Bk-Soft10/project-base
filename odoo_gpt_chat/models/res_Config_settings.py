@@ -1,7 +1,7 @@
 from odoo import api, fields, models, _
 
-class ResConfigSettings(models.TransientModel):
 
+class ResConfigSettings(models.TransientModel):
     _inherit = 'res.config.settings'
 
     chat_bot_id = fields.Char("Chat bot ID", config_parameter="odoo_gpt_chat.chat_bot_id")

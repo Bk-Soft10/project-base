@@ -110,7 +110,7 @@
                                 <th>Name</th>
                                 <th class="text-right">Balance</th>
                                 <th class="text-right">
-<!--                                    <span t-esc="data['form']['label_filter']"/>-->
+                                    <!--                                    <span t-esc="data['form']['label_filter']"/>-->
                                     <span>Comp</span>
                                 </th>
                             </tr>

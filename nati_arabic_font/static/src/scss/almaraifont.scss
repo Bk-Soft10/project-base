@@ -27,7 +27,7 @@ $almarai-font-path: '../fonts/Almarai';
 
 @mixin almarai-font-pair($type, $weight) {
     @include almarai-font('#{$type}', $weight, normal);
-    @include almarai-font('#{$type}Italic', $weight, italic);
+//     @include almarai-font('#{$type}Italic', $weight, italic);
 }
 
 

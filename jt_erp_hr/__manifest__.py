@@ -30,7 +30,7 @@
     'license': 'AGPL-3',
     'depends': [
         'hr', 'hr_attendance', 'hr_contract', 'hr_expense',
-        'hr_fleet', 'hr_gamification', 'hr_holidays', 
+        'hr_fleet', 'hr_gamification', 'hr_holidays',
         'hr_holidays_attendance', 'hr_maintenance',
         'hr_org_chart', 'hr_presence', 'hr_recruitment',
         'hr_recruitment_survey', 'hr_skills', 'hr_skills_slides',

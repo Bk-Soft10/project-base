@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-   <data noupdate="1">
-<!--       Records for the account.financial.report model-->
+    <data noupdate="1">
+        <!--       Records for the account.financial.report model-->
         <record id="account_financial_report_cash_flow0" model="account.financial.report">
             <field name="name">Cash Flow Statement</field>
             <field name="type">sum</field>

@@ -27,21 +27,21 @@ import logging
 
 _logger = logging.getLogger('smsclient')
 
+
 class ServerAction(models.Model):
     """
     Possibility to specify the SMS Gateway when configure this server action
     """
     _inherit = 'ir.actions.server'
 
-    action_type = fields.Selection([('sms','SMS')], 'action Type')
-    sms =  fields.Char('sms')
+    action_type = fields.Selection([('sms', 'SMS')], 'action Type')
+    sms = fields.Char('sms')
     mobile = fields.Char('Mobile')
-    condition =  fields.Char('Condition')
+    condition = fields.Char('Condition')
     sms_server = fields.Many2one('sms.smsclient', 'SMS Server',
-            help='Select the SMS Gateway configuration to use with this action')
-    sms_template_id  = fields.Many2one('mail.template', 'SMS Template',
-            help='Select the SMS Template configuration to use with this action')
-
+                                 help='Select the SMS Gateway configuration to use with this action')
+    sms_template_id = fields.Many2one('mail.template', 'SMS Template',
+                                      help='Select the SMS Template configuration to use with this action')
 
     @api.model
     def run(self):
@@ -79,39 +79,39 @@ class ServerAction(models.Model):
                     values = {}
                     for field in ['subject', 'body_html', 'email_from',
                                   'email_to', 'email_recipients', 'email_cc', 'reply_to']:
-                        values[field] = email_template_obj.render_template( getattr(template, field),
-                                                             template.model, res_id, context=context) \
-                                                             or False
-                    vals ={
+                        values[field] = email_template_obj.render_template(getattr(template, field),
+                                                                           template.model, res_id, context=context) \
+                                        or False
+                    vals = {
                         'name': gateway.url,
                         'gateway_id': gateway.id,
                         'state': 'draft',
                         'mobile': to,
                         'msg': values['body_html'],
-                        'validity': gateway.validity, 
-                        'classes': gateway.classes, 
-                        'deferred': gateway.deferred, 
-                        'priority': gateway.priority, 
+                        'validity': gateway.validity,
+                        'classes': gateway.classes,
+                        'deferred': gateway.deferred,
+                        'priority': gateway.priority,
                         'coding': gateway.coding,
-                        'tag': gateway.tag, 
+                        'tag': gateway.tag,
                         'nostop': gateway.nostop,
                     }
-                    sms_in_q = queue_obj.search(cr, uid,[
-                        ('name','=',gateway.url),
-                        ('gateway_id','=',gateway.id),
-                        ('state','=','draft'),
-                        ('mobile','=',to),
-                        ('msg','=',values['body_html']),
-                        ('validity','=',gateway.validity), 
-                        ('classes','=',gateway.classes), 
-                        ('deferred','=',gateway.deferred), 
-                        ('priority','=',gateway.priority), 
-                        ('coding','=',gateway.coding),
-                        ('tag','=',gateway.tag), 
-                        ('nostop','=',gateway.nostop)
-                        ])
+                    sms_in_q = queue_obj.search(cr, uid, [
+                        ('name', '=', gateway.url),
+                        ('gateway_id', '=', gateway.id),
+                        ('state', '=', 'draft'),
+                        ('mobile', '=', to),
+                        ('msg', '=', values['body_html']),
+                        ('validity', '=', gateway.validity),
+                        ('classes', '=', gateway.classes),
+                        ('deferred', '=', gateway.deferred),
+                        ('priority', '=', gateway.priority),
+                        ('coding', '=', gateway.coding),
+                        ('tag', '=', gateway.tag),
+                        ('nostop', '=', gateway.nostop)
+                    ])
                     if not sms_in_q:
-                        queue_obj.create( vals, context=context)
+                        queue_obj.create(vals, context=context)
                         _logger.info('SMS successfully send to : %s' % (to))
                 except Exception:
                     _logger.error('Failed to send SMS : %s' % repr(e))

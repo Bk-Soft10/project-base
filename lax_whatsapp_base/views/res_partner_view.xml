@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+	    <record id="res_partner_tree_inherit_lax_whatsapp" model="ir.ui.view">
+            <field name="name">res.partner.tree.inherit.lax.whatsapp</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="inside">
+                 	<header>
+    					<button name="send_by_whatsapp" class="oe_stat_button" icon="fa-whatsapp" type="object"/>
+    				</header>
+            	</xpath>
+            </field>
+	    </record>
+        
+		<record id="res_partner_form" model="ir.ui.view">
+            <field name="name">res.partner.inherit.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//group//field[@name='mobile']" position="replace">
+                    <div class="o_row">
+                        <field name="mobile" widget="phone"/>
+                        <button type="object" name="send_by_whatsapp" class="oe_stat_button" icon="fa-whatsapp"/>
+                    </div>
+                </xpath>
+            </field>
+	    </record>
+	</data>
+</odoo>

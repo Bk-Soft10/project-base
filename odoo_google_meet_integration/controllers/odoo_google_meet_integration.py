@@ -29,6 +29,7 @@ from odoo.http import request
 
 class GoogleMeetAuth(http.Controller):
     """Controller handling Google Meet authentication for Odoo users."""
+
     @http.route('/google_meet_authentication', type="http", auth="public",
                 website=True)
     def get_auth_code(self, **kw):

@@ -16,7 +16,6 @@ from odoo.service import security
 from odoo.tools.translate import _
 from odoo.addons.web.controllers.utils import ensure_db, _get_login_redirect_url, is_user_internal
 
-
 _logger = logging.getLogger(__name__)
 
 # Shared parameters for all login/signup flows
@@ -24,6 +23,7 @@ SIGN_UP_REQUEST_PARAMS = {'db', 'login', 'debug', 'token', 'message', 'error', '
                           'redirect', 'redirect_hostname', 'email', 'name', 'partner_id',
                           'password', 'confirm_password', 'city', 'country_id', 'lang', 'signup_email'}
 LOGIN_SUCCESSFUL_PARAMS = set()
+
 
 def clear_session_history(u_sid, f_uid=False):
     """ Clear all the user session histories for a particular user """
@@ -63,7 +63,6 @@ class Session(session.Session):
         user._clear_session()
         request.session.logout(keep_db=True)
         return request.redirect(redirect, 303)
-
 
 
 class Home(home.Home):

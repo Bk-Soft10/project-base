@@ -26,6 +26,6 @@
     ],
     'installable': True,
     'auto_install': False,
-    "live_test_url":'https://youtu.be/e_LGkbyjpjs',
-    "images":['static/description/Banner.gif'],
+    "live_test_url": 'https://youtu.be/e_LGkbyjpjs',
+    "images": ['static/description/Banner.gif'],
 }

@@ -54,7 +54,7 @@ def new(cls, db_name, force_demo=False, status=None, update_module=False):
 def _manage_upgrade_errors(upgrades, e):
     if upgrades and config.get("stop_after_upgrades"):
         msg = isinstance(e, UserError) and \
-            e.value or e
+              e.value or e
         _logger.error(tools.ustr(msg), exc_info=True)
         _logger.critical("Upgrade FAILED")
         _logger.info("Stopping Odoo server")

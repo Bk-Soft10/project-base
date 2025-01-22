@@ -22,7 +22,7 @@
 
 from datetime import date, timedelta
 
-from odoo import fields, models,_
+from odoo import fields, models, _
 from odoo.exceptions import UserError, ValidationError, AccessError, RedirectWarning
 
 
@@ -37,7 +37,8 @@ class ResCompany(models.Model):
                 ('state', '=', 'draft'),
                 ('date', '<=', values['fiscalyear_lock_date'])])
             if draft_entries:
-                error_msg = _('There are still unposted entries in the period you want to lock. You should either post or delete them.')
+                error_msg = _(
+                    'There are still unposted entries in the period you want to lock. You should either post or delete them.')
                 action_error = {
                     'view_mode': 'tree',
                     'name': 'Unposted Entries',
@@ -45,7 +46,8 @@ class ResCompany(models.Model):
                     'type': 'ir.actions.act_window',
                     'domain': [('id', 'in', draft_entries.ids)],
                     'search_view_id': [self.env.ref('account.view_account_move_filter').id, 'search'],
-                    'views': [[self.env.ref('account.view_move_tree').id, 'list'], [self.env.ref('account.view_move_form').id, 'form']],
+                    'views': [[self.env.ref('account.view_move_tree').id, 'list'],
+                              [self.env.ref('account.view_move_form').id, 'form']],
                 }
                 raise RedirectWarning(error_msg, action_error, _('Show unposted entries'))
 
@@ -57,7 +59,7 @@ class ResCompany(models.Model):
             ])
             if unreconciled_statement_lines:
                 error_msg = _("There are still unreconciled bank statement lines in the period you want to lock."
-                            "You should either reconcile or delete them.")
+                              "You should either reconcile or delete them.")
                 action_error = {
                     'view_mode': 'tree',
                     'name': 'Unreconciled Transactions',
@@ -66,9 +68,7 @@ class ResCompany(models.Model):
                     'domain': [('id', 'in', unreconciled_statement_lines.ids)],
                     # 'search_view_id': [self.env.ref('account.view_account_move_filter').id, 'search'],
                     'views': [[self.env.ref('base_accounting_kit.view_bank_statement_line_tree').id, 'list']]
-                              # [self.env.ref('account.view_move_form').id, 'form']],
+                    # [self.env.ref('account.view_move_form').id, 'form']],
                 }
                 # action_error = self._get_fiscalyear_lock_statement_lines_redirect_action(unreconciled_statement_lines)
                 raise RedirectWarning(error_msg, action_error, _('Show Unreconciled Bank Statement Line'))
-
-
