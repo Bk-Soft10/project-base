@@ -1,5 +1,5 @@
-from odoo import models, fields
 
+from odoo import models,fields 
 
 class CloseReason(models.Model):
     _name = 'close.reason'
@@ -7,3 +7,5 @@ class CloseReason(models.Model):
 
     name = fields.Char(string='name')
     desc = fields.Char(string='Description')
+    
+    
