@@ -32,7 +32,6 @@ class IrHttp(models.AbstractModel):
                 uid = request.session.uid
                 user_pool = request.env['res.users'].with_user(
                     SUPERUSER_ID).browse(uid)
-
                 def _update_user(u_sid, u_now, u_exp_date, u_uid):
                     """ Function for updating session details for the
                         corresponding user

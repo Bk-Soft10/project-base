@@ -29,15 +29,15 @@ Vendor read only access
 Limited customer access
 
     """,
-    "license": "OPL-1",
+    "license" : "OPL-1",
     'live_test_url': "https://youtu.be/J2k28TUCbZo",
-    "images": ['static/description/main_screenshot.png'],
-    'depends': ['base', 'sale_management'],
+    "images":['static/description/main_screenshot.png'],
+    'depends': ['base','sale_management'],
     'data': [
-        'security/user_read_only_group.xml',
-        'security/ir.model.access.csv',
-        'views/res_user_read_only.xml',
-    ],
+            'security/user_read_only_group.xml',
+            'security/ir.model.access.csv',
+            'views/res_user_read_only.xml',
+            ],
     'installable': True,
     'auto_install': False,
     'category': 'Extra Tools',

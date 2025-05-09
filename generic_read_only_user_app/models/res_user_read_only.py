@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from odoo import api, fields, models, tools, _
+from odoo import api, fields, models, tools,_
 from odoo.exceptions import ValidationError
-
 
 class ResUser(models.Model):
     _inherit = 'res.users'
 
     read_only = fields.Boolean(string="Make Read Only")
-
+    
     @api.onchange('read_only')
     def set_read_only_user(self):
         ir_model_data = self.env['ir.model.data']
@@ -19,16 +18,15 @@ class ResUser(models.Model):
             for group in self.groups_id:
                 group_list.append(group.id)
             group_list.append(read_only_grp_id)
-            result = self.write({'groups_id': ([(6, 0, group_list)])})
-
+            result= self.write({'groups_id':([(6,0,group_list)])})
+        
         elif self.read_only:
             self.read_only = False
             group_list2 = []
             for group in self.groups_id:
-                if group.id != read_only_grp_id:
+                if group.id != read_only_grp_id: 
                     group_list2.append(group.id)
-            result = self.write({'groups_id': ([(6, 0, group_list2)])})
-
+            result= self.write({'groups_id':([(6,0,group_list2)])})
 
 class IrModelAccess(models.Model):
     _inherit = 'ir.model.access'
@@ -42,13 +40,12 @@ class IrModelAccess(models.Model):
                 return False
         return result
 
-
 class IrRule(models.Model):
     _inherit = 'ir.rule'
 
     def _compute_domain(self, model_name, mode="read"):
-        res = super(IrRule, self)._compute_domain(model_name, mode)
-        obj_list = ['res.users.log', 'res.users', 'mail.channel', 'mail.alias', 'bus.presence', 'res.lang']
+        res = super(IrRule,self)._compute_domain(model_name, mode)
+        obj_list=['res.users.log','res.users','mail.channel','mail.alias','bus.presence','res.lang']
         if model_name not in obj_list:
             if self.env.user.has_group('generic_read_only_user_app.group_read_only_user'):
                 if mode != 'read':

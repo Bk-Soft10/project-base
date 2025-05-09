@@ -6,7 +6,7 @@
         <field name="tag">purchase_report</field>
     </record>
     <menuitem id="dynamic_purchase_report_menu"
-              name=" Dynamic Purchase Report"
-              parent="purchase.purchase_report"
+              name="Dynamic Purchase Report"
+              parent="purchase.purchase_report_main"
               action="dynamic_purchase_report_action"/>
 </odoo>

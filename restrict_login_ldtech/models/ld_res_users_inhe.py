@@ -77,3 +77,4 @@ class ResUsers(models.Model):
         self.with_user(SUPERUSER_ID).write({'sid': sid, 'exp_date': exp_date,
                                             'logged_in': True,
                                             'last_update': datetime.now()})
+

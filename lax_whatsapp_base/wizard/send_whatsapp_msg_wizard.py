@@ -56,7 +56,6 @@ class SendWhatsappWizard(models.TransientModel):
             text_message = html2text.html2text(wiz_id.body_html)
             
             if self.mobile_number:
-                print("====================================")
                 whatsapp_number = self.mobile_number.split(',')
                 for num in whatsapp_number:
                     rec.company_id.send_to_whatsapp(

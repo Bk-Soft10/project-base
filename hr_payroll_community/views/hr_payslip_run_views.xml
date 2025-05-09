@@ -93,16 +93,18 @@
                     <h1>
                         <field name="name" readonly="state != 'draft'"/>
                     </h1>
-                    <group col="4">
-                        <label for="date_start" string="Period"
-                               readonly="state != 'draft'"/>
-                        <div>
-                            <field name="date_start" class="oe_inline"/>
-                            -
-                            <field name="date_end" class="oe_inline"
-                                   readonly="state != 'draft'"/>
-                        </div>
-                        <field name="credit_note" readonly="state != 'draft'"/>
+                    <group>
+                        <group>
+                            <label for="date_start" string="Period" readonly="state != 'draft'"/>
+                            <div>
+                                <field name="date_start" class="oe_inline" readonly="state != 'draft'"/>
+                                -
+                                <field name="date_end" class="oe_inline" readonly="state != 'draft'"/>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="credit_note" readonly="state != 'draft'"/>
+                        </group>
                     </group>
                     <separator string="Payslips"/>
                     <field name="slip_ids" readonly="state != 'draft'"/>

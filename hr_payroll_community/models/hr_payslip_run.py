@@ -1,24 +1,5 @@
 # -*- coding: utf-8 -*-
 #############################################################################
-#    A part of Open HRMS Project <https://www.openhrms.com>
-#
-#    Cybrosys Technologies Pvt. Ltd.
-#
-#    Copyright (C) 2023-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
-#    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
-#
-#    You can modify it under the terms of the GNU LESSER
-#    GENERAL PUBLIC LICENSE (LGPL v3), Version 3.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU LESSER GENERAL PUBLIC LICENSE (LGPL v3) for more details.
-#
-#    You should have received a copy of the GNU LESSER GENERAL PUBLIC LICENSE
-#    (LGPL v3) along with this program.
-#    If not, see <http://www.gnu.org/licenses/>.
-#
 #############################################################################
 from datetime import date, datetime
 from dateutil.relativedelta import relativedelta
@@ -42,6 +23,7 @@ class HrPayslipRun(models.Model):
         ('close', 'Close'),
     ], string='Status', index=True, readonly=True, copy=False, default='draft',
         help="Status for Payslip Batches")
+    company_id = fields.Many2one('res.company', string='Company', copy=False, default=lambda self: self.env.company)
     date_start = fields.Date(string='Date From', required=True,
                              help="start date for batch",
                              default=lambda self: fields.Date.to_string(
