@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <div t-name="website_faqs.faqSearchBar.autocomplete" class="dropdown-menu show w-100"
+         style="border-radius: 1rem;margin-top:40px;">
+        <div class="overflow-auto" style="max-height: 300px;margin: 8px;">
+            <t t-if="!faqs.length">
+                <span class="dropdown-item-text text-muted">No results found. Please try another search.</span>
+            </t>
+            <a t-foreach="faqs" t-as="f" class="dropdown-item p-2 text-wrap" t-att-href="'/faq?faq='+(f['faq_id'])" t-key="f['faq_id']">
+                <small class="text-muted"><t t-esc="f['faq_tag']"/></small>
+                <h5 class="text-primary"><t t-esc="f['faq_question']"/></h5>
+                <div style="word-wrap: break-word;"><t t-out="f['faq_ans']"/></div>
+            </a>
+        </div>
+    </div>
+
+</templates>

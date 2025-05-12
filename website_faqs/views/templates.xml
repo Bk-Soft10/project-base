@@ -1,0 +1,197 @@
+<odoo>
+    <data>
+        <!--        <template id="website_faqs.assets_frontend" inherit_id="website.assets_frontend" name="Active Class">-->
+        <!--            <xpath expr="." position="inside">-->
+        <!--                <script type="text/javascript" src="/website_faqs/static/src/js/active_class.js"/>-->
+        <!--            </xpath>-->
+        <!--        </template>-->
+
+        <!--        <template id="header" inherit_id="website.layout" name="Header Menu FAQ">-->
+        <!--            <xpath expr="//header//ul[@id='top_menu']/li" position="before">-->
+        <!--                <li t-if="website.show_faq" class="nav-item">-->
+        <!--                    <a id="faq_home" href="/faqs" class="nav-link">FAQ</a>-->
+        <!--                </li>-->
+        <!--            </xpath>-->
+        <!--        </template>-->
+        <record id="menu_home" model="website.menu">
+            <field name="name">FAQs</field>
+            <field name="url">/faqs</field>
+            <field name="sequence" type="int">100</field>
+        </record>
+
+        <template id="all_faqs" name="All FAQs">
+            <t t-call="website.layout">
+                <div id="wrap" class="container py-4">
+                    <div class="mb-3">
+                        <div style="text-align:center;">
+                            <h2 class="mb-3 text-primary">How can we help you?</h2>
+                            <div id="search_query" class="input-group" style="margin:0 auto; max-width: 500px">
+                                <input type="search" class="dev-query search-query form-control oe_search_box"
+                                       style="border-radius: 1rem;"
+                                       placeholder="Type keywords to find answers"/>
+                            </div>
+                            <div class="text-primary mt-4">
+                                <span>You can also browse the topics below to find what you are looking for.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div id="cate"/>
+                        <div class="col">
+                            <div id="accordion" style="margin: 20px 0; border-radius: 1rem;">
+                                <t t-foreach="data" t-as="category">
+                                    <t t-foreach="data[category]" t-as="tag">
+                                        <t t-foreach="tag" t-as="tg">
+                                            <div class="card" style="border-radius: 1rem;">
+                                                <div class="card-header " style="border-radius: 1rem;">
+                                                    <a data-bs-toggle="collapse"
+                                                       t-att-href="'#'+tg.replace(' ','')"
+                                                       class="card-link collapsed"
+                                                       aria-expanded="false">
+                                                        <t t-esc="tg"/>
+                                                        <i class="pull-right fa fa-plus"/>
+                                                    </a>
+                                                </div>
+                                                <div t-att-id="tg.replace(' ','')" class="collapse" style=""
+                                                     data-bs-parent="#accordion">
+                                                    <div class="card-body _5omz rich-text"
+                                                         style="border-radius: 1rem;">
+                                                        <t t-foreach="tag[tg]" t-as="text">
+                                                            <div class="card mb-2 mt-2" style="border-radius: 1rem;">
+                                                                <a class="text-secondary card-link"
+                                                                   t-att-href="'/faq?faq='+str(text['faq_id'])">
+                                                                    <div class="card-header "
+                                                                         style="border-radius: 1rem;">
+                                                                        <strong>Question:</strong>
+                                                                        <span t-esc="text['question']"/>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                        </t>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </t>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+        <template id="faq_category" customize_show="True" inherit_id="website_faqs.all_faqs"
+                  name="Show FAQs Categories">
+            <xpath expr="//div[@id='cate']" position="replace">
+                <div class="col-lg-3" style="padding-top: 20px;">
+                    <button type="button" class="btn btn-link d-lg-none"
+                            data-bs-target="#faq_categories_collapse" data-bs-toggle="collapse">
+                        Show categories
+                    </button>
+                    <div class="collapse d-lg-block" id="faq_categories_collapse">
+                        <ul id="category_list" class="nav nav-pills flex-column mb-2">
+                            <li class="nav-item">
+                                <a t-att-class="'nav-link '+ 'active' if highlight == 'all' else 'nav-link'"
+                                   href="/faqs?cat=0">All
+                                </a>
+                            </li>
+                            <t t-foreach="category" t-as="cat">
+                                <li class="nav-item">
+                                    <a t-att-class="'nav-link '+ 'active' if highlight == cat['cat_name'] else 'nav-link'"
+                                       t-att-href="'/faqs?cat='+str(cat['cat_id'])">
+                                        <t t-esc="cat['cat_name']"/>
+                                    </a>
+                                </li>
+                            </t>
+                        </ul>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+
+        <template id="spec_faq" name="FAQ">
+            <t t-call="website.layout">
+                <div id="wrap" class="container py-4">
+                    <div class="text-muted">
+                        <a href="/faqs">
+                            <i class="fa fa-question-circle-o fa-lg"/>
+                            FAQs
+                        </a>
+                        <i class="fa fa-chevron-right">
+                            <t t-esc="tag"/>
+                        </i>
+                    </div>
+                    <hr/>
+                    <div id="faq_body" class="mb-4" style="margin-left: 7%;margin-right: 7%;">
+                        <div class="mt-5 mb-5">
+                            <h4>
+                                <t t-esc="question"/>
+                            </h4>
+                        </div>
+                        <div>
+                            <t t-raw="ans"/>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="container">
+                        <t t-if="feedback">
+                            <span class='text-muted'>Thank you for your feedback</span>
+                        </t>
+                        <div t-else="" id="take_feedback">
+                            <span class="text-muted">Was this article helpful?</span>
+                            <div style="float:right;">
+                                <a class="feedback btn btn-outline-primary mr-2" style="border-radius: 1rem;"
+                                   t-att-href="'/faq?faq='+str(faq_id)+'&amp;fb=1'">YES
+                                </a>
+                                <a class="feedback btn btn-outline-primary mr-2" style="border-radius: 1rem;"
+                                   t-att-href="'/faq?faq='+str(faq_id)+'&amp;fb=0'">NO
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div style="text-align:center">
+                        <a class="btn btn-outline-primary" style="border-radius: 1rem;" href="/faqs">FAQ HOME</a>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+        <template id="error_page" name="Error">
+            <t t-call="website.layout">
+                <div id="wrap">
+                    <div class="container">
+                        <h1 class="mt-5">Oops! Something went wrong.</h1>
+                        <p>Take a look at the error message below.</p>
+                    </div>
+
+                    <div class="container">
+                        <p>
+                            <strong>Error message:</strong>
+                        </p>
+                        <pre>
+                            FAQ does not exist or has been deleted.
+                        </pre>
+                        <p/>
+                        <div style="text-align:center">
+                            <a class="btn btn-outline-primary" style="border-radius: 1rem;" href="/faqs">FAQ HOME</a>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+        <template id="empty_page" name="Error">
+            <t t-call="website.layout">
+                <div id="wrap">
+                    <div class="container">
+                        <h3 class="mt-5 alert alert-info">Sorry! No FAQs posted yet.</h3>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+    </data>
+</odoo>

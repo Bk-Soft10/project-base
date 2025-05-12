@@ -1,0 +1,143 @@
+<odoo>
+    <data>
+        <!-- explicit list view definition -->
+
+        <record id="website_faqs.list_view_faqs" model="ir.ui.view">
+            <field name="name">FAQs List</field>
+            <field name="model">website.faq.faqs</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="category"/>
+                    <field name="main_tag"/>
+                    <field name="website_id"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="website_faqs.list_view_category" model="ir.ui.view">
+            <field name="name">Category List</field>
+            <field name="model">website.faq.category</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom">
+                    <field name="name" required="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="website_faqs.list_view_tag" model="ir.ui.view">
+            <field name="name">Tag List</field>
+            <field name="model">website.faq.main.tag</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom">
+                    <field name="name" required="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--        Form Views -->
+
+        <record id="website_faqs.form_view_faq" model="ir.ui.view">
+            <field name="name">FAQ</field>
+            <field name="model">website.faq.faqs</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="publish_faq" type="object" string="Publish" invisible="state == 'published'"
+                                class="oe_highlight"/>
+                        <button name="un_publish_faq" type="object" string="Unpublish"
+                                invisible="state == 'unpublished'"
+                                class="oe_highlight"/>
+                        <field name="state" widget="statusbar" statusbar_visible="published,unpublished"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" name="likes" type="object"
+                                    icon="fa-thumbs-o-up">
+                                <field name="ups" widget="statinfo"/>
+                            </button>
+                            <button class="oe_stat_button" name="dislikes" type="object"
+                                    icon="fa-thumbs-o-down">
+                                <field name="downs" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <group>
+                            <field name="name" required="1" readonly="state == 'published'"/>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="category" required="1" readonly="state == 'published'"/>
+                                <field name="website_id" required="1" readonly="state == 'published'"/>
+                            </group>
+                            <group>
+                                <field name="main_tag" required="1" readonly="state == 'published'"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="answer" readonly="state == 'published'" required="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="website_faqs.view_show_faq_option_settings_form" model="ir.ui.view">
+            <field name="name">website_faqs.show.faq.settings.form.inherit</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="website.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+<!--                <xpath expr="//field[@name='cdn_activated']/../.." position="after">-->
+<!--                    <div class="col-12 col-lg-6 o_setting_box">-->
+<!--                        <div class="o_setting_left_pane">-->
+<!--                            <field name="show_faq"/>-->
+<!--                        </div>-->
+<!--                        <div class="o_setting_right_pane">-->
+<!--                            <label for="show_faq"/>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </xpath>-->
+                <xpath expr="//block[@id='website_settings']" position="inside">
+                    <setting title="Website FAQs">
+                        <field name="show_faq"/>
+                        <label class="o_form_label d-block" for="show_faq"
+                               string="Show FAQs"/>
+                    </setting>
+                </xpath>
+
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+
+        <record id="website_faqs.action_window_faqs" model="ir.actions.act_window">
+            <field name="name">FAQs</field>
+            <field name="res_model">website.faq.faqs</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="website_faqs.action_window_category" model="ir.actions.act_window">
+            <field name="name">Categories</field>
+            <field name="res_model">website.faq.category</field>
+            <field name="view_mode">tree</field>
+        </record>
+        <record id="website_faqs.action_window_main_tag" model="ir.actions.act_window">
+            <field name="name">Tags</field>
+            <field name="res_model">website.faq.main.tag</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+        <!-- menu categories -->
+
+        <menuitem name="FAQ" id="website_faqs.menu_faq" parent="website.menu_website_configuration" sequence="99"/>
+
+        <!-- actions -->
+
+        <menuitem name="FAQs" id="website_faqs.menu_1_faqs" parent="website_faqs.menu_faq"
+                  action="website_faqs.action_window_faqs"/>
+        <menuitem name="Category" id="website_faqs.menu_2_category" parent="website_faqs.menu_faq"
+                  action="website_faqs.action_window_category"/>
+        <menuitem name="Tag" id="website_faqs.menu_3_tag" parent="website_faqs.menu_faq"
+                  action="website_faqs.action_window_main_tag"/>
+    </data>
+</odoo>
