@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Privilege for Web Notification (replaces category in Odoo 19) -->
+    <record id="privilege_web_notification" model="res.groups.privilege">
+        <field name="name">Web Notifications</field>
+    </record>
+
+    <!-- Group: Web Notification Manager -->
+    <record id="group_web_notification_manager" model="res.groups">
+        <field name="name">Web Notification Manager</field>
+        <field name="privilege_id" ref="privilege_web_notification"/>
+        <field name="comment">Users with this group can create and manage web notifications.</field>
+    </record>
+</odoo>

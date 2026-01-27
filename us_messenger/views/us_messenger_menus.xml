@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <menuitem
+        id="messenger_menu"
+        web_icon="us_messenger,static/description/icon.png"
+        name="Messengers"
+        groups="us_messenger.us_messenger_group_user"
+    >   
+        <menuitem
+            id="messenger_project_menu_action"
+            name="Messengers"
+            action="messenger_project_action"
+            groups="us_messenger.us_messenger_group_dev"
+            sequence="10"
+        />
+        <menuitem
+            id="messenger_job_menu_action"
+            name="Jobs"
+            action="messenger_job_action"
+            groups="us_messenger.us_messenger_group_dev"
+            sequence="20"
+        />
+        <menuitem
+            id="messenger_sessions_menu_action"
+            name="Sessions"
+            action="messenger_discuss_channel_action"
+            groups="us_messenger.us_messenger_group_user"
+            sequence="30"
+        />
+        <menuitem
+            id="messenger_operator_menu_action"
+            name="Operators"
+            action="messenger_operator_action"
+            groups="us_messenger.auto_operator_selection"
+            sequence="40"
+        />
+        <menuitem
+            id="messenger_script_menu_action"
+            name="Scripts"
+            action="messenger_script_action"
+            groups="us_messenger.us_messenger_group_dev"
+            sequence="50"
+        />
+    </menuitem>
+</odoo>

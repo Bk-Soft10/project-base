@@ -1,0 +1,34 @@
+<odoo>
+    <data noupdate="1">
+        <record id="step_type_text" model="us.messenger.script.step.type">
+            <field name="name">Text Message</field>
+            <field name="step_type">text</field>
+            <field name="bot_type">all_bots</field>
+        </record>
+
+        <record id="step_type_question_email" model="us.messenger.script.step.type">
+            <field name="name">Email Input</field>
+            <field name="step_type">question_email</field>
+            <field name="bot_type">all_bots</field>
+        </record>
+
+        <record id="step_type_question_phone" model="us.messenger.script.step.type">
+            <field name="name">Phone Input</field>
+            <field name="step_type">question_phone</field>
+            <field name="bot_type">all_bots</field>
+        </record>
+        
+        <record id="step_type_free_input_single" model="us.messenger.script.step.type">
+            <field name="name">Free Text Input</field>
+            <field name="step_type">free_input_single</field>
+            <field name="bot_type">all_bots</field>
+        </record>
+        
+        <record id="step_type_forward_operator" model="us.messenger.script.step.type">
+            <field name="name">Forward to Operator</field>
+            <field name="step_type">forward_operator</field>
+            <field name="bot_type">all_bots</field>
+        </record>
+
+    </data>
+</odoo>

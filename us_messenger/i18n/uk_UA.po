@@ -1,0 +1,1467 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* us_messenger
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-07 10:51+0000\n"
+"PO-Revision-Date: 2026-01-07 10:51+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: us_messenger
+#: model:ir.module.category,description:us_messenger.module_category_us_messenger
+msgid ""
+"\n"
+"                User: read-only access;\n"
+"            Developer: restricted write access;\n"
+"            Administrator: same as Developer, but access to secure staff.\n"
+"            "
+msgstr ""
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.discuss_channel_view_list
+msgid "# Messages"
+msgstr "# Повідомлень"
+
+#. module: us_messenger
+#. odoo-python
+#: code:addons/us_messenger/models/us_messenger_script_step.py:0
+#: code:addons/us_modules/us_messenger/models/us_messenger_script_step.py:0
+msgid "%(msg)s %(dots)s"
+msgstr "%(msg)s %(dots)s"
+
+#. module: us_messenger
+#. odoo-python
+#: code:addons/us_messenger/models/us_messenger_script.py:0
+#: code:addons/us_modules/us_messenger/models/us_messenger_script.py:0
+msgid "%s (copy)"
+msgstr "%s (копія)"
+
+#. module: us_messenger
+#. odoo-python
+#: code:addons/us_messenger/models/us_messenger_link.py:0
+#: code:addons/us_modules/us_messenger/models/us_messenger_link.py:0
+msgid "%s link already exists: %s=%s, %s=%s"
+msgstr "Зв'язок %s вже існує: %s=%s, %s=%s"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_project_view_kanban
+msgid ""
+"<i class=\"fa fa-circle\" style=\"color: #0eec84; width: 2px; height: 2px;\"/>\n"
+"                                            <span style=\"margin-left: 15px\">Online</span>"
+msgstr ""
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_project_view_kanban
+msgid ""
+"<i class=\"fa fa-circle\" style=\"color: #ff3333; width: 2px; height: 2px;\"/>\n"
+"                                            <span style=\"margin-left: 15px\">Offline</span>"
+msgstr ""
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.view_us_messenger_operator_kanban
+msgid ""
+"<i class=\"fa fa-star me-1\" title=\"Bot\"/> \n"
+"                                            <strong>Priority:</strong>"
+msgstr ""
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_project_view_form
+msgid ""
+"<span class=\"text-muted\" invisible=\"is_us_assistant_installed == "
+"True\">You can integrate ChatGPT Assistant by installing the 'us_assistant' "
+"module</span>"
+msgstr ""
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_project_view_kanban
+msgid "<span>Users: </span>"
+msgstr "<span>Користувачі: </span>"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_project__active
+msgid "Active"
+msgstr "Активний"
+
+#. module: us_messenger
+#: model:ir.model.fields.selection,name:us_messenger.selection__us_messenger_project__state__active_webhook
+msgid "Active Webhook"
+msgstr "Активний Webhook"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_res_config_settings__is_add_new_operators_to_channel
+msgid "Add new operators to old channels"
+msgstr "Додати нових операторів до старих каналів"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.res_config_settings_view_form
+msgid "Add new operators to old channels in bot"
+msgstr "Додати нових операторів до старих каналів у боті"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_project__is_add_operator_signature
+msgid "Add operator signature"
+msgstr "Додати підпис оператора"
+
+#. module: us_messenger
+#. odoo-javascript
+#: code:addons/us_messenger/static/src/core/web/messenger_channel_info_list.xml:0
+#: code:addons/us_modules/us_messenger/static/src/core/web/messenger_channel_info_list.xml:0
+msgid "Add your notes here..."
+msgstr "Додайте свої нотатки тут..."
+
+#. module: us_messenger
+#: model:res.groups,name:us_messenger.us_messenger_group_manager
+msgid "Administrator"
+msgstr "Адміністратор"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.res_config_settings_view_form
+msgid ""
+"Algorithm that searches for an operator. We search for a user (specified as "
+"an operator) who is online or has been online for the last 30 minutes. "
+"Priority is given to those who have the fewest channels in the last 24 hours"
+" and those who are not currently busy. If these two conditions are not met, "
+"the algorithm will return the most suitable option"
+msgstr ""
+"Алгоритм, що здійснює пошук оператора. Ми шукаємо користувача (зазначеного "
+"як оператор), який перебуває в мережі або був у мережі протягом останніх 30 "
+"хвилин. Пріоритет надається тим, хто має найменшу кількість каналів за "
+"останні 24 години, та тим, хто наразі не зайнятий. Якщо ці дві умови не "
+"виконуються, алгоритм поверне найбільш підходящий варіант."
+
+#. module: us_messenger
+#: model:ir.model.fields.selection,name:us_messenger.selection__us_messenger_script_step_type__bot_type__all_bots
+msgid "All Bots"
+msgstr "Всі боти"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_answer__answer_code
+msgid "Answer Code"
+msgstr "Код відповіді"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_answer__name
+msgid "Answer Text"
+msgstr "Текст відповіді"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_step__answer_ids
+msgid "Answers"
+msgstr "Відповіді"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_step__apply_for_partner
+msgid "Apply For Partner"
+msgstr "Застосувати для партнера"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_project__are_you_inside
+msgid "Are you inside the matrix?"
+msgstr "Ви всередині матриці?"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_project__assistant_id
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_project_view_form
+msgid "Assistant"
+msgstr "Ассистент"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_project__is_forward_auto_to_document
+msgid "Auto-forward to last document"
+msgstr "Автопересилання до останнього документа"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_res_config_settings__group_auto_operator_selection
+msgid "Automatic operator selection"
+msgstr "Автоматичний вибір оператора"
+
+#. module: us_messenger
+#: model:res.groups,name:us_messenger.auto_operator_selection
+#: model:res.groups.privilege,name:us_messenger.us_messenger_operator_selection
+msgid "Automatic operator selection in channel"
+msgstr "Автоматичний вибір оператора в каналі"
+
+#. module: us_messenger
+#: model:ir.model.fields,help:us_messenger.field_us_messenger_script_step__apply_for_partner
+msgid ""
+"Automatically assign the specified data to the current partner. If disabled,"
+" data will only be stored in the channel."
+msgstr ""
+"Автоматично призначати вказані дані поточному партнеру. Якщо вимкнено,"
+" дані будуть зберігатися лише в каналі."
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script__available_question_selection
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_step__available_question_selection
+msgid "Available Question Selection"
+msgstr "Доступний вибір питання"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_operator__avatar_128
+msgid "Avatar 128"
+msgstr "Аватар 128"
+
+#. module: us_messenger
+#. odoo-javascript
+#: code:addons/us_messenger/static/src/core/web/messenger_channel_info_list.xml:0
+#: code:addons/us_modules/us_messenger/static/src/core/web/messenger_channel_info_list.xml:0
+msgid "Become Operator"
+msgstr "Стати оператором"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_operator__bot_id
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_partner__bot_id
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script__project_ids
+msgid "Bot"
+msgstr "Бот"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script__operator_partner_id
+msgid "Bot Operator"
+msgstr "Оператор бота"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_partner__script_id
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_answer__script_id
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_step__script_id
+msgid "Bot Script"
+msgstr "Скрипт бота"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_operator__messenger_type
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_project__bot_type
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script__bot_type
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_step__bot_type
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_step_type__bot_type
+msgid "Bot Type"
+msgstr "Тип бота"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.discuss_channel_view_list
+msgid "CHANGE OPERATOR"
+msgstr "ЗМІНИТИ ОПЕРАТОРА"
+
+#. module: us_messenger
+#. odoo-python
+#: code:addons/us_messenger/models/us_messenger_link.py:0
+#: code:addons/us_modules/us_messenger/models/us_messenger_link.py:0
+msgid "Cannot find value for %s. Found: %s and %s"
+msgstr "Не вдалося знайти значення для %s. Знайдено: %s та %s"
+
+#. module: us_messenger
+#. odoo-python
+#: code:addons/us_messenger/models/us_messenger_partner.py:0
+#: code:addons/us_modules/us_messenger/models/us_messenger_partner.py:0
+msgid "Change Operator"
+msgstr "Змінити оператора"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_discuss_operator_wizard__channel_id
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_partner__channel_id
+msgid "Channel"
+msgstr "Канал"
+
+#. module: us_messenger
+#: model:ir.model,name:us_messenger.model_us_messenger_discuss_operator_wizard
+msgid "Channel Operator Wizard"
+msgstr "Майстер оператора каналу"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_discuss_channel_view_search
+msgid "Channel Type"
+msgstr "Тип каналу"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_operator__channel_count
+msgid "Channel count"
+msgstr "Кількість каналів"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_discuss_operator_wizard__channel_name
+msgid "Channel name"
+msgstr "Назва каналу"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_project__channel_template
+msgid "Channel template"
+msgstr "Шаблон каналу"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_discuss_channel__messenger_client_partner_id
+msgid "Client partner"
+msgstr "Партнер клієнта"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_step__step_command
+msgid "Command"
+msgstr "Команда"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_script_view_form
+msgid "Common Answers"
+msgstr "Загальні відповіді"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_project__company_id
+msgid "Company"
+msgstr "Компанія"
+
+#. module: us_messenger
+#: model:ir.model,name:us_messenger.model_res_config_settings
+msgid "Config Settings"
+msgstr "Налаштування"
+
+#. module: us_messenger
+#: model:ir.model,name:us_messenger.model_res_partner
+msgid "Contact"
+msgstr "Контакт"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_res_users__count_channels
+msgid "Count Channels"
+msgstr "Кількість каналів"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_partner__message_count
+msgid "Count Messages"
+msgstr "Кількість повідомлень"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_partner__channel_create_date
+msgid "Create Date"
+msgstr "Дата створення"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_discuss_operator_wizard__create_uid
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_job__create_uid
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_operator__create_uid
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_partner__create_uid
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_project__create_uid
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script__create_uid
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_answer__create_uid
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_step__create_uid
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_step_type__create_uid
+msgid "Created by"
+msgstr "Створив"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_discuss_operator_wizard__create_date
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_job__create_date
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_operator__create_date
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_partner__create_date
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_project__create_date
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script__create_date
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_answer__create_date
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_step__create_date
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_step_type__create_date
+msgid "Created on"
+msgstr "Створено"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_discuss_channel_view_search
+msgid "Creation Date"
+msgstr "Дата створення"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_project__current_job_id
+msgid "Current Job"
+msgstr "Поточне завдання"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_partner__current_step_id
+msgid "Current Step"
+msgstr "Поточний крок"
+
+#. module: us_messenger
+#: model:ir.model.fields.selection,name:us_messenger.selection__ir_logging__type__data_out
+msgid "Data Transmission"
+msgstr "Передача даних"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_discuss_channel_view_kanban
+msgid "Date:"
+msgstr "Дата:"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_project__default_lang
+msgid "Default language"
+msgstr "Мова за замовчуванням"
+
+#. module: us_messenger
+#: model:res.groups,name:us_messenger.us_messenger_group_dev
+msgid "Developer"
+msgstr "Розробник"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.us_messenger_discuss_operator_wizard_view_form
+msgid "Discard"
+msgstr "Скасувати"
+
+#. module: us_messenger
+#: model:ir.model,name:us_messenger.model_discuss_channel
+msgid "Discussion Channel"
+msgstr "Канал обговорення"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_discuss_channel__display_name
+#: model:ir.model.fields,field_description:us_messenger.field_ir_logging__display_name
+#: model:ir.model.fields,field_description:us_messenger.field_mail_message__display_name
+#: model:ir.model.fields,field_description:us_messenger.field_mail_thread__display_name
+#: model:ir.model.fields,field_description:us_messenger.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:us_messenger.field_res_partner__display_name
+#: model:ir.model.fields,field_description:us_messenger.field_res_users__display_name
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_discuss_operator_wizard__display_name
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_job__display_name
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_operator__display_name
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_partner__display_name
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_project__display_name
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script__display_name
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_answer__display_name
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_step__display_name
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_step_type__display_name
+msgid "Display Name"
+msgstr "Назва для відображення"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_mail_mail__document_message_id
+#: model:ir.model.fields,field_description:us_messenger.field_mail_message__document_message_id
+msgid "Document Message"
+msgstr "Повідомлення документа"
+
+#. module: us_messenger
+#: model:ir.model.fields.selection,name:us_messenger.selection__us_messenger_job__state__done
+msgid "Done"
+msgstr "Виконано"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_job_view_search
+msgid "Done jobs"
+msgstr "Виконані завдання"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_project_view_form
+msgid "E.g. Legacy Migration"
+msgstr "Напр. Legacy Migration"
+
+#. module: us_messenger
+#: model:ir.model,name:us_messenger.model_mail_thread
+msgid "Email Thread"
+msgstr "Ланцюжки повідомлень"
+
+#. module: us_messenger
+#: model:ir.model.fields.selection,name:us_messenger.selection__us_messenger_project__state__enabled_webhook
+msgid "Enabled Webhook"
+msgstr "Увімкнений Webhook"
+
+#. module: us_messenger
+#. odoo-javascript
+#: code:addons/us_messenger/static/src/core/web/messenger_channel_info_list.xml:0
+#: code:addons/us_modules/us_messenger/static/src/core/web/messenger_channel_info_list.xml:0
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_discuss_channel_view_search
+msgid "End Session"
+msgstr "Завершити сесію"
+
+#. module: us_messenger
+#. odoo-javascript
+#: code:addons/us_messenger/static/src/core/common/store_service_patch.js:0
+#: code:addons/us_modules/us_messenger/static/src/core/common/store_service_patch.js:0
+#: model:ir.model.fields.selection,name:us_messenger.selection__discuss_channel__messenger_status__end_session
+msgid "End session"
+msgstr "Завершити сесію"
+
+#. module: us_messenger
+#. odoo-python
+#: code:addons/us_messenger/models/us_messenger_project.py:0
+#: code:addons/us_modules/us_messenger/models/us_messenger_project.py:0
+msgid "Error by activation webhook: %s"
+msgstr "Помилка при активації webhook: %s"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_mail_mail__external_messenger_id
+#: model:ir.model.fields,field_description:us_messenger.field_mail_message__external_messenger_id
+msgid "External Messenger"
+msgstr "Зовнішній месенджер"
+
+#. module: us_messenger
+#: model:ir.model.fields,help:us_messenger.field_mail_mail__external_messenger_id
+#: model:ir.model.fields,help:us_messenger.field_mail_message__external_messenger_id
+msgid "External id for messenger"
+msgstr "Зовнішній ID для месенджера"
+
+#. module: us_messenger
+#: model:ir.model.fields.selection,name:us_messenger.selection__us_messenger_job__state__failed
+msgid "Failed"
+msgstr "Невдало"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_job_view_search
+msgid "Failed jobs"
+msgstr "Невдалі завдання"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_step__fault_message
+msgid "Fault Message"
+msgstr "Повідомлення про помилку"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_res_config_settings__auto_operator_selection
+msgid "For relating with group_auto_operator_selection"
+msgstr "Для зв'язку з group_auto_operator_selection"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_project__is_forward_explicit_reply_to_document
+msgid "Forward explicit replies to document"
+msgstr "Пересилати явні відповіді до документа"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_res_users__has_access_messenger
+msgid "Has access to Messenger"
+msgstr "Має доступ до месенджера"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_res_partner__is_have_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_res_users__is_have_messenger
+msgid "Have messenger"
+msgstr "Має месенджер"
+
+#. module: us_messenger
+#: model:ir.model.fields,help:us_messenger.field_us_messenger_partner__is_hide
+#: model:ir.model.fields,help:us_messenger.field_us_messenger_project__is_hide_change_operator_user
+msgid ""
+"Hide 'Change Operator' for operators in menu 'Operators'. If active, "
+"operators and admins can change operator for channel. If no active, only "
+"admins"
+msgstr ""
+"Приховати «Змінити оператора» для операторів у меню «Оператори». Якщо "
+"активна, оператори та адміністратори можуть змінювати оператора для каналу. "
+"Якщо неактивна, тільки адміністратори"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_partner__is_hide
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_project__is_hide_change_operator_user
+msgid "Hide button \"Change Operator\" for operators"
+msgstr "Приховати кнопку «Змінити оператора» для операторів"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.discuss_channel_view_list
+msgid "History"
+msgstr "Історія"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_discuss_channel__id
+#: model:ir.model.fields,field_description:us_messenger.field_ir_logging__id
+#: model:ir.model.fields,field_description:us_messenger.field_mail_message__id
+#: model:ir.model.fields,field_description:us_messenger.field_mail_thread__id
+#: model:ir.model.fields,field_description:us_messenger.field_res_config_settings__id
+#: model:ir.model.fields,field_description:us_messenger.field_res_partner__id
+#: model:ir.model.fields,field_description:us_messenger.field_res_users__id
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_discuss_operator_wizard__id
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_job__id
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_operator__id
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_partner__id
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_project__id
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script__id
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_answer__id
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_step__id
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_step_type__id
+msgid "ID"
+msgstr "ID"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_partner__external_id
+msgid "ID User"
+msgstr "ID користувача"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.res_config_settings_view_form
+msgid ""
+"If enabled, only one operator will be added according to this algorithm. If "
+"disabled, all operators will be added to the new channel."
+msgstr ""
+"Якщо ця опція увімкнена, за деяким алгоритмом (див. в підказці) буде додано "
+"лише одного оператора. Якщо ця опція вимкнена, до нового каналу будуть "
+"додані всі оператори."
+
+#. module: us_messenger
+#: model:ir.model.fields,help:us_messenger.field_us_messenger_project__is_forward_explicit_reply_to_document
+msgid ""
+"If enabled, when a messenger user explicitly replies to a message that was "
+"sent from a document chatter, the reply will be duplicated to that "
+"document's chatter."
+msgstr ""
+"Якщо увімкнено, коли користувач месенджера явно відповідає на повідомлення, "
+"надіслане з чату документа, відповідь буде скопійована до чату "
+"цього документа."
+
+#. module: us_messenger
+#: model:ir.model.fields,help:us_messenger.field_us_messenger_project__is_forward_auto_to_document
+msgid ""
+"If enabled, when a messenger user sends a message (without explicit reply) "
+"and the last message in the channel was from a document chatter, the message"
+" will be duplicated to that document's chatter."
+msgstr ""
+"Якщо увімкнено, коли користувач месенджера надсилає повідомлення (без явної відповіді) "
+"і останнє повідомлення в каналі було з чату документа, повідомлення"
+" буде скопійовано до чату цього документа."
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script__image_1920
+msgid "Image"
+msgstr "Зображення"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script__image_1024
+msgid "Image 1024"
+msgstr "Зображення 1024"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script__image_128
+msgid "Image 128"
+msgstr "Зображення 128"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script__image_256
+msgid "Image 256"
+msgstr "Зображення 256"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script__image_512
+msgid "Image 512"
+msgstr "Зображення 512"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_discuss_channel_view_search
+msgid "In Progress"
+msgstr "В процесі"
+
+#. module: us_messenger
+#. odoo-javascript
+#: code:addons/us_messenger/static/src/core/common/store_service_patch.js:0
+#: code:addons/us_modules/us_messenger/static/src/core/common/store_service_patch.js:0
+#: model:ir.model.fields.selection,name:us_messenger.selection__discuss_channel__messenger_status__in_progress
+msgid "In progress"
+msgstr "В процесі"
+
+#. module: us_messenger
+#: model:ir.model.fields,help:us_messenger.field_us_messenger_script__share_phone_btn_text
+msgid "In some messengers, the phone number is transferred by pressing a button. "
+"This text will be displayed on the button."
+msgstr "В деяких месенджерах номер телефону передається натисканням кнопки. "
+"Цей текст буде відображатися на кнопці."
+
+#. module: us_messenger
+#. odoo-python
+#: code:addons/us_messenger/models/us_messenger_script_step.py:0
+#: code:addons/us_modules/us_messenger/models/us_messenger_script_step.py:0
+msgid "Incorrect data entered, please try again."
+msgstr "Введено некоректні дані, будь ласка, спробуйте ще раз."
+
+#. module: us_messenger
+#. odoo-javascript
+#: code:addons/us_messenger/static/src/core/web/messenger_channel_info_list.xml:0
+#: code:addons/us_messenger/static/src/core/web/thread_actions.js:0
+#: code:addons/us_modules/us_messenger/static/src/core/web/messenger_channel_info_list.xml:0
+#: code:addons/us_modules/us_messenger/static/src/core/web/thread_actions.js:0
+msgid "Information"
+msgstr "Інформація"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_project_view_form
+msgid "Instruction"
+msgstr "Інструкція"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_step__is_forward_operator
+msgid "Is Forward Operator"
+msgstr "Пересилання оператору"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_project__is_us_assistant_installed
+msgid "Is Us Assistant Installed"
+msgstr "Чи встановлено Us Assistant"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_project__job_ids
+msgid "Job"
+msgstr "Завдання"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_project__job_count
+msgid "Job Count"
+msgstr "Кількість завдань"
+
+#. module: us_messenger
+#: model:ir.actions.act_window,name:us_messenger.messenger_job_action
+#: model:ir.ui.menu,name:us_messenger.messenger_job_menu_action
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_project_view_form
+msgid "Jobs"
+msgstr "Джоби"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_discuss_channel_view_search
+msgid "Last 24 Hours"
+msgstr "Останні 24 години"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_discuss_channel_view_search
+msgid "Last 30 Days"
+msgstr "Останні 30 днів"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_discuss_channel_view_search
+msgid "Last 365 Days"
+msgstr "Останні 365 днів"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_discuss_channel_view_search
+msgid "Last 7 Days"
+msgstr "Останні 7 днів"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_discuss_operator_wizard__write_uid
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_job__write_uid
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_operator__write_uid
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_partner__write_uid
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_project__write_uid
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script__write_uid
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_answer__write_uid
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_step__write_uid
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_step_type__write_uid
+msgid "Last Updated by"
+msgstr "Останнє оновлення"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_discuss_operator_wizard__write_date
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_job__write_date
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_operator__write_date
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_partner__write_date
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_project__write_date
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script__write_date
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_answer__write_date
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_step__write_date
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_step_type__write_date
+msgid "Last Updated on"
+msgstr "Останнє оновлення"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_discuss_channel__last_end_session
+msgid "Last end"
+msgstr "Останнє завершення"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_project__link_on_bot
+msgid "Link on Bot"
+msgstr "Посилання на бота"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_job__log_ids
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_project__log_ids
+msgid "Log"
+msgstr "Лог"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_job__log_count
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_project__log_count
+msgid "Log Count"
+msgstr "Кількість логів"
+
+#. module: us_messenger
+#: model:ir.model,name:us_messenger.model_ir_logging
+msgid "Logging"
+msgstr "Ведення журналу"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_job_view_form
+msgid "Logs"
+msgstr "Логи"
+
+#. module: us_messenger
+#. odoo-javascript
+#: code:addons/us_messenger/static/src/core/common/store_service_patch.js:0
+#: code:addons/us_modules/us_messenger/static/src/core/common/store_service_patch.js:0
+#: model:ir.model.fields.selection,name:us_messenger.selection__discuss_channel__messenger_status__need_help
+msgid "Looking for help"
+msgstr "Пошук допомоги"
+
+#. module: us_messenger
+#: model:ir.model,name:us_messenger.model_mail_message
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_step__message
+msgid "Message"
+msgstr "Повідомлення"
+
+#. module: us_messenger
+#: model:ir.model.fields,help:us_messenger.field_us_messenger_script_step__fault_message
+msgid ""
+"Message about unsuccessful execution of a step, for example, if no operator "
+"was found, display the message no available operators found."
+msgstr ""
+"Повідомлення про невдале виконання кроку, наприклад, якщо оператора "
+"не знайдено, відобразиться повідомлення 'доступних операторів не знайдено'."
+
+#. module: us_messenger
+#: model:ir.model.fields,help:us_messenger.field_us_messenger_script_step__success_message
+msgid "Message if the step was successful"
+msgstr "Повідомлення при успішному виконанні кроку"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_ir_logging__message_short
+msgid "Message..."
+msgstr "Повідомлення..."
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_discuss_channel_view_kanban
+msgid "Messages:"
+msgstr "Повідомлення:"
+
+#. module: us_messenger
+#: model:res.partner.category,name:us_messenger.res_partner_category_messenger
+msgid "Messenger"
+msgstr "Месенджер"
+
+#. module: us_messenger
+#. odoo-javascript
+#: code:addons/us_messenger/static/src/core/common/messaging_menu_patch.js:0
+#: code:addons/us_modules/us_messenger/static/src/core/common/messaging_menu_patch.js:0
+msgid "Messenger Chats"
+msgstr "Чати месенджера"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_project__messenger_image
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_project_view_form
+msgid "Messenger Image"
+msgstr "Зображення месенджера"
+
+#. module: us_messenger
+#: model:ir.model,name:us_messenger.model_us_messenger_job
+#: model:ir.model.fields,field_description:us_messenger.field_ir_logging__messenger_job_id
+msgid "Messenger Job"
+msgstr "Завдання месенджера"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_discuss_channel__messenger_note
+msgid "Messenger Note"
+msgstr "Нотатка месенджера"
+
+#. module: us_messenger
+#: model:ir.model,name:us_messenger.model_us_messenger_project
+#: model:ir.model.fields,field_description:us_messenger.field_discuss_channel__us_messenger_project_id
+msgid "Messenger Project"
+msgstr "Проєкт месенджера"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_discuss_channel_view_search
+msgid "Messenger Project (Bot)"
+msgstr "Проєкт месенджера (Бот)"
+
+#. module: us_messenger
+#: model:ir.model,name:us_messenger.model_us_messenger_script
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_project__script_id
+msgid "Messenger Script"
+msgstr "Скрипт месенджера"
+
+#. module: us_messenger
+#: model:ir.model,name:us_messenger.model_us_messenger_script_answer
+msgid "Messenger Script Answer"
+msgstr "Відповідь скрипта"
+
+#. module: us_messenger
+#: model:ir.model,name:us_messenger.model_us_messenger_script_step
+msgid "Messenger Script Step"
+msgstr "Крок скрипта"
+
+#. module: us_messenger
+#: model:ir.model,name:us_messenger.model_us_messenger_script_step_type
+msgid "Messenger Script Step Type"
+msgstr "Тип кроку скрипта"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_discuss_channel_view_search
+msgid "Messenger Status"
+msgstr "Статус месенджера"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_partner__type_messenger
+msgid "Messenger Type"
+msgstr "Тип месенджера"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.res_users_form_view_edit
+#: model_terms:ir.ui.view,arch_db:us_messenger.res_users_form_view_prefer_edit
+msgid "Messenger nickame"
+msgstr "Нікнейм месенджера"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_res_users__messenger_nickname
+msgid "Messenger nickname"
+msgstr "Нікнейм месенджера"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_res_users__messenger_operator_ids
+msgid "Messenger operator"
+msgstr "Оператор месенджера"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_discuss_channel__messenger_partner_id
+msgid "Messenger partner"
+msgstr "Партнер месенджера"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.view_partner_form_inherited
+msgid "Messenger records"
+msgstr "Записи месенджера"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_discuss_channel__messenger_status
+msgid "Messenger status"
+msgstr "Статус месенджера"
+
+#. module: us_messenger
+#: model:ir.actions.server,name:us_messenger.ir_cron_cleanup_messenger_jobs_ir_actions_server
+msgid "Messenger: Cleanup Old Jobs"
+msgstr "Месенджер: Очищення старих завдань"
+
+#. module: us_messenger
+#. odoo-javascript
+#: code:addons/us_messenger/static/src/core/common/discuss_app_model_patch.js:0
+#: code:addons/us_modules/us_messenger/static/src/core/common/discuss_app_model_patch.js:0
+#: model:ir.actions.act_window,name:us_messenger.messenger_project_action
+#: model:ir.ui.menu,name:us_messenger.messenger_menu
+#: model:ir.ui.menu,name:us_messenger.messenger_project_menu_action
+#: model_terms:ir.ui.view,arch_db:us_messenger.res_config_settings_view_form
+msgid "Messengers"
+msgstr "Месенджери"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_res_partner__messenger_partner_ids
+#: model:ir.model.fields,field_description:us_messenger.field_res_users__messenger_partner_ids
+msgid "Messengers contacts"
+msgstr "Контакти месенджерів"
+
+#. module: us_messenger
+#. odoo-python
+#: code:addons/us_messenger/models/us_messenger_link.py:0
+#: code:addons/us_modules/us_messenger/models/us_messenger_link.py:0
+msgid "Mixing apples and oranges: %s and %s"
+msgstr "Змішування несумісних типів: %s та %s"
+
+#. module: us_messenger
+#. odoo-python
+#: code:addons/us_messenger/models/mail_message.py:0
+#: code:addons/us_modules/us_messenger/models/mail_message.py:0
+msgid "My Messages"
+msgstr "Мої повідомлення"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_operator__name
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_partner__name
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_project__name
+msgid "Name"
+msgstr "Ім'я"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_discuss_channel_view_search
+msgid "Need Help"
+msgstr "Потрібна допомога"
+
+#. module: us_messenger
+#: model:ir.model.fields.selection,name:us_messenger.selection__us_messenger_project__state__new
+msgid "New"
+msgstr "Новий"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_answer__next_step_id
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_step__next_step_id
+msgid "Next Step"
+msgstr "Наступний крок"
+
+#. module: us_messenger
+#: model:ir.model.fields,help:us_messenger.field_discuss_channel__messenger_note
+msgid "Note about the customer"
+msgstr "Нотатка про клієнта"
+
+#. module: us_messenger
+#. odoo-javascript
+#: code:addons/us_messenger/static/src/core/web/messenger_channel_info_list.xml:0
+#: code:addons/us_modules/us_messenger/static/src/core/web/messenger_channel_info_list.xml:0
+msgid "Notes"
+msgstr "Нотатки"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_discuss_channel__messenger_operator_id
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_discuss_operator_wizard__operator_id
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_partner__messenger_operator_id
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_discuss_channel_view_search
+msgid "Operator"
+msgstr "Оператор"
+
+#. module: us_messenger
+#: model:ir.actions.act_window,name:us_messenger.messenger_operator_action
+#: model:ir.model,name:us_messenger.model_us_messenger_operator
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_discuss_operator_wizard__operators_ids
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_project__operator_ids
+#: model:ir.ui.menu,name:us_messenger.messenger_operator_menu_action
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_project_view_form
+msgid "Operators"
+msgstr "Оператори"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_project_view_form
+msgid "Parameters"
+msgstr "Параметри"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.discuss_channel_view_list
+msgid "Participants"
+msgstr "Учасники"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_partner__partner_id
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_project_view_form
+msgid "Partner"
+msgstr "Партнер"
+
+#. module: us_messenger
+#: model:ir.model.fields,help:us_messenger.field_us_messenger_operator__partner_id
+msgid "Partner-related data of the user"
+msgstr "Дані користувача, пов'язані з партнером"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_operator__priority
+msgid "Priority"
+msgstr "Пріоритет"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_ir_logging__project_id
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_job__project_id
+msgid "Project"
+msgstr "Проєкт"
+
+#. module: us_messenger
+#: model:ir.actions.act_window,name:us_messenger.messenger_job_action_from_project
+msgid "Project Jobs"
+msgstr "Завдання проєкту"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_operator__partner_id
+msgid "Related Partner"
+msgstr "Пов'язаний партнер"
+
+#. module: us_messenger
+#: model:ir.model.fields,help:us_messenger.field_mail_mail__document_message_id
+#: model:ir.model.fields,help:us_messenger.field_mail_message__document_message_id
+msgid "Relates a message that was duplicated from the document"
+msgstr "Посилається на повідомлення, що було скопійовано з документа"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_project_view_form
+msgid "Remove"
+msgstr "Деактивувати"
+
+#. module: us_messenger
+#: model:ir.model.fields.selection,name:us_messenger.selection__ir_logging__type__data_in
+msgid "Response"
+msgstr "Відповідь"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_project_view_form
+msgid "Run Now"
+msgstr "Запустити"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.us_messenger_discuss_operator_wizard_view_form
+msgid "Save"
+msgstr "Зберегти"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script__name
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_step__name
+msgid "Script Name"
+msgstr "Назва скрипта"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script__script_step_ids
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_script_view_form
+msgid "Script Steps"
+msgstr "Кроки скрипта"
+
+#. module: us_messenger
+#: model:ir.model.fields,help:us_messenger.field_us_messenger_partner__script_id
+#: model:ir.model.fields,help:us_messenger.field_us_messenger_project__script_id
+msgid ""
+"Script for bot interaction with messenger users. Defines steps such as "
+"receiving arbitrary questions about the user's phone number or email, "
+"connecting to the operator, etc. If the field is empty, the user will be "
+"added directly to the communication channel without any intermediate steps."
+msgstr "Скрипт для взаємодії бота з користувачами месенджера. Визначає кроки, такі "
+"як отримання довільних запитань про номер телефону користувача або email, "
+"підключення до оператора, тощо. Якщо поле пусте, користувач буде "
+"доданий безпосередньо до каналу комунікації без будь-яких "
+"проміжних кроків."
+
+#. module: us_messenger
+#: model:ir.actions.act_window,name:us_messenger.messenger_script_action
+#: model:ir.ui.menu,name:us_messenger.messenger_script_menu_action
+msgid "Scripts"
+msgstr "Скрипти"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_discuss_channel_view_search
+msgid "Search history"
+msgstr "Пошук історії"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_answer__sequence
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_step__sequence
+msgid "Sequence"
+msgstr "Послідовність"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.discuss_channel_view_list
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_discuss_channel_view_search
+msgid "Session Date"
+msgstr "Дата сесії"
+
+#. module: us_messenger
+#: model:ir.actions.act_window,name:us_messenger.messenger_discuss_channel_action
+#: model:ir.ui.menu,name:us_messenger.messenger_sessions_menu_action
+msgid "Sessions"
+msgstr "Сесії"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script__share_phone_btn_text
+msgid "Share Phone Button Text"
+msgstr "Текст кнопки поділитися телефоном"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_step__show_fault_message
+msgid "Show Fault Message"
+msgstr "Показувати повідомлення про помилку"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_step__show_success_message
+msgid "Show Success Message"
+msgstr "Показувати повідомлення про успіх"
+
+#. module: us_messenger
+#: model:ir.model.fields.selection,name:us_messenger.selection__us_messenger_job__state__started
+msgid "Started"
+msgstr "Розпочато"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_job_view_search
+msgid "Started jobs"
+msgstr "Розпочаті завдання"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_job__state
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_project__state
+msgid "State"
+msgstr "Стан"
+
+#. module: us_messenger
+#. odoo-javascript
+#: code:addons/us_messenger/static/src/core/web/messenger_channel_info_list.xml:0
+#: code:addons/us_modules/us_messenger/static/src/core/web/messenger_channel_info_list.xml:0
+msgid "Status"
+msgstr "Статус"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_answer__messenger_step_id
+msgid "Step"
+msgstr "Крок"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_step__step_type_id
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_step_type__step_type
+msgid "Step Type"
+msgstr "Тип кроку"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_step__step_type_code
+msgid "Step Type Code"
+msgstr "Код типу кроку"
+
+#. module: us_messenger
+#. odoo-python
+#: code:addons/us_messenger/models/us_messenger_script.py:0
+#: code:addons/us_modules/us_messenger/models/us_messenger_script.py:0
+msgid "Step of type 'Question' must have answers."
+msgstr "Крок типу 'Питання' повинен мати відповіді."
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_project_view_form
+msgid "Subscribers"
+msgstr "Підписники"
+
+#. module: us_messenger
+#. odoo-python
+#: code:addons/us_messenger/models/us_messenger_project.py:0
+#: code:addons/us_modules/us_messenger/models/us_messenger_project.py:0
+msgid "Success"
+msgstr "Успішно"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_step__success_message
+msgid "Success Message"
+msgstr "Повідомлення про успіх"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_job__function
+msgid "Task Function"
+msgstr "Функція завдання"
+
+#. module: us_messenger
+#: model:ir.model.constraint,message:us_messenger.constraint_us_messenger_script_step_unique_step_command
+msgid "This command already exists in this script."
+msgstr "Ця команда вже існує в цьому скрипті."
+
+#. module: us_messenger
+#: model:ir.model.constraint,message:us_messenger.constraint_us_messenger_script_step_type_unique_step_type
+msgid "This step type already exists in the system. "
+msgstr "Цей тип кроку вже існує в системі. "
+
+#. module: us_messenger
+#: model:ir.model.fields,help:us_messenger.field_us_messenger_script_step__step_command
+msgid "This step will only be performed if the corresponding command is received."
+msgstr "Цей крок буде виконано лише при отриманні відповідної команди."
+
+#. module: us_messenger
+#: model:ir.model.fields,help:us_messenger.field_res_users__messenger_nickname
+msgid ""
+"This user nickname is used when no other nickname is specified in the bot "
+"settings in the “Operators” tab."
+msgstr ""
+"Цей нікнейм користувача використовується, коли інший нікнейм не вказано в "
+"налаштуваннях бота на вкладці «Оператори»."
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_project__token
+msgid "Token"
+msgstr "Токен"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_ir_logging__type
+msgid "Type"
+msgstr "Тип"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_script_step_type__name
+msgid "Type Name"
+msgstr "Назва типу"
+
+#. module: us_messenger
+#: model:ir.model.fields,help:us_messenger.field_us_messenger_project__state
+msgid "Type is used to separate New, Active Webhook, Not active Webhook"
+msgstr "Тип використовується для розділення: Новий, Активний Webhook, Неактивний Webhook"
+
+#. module: us_messenger
+#: model:ir.model,name:us_messenger.model_us_messenger_partner
+msgid "Union res_partner and us_messenger_link"
+msgstr "Об'єднання res_partner та us_messenger_link"
+
+#. module: us_messenger
+#: model:ir.module.category,name:us_messenger.module_category_us_messenger
+#: model:res.groups.privilege,name:us_messenger.module_privilege_us_messenger
+msgid "Us messenger"
+msgstr "Us messenger"
+
+#. module: us_messenger
+#: model:ir.model.fields,help:us_messenger.field_us_messenger_project__channel_template
+msgid ""
+"Use %(name)s - name partner \n"
+" %(botname)s - bot name"
+msgstr ""
+"Використовуйте %(name)s - ім'я партнера \n"
+" %(botname)s - назва бота"
+
+#. module: us_messenger
+#: model:ir.model,name:us_messenger.model_res_users
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_operator__user_id
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_project__user_ids
+#: model:res.groups,name:us_messenger.us_messenger_group_user
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_project_view_form
+msgid "User"
+msgstr "Користувач"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_operator__nickname
+msgid "User nickname"
+msgstr "Нікнейм користувача"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_partner__username
+msgid "Username"
+msgstr "Ім'я користувача"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_project__users_count
+msgid "Users Count"
+msgstr "Кількість користувачів"
+
+#. module: us_messenger
+#. odoo-javascript
+#: code:addons/us_messenger/static/src/core/web/messenger_channel_info_list.xml:0
+#: code:addons/us_modules/us_messenger/static/src/core/web/messenger_channel_info_list.xml:0
+msgid "View Contact"
+msgstr "Переглянути контакт"
+
+#. module: us_messenger
+#. odoo-javascript
+#: code:addons/us_messenger/static/src/core/common/store_service_patch.js:0
+#: code:addons/us_modules/us_messenger/static/src/core/common/store_service_patch.js:0
+#: model:ir.model.fields.selection,name:us_messenger.selection__discuss_channel__messenger_status__waiting_customer
+msgid "Waiting for customer"
+msgstr "Очікування клієнта"
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_project__webhook_type
+msgid "Webhook Type"
+msgstr "Тип Webhook"
+
+#. module: us_messenger
+#. odoo-python
+#: code:addons/us_messenger/models/us_messenger_project.py:0
+#: code:addons/us_modules/us_messenger/models/us_messenger_project.py:0
+msgid "Webhook URL is not configured"
+msgstr "URL Webhook не налаштовано"
+
+#. module: us_messenger
+#. odoo-python
+#: code:addons/us_messenger/models/us_messenger_project.py:0
+#: code:addons/us_modules/us_messenger/models/us_messenger_project.py:0
+msgid "Webhook URL must use HTTPS protocol"
+msgstr "URL Webhook повинен використовувати протокол HTTPS"
+
+#. module: us_messenger
+#. odoo-python
+#: code:addons/us_messenger/models/us_messenger_project.py:0
+#: code:addons/us_modules/us_messenger/models/us_messenger_project.py:0
+msgid "Webhook has been set successfully."
+msgstr "Webhook успішно встановлено."
+
+#. module: us_messenger
+#. odoo-python
+#: code:addons/us_messenger/models/us_messenger_project.py:0
+#: code:addons/us_modules/us_messenger/models/us_messenger_project.py:0
+msgid "Webhook has been unset successfully."
+msgstr "Webhook успішно вимкнено."
+
+#. module: us_messenger
+#: model:ir.model.fields,field_description:us_messenger.field_us_messenger_project__website_path
+msgid "Website Path"
+msgstr "Шлях веб-сайту"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.res_config_settings_view_form
+msgid ""
+"When a new operator is added to the bot, should they be added to other "
+"(already created) channels associated with this bot?"
+msgstr ""
+"Коли до бота додається новий оператор, чи слід додавати його до інших (вже "
+"створених) каналів, пов'язаних із цим ботом?"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_discuss_channel_view_search
+msgid "Without Operator"
+msgstr "Без оператора"
+
+#. module: us_messenger
+#. odoo-javascript
+#: code:addons/us_messenger/static/src/core/common/store_service_patch.js:0
+#: code:addons/us_modules/us_messenger/static/src/core/common/store_service_patch.js:0
+#: model:ir.model.fields.selection,name:us_messenger.selection__discuss_channel__messenger_status__without_operator
+msgid "Without operator"
+msgstr "Без оператора"
+
+#. module: us_messenger
+#: model:ir.model.fields,help:us_messenger.field_us_messenger_project__assistant_id
+msgid ""
+"You can integrate ChatGPT Assistant by installing the 'us_assistant' module"
+msgstr ""
+"Ви можете інтегрувати ChatGPT Assistant, встановивши модуль «us_assistant»."
+
+#. module: us_messenger
+#: model:ir.model.fields,help:us_messenger.field_us_messenger_project__name
+msgid "Your bot name"
+msgstr "Назва вашого бота"
+
+#. module: us_messenger
+#: model:ir.model.fields.selection,name:us_messenger.selection__us_messenger_project__webhook_type__json
+msgid "application/json"
+msgstr "application/json"
+
+#. module: us_messenger
+#: model:ir.model.fields.selection,name:us_messenger.selection__us_messenger_project__webhook_type__http
+msgid "application/x-www-form-urlencoded"
+msgstr "application/x-www-form-urlencoded"
+
+#. module: us_messenger
+#. odoo-python
+#: code:addons/us_messenger/models/mail_message.py:0
+#: code:addons/us_modules/us_messenger/models/mail_message.py:0
+msgid "author_id"
+msgstr "author_id"
+
+#. module: us_messenger
+#. odoo-python
+#: code:addons/us_messenger/models/mail_message.py:0
+#: code:addons/us_modules/us_messenger/models/mail_message.py:0
+msgid "author_id.type_messenger"
+msgstr "author_id.type_messenger"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.view_us_messenger_operator_kanban
+msgid "channels"
+msgstr "канали"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_script_step_view_form
+msgid "e.g. 'Error processing message, incorrect data entered.'"
+msgstr "напр. 'Помилка обробки повідомлення, введено некоректні дані.'"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_script_step_view_form
+msgid "e.g. 'How can I help you?'"
+msgstr "напр. 'Чим я можу вам допомогти?'"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_script_step_view_form
+msgid "e.g. 'Thanks, your response has been saved."
+msgstr "напр. 'Дякуємо, вашу відповідь збережено."
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_script_view_form
+msgid "e.g. My Script"
+msgstr "напр. Мій скрипт"
+
+#. module: us_messenger
+#: model_terms:ir.ui.view,arch_db:us_messenger.messenger_project_view_form
+msgid "is_us_assistant_installed"
+msgstr "is_us_assistant_installed"
+
+#. module: us_messenger
+#: model:ir.model.constraint,message:us_messenger.constraint_discuss_channel_unique_messenger_partner
+msgid "messenger_partner_id must be unique to ensure one2one relationship"
+msgstr "messenger_partner_id повинен бути унікальним для забезпечення зв'язку один-до-одного"
+
+#. module: us_messenger
+#. odoo-python
+#: code:addons/us_messenger/models/mail_message.py:0
+#: code:addons/us_modules/us_messenger/models/mail_message.py:0
+msgid "model"
+msgstr "model"
+
+#. module: us_messenger
+#. odoo-python
+#: code:addons/us_messenger/models/mail_message.py:0
+#: code:addons/us_modules/us_messenger/models/mail_message.py:0
+msgid "partner_ids.type_messenger"
+msgstr "partner_ids.type_messenger"

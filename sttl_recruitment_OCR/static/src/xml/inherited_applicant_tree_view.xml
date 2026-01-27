@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+   <t t-name="sttl_recruitment_OCR.upload_doc" t-inherit="web.ListView.Buttons" t-inherit-mode="primary">
+       <xpath expr="." position="inside">
+           <button type="button" class="mx-3 btn btn-primary" t-on-click="onUploadList"> Upload Resumes </button>
+       </xpath>
+   </t>
+</templates>

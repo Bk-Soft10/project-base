@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_upload_wizard,access.upload.wizard,model_upload_wizard,,1,1,1,1
+sttl_recruitment_OCR.access_hr_applicant_skills,access_hr_applicant_skills,sttl_recruitment_OCR.model_hr_applicant_skills,base.group_user,1,1,1,1
+sttl_recruitment_OCR.access_hr_applicant_language,access_hr_applicant_language,sttl_recruitment_OCR.model_hr_applicant_language,base.group_user,1,1,1,1

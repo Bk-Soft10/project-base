@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+
+    <!-- Systray Notification Bell Icon -->
+    <t t-name="zk_notification_lite.NotificationSystray">
+        <Dropdown onOpened.bind="onDropdownOpen" position="'bottom-end'" menuClass="'zk-notification-dropdown'">
+            <!-- Toggle button - default slot (direct child) -->
+            <button class="btn zk-notification-systray-btn" t-att-class="{'zk-ring-animation': state.isAnimating}">
+                <i class="fa fa-bell zk-notification-bell" t-att-class="{'zk-has-notifications': hasNotifications}"/>
+                <span t-if="hasNotifications" class="zk-notification-badge">
+                    <t t-esc="notificationCount"/>
+                </span>
+            </button>
+            <!-- Menu content slot -->
+            <t t-set-slot="content">
+                <div class="zk-notification-dropdown-header">
+                    <div class="zk-notification-tabs">
+                        <div class="zk-notification-tab" t-att-class="{'active': state.activeTab === 'new'}" t-on-click="() => this.setTab('new')">
+                            New
+                        </div>
+                        <div class="zk-notification-tab" t-att-class="{'active': state.activeTab === 'history'}" t-on-click="() => this.setTab('history')">
+                            History
+                        </div>
+                    </div>
+                </div>
+                
+                <t t-if="state.activeTab === 'new'">
+                    <t t-if="state.notifications.length === 0">
+                        <div class="zk-notification-empty">
+                            <i class="fa fa-bell-slash-o"/>
+                            <span>No new notifications</span>
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <t t-foreach="state.notifications" t-as="notification" t-key="notification.id">
+                            <DropdownItem class="'zk-notification-item'">
+                                <div class="zk-notification-item-content">
+                                    <div class="zk-notification-item-title" t-esc="notification.name"/>
+                                    <div class="zk-notification-item-message" t-esc="notification.message"/>
+                                </div>
+                                <button class="zk-notification-item-action" t-on-click.stop="() => this.markAsRead(notification.id)" title="Mark as Read">
+                                    <i class="fa fa-check"/>
+                                </button>
+                                <button class="zk-notification-item-close" t-on-click.stop="() => this.dismissNotification(notification.id)" title="Dismiss">
+                                    <i class="fa fa-times"/>
+                                </button>
+                            </DropdownItem>
+                        </t>
+                    </t>
+                </t>
+                
+                <t t-if="state.activeTab === 'history'">
+                    <t t-if="state.historyNotifications.length === 0">
+                        <div class="zk-notification-empty">
+                            <i class="fa fa-history"/>
+                            <span>No history</span>
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <t t-foreach="state.historyNotifications" t-as="notification" t-key="notification.id">
+                            <DropdownItem class="'zk-notification-item read'">
+                                <div class="zk-notification-item-content">
+                                    <div class="zk-notification-item-title" t-esc="notification.name"/>
+                                    <div class="zk-notification-item-message" t-att-class="{'cancelled': notification.state === 'cancelled', 'finished': notification.state === 'finish'}" t-esc="notification.message"/>
+                                    <div class="zk-notification-item-date" t-esc="notification.date"/>
+                                </div>
+                            </DropdownItem>
+                        </t>
+                    </t>
+                </t>
+            </t>
+        </Dropdown>
+    </t>
+
+    <!-- Pop-up Notification Template -->
+    <t t-name="zk_notification_lite.PopupNotification">
+        <div class="zk-popup-notification-container">
+            <t t-foreach="state.notifications" t-as="notification" t-key="notification.id">
+                <div class="zk-popup-notification">
+                    <div class="zk-popup-header">
+                        <span class="zk-popup-title" t-esc="notification.name"/>
+                        <button class="zk-popup-close" t-on-click="() => this.dismissNotification(notification.id)">×</button>
+                    </div>
+                    <div class="zk-popup-body">
+                        <span t-esc="notification.message"/>
+                    </div>
+                    <div class="zk-popup-footer">
+                        <button class="zk-popup-mark-read" t-on-click="() => this.markAsRead(notification.id)" title="Mark as read">
+                            <i class="fa fa-check"/>
+                            <span>Mark as read</span>
+                        </button>
+                    </div>
+                </div>
+            </t>
+        </div>
+    </t>
+
+    <!-- Breaking News Template -->
+    <t t-name="zk_notification_lite.BreakingNews">
+        <t t-if="state.notifications.length > 0 and currentNotification">
+            <div class="zk-breaking-news-container" t-att-style="bannerStyle">
+                <div t-att-class="'zk-breaking-news-text ' + textClass">
+                    <span t-esc="currentNotification.message"/>
+                </div>
+                <div class="zk-breaking-news-actions">
+                    <button class="zk-breaking-news-mark-read" t-on-click="markAsRead" title="Mark as read">
+                        <i class="fa fa-check"/>
+                    </button>
+                    <button class="zk-breaking-news-close" t-on-click="closeBanner" title="Dismiss">×</button>
+                </div>
+            </div>
+        </t>
+    </t>
+
+</templates>

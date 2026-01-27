@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Adding adefault value for field_name in res.config.settings-->
+    <data noupdate="1">
+        <record id="auto_operator_selection_view" model="ir.config_parameter">
+            <field name="key">us_messenger.auto_operator_selection</field>
+            <field name="value">True</field>
+        </record>
+    </data>
+</odoo>

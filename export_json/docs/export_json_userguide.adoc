@@ -1,0 +1,25 @@
+= Guide d'utilisation de l'export JSON
+
+== Présentation de la fonctionnalité
+
+L'export JSON permet, comme son nom l'indique, d'exporter les données d'un record en format JSON.
+
+Ce type d'export peut être utilisé par exemple si le connecteur Carbone.io est utilisé, car il a besoin de recevoir les données à intégrer au document sous le format JSON.
+
+== Utilisation de la fonctionnalité
+
+- Dans l'interface Odoo, aller sur une vue Liste > sélectionner au moins un record :
+
+image::images/process_export1.png[]
+
+- Ensuite, cliquer sur _Action_ -> _Exporter_ , cette action ouvre un popup :
+
+image::images/export_json2.png[]
+
+image::images/export_json3_popup_export.png[]
+
+- Sélectionner le format d'exportation de type _JSON_ , insérer tous les champs à exporter, créer un modèle d'export et le sauvegarder :
+
+image::images/export_json_popup_export2.png[]
+
+- Cliquer sur _Exporter_ , le fichier en format JSON est téléchargé.

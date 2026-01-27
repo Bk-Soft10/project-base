@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_web_notification_manager,web.notification.manager,model_web_notification,group_web_notification_manager,1,1,1,1
+access_web_notification_user,web.notification.user,model_web_notification,base.group_user,1,0,0,0
+access_web_notification_read_manager,web.notification.read.manager,model_web_notification_read,group_web_notification_manager,1,1,1,1
+access_web_notification_read_user,web.notification.read.user,model_web_notification_read,base.group_user,1,1,1,0
+access_web_notification_template_manager,web.notification.template.manager,model_web_notification_template,group_web_notification_manager,1,1,1,1

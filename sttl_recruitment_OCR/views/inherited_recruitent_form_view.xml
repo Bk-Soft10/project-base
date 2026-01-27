@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+   <data>
+       <record id="recruitment_inherited_form_view" model="ir.ui.view">
+           <field name="name">recruitment.order.view.form.inherit</field>
+           <field name="model">hr.applicant</field>
+           <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form"/>
+           <field name="arch" type="xml">
+               <field name="linkedin_profile" position="after">
+                   <field name="degree"/>
+                   <field name="location"/>
+                   <field name="skills" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}"/>
+               </field>
+               <field name = 'categ_ids' position = "after">
+                   <field name="date_of_birth"/>
+                   <field name="marital_status"/>
+                   <field name="gender"/>
+                   <field name="languages" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}"/>
+                   <label for="experience_years" String="Experience" />
+                    <div>
+                        <field name="experience_years" class="oe_inline" /> years
+                        <field name="experience_months" class="oe_inline" /> months
+                    </div>
+               </field>
+           </field>
+       </record>
+   </data>
+</odoo>

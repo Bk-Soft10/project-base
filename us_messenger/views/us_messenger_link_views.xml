@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="us_messenger_link_view_list" model="ir.ui.view">
+        <field name="name">us.messenger.link.list</field>
+        <field name="model">us.messenger.link</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="relation" />
+                <field name="system1" />
+                <field name="ref1" />
+                <field name="system2" />
+                <field name="ref2" />
+                <field name="model" />
+                <field name="bot_id"/>
+                <field name="date" />
+            </list>
+        </field>
+    </record>
+    <record id="us_messenger_link_view_form" model="ir.ui.view">
+        <field name="name">us.messenger.link.form</field>
+        <field name="model">us.messenger.link</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="relation" />
+                            <field name="system1" />
+                            <field name="ref1" />
+                            <field name="system2" />
+                            <field name="ref2" />
+                            <field name="model" />
+                            <field name="bot_id"/>
+                            <field name="date" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="us_messenger_link_view_search" model="ir.ui.view">
+        <field name="name">us.messenger.link.search</field>
+        <field name="model">us.messenger.link</field>
+        <field name="arch" type="xml">
+            <search>
+                <field
+                    name="ref1"
+                    string="Reference"
+                    filter_domain="['|', ('ref1', '=', self), ('ref2', '=', self)]"
+                />
+                <filter
+                    string="Odoo Links"
+                    name="odoo"
+                    domain="[('system2', '=', '__odoo__')]"
+                />
+                <filter
+                    string="External Links"
+                    name="external"
+                    domain="[('system2', '!=', '__odoo__')]"
+                />
+                <group>
+                    <filter
+                        string="Relation"
+                        name='relation'
+                        context="{'group_by':'relation'}"
+                    />
+                    <filter
+                        string="Odoo Model"
+                        name='model'
+                        context="{'group_by':'model'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="messenger_link_action" model="ir.actions.act_window">
+        <field name="name">Links</field>
+        <field name="res_model">us.messenger.link</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="us_messenger_link_view_search" />
+    </record>
+</odoo>

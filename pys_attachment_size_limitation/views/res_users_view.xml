@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="inherit_res_user_attachment" model="ir.ui.view">
+        <field name="name">inherit.res.user.attachment</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[@name='preferences']" position="inside">
+                <group>
+                    <group>
+                        <field name="user_select_attachment_size_unit"
+                            required="users_general_size_limit_attachment"/>
+                    </group>
+                    <group>
+                        <field name="users_general_size_limit_attachment"
+                         modifiers="{'required': ['users_general_size_limit_attachment', '>', 0]}"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

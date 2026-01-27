@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<odoo> 
+    <record id="messenger_discuss_channel_view_search" model="ir.ui.view">
+        <field name="name">discuss.channel.search</field>
+        <field name="model">discuss.channel</field>
+        <field name="arch" type="xml">
+            <search string="Search history">
+                <field name="create_date"/>
+                <field name="messenger_status"/>
+                <field name="channel_type"/>
+                <field name="messenger_operator_id"/>
+                <field name="us_messenger_project_id"/>
+                <filter name="filter_session_date" date="create_date" string="Session Date">
+                    <filter name="rated_on_last_24_hours" string="Last 24 Hours" domain="[('create_date', '&gt;', '-1d')]"/>
+                    <filter name="rated_on_last_7_days" string="Last 7 Days" domain="[('create_date', '&gt;', 'today -7d +1d')]"/>
+                    <filter name="rated_on_last_30_days" string="Last 30 Days" domain="[('create_date', '&gt;', 'today -30d +1d')]"/>
+                    <filter name="rated_on_last_365_days" string="Last 365 Days" domain="[('create_date', '&gt;', 'today -365d +1d')]"/>
+                </filter>
+                <separator/>
+                <filter name="status_in_progress" string="In Progress" domain="[('messenger_status', '=', 'in_progress')]"/>
+                <filter name="status_without_operator" string="Without Operator" domain="[('messenger_status', '=', 'without_operator')]"/>
+                <filter name="status_need_help" string="Need Help" domain="[('messenger_status', '=', 'need_help')]"/>
+                <filter name="status_end_session" string="End Session" domain="[('messenger_status', '=', 'end_session')]"/>
+                <separator/>
+                <group>
+                    <filter string="Messenger Status" name="group_by_status" domain="[]" context="{'group_by': 'messenger_status'}"/>
+                    <filter string="Messenger Project (Bot)" name="group_by_bot" domain="[]" context="{'group_by': 'us_messenger_project_id'}"/>
+                    <filter string="Channel Type" name="group_by_type" domain="[]" context="{'group_by': 'channel_type'}"/>
+                    <filter string="Operator" name="group_by_operator" domain="[]" context="{'group_by': 'messenger_operator_id'}"/>
+                    <filter string="Creation Date" name="group_by_date" domain="[]" context="{'group_by': 'create_date:day'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="messenger_discuss_channel_view_kanban" model="ir.ui.view">
+        <field name="name">discuss.channel.kanban</field>
+        <field name="model">discuss.channel</field>
+        <field name="arch" type="xml">
+            <kanban js_class="us_messenger.discuss_channel_kanban" quick_create="false" create="False" default_order="create_date desc">
+                <templates>
+                    <t t-name="card">
+                        <div class="d-flex">
+                            <div class="d-flex flex-column">
+                                <field class="fw-bolder" name="name"/>
+                                <field name="channel_type"/>
+                                <span class="fw-bold">Date: <field name="create_date" class="fw-normal"/></span>
+                                <span class="fw-bold">Messages: <field name="message_count" class="fw-normal"/></span>
+                            </div>
+                        </div>
+                        <footer class="pt-0">
+                            <span class="fw-bold">
+                                <field name="messenger_status" 
+                                    widget="badge"
+                                    invisible="messenger_status == 'in_progress' and not messenger_operator_id"
+                                    decoration-success="messenger_status == 'in_progress'" 
+                                    decoration-warning="messenger_status == 'without_operator'" 
+                                    decoration-danger="messenger_status == 'need_help'"/>
+                                    
+                            </span>
+                            <field name="messenger_operator_id" invisible="not messenger_operator_id" widget="many2one_avatar" class="ms-auto me-1"/>
+                        </footer>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="messenger_discuss_channel_action" model="ir.actions.act_window">
+        <field name="name">Sessions</field>
+        <field name="res_model">discuss.channel</field>
+        <field name="view_mode">kanban</field>
+        <field name="domain">[('channel_type', 'like', 'us_messenger_')]</field>
+        <field name="view_id" ref="us_messenger.messenger_discuss_channel_view_kanban"/>
+        <field name="search_view_id" ref="us_messenger.messenger_discuss_channel_view_search"/>
+        <field name="context">
+            {
+                "search_default_filter_session_date": "custom_rated_on_last_30_days",
+            }
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-inherit="mail.DiscussSidebarChannel.main" t-inherit-mode="extension">
+        <xpath expr="//*[@name='threadAvatar']" position="before">
+            <t t-call="us_messenger.MessengerStatusLabelOfThread">
+                <t t-set="templateParams" t-value="{ messengerThread: props.thread }"/>
+            </t>
+        </xpath>
+    </t>
+
+    <t t-name="us_messenger.MessengerStatusLabelOfThread">
+        <t t-set="messengerThread" t-value="templateParams.messengerThread"/>
+        <span t-if="messengerThread.channel_type and messengerThread.channel_type.startsWith('us_messenger') and (['without_operator', 'waiting_customer', 'end_session', 'need_help'].includes(messengerThread.messenger_status) or messengerThread.messenger_end_dt)" class="o-messenger-MessengerStatusLabel" t-att-title="messengerThread.messengerStatusLabel" t-att-class="{
+            'position-absolute top-0 start-0': env.inDiscussSidebar or env.inChatBubble or env.inNotificationItem,
+            'o-messenger-MessengerStatusLabel-Sidebar end-0 bottom-0 rounded-2 border': env.inDiscussSidebar,
+            'm-n2 z-1 bg-opacity-100': env.inChatBubble or env.inNotificationItem,
+            'text-warning': messengerThread.messenger_status === 'end_session',
+            'o-help': messengerThread.messenger_status === 'need_help',
+            'bg-info': messengerThread.messenger_status === 'waiting_customer' and env.inDiscussSidebar,
+            'bg-warning': messengerThread.messenger_status === 'without_operator' and env.inDiscussSidebar,
+            'bg-info': messengerThread.messenger_status === 'end_session' and env.inDiscussSidebar,
+            'bg-info': messengerThread.messenger_status === 'need_help' and env.inDiscussSidebar,
+        }">
+            <i class="o-messenger-MessengerStatusLabel-icon" t-attf-class="{{ messengerThread.messenger_end_dt ? 'fa fa-flag-checkered' : store.messengerStatusButtons.find(btn => btn.status === messengerThread.messenger_status)?.icon }}" t-att-class="{
+                'o-white': messengerThread.messenger_end_dt,
+                'position-absolute start-0 top-0 z-1 o-inDiscussSidebar rounded-circle o-px-0_5 m-n1': env.inDiscussSidebar,
+                'fa-fw': !env.inDiscussSidebar,
+            }"/>
+        </span>
+    </t>
+</templates>

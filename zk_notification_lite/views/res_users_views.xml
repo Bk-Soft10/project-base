@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherit res.users form view to REMOVE notification permission from view -->
+    <!-- We overwrite the previous view definition to essentially do nothing or remove the element -->
+    <record id="view_users_form_inherit_notification" model="ir.ui.view">
+        <field name="name">res.users.form.inherit.notification</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <!-- We previously added a group after access_rights page group -->
+            <!-- We will try to replace it with nothing, effectively removing it -->
+            <xpath expr="//page[@name='access_rights']//group" position="after">
+                <!-- Empty to remove the field from display -->
+            </xpath>
+        </field>
+    </record>
+</odoo>

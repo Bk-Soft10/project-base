@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<odoo>
+    <record id="messenger_project_action" model="ir.actions.act_window">
+        <field name="name">Messengers</field>
+        <field name="res_model">us.messenger.project</field>
+        <field name="view_mode">kanban,form</field>
+        <field name="context">{"active_test": False}</field>
+        <field name="domain">[('state', 'in', ['new', 'active_webhook', 'enabled_webhook'])]</field>
+    </record>
+    <record id="messenger_project_view_kanban" model="ir.ui.view">
+        <field name="name">us.messenger.project.kanban</field>
+        <field name="model">us.messenger.project</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <templates>
+                    <t t-name="card" class="flex-row align-items-center">
+                        <aside>
+                            <field name="messenger_image" widget="image" options="{'size': [50, 50], 'img_class': 'object-fit-contain'}"/> 
+                        </aside>
+                        <main class="me-4">
+                            <field name="state" invisible="1"/>
+                            <div class="mb-1">
+                                <field name="name" class="mb-0 fw-bold fs-5"/>
+                            </div>
+                            <div>
+                                <span>Users: </span>
+                                <field name="users_count"/>
+                            </div>
+                            <footer>
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <div t-if="record.state.raw_value=='active_webhook'">
+                                            <i class="fa fa-circle" style="color: #0eec84; width: 2px; height: 2px;"/>
+                                            <span style="margin-left: 15px">Online</span>
+                                        </div>
+                                        <div t-if="record.state.raw_value=='new'">
+                                            <i class="fa fa-circle" style="color: #ff3333; width: 2px; height: 2px;"/>
+                                            <span style="margin-left: 15px">Offline</span>
+                                        </div>
+                                        <div t-if="record.state.raw_value=='enabled_webhook'">
+                                            <i class="fa fa-circle" style="color: #ff3333; width: 2px; height: 2px;"/>
+                                            <span style="margin-left: 15px">Offline</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </footer>
+                        </main>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <record id="messenger_project_view_form" model="ir.ui.view">
+        <field name="name">us.messenger.project.form</field>
+        <field name="model">us.messenger.project</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" invisible="1"/>
+                    <field name="active" invisible="1"/>
+                    <button
+                            name="action_set_webhook"
+                            string="Run Now"
+                            class="oe_highlight"
+                            type="object"
+                            invisible="state=='active_webhook'"
+                    />
+                    <button
+                            name="action_remove_webhook"
+                            type="object"
+                            string="Remove"
+                            class="oe_highlight"
+                            invisible="state=='new' or state == 'enabled_webhook'"
+                    />
+                </header>
+
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                                type="object"
+                                name="action_open_instruction"
+                                class="oe_stat_button"
+                                string="Instruction"
+                        />
+                        <button
+                                type="action"
+                                name="%(us_messenger.messenger_job_action_from_project)d"
+                                class="oe_stat_button"
+                                icon="fa-check-circle-o"
+                        >
+                            <field string="Jobs" name="job_count" widget="statinfo"/>
+                        </button>
+
+                    </div>
+                    <field name="active" invisible="1"/>
+                    <widget
+                            name="web_ribbon"
+                            text="Archived"
+                            bg_color="bg-danger"
+                            invisible="active"
+                    />
+
+                    <div>
+                        
+                        <field name="messenger_image" widget="image" class="oe_avatar" options="{'img_class': 'object-fit-contain border-0', 'size': [90, 90] }" string="Messenger Image"/>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="E.g. Legacy Migration"/>
+                            </h1>
+                        </div>
+                        
+                        <group>
+                            <field name="users_count" invisible="1"/>
+                            <field name="bot_type" readonly="id"/>
+                            <field name="is_us_assistant_installed" invisible="1"/>
+                            <field name="token" password="True"/>
+                            <field
+                                name="company_id"
+                                options="{'no_create': True}"
+                            />
+                            <field name="script_id" domain="[('bot_type', '=', bot_type)]"/>
+                            <field name="link_on_bot"/>
+                            <field name="is_us_assistant_installed" invisible="1"/>
+                            <label for="assistant_id" string="Assistant"/>
+                            <div>
+                                <span class="text-muted" invisible="is_us_assistant_installed == True">You can integrate ChatGPT Assistant by installing the 'us_assistant' module</span>
+                                <field name="assistant_id" title="is_us_assistant_installed" options="{'no_create': True}" string="Assistant" readonly="is_us_assistant_installed == False"/>
+                            </div>
+                        </group>
+                    </div>
+                    <notebook>
+                        <page string="Operators" name="operators">
+                            <field name="operator_ids"
+                                    nolabel="1"
+                                    colspan="2"
+                                    mode="list">
+                                <list editable="bottom">
+                                    <field name="user_id" string="User" domain="[('share', '=', False), ('id', 'not in', parent.operator_user_ids)]" widget="many2one_avatar_user" width="175px"/>
+                                    <field name="nickname" readonly="id == False"/>
+                                    <field name="priority" groups="us_messenger.auto_operator_selection"/>
+                                    <field name="channel_count" readonly="1"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Subscribers" name="subscribers">
+                            <field name="user_ids">
+                                <list readonly="1" create="0" delete="0">
+                                    <field name="name" string="Partner"/>
+                                    <field name="channel_create_date"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page name="params" string="Parameters">
+                            <group>
+                                <field name="default_lang"/>
+                                <field name="is_add_operator_signature" widget="boolean_toggle"/>
+                                <field name="channel_template"/>
+                                <field name="is_hide_change_operator_user" widget="boolean_toggle"/>
+                                <field name="is_forward_auto_to_document" widget="boolean_toggle"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

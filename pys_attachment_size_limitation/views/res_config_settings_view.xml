@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.attachment</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="40"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//block[@id='user_default_rights']" position="before">
+                <block title="Attachment" id="attachment_size_limit">
+
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12  o_setting_box">
+
+                            <!-- LEFT PANE -->
+                            <div class="o_setting_left_pane">
+                                <field name="enable_general_size_limit_attachment"/>
+                            </div>
+
+                            <!-- RIGHT PANE -->
+                            <div class="o_setting_right_pane"
+                                 invisible="not enable_general_size_limit_attachment">
+
+                                <div class="row">
+
+                                    <div class="col-6 ">
+                                        <label for="select_attachment_size_unit" class="me-3"/>
+                                        <field name="select_attachment_size_unit"
+                                               required="enable_general_size_limit_attachment"
+                                               />
+                                    </div>
+
+                                    <!-- Size (Right side) -->
+                                    <div class="col-6">
+                                        <label for="general_size_limit_attachment" class="me-3"/>
+                                        <field name="general_size_limit_attachment"  required="enable_general_size_limit_attachment"
+                                               />
+                                    </div>
+
+                                </div>
+
+                                <div class="text-muted mt8">
+                                    Define the maximum allowed attachment size.
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </block>
+            </xpath>
+        </field>
+    </record>
+</odoo>

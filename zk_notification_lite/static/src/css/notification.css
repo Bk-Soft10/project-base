@@ -1,0 +1,448 @@
+/* Web Notification Styles */
+
+/* ============================================
+   Systray Notification Bell Icon
+   ============================================ */
+.zk-notification-systray-btn {
+    position: relative;
+    background: transparent !important;
+    border: none !important;
+    padding: 4px 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.zk-notification-systray-btn:hover {
+    background: rgba(0, 0, 0, 0.05) !important;
+    border-radius: 4px;
+}
+
+.zk-notification-bell {
+    font-size: 18px;
+    color: #ffffff;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.zk-notification-bell.zk-has-notifications {
+    color: #ff9800;
+}
+
+.zk-notification-badge {
+    position: absolute;
+    top: 0;
+    right: 2px;
+    background: linear-gradient(135deg, #ff5722 0%, #ff9800 100%);
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    min-width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    box-shadow: 0 2px 4px rgba(255, 87, 34, 0.3);
+}
+
+/* Ring Animation */
+.zk-ring-animation .zk-notification-bell {
+    animation: bellRing 0.8s ease-in-out infinite;
+    transform-origin: top center;
+}
+
+@keyframes bellRing {
+    0% {
+        transform: rotate(0);
+    }
+
+    10% {
+        transform: rotate(15deg);
+    }
+
+    20% {
+        transform: rotate(-13deg);
+    }
+
+    30% {
+        transform: rotate(10deg);
+    }
+
+    40% {
+        transform: rotate(-8deg);
+    }
+
+    50% {
+        transform: rotate(5deg);
+    }
+
+    60% {
+        transform: rotate(-3deg);
+    }
+
+    70% {
+        transform: rotate(2deg);
+    }
+
+    80% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(0);
+    }
+}
+
+/* Notification Dropdown */
+.zk-notification-dropdown {
+    min-width: 320px;
+    max-width: 400px;
+    max-height: 400px;
+    overflow-y: auto;
+    box-sizing: border-box;
+    background: white;
+}
+
+/* Notification Header & Tabs */
+.zk-notification-dropdown-header {
+    padding: 0;
+    border-bottom: 1px solid #eee;
+    background: #f8f9fa;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.zk-notification-tabs {
+    display: flex;
+}
+
+.zk-notification-tab {
+    flex: 1;
+    text-align: center;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #666;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+}
+
+.zk-notification-tab:hover {
+    background: #f0f0f0;
+    color: #333;
+}
+
+.zk-notification-tab.active {
+    color: #ff9800;
+    border-bottom-color: #ff9800;
+    background: white;
+}
+
+.zk-notification-empty {
+    padding: 40px 20px;
+    text-align: center;
+    color: #999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.zk-notification-empty i {
+    font-size: 32px;
+    color: #ccc;
+}
+
+.zk-notification-item {
+    display: flex !important;
+    align-items: flex-start;
+    padding: 12px 16px !important;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.zk-notification-item:hover {
+    background: #f8f9fa;
+}
+
+.zk-notification-item-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.zk-notification-item-title {
+    font-weight: 600;
+    color: #e65100;
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+.zk-notification-item-message {
+    color: #666;
+    font-size: 12px;
+    line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.zk-notification-item-action {
+    background: none;
+    border: none;
+    color: #4caf50;
+    padding: 4px;
+    cursor: pointer;
+    margin-left: 4px;
+    transition: color 0.2s;
+}
+
+.zk-notification-item-action:hover {
+    color: #2e7d32;
+    background: rgba(76, 175, 80, 0.1);
+    border-radius: 4px;
+}
+
+.zk-notification-item-date {
+    font-size: 11px;
+    color: #999;
+    margin-top: 4px;
+}
+
+.zk-notification-item.read {
+    opacity: 0.8;
+    background: #fafafa;
+}
+
+.zk-notification-item-message.cancelled {
+    color: #f44336 !important;
+}
+
+.zk-notification-item-message.finished {
+    color: #4caf50 !important;
+}
+
+.zk-notification-item-close {
+    background: none;
+    border: none;
+    color: #999;
+    padding: 4px;
+    cursor: pointer;
+    margin-left: 2px;
+    transition: color 0.2s;
+}
+
+.zk-notification-item-close:hover {
+    color: #f44336;
+    background: rgba(244, 67, 54, 0.1);
+    border-radius: 4px;
+}
+
+/* ============================================
+   Pop-up Notification Styles
+   ============================================ */
+.zk-popup-notification-container {
+    position: fixed;
+    top: 70px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 350px;
+}
+
+.zk-popup-notification {
+    background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+    border-left: 4px solid #ff9800;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    padding: 0;
+    min-width: 280px;
+    max-width: 350px;
+    animation: slideInRight 0.3s ease-out;
+    overflow: hidden;
+}
+
+.zk-popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background: rgba(255, 152, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 152, 0, 0.2);
+}
+
+.zk-popup-title {
+    font-weight: 600;
+    color: #e65100;
+    font-size: 14px;
+}
+
+.zk-popup-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #666;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.zk-popup-close:hover {
+    color: #e65100;
+}
+
+.zk-popup-body {
+    padding: 12px 15px;
+    color: #333;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.zk-popup-footer {
+    padding: 8px 15px;
+    background: rgba(255, 152, 0, 0.05);
+    border-top: 1px solid rgba(255, 152, 0, 0.15);
+    display: flex;
+    justify-content: flex-end;
+}
+
+.zk-popup-mark-read {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    border: 1px solid #4caf50;
+    color: #4caf50;
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.zk-popup-mark-read:hover {
+    background: #4caf50;
+    color: white;
+}
+
+.zk-popup-mark-read i {
+    font-size: 12px;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* ============================================
+   Breaking News Banner Styles
+   ============================================ */
+.zk-breaking-news-container {
+    position: fixed;
+    top: 46px;
+    left: 0;
+    right: 0;
+    z-index: 9998;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 50px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.zk-breaking-news-text {
+    white-space: nowrap;
+    font-weight: 500;
+    padding: 5px 0;
+    flex: 1;
+}
+
+.zk-breaking-news-actions {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.zk-breaking-news-mark-read {
+    background: rgba(76, 175, 80, 0.2);
+    border: 1px solid rgba(76, 175, 80, 0.5);
+    color: #4caf50;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: all 0.2s;
+    font-size: 14px;
+}
+
+.zk-breaking-news-mark-read:hover {
+    background: #4caf50;
+    color: white;
+}
+
+.zk-breaking-news-close {
+    background: rgba(0, 0, 0, 0.1);
+    border: none;
+    font-size: 20px;
+    color: inherit;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.zk-breaking-news-close:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* Marquee Animations */
+.marquee-rtl {
+    animation: marqueeRTL 15s linear infinite;
+}
+
+.marquee-ltr {
+    animation: marqueeLTR 15s linear infinite;
+}
+
+@keyframes marqueeRTL {
+    0% {
+        transform: translateX(100%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes marqueeLTR {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Pause animation on hover */
+.zk-breaking-news-container:hover .zk-breaking-news-text {
+    animation-play-state: paused;
+}

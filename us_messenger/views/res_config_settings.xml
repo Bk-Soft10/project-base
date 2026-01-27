@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.us_messenger</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="5"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="Messengers" string="Messengers" name="us_messenger" groups="us_messenger.us_messenger_group_manager">
+                    <block title="Messengers">
+                        <setting id="automatic_operator_selection" 
+                            title="Algorithm that searches for an operator. We search for a user (specified as an operator) who is online or has been online for the last 30 minutes. Priority is given to those who have the fewest channels in the last 24 hours and those who are not currently busy. If these two conditions are not met, the algorithm will return the most suitable option"
+                            help="If enabled, only one operator will be added according to this algorithm. If disabled, all operators will be added to the new channel.">
+                            <field name="group_auto_operator_selection"/>
+                        </setting>
+                        <setting id="automatic_operator_selection" 
+                            invisible="group_auto_operator_selection" 
+                            title="Add new operators to old channels in bot"
+                            help="When a new operator is added to the bot, should they be added to other (already created) channels associated with this bot?">
+                            <field name="is_add_new_operators_to_channel"/>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+</odoo>

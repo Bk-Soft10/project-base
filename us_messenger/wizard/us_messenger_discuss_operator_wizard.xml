@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="us_messenger_discuss_operator_wizard_view_form" model="ir.ui.view">
+            <field name="name">us.messenger.discuss.operator.wizard.view.form</field>
+            <field name="model">us.messenger.discuss.operator.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <field name="operators_ids" invisible="1"/>
+                        <h1><field name="channel_name" readonly="1"/></h1> <!--options="{'no_open': True}"-->
+                        <field name="operator_id" domain="[('id', 'in', operators_ids)]" widget="many2one_avatar_user"/>
+                    </sheet>
+                    <footer>
+                        <button name="action_save_operator" string="Save" type="object" class="oe_highlight" data-hotkey="q"/>
+                        <button string="Discard" class="btn-secondary" special="cancel" data-hotkey="x"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Main Menu -->
+    <menuitem id="menu_web_notification_root"
+              name="Web Notification"
+              sequence="100"
+              web_icon="zk_notification_lite,static/description/icon.png"
+              groups="zk_notification_lite.group_web_notification_manager"/>
+
+    <!-- Submenu -->
+    <menuitem id="menu_web_notification_sub"
+              name="Web Notifications"
+              parent="menu_web_notification_root"
+              action="action_web_notification"
+              sequence="10"/>
+
+    <!-- Configuration Menu -->
+    <menuitem id="menu_web_notification_config"
+              name="Configuration"
+              parent="menu_web_notification_root"
+              sequence="20"/>
+
+    <menuitem id="menu_web_notification_template"
+              name="Templates"
+              parent="menu_web_notification_config"
+              action="action_web_notification_template"
+              sequence="10"/>
+</odoo>

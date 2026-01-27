@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <!-- Update Preferences form !-->
+        <record id="res_users_form_view_prefer_edit" model="ir.ui.view">
+            <field name="name">res.users.preferences.form.us_messenger</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form_simple_modif"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='outgoing_mail_server_type']" position="after">
+                    <field name="has_access_messenger" invisible="1"/>
+                    <field name="messenger_nickname" string="Messenger nickame" invisible="not has_access_messenger"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Update user form !-->
+        <record id="res_users_form_view_edit" model="ir.ui.view">
+            <field name="name">res.users.form.us_messenger</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='outgoing_mail_server_type']" position="after">
+                    <field name="has_access_messenger" invisible="1"/>
+                    <field name="messenger_nickname" string="Messenger nickame" invisible="not has_access_messenger"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

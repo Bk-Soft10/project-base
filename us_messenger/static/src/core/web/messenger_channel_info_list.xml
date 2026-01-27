@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="us_messenger.MessengerChannelInfoList">
+        <ActionPanel title.translate="Information" minWidth="200" initialWidth="env.inMeetingView ? 400 : 300" icon="'fa fa-info'">
+            <button t-if="hasClientProfile" class="btn btn-primary mt-1" t-on-click="openClientProfile" title="View Contact">
+                View Contact
+            </button>
+            <button t-if="!hasMessengerOperator and props.thread.messenger_status === 'without_operator'" class="btn btn-primary mt-1" t-on-click="clickBecomeOperator" title="Become Operator">
+                Become Operator
+            </button>
+            <div t-if="leads.length" class="d-flex flex-column bg-inherit gap-1">
+                <h6 class="pt-3 mb-1">Leads</h6>
+                <div class="list-group">
+                    <t t-foreach="leads" t-as="lead" t-key="lead.id">
+                        <button class="list-group-item list-group-item-action d-flex align-items-center gap-2" t-on-click="() => this.openLead(lead.id)">
+                            <i class="fa fa-handshake-o text-primary"/>
+                            <span class="text-truncate"><t t-esc="lead.name or 'New Lead'"/></span>
+                        </button>
+                    </t>
+                </div>
+            </div>
+            <div t-if="!props.thread.messenger_end_dt" class="o-messenger-MessengerChannelInfoList d-flex flex-column bg-inherit gap-1">
+                <h6 class="pt-3 mb-1">Status</h6>
+                <t t-call="us_messenger.MessengerStatusSelection">
+                    <t t-set="templateParams" t-value="{ messengerThread: props.thread }"/>
+                </t>
+                <button class="btn btn-danger mt-2" t-if="props.thread.messenger_operator_id" t-on-click="endSession" t-att-disabled="state.isEndingSession" title="End Session">
+                    <i class="fa fa-times me-1"/>End Session
+                </button>
+            </div>
+            <div class="d-flex flex-column bg-inherit gap-1">
+                <h6 class="pt-3 mb-0">Notes</h6>
+                <textarea class="form-control" rows="3" placeholder="Add your notes here..." t-model="props.thread.messengerNoteText" t-on-blur="onBlurNote"></textarea>
+            </div>
+            <t t-name="extra_infos"/>
+        </ActionPanel>
+    </t>
+
+    <t t-name="us_messenger.MessengerStatusSelection">
+        <t t-set="messengerThread" t-value="templateParams.messengerThread"/>
+        <div class="o-messenger-MessengerStatusSelection list-group" t-ref="messenger-status-selection">
+            <t t-foreach="store.messengerStatusButtons" t-as="btn" t-key="btn.status">
+                <t t-set="isBtnActive" t-value="messengerThread.messenger_status === btn.status"/>
+                <button
+                    class="list-group-item list-group-item-action d-flex align-items-center gap-2"
+                    t-att-class="{
+                        'active': isBtnActive,
+                        'o-inProgress': isBtnActive and btn.status === 'in_progress',
+                        'o-without-operator': isBtnActive and btn.status === 'without_operator',
+                        'o-end-session': isBtnActive and btn.status === 'end_session',
+                    }"
+                    t-att-disabled="btn.status === 'end_session'"
+                    t-on-click="() => btn.status !== 'end_session' &amp;&amp; messengerThread.updateMessengerStatus(btn.status)"
+                >
+                    <input
+                        type="radio"
+                        t-att-checked="isBtnActive"
+                        class="form-check-input m-0"
+                    />
+                    <span class="o-messenger-MessengerStatusSelection-Label text-truncate cursor-pointer flex-grow-1" t-esc="btn.label"/>
+                    <t t-call="us_messenger.MessengerStatusLabel">
+                        <t t-set="templateParams" t-value="{ btn }"/>
+                    </t>
+                </button>
+            </t>
+        </div>
+    </t>
+
+    <t t-name="us_messenger.MessengerStatusLabel">
+        <t t-set="btn" t-value="templateParams.btn"/>
+        <span class="o-messenger-MessengerStatusLabel fa" t-att-title="btn.label" t-att-class="{
+            'text-success': btn.status === 'in_progress',
+            'text-secondary': btn.status === 'end_session',
+            'o-without-operator': btn.status === 'without_operator',
+            'o-help': btn.status === 'need_help',
+        }">
+            <i
+                t-if="btn.icon"
+                class="o-messenger-MessengerStatusLabel-icon"
+                t-attf-class="{{ btn.icon }}"
+            />
+        </span>
+    </t>
+</templates>

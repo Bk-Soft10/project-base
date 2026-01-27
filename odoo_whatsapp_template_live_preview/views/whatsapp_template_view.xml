@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherit WhatsApp Template Form -->
+    <record id="view_whatsapp_template_form_inherit_preview" model="ir.ui.view">
+        <field name="name">whatsapp.template.form.inherit.preview</field>
+        <field name="model">whatsapp.template</field>
+        <field name="inherit_id" ref="whatsapp.whatsapp_template_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="after">
+                <group style="margin-right: 10px;margin-top: 10px;" invisible="not preview_whatsapp">
+                    <field name="preview_whatsapp" nolabel="1" widget="html"/>
+                </group>
+            </xpath>
+            <xpath expr="//button[@name='%(whatsapp.whatsapp_preview_action_from_template)d']" position="attributes">
+               <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

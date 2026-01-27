@@ -1,0 +1,134 @@
+.o-messenger-MessengerStatusLabel.o-help {
+    color: var(--messenger-MessengerStatusLabel-helpColor, #{$purple});
+}
+
+.o-messenger-MessengerStatusLabel.o-without-operator {
+    color: var(--messenger-MessengerStatusLabel-helpColor, #{$orange});
+}
+
+.o-messenger-MessengerStatusSelection {
+    --list-group-border-radius: var(--border-radius);
+
+    @keyframes shakeX {
+        from, to {transform: translate3d(0, 0, 0);}
+        20%, 60% {transform: translate3d(-.15em, 0, 0);}
+        40%, 80% {transform: translate3d(.15em, 0, 0);}
+    }
+
+    button:where(:not(.active)) .o-messenger-MessengerStatusLabel {
+        visibility: hidden;
+        animation: none;
+    }
+
+    .o-messenger-MessengerStatusLabel {
+        &.o-waiting {
+            transform: rotate(180deg);
+            transition: transform 1s;
+        }
+        &.o-help {
+            animation: none;
+        }
+        &.o-without-operator {
+            animation: none;
+        }
+    }
+
+    button.active .o-messenger-MessengerStatusLabel {
+        &.o-waiting {
+            transform: none;
+        }
+        &.o-help {
+            animation: shakeX .5s;
+        }
+        &.o-without-operator {
+            animation: shakeX .5s;
+        }
+    }
+
+    button.active.o-inProgress  {
+        --list-group-active-bg: #{rgba($success, .2)};
+        --list-group-active-color: #{$success};
+        --list-group-active-border-color: #{$success};
+
+        .o-messenger-MessengerStatusSelection-Label {
+            color: var(--list-group-color);
+        }
+        &.o-messenger-MessengerStatusLabel-icon {
+            color: $success;
+        }
+
+        .form-check-input {
+            background-color: $success;
+            border-color: $success;
+        }
+    }
+
+    button.active.o-need-help {
+        --list-group-active-bg: #{rgba($orange, .1)};
+        --list-group-active-color: var(--body-color);
+        --list-group-active-border-color: #{$orange};
+
+
+        &.o-messenger-MessengerStatusLabel-icon {
+            color: #{$orange};
+        }
+
+        .form-check-input {
+            background-color: #{$orange};
+            border-color: #{$orange};
+        }
+    }
+
+    button.active.o-without-operator {
+        --list-group-active-bg: #{rgba($orange, .1)};
+        --list-group-active-color: var(--body-color);
+        --list-group-active-border-color: #{$orange};
+
+
+        &.o-messenger-MessengerStatusLabel-icon {
+            color: #{$orange};
+        }
+
+        .form-check-input {
+            background-color: #{$orange};
+            border-color: #{$orange};
+        }
+    }
+
+    button.active.o-waiting-customer {
+        --list-group-active-bg: #{rgba($gray-500, .1)};
+        --list-group-active-color: var(--body-color);
+        --list-group-active-border-color: #{$gray-600};
+
+        .form-check-input {
+            background-color: #{$gray-600};
+            border-color: #{$gray-600};
+        }
+    }
+
+    button.active.o-end-session {
+        --list-group-active-bg: #{rgba($gray-500, .1)};
+        --list-group-active-color: var(--body-color);
+        --list-group-active-border-color: #{$gray-600};
+
+        .form-check-input {
+            background-color: #{$gray-600};
+            border-color: #{$gray-600};
+        }
+    }
+
+    // Dropdown
+    .o_popover & {
+        --list-group-border-radius: 0;
+
+        .list-group-item {
+            border-width: 0;
+            margin: 0;
+        }
+    }
+}
+
+.o-messenger-MessengerStatusLabel.position-absolute {
+    background-color: rgba($white, var(--bg-opacity, 1));
+    border-radius: 50%;
+}

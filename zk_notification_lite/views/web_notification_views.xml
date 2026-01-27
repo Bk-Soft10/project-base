@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form View -->
+    <!-- Read Notification Tree View -->
+    <record id="view_web_notification_read_tree" model="ir.ui.view">
+        <field name="name">web.notification.read.tree</field>
+        <field name="model">web.notification.read</field>
+        <field name="arch" type="xml">
+            <list string="Users who marked as read" create="false" delete="false">
+                <field name="user_id"/>
+                <field name="read_date"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_web_notification_form" model="ir.ui.view">
+        <field name="name">web.notification.form</field>
+        <field name="model">web.notification</field>
+        <field name="arch" type="xml">
+            <form string="Web Notification">
+                <header>
+                    <button name="action_submit" 
+                            string="SUBMIT" 
+                            type="object" 
+                            class="btn-primary"
+                            invisible="state == 'finish'"/>
+                    <button name="action_cancel" 
+                            string="Cancel" 
+                            type="object" 
+                            class="btn-secondary"
+                            invisible="state != 'in_progress'"/>
+                    <field name="state" widget="statusbar" 
+                           statusbar_visible="draft,in_progress,finish,cancelled"
+                           clickable="1"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="notification_type"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <!-- General Information Tab -->
+                        <page string="General Information" name="general_info">
+                            <group>
+                                <group>
+                                    <field name="user_selection"/>
+                                    <field name="user_ids" 
+                                           widget="many2many_tags"
+                                           invisible="user_selection != 'among'"/>
+                                </group>
+                            </group>
+                            <group>
+                                <field name="template_id"/>
+                                <field name="message"/>
+                            </group>
+                        </page>
+                        
+                        <!-- Pop-Up Notification Tab -->
+                        <page string="Pop-Up Notification" 
+                              name="popup_notification"
+                              invisible="notification_type != 'popup'">
+                            <group>
+                                <p class="text-muted">
+                                    Pop-up notifications will appear as toast messages on the right side of the screen for selected users when the state is "In Progress".
+                                </p>
+                            </group>
+                        </page>
+                        
+                        <!-- Breaking News Notifications Tab -->
+                        <page string="Breaking News Notifications" 
+                              name="breaking_news_notification"
+                              invisible="notification_type != 'breaking_news'">
+                            <group>
+                                <group>
+                                    <field name="background_color" widget="color"/>
+                                    <field name="font_color" widget="color"/>
+                                    <field name="font_size"/>
+                                </group>
+                                <group>
+                                    <field name="is_moving_text"/>
+                                    <field name="moving_text_direction" 
+                                           invisible="not is_moving_text"/>
+                                    <field name="expiry_date"/>
+                                </group>
+                            </group>
+                        </page>
+                        
+                        <!-- Read By Users Tab -->
+                        <page string="Read By" name="read_by">
+                            <field name="read_ids" readonly="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- List View -->
+    <record id="view_web_notification_tree" model="ir.ui.view">
+        <field name="name">web.notification.list</field>
+        <field name="model">web.notification</field>
+        <field name="arch" type="xml">
+            <list string="Web Notifications">
+                <field name="name"/>
+                <field name="notification_type"/>
+                <field name="user_selection"/>
+                <field name="state" widget="badge" 
+                       decoration-info="state == 'draft'"
+                       decoration-success="state == 'in_progress'"
+                       decoration-muted="state == 'finish'"/>
+                <field name="create_date"/>
+                <button name="action_delete_notification" type="object" string="Delete" icon="fa-trash" confirm="Are you sure you want to delete this notification?"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_web_notification_search" model="ir.ui.view">
+        <field name="name">web.notification.search</field>
+        <field name="model">web.notification</field>
+        <field name="arch" type="xml">
+            <search string="Search Notifications">
+                <field name="name"/>
+                <field name="message"/>
+                <filter name="filter_draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                <filter name="filter_in_progress" string="In Progress" domain="[('state', '=', 'in_progress')]"/>
+                <filter name="filter_finish" string="Finish" domain="[('state', '=', 'finish')]"/>
+                <separator/>
+                <filter name="filter_popup" string="Pop-Up" domain="[('notification_type', '=', 'popup')]"/>
+                <filter name="filter_breaking_news" string="Breaking News" domain="[('notification_type', '=', 'breaking_news')]"/>
+                <separator/>
+                <group>
+                    <filter name="group_by_state" string="State" context="{'group_by': 'state'}"/>
+                    <filter name="group_by_type" string="Type" context="{'group_by': 'notification_type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_web_notification" model="ir.actions.act_window">
+        <field name="name">Web Notifications</field>
+        <field name="res_model">web.notification</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_web_notification_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first web notification
+            </p>
+            <p>
+                Web notifications can be displayed as Pop-Up messages or Breaking News banners.
+            </p>
+        </field>
+    </record>
+
+    <!-- Template Action -->
+    <record id="action_web_notification_template" model="ir.actions.act_window">
+        <field name="name">Notification Templates</field>
+        <field name="res_model">web.notification.template</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first notification template
+            </p>
+        </field>
+    </record>
+
+    <!-- Template Menu (if menus.xml exists, it should probably go there, but checking previous file list shows menus.xml exists. I should check menus.xml first to adhere to structure, but user request implies just 'add template message'. I'll check menus.xml content first before finalizing where to put the menu) -->
+</odoo>

@@ -1,0 +1,20 @@
+[build-system]
+requires = ["addon-odoo-wheel>=0.4"]
+build-backend = "addon_odoo_wheel.builder"
+
+[tool.addon-odoo-wheel]
+allow_no_odoo_version = true
+classifiers = [
+    "Programming Language :: Python :: 3",
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
+    "Programming Language :: Python :: 3 :: Only",
+    "Framework :: Odoo :: 19.0",
+]
+
+[project]
+name = "export_json"
+description = "Odoo module to add json type to native export feature"
+authors = [
+    { name = "mangono", email = "stephane.fromont@mangono.fr" },
+]

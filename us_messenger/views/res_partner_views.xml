@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_partner_form_inherited" model="ir.ui.view">
+        <field name="name">res.partner.form.inherited</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <field name="is_have_messenger" invisible="1"/>
+                <page string="Messenger records" name="messenger_records" groups="us_messenger.us_messenger_group_user">
+                    <field name="messenger_partner_ids">
+                        <list create="0" edit="0" delete="0" options="{'mode': 'readonly'}">
+                            <field name="username"/>
+                            <field name="external_id"/>
+                            <field name="channel_id"/>
+                            <field name="messenger_operator_id" widget="many2one_avatar" groups="us_messenger.auto_operator_selection"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
