@@ -131,7 +131,7 @@ class CamsAttendance(http.Controller):
             direction = (
                 request.env["ir.config_parameter"]
                 .sudo()
-                .get_param("odoo-biometric-attendance.entry_strategy")
+                .get_param("hr_attendance_biometric.entry_strategy")
                 or default_direction
             )
             return direction

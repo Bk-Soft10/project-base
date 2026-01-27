@@ -18,7 +18,7 @@
 
     'images': ['static/description/banner.png'],
     'license': 'LGPL-3',
-    'auto_install': True,
+    'auto_install': False,
     'installable': True,
     'live_test_url': 'https://youtu.be/aR3ZmDu8OjI',
 

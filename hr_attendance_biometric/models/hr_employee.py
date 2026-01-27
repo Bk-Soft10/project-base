@@ -15,14 +15,14 @@ class HrEmployee(models.Model):
         return (
             self.env["ir.config_parameter"]
             .sudo()
-            .get_param("odoo-biometric-attendance.update_device")
+            .get_param("hr_attendance_biometric.update_device")
         )
 
     def _get_device_base_api_url(self):
         return (
             self.env["ir.config_parameter"]
             .sudo()
-            .get_param("odoo-biometric-attendance.device_api_base_url")
+            .get_param("hr_attendance_biometric.device_api_base_url")
         )
 
     @api.model_create_multi

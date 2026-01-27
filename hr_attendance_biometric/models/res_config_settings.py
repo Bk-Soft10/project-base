@@ -32,13 +32,13 @@ class ResConfigSettings(models.TransientModel):
         get_param = self.env["ir.config_parameter"].sudo().get_param
         res.update(
             entry_strategy=get_param(
-                "odoo-biometric-attendance.entry_strategy", default="1"
+                "hr_attendance_biometric.entry_strategy", default="1"
             ),
             update_device=get_param(
-                "odoo-biometric-attendance.update_device", default=False
+                "hr_attendance_biometric.update_device", default=False
             ),
             device_api_base_url=get_param(
-                "odoo-biometric-attendance.device_api_base_url",
+                "hr_attendance_biometric.device_api_base_url",
                 default="http://robot.camsunit.com/external/1.0/user",
             ),
         )
@@ -47,9 +47,9 @@ class ResConfigSettings(models.TransientModel):
     @api.model
     def set_values(self):
         set_param = self.env["ir.config_parameter"].sudo().set_param
-        set_param("odoo-biometric-attendance.entry_strategy", self.entry_strategy)
-        set_param("odoo-biometric-attendance.update_device", self.update_device)
+        set_param("hr_attendance_biometric.entry_strategy", self.entry_strategy)
+        set_param("hr_attendance_biometric.update_device", self.update_device)
         set_param(
-            "odoo-biometric-attendance.device_api_base_url", self.device_api_base_url
+            "hr_attendance_biometric.device_api_base_url", self.device_api_base_url
         )
         return super().set_values()

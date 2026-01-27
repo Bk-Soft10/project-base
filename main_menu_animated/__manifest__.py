@@ -31,7 +31,7 @@
     "images": [
         "static/description/banner.gif",
     ],
-    "auto_install": True,
+    "auto_install": False,
     "application": True,
     "installable": True,
 }
