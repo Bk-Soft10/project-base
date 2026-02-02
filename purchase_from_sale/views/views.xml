@@ -39,7 +39,7 @@
             </xpath>
 
             <xpath expr="//header/button[@name='action_confirm'][1]" position="attributes">
-                <attribute name="invisible">state not in ['sent', 'ready'] or not can_confirm_so</attribute>
+                <attribute name="invisible">state not in ['sent'] or not can_confirm_so</attribute>
             </xpath>
             <xpath expr="//header/button[@name='action_confirm'][2]" position="attributes">
                 <attribute name="invisible">1</attribute>

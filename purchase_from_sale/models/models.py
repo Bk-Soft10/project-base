@@ -23,7 +23,7 @@ class SaleOrder(models.Model):
         for rec in self:
             rec_su = rec.sudo()
             po_recs = rec_su.request_purchase_ids and rec_su.request_purchase_ids.filtered(lambda p: p.state not in ['cancel']) or None
-            rec.can_confirm_so = len(po_recs.ids) == 0 if po_recs else True
+            rec.can_confirm_so = True if not po_recs or po_recs.filtered(lambda p: p.state in ['vendor_price_confirmed']) else False
 
     @api.depends('request_purchase_ids', 'request_purchase_ids.state')
     def _compute_request_purchase_count(self):
@@ -86,6 +86,32 @@ class SaleOrder(models.Model):
             for po_rec in po_recs:
                 po_rec.button_cancel()
         return res
+
+    def action_confirm(self):
+        res = super().action_confirm()
+        for rec in self:
+            rec_su = rec.sudo()
+            po_recs = rec_su.request_purchase_ids.filtered(lambda x: x.state in ['vendor_price_confirmed'])
+            if po_recs and len(po_recs) == 1:
+                po_recs.button_confirm()
+        return res
+
+    def action_validate_price(self):
+        self.ensure_one()
+        rec_su = self.sudo()
+        po_recs = rec_su.request_purchase_ids.filtered(lambda x: x.state in ['vendor_price_confirmed'])
+        po_order_lines = rec_su.order_line.filtered(lambda x: x.request_purchase_line_ids)
+        valid_prices = all(line.request_purchase_line_ids.filtered(lambda x: x.order_id.state in ['vendor_price_confirmed']) for line in po_order_lines)
+        if po_recs and len(po_recs) == 1 and valid_prices:
+            rec_su.action_ready()
+        else:
+            raise UserError(_("No purchase order found for validation."))
+
+    def message_post(self, **kwargs):
+        if self.env.context.get('mark_so_as_sent'):
+            self.filtered(lambda o: o.state in ['draft', 'ready']).with_context(tracking_disable=True).write({'state': 'sent'})
+            kwargs['notify_author_mention'] = kwargs.get('notify_author_mention', True)
+        return super().message_post(**kwargs)
 
 #################################################################################################################
 # sale.order.line model
@@ -164,6 +190,25 @@ class PurchaseOrder(models.Model):
         self.ensure_one()
         rec_su = self.sudo()
         rec_su.state = 'vendor_price_confirmed'
+        sale_rec = rec_su.request_sale_id
+        if sale_rec and sale_rec.state in ['price_pending']:
+            sale_rec.action_validate_price()
+
+    def button_approve(self, force=False):
+        for rec in self:
+            rec_su = rec.sudo()
+            sale_rec = rec_su.request_sale_id
+            if sale_rec and sale_rec.state not in ['sale']:
+                raise UserError(_("You cannot approve purchase order before sale order is confirmed."))
+        return super().button_approve(force=force)
+
+    def button_confirm(self):
+        for rec in self:
+            rec_su = rec.sudo()
+            sale_rec = rec_su.request_sale_id
+            if sale_rec and sale_rec.state not in ['sale']:
+                raise UserError(_("You cannot confirm purchase order before sale order is confirmed."))
+        return super().button_confirm()
 
 #################################################################################################################
 # purchase.order.line model
