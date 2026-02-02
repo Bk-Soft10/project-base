@@ -8,9 +8,12 @@
         <field name="arch" type="xml">
             <block name="quotation_order_setting_container" position="after">
                 <block title="Quotations Vendor Prices" name="quotation_vendor_price_setting_container">
-                    <setting name="sale_vendor_price_setting_div">
-                        <field name="sale_price_type" force_save="1" required="1"/>
-                        <field name="sale_profit_margin" force_save="1"/>
+                    <setting name="sale_vendor_price_setting" string="Vendor Profit Configuration"
+                         help="Define the profit calculation type and its default value when pricing quotations.">
+                        <div class="o_row">
+                            <field name="sale_price_type" force_save="1" required="1" class="oe_inline"/>
+                            <field name="sale_profit_margin" force_save="1" class="oe_inline"/>
+                        </div>
                     </setting>
                 </block>
             </block>

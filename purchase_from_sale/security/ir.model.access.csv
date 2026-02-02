@@ -2,5 +2,5 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_sale_rfq_wizard_all,sale.rfq.wizard.all,model_sale_rfq_wizard,base.group_user,1,1,1,1
 access_sale_order_purchase_user,sale.order.purchase_user,sale.model_sale_order,purchase.group_purchase_user,1,0,0,0
 access_sale_lines_purchase_user,sale.lines.purchase_user,sale.model_sale_order_line,purchase.group_purchase_user,1,0,0,0
-access_purchase_order_sale_user,purchase.order.sale_user,sale.model_purchase_order,sales_team.group_sale_salesman,1,0,0,0
-access_purchase_lines_sale_user,purchase.lines.sale_user,sale.model_purchase_order_line,sales_team.group_sale_salesman,1,0,0,0
+access_purchase_order_sale_user,purchase.order.sale_user,purchase.model_purchase_order,sales_team.group_sale_salesman,1,0,0,0
+access_purchase_lines_sale_user,purchase.lines.sale_user,purchase.model_purchase_order_line,sales_team.group_sale_salesman,1,0,0,0
