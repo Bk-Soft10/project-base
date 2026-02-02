@@ -47,21 +47,22 @@
 
             <xpath expr="//header/button[@name='action_rfq_send']" position="after">
                 <button name="action_confirm_price" string="Confirm Price" class="oe_highlight" type="object"
-                    invisible="state not in ['draft', 'sent']" data-hotkey="y" groups="purchase.group_purchase_user"/>
+                        invisible="not partner_id or state not in ['draft', 'sent']" data-hotkey="y"
+                        groups="purchase.group_purchase_user"/>
             </xpath>
 
             <xpath expr="//header/button[@name='action_rfq_send'][1]" position="attributes">
-                <attribute name="invisible">state != 'draft'</attribute>
+                <attribute name="invisible">not partner_id or state != 'draft'</attribute>
             </xpath>
             <xpath expr="//header/button[@name='action_rfq_send'][2]" position="attributes">
                 <attribute name="invisible">request_sale_id or state != 'sent'</attribute>
             </xpath>
 
             <xpath expr="//header/button[@name='button_confirm'][1]" position="attributes">
-                <attribute name="invisible">request_sale_id or state != 'vendor_price_confirmed'</attribute>
+                <attribute name="invisible">not partner_id or request_sale_id or state != 'vendor_price_confirmed'</attribute>
             </xpath>
             <xpath expr="//header/button[@name='button_confirm'][2]" position="attributes">
-                <attribute name="invisible">request_sale_id or state != 'draft'</attribute>
+                <attribute name="invisible">not partner_id or request_sale_id or state != 'draft'</attribute>
             </xpath>
 
             <xpath expr="//header/button[@name='button_cancel']" position="attributes">

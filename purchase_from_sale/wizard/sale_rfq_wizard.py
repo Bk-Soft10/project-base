@@ -76,10 +76,12 @@ class SaleRfqWizard(models.TransientModel):
                 'user_id': rec_su.user_id and rec_su.user_id.id or None,
                 'order_line': order_lines,
                 'origin': sale_rec and sale_rec.name or None,
-                'partner_id': default_vendor and default_vendor.id or self.env.user.partner_id.id,
+                # 'partner_id': default_vendor and default_vendor.id or self.env.user.partner_id.id,
                 # 'date_order': sale_rec and sale_rec.date_order or None,
             }
             po_rec = self.env['purchase.order'].sudo().create(po_values) if order_lines and len(order_lines) > 0 else None
+            if po_rec and sale_rec:
+                sale_rec.action_price_pending()
 
             res_message = _("Request Purchase Created Successfully!") if po_rec else _("Request Purchase Creation Failed!")
             res_type = 'success' if po_rec else 'warning'

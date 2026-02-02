@@ -65,6 +65,16 @@ class SaleOrder(models.Model):
             return action
         return {'type': 'ir.actions.act_window_close'}
 
+    def action_price_pending(self):
+        self.ensure_one()
+        rec_su = self.sudo()
+        rec_su.state = 'price_pending'
+
+    def action_ready(self):
+        self.ensure_one()
+        rec_su = self.sudo()
+        rec_su.state = 'ready'
+
 #################################################################################################################
 # sale.order.line model
 #################################################################################################################
