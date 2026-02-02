@@ -17,7 +17,8 @@ class SaleRfqWizard(models.TransientModel):
     warehouse_id = fields.Many2one(related='sale_id.warehouse_id', store=True)
     picking_type_id = fields.Many2one('stock.picking.type', string='Picking Type', copy=False, required=True,
                                    domain="[('code', 'in', ['incoming']), ('warehouse_id', '=', warehouse_id)]")
-    line_ids = fields.Many2many('sale.order.line', string='Order Lines', copy=False)
+    line_ids = fields.Many2many('sale.order.line', string='Order Lines', copy=False,
+                                domain="[('product_id', '!=', False), ('order_id', '=', sale_id)]")
     user_id = fields.Many2one('res.users', string='Responsible User', copy=False, domain=_get_purchase_responsible_domain)
     company_id = fields.Many2one('res.company', string='Company', copy=False, required=True,
                                  default=lambda self: self.env.company)
@@ -56,7 +57,9 @@ class SaleRfqWizard(models.TransientModel):
         sale_rec = rec_su.sale_id
         picking_type = rec_su.picking_type_id
         sale_lines = rec_su.line_ids.filtered(lambda x: not x._has_request_po() and x.product_id)
+        user_rec = rec_su.user_id or None
         company_rec = rec_su.company_id or self.env.company
+        default_vendor = user_rec and user_rec.partner_id or None
         if sale_rec and picking_type and sale_lines and sale_rec.state in ['draft']:
             order_lines = [(0, 0, {
                 'name': line.name,
@@ -70,7 +73,10 @@ class SaleRfqWizard(models.TransientModel):
                 'request_sale_id': sale_rec and sale_rec.id or None,
                 'picking_type_id': picking_type and picking_type.id or None,
                 'company_id': company_rec and company_rec.id or None,
+                'user_id': rec_su.user_id and rec_su.user_id.id or None,
                 'order_line': order_lines,
+                'origin': sale_rec and sale_rec.name or None,
+                'partner_id': default_vendor and default_vendor.id or self.env.user.partner_id.id,
                 # 'date_order': sale_rec and sale_rec.date_order or None,
             }
             po_rec = self.env['purchase.order'].sudo().create(po_values) if order_lines and len(order_lines) > 0 else None

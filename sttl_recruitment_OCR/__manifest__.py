@@ -2,9 +2,10 @@
 {
     'name': 'OCR Recruitment',
     'version': '19.0.1.0',
+    'license': 'LGPL-3',
     'category': 'Tools',
-    "author": "Silver Touch Technologies Limited",
-    "website": "https://www.silvertouch.com/",
+    'author': "Silver Touch Technologies Limited",
+    'website': "https://www.silvertouch.com/",
     'summary': 'Extracts the information of candidates from the resumes and creates applications in recruitment.',
     'depends': ['base', 'web', 'sms', 'hr_recruitment', 'base_setup'],
     
@@ -15,7 +16,7 @@
         ],
     },
     'data': [
-        "security/ir.model.access.csv",
+        'security/ir.model.access.csv',
         'views/view_upload_documents.xml',
         'views/inherited_recruitent_form_view.xml',
         'views/res_config_view.xml',

@@ -1,17 +1,17 @@
 {
-
-    'name': 'Auto Barcode Generator',
-    'description': """
+    "name": 'Auto Barcode Generator',
+    "description": """
         Barcode Generator
     """,
-    'summary': """
+    "summary": """
         Barcode Generator on Inventory
     """,
-    'category': 'Barcode',
+    "category": 'Barcode',
     "author": "One Stop Odoo",
     "website": "https://onestopodoo.com",
     "maintainer": 'One Stop Odoo',
-    'version': '1.5',
+    "version": '1.5',
+    "license": 'LGPL-3',
     # Dependencies
     'depends': ['stock'],
     # Views

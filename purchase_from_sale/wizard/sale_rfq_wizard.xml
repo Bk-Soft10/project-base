@@ -25,14 +25,20 @@
                 <notebook>
                     <page name="wizard_line_pg" string="Order Lines" invisible="not line_ids">
                         <group colspan="4">
-                            <field name="line_ids" force_save="1" nolabel="1" colspan="2"
-                                   options="{'no_create': 1, 'no_open': 1}"
-                                   context="{'view_mode': 'list', 'create': False, 'edit': False}"/>
+                            <field name="line_ids" force_save="1" nolabel="1" colspan="2" context="{'view_mode': 'kanban,list'}"
+                                   options="{'no_create': 1, 'no_open': 1, 'no_quick_create': 1, 'no_create_edit': 1}">
+                                <list create="0" edit="0" no_open="1" sample="1">
+                                    <field name="product_id" force_save="1" readonly="1"/>
+                                    <field name="product_uom_id" force_save="1" readonly="1" optional="hide"/>
+                                    <field name="product_uom_qty" force_save="1" readonly="1" optional="show"/>
+                                    <field name="analytic_distribution" force_save="1" readonly="1" optional="hide"/>
+                                </list>
+                            </field>
                         </group>
                     </page>
                 </notebook>
                 <footer>
-                    <button name="action_submit" type="object" string="Update" class="oe_highlight"
+                    <button name="action_submit" type="object" string="Create RFQ" class="oe_highlight"
                             invisible="not line_ids or not picking_type_id or not sale_id"/>
                     <button string="Cancel" class="btn-secondary" type="object" name="action_close"/>
                 </footer>
