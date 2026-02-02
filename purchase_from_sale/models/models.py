@@ -40,6 +40,22 @@ class SaleOrder(models.Model):
             action['res_id'] = po_recs.ids[0]
         return action
 
+    def action_create_rfq_purchase(self):
+        self.ensure_one()
+        sale_rec = self.sudo()
+        order_lines = sale_rec and sale_rec.order_line.filtered(
+            lambda x: not x._has_request_po() and x.product_id) or None
+        action_rec = self.env.ref("purchase_from_sale.action_sale_rfq_wizard_open", None)
+        if action_rec and order_lines and len(order_lines) > 0:
+            action = action_rec.sudo().read()[0]
+            action['context'] = {
+                'default_sale_id': sale_rec.id,
+                'default_company_id': sale_rec.company_id and sale_rec.company_id.id or self.env.company.id,
+                'default_line_ids': [(6, 0, [line.id for line in order_lines])]
+            }
+            return action
+        return {'type': 'ir.actions.act_window_close'}
+
 #################################################################################################################
 # sale.order.line model
 #################################################################################################################
@@ -47,8 +63,18 @@ class SaleOrder(models.Model):
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
-    request_purchase_line_ids = fields.One2many('purchase.order.line', 'request_sale_line_id',
-                                                string='Request Purchase Lines', copy=False)
+    request_purchase_line_ids = fields.One2many('purchase.order.line', 'request_sale_line_id', string='Purchase Lines', copy=False)
+
+    def can_create_request_po(self):
+        self.ensure_one()
+        rec_su = self.sudo()
+        return True if rec_su.product_id and not rec_su._has_request_po() else False
+
+    def _has_request_po(self):
+        self.ensure_one()
+        rec_su = self.sudo()
+        purchase_lines = rec_su.request_purchase_line_ids.filtered(lambda x: x.order_id.state not in ['cancel'])
+        return purchase_lines and len(purchase_lines) > 0 or False
 
 #################################################################################################################
 # purchase.order model

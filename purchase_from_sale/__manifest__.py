@@ -12,7 +12,7 @@
         'purchase',
     ],
     'data': [
-        # 'wizard/sale_rfq_wizard.xml',
+        'wizard/sale_rfq_wizard.xml',
         'views/views.xml',
         'views/res_settings_views.xml',
     ],

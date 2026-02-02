@@ -9,9 +9,16 @@
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
+            <header position="before">
+                <field name="request_purchase_ids" force_save="1" invisible="1"/>
+            </header>
+            <header position="inside">
+                <button string="Get Price From Vendor" name="action_create_rfq_purchase" type="object"
+                        class="oe_highlight" invisible="not order_line or request_purchase_ids or state not in ['draft']"/>
+            </header>
             <div name="button_box" position="inside">
                 <button name="action_view_request_purchases" type="object"
-                    class="oe_stat_button" icon="fa-calendar" invisible="request_purchase_count == 0">
+                    class="oe_stat_button" icon="fa-bell" invisible="request_purchase_count == 0">
                     <field name="request_purchase_count" widget="statinfo"/>
                 </button>
             </div>

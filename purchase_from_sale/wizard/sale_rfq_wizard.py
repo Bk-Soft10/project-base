@@ -31,6 +31,9 @@ class SaleRfqWizard(models.TransientModel):
             wh_st = sale_rec and sale_rec.warehouse_id or None
             if wh_st:
                 rec_su.warehouse_id = wh_st.id
+            order_lines = sale_rec and sale_rec.order_line.filtered(lambda x: not x._has_request_po() and x.product_id) or None
+            if order_lines and not rec_su.line_ids:
+                rec_su.line_ids = [(6, 0, [line.id for line in order_lines])]
             company_rec = sale_rec and sale_rec.company_id or None
             if company_rec:
                 rec_su.company_id = company_rec.id
@@ -52,42 +55,38 @@ class SaleRfqWizard(models.TransientModel):
         close_act = {'type': 'ir.actions.client', 'tag': 'reload'} or {'type': 'ir.actions.act_window_close'}
         sale_rec = rec_su.sale_id
         picking_type = rec_su.picking_type_id
-        sale_lines = rec_su.line_ids
+        sale_lines = rec_su.line_ids.filtered(lambda x: not x._has_request_po() and x.product_id)
         company_rec = rec_su.company_id or self.env.company
-        if sale_rec and picking_type and sale_lines:
+        if sale_rec and picking_type and sale_lines and sale_rec.state in ['draft']:
             order_lines = [(0, 0, {
                 'name': line.name,
                 'product_id': line.product_id and line.product_id.id or None,
+                'product_uom_id': line.product_uom_id and line.product_uom_id.id or None,
+                'product_qty': line.product_uom_qty,
+                'analytic_distribution': line.analytic_distribution,
                 'request_sale_line_id': line.id,
-            }) for line in sale_lines]
+            }) for line in sale_lines if line.product_id]
             po_values = {
                 'request_sale_id': sale_rec and sale_rec.id or None,
                 'picking_type_id': picking_type and picking_type.id or None,
                 'company_id': company_rec and company_rec.id or None,
                 'order_line': order_lines,
+                # 'date_order': sale_rec and sale_rec.date_order or None,
             }
-        # src_record = doc_rec._get_attachment_record() if doc_rec else False
-        # ai_data = rec_su.ai_data_ids
-        # s_data = ai_data.filtered(lambda x: x.can_update and x.action_field_id and x.select) if ai_data else False
-        # if doc_rec and src_record and ai_data:
-        #     if action_ai:
-        #         ai_data_result = json.load(rec_su.ai_data_result) if rec_su.ai_data_result else {}
-        #         pass_vals = dict(attachment_rec=doc_rec, src_record=src_record, ai_data=ai_data_result)
-        #         res = action_ai._run_action(params=pass_vals)
-        #         res_message = _("AI Call Action Successful!") if res else _("AI Call Action Failed!")
-        #         res_type = 'success' if res else 'warning'
-        #         return {
-        #             'type': 'ir.actions.client',
-        #             'tag': 'display_notification',
-        #             'params': {
-        #                 'message': res_message,
-        #                 'type': res_type,
-        #                 'sticky': False,
-        #                 'next': close_act,
-        #             }
-        #         }
-        #     if s_data:
-        #         s_data.action_selected_data_fields_update()
+            po_rec = self.env['purchase.order'].sudo().create(po_values) if order_lines and len(order_lines) > 0 else None
+
+            res_message = _("Request Purchase Created Successfully!") if po_rec else _("Request Purchase Creation Failed!")
+            res_type = 'success' if po_rec else 'warning'
+            return {
+                'type': 'ir.actions.client',
+                'tag': 'display_notification',
+                'params': {
+                    'message': res_message,
+                    'type': res_type,
+                    'sticky': False,
+                    'next': close_act,
+                }
+            }
         return close_act
 
     def action_close(self):
