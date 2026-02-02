@@ -32,7 +32,7 @@ class SaleRfqWizard(models.TransientModel):
             wh_st = sale_rec and sale_rec.warehouse_id or None
             if wh_st:
                 rec_su.warehouse_id = wh_st.id
-            order_lines = sale_rec and sale_rec.order_line.filtered(lambda x: not x._has_request_po() and x.product_id) or None
+            order_lines = sale_rec and sale_rec.order_line.filtered(lambda x: x.can_create_request_po()) or None
             if order_lines and not rec_su.line_ids:
                 rec_su.line_ids = [(6, 0, [line.id for line in order_lines])]
             company_rec = sale_rec and sale_rec.company_id or None

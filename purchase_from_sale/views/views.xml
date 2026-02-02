@@ -41,6 +41,32 @@
                 <field name="request_sale_line_id" force_save="1" options="{'no_open': 1, 'no_create': 1}" optional="hide"
                        column_invisible="not parent.request_sale_id" readonly="1"/>
             </xpath>
+            <field name="partner_id" position="attributes">
+                <attribute name="required">not request_sale_id or state not in ['draft']</attribute>
+            </field>
+
+            <xpath expr="//header/button[@name='action_rfq_send']" position="after">
+                <button name="action_confirm_price" string="Confirm Price" class="oe_highlight" type="object"
+                    invisible="state not in ['draft', 'sent']" data-hotkey="y" groups="purchase.group_purchase_user"/>
+            </xpath>
+
+            <xpath expr="//header/button[@name='action_rfq_send'][1]" position="attributes">
+                <attribute name="invisible">state != 'draft'</attribute>
+            </xpath>
+            <xpath expr="//header/button[@name='action_rfq_send'][2]" position="attributes">
+                <attribute name="invisible">request_sale_id or state != 'sent'</attribute>
+            </xpath>
+
+            <xpath expr="//header/button[@name='button_confirm'][1]" position="attributes">
+                <attribute name="invisible">request_sale_id or state != 'vendor_price_confirmed'</attribute>
+            </xpath>
+            <xpath expr="//header/button[@name='button_confirm'][2]" position="attributes">
+                <attribute name="invisible">request_sale_id or state != 'draft'</attribute>
+            </xpath>
+
+            <xpath expr="//header/button[@name='button_cancel']" position="attributes">
+                <attribute name="invisible">request_sale_id or state not in ('draft', 'to approve', 'sent', 'purchase', 'vendor_price_confirmed') or locked</attribute>
+            </xpath>
         </field>
     </record>
 

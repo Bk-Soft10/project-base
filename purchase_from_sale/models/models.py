@@ -12,7 +12,17 @@ class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     request_purchase_ids = fields.One2many('purchase.order', 'request_sale_id', string='Purchases', copy=False)
-    request_purchase_count = fields.Integer("Count of Source PO", compute='_compute_request_purchase_count')
+    request_purchase_count = fields.Integer("Count of RFQs", compute='_compute_request_purchase_count')
+    can_confirm_so = fields.Integer("Can Confirm Order", compute='_compute_can_confirm_sale')
+    state = fields.Selection(selection_add=[
+        ('draft',), ('price_pending', 'Pending for Pricing'), ('ready', 'Ready for Confirmation'), ('sent',),
+    ], ondelete={'price_pending': 'set default', 'ready': 'set default'})
+
+    def _compute_can_confirm_sale(self):
+        for rec in self:
+            rec_su = rec.sudo()
+            po_recs = rec_su.request_purchase_ids and rec_su.request_purchase_ids.filtered(lambda p: p.state not in ['cancel']) or None
+            rec.can_confirm_so = len(po_recs.ids) == 0 if po_recs else True
 
     @api.depends('request_purchase_ids', 'request_purchase_ids.state')
     def _compute_request_purchase_count(self):
@@ -43,8 +53,7 @@ class SaleOrder(models.Model):
     def action_create_rfq_purchase(self):
         self.ensure_one()
         sale_rec = self.sudo()
-        order_lines = sale_rec and sale_rec.order_line.filtered(
-            lambda x: not x._has_request_po() and x.product_id) or None
+        order_lines = sale_rec and sale_rec.order_line.filtered(lambda x: x.can_create_request_po()) or None
         action_rec = self.env.ref("purchase_from_sale.action_sale_rfq_wizard_open", None)
         if action_rec and order_lines and len(order_lines) > 0:
             action = action_rec.sudo().read()[0]
@@ -83,7 +92,16 @@ class SaleOrderLine(models.Model):
 class PurchaseOrder(models.Model):
     _inherit = 'purchase.order'
 
+    partner_id = fields.Many2one(required=False)
     request_sale_id = fields.Many2one('sale.order', string='Request Sale', copy=False)
+    state = fields.Selection(selection_add=[
+        ('sent',), ('vendor_price_confirmed', 'Vendor Price Confirmed'), ('to approve',),
+    ], ondelete={'vendor_price_confirmed': 'set default'})
+
+    def action_confirm_price(self):
+        self.ensure_one()
+        rec_su = self.sudo()
+        rec_su.state = 'vendor_price_confirmed'
 
 #################################################################################################################
 # purchase.order.line model
