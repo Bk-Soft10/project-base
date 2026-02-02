@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sale_rfq_wizard_all,sale.rfq.wizard.all,model_sale_rfq_wizard,base.group_user,1,1,1,1
