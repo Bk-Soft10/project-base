@@ -153,6 +153,14 @@ class SaleOrderLine(models.Model):
             rec_su = rec.sudo()
             po_lines = rec_su.request_purchase_line_ids.filtered(lambda x: x.order_id.state not in ['cancel'])
             rec_su.price_vendor = po_lines and po_lines[0].price_unit or 0.0
+            if po_lines and po_lines[0].currency_id != rec_su.currency_id:
+                vendor_price = po_lines[0].currency_id._convert(
+                    po_lines[0].price_unit,
+                    rec_su.currency_id,
+                    rec_su.company_id,
+                    fields.Date.today()
+                )
+                rec_su.price_vendor = vendor_price
             if rec_su.price_vendor > 0.0:
                 rec_su._compute_price_sale_unit()
 
@@ -208,6 +216,8 @@ class PurchaseOrder(models.Model):
             sale_rec = rec_su.request_sale_id
             if sale_rec and sale_rec.state not in ['sale']:
                 raise UserError(_("You cannot confirm purchase order before sale order is confirmed."))
+            if sale_rec and rec_su.state in ['vendor_price_confirmed']:
+                rec_su.state = 'draft'
         return super().button_confirm()
 
 #################################################################################################################
