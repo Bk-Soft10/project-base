@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <!-- ################################################################# -->
+    <!-- #####################  sale.order  ############################## -->
+
+    <record id="view_custom_sale_order_form" model="ir.ui.view">
+        <field name="name">sale.order.view.form.inherit.custom</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <header position="before">
+                <field name="request_purchase_ids" force_save="1" invisible="1"/>
+                <field name="is_need_po" force_save="1" invisible="1"/>
+                <field name="can_confirm_so" force_save="1" invisible="1"/>
+            </header>
+            <header position="inside">
+                <button string="Get Price From Vendor" name="action_create_rfq_purchase" type="object"
+                        class="oe_highlight" invisible="not order_line or not is_need_po or state not in ['draft']"/>
+            </header>
+            <div name="button_box" position="inside">
+                <button name="action_view_request_purchases" type="object"
+                    class="oe_stat_button" icon="fa-bell" invisible="request_purchase_count == 0">
+                    <field name="request_purchase_count" string="RFQs" widget="statinfo"/>
+                </button>
+            </div>
+            <field name="order_line" position="attributes">
+                <attribute name="readonly">state not in ['draft', 'sent'] or locked or request_purchase_ids</attribute>
+            </field>
+            <xpath expr="//field[@name='order_line']/list/field[@name='product_id']" position="before">
+                <field name="request_purchase_line_ids" force_save="1" readonly="1" optional="hide" column_invisible="0"/>
+                <field name="is_request_po" force_save="1" readonly="1" optional="hide" column_invisible="0"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/list/field[@name='product_id']" position="attributes">
+                <attribute name="force_save">1</attribute>
+                <attribute name="readonly">not product_updatable or parent.state not in ['draft'] or request_purchase_line_ids</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/list/field[@name='price_unit']" position="attributes">
+                <attribute name="force_save">1</attribute>
+                <attribute name="readonly">qty_invoiced &gt; 0 or parent.state not in ['draft', 'sent'] or is_request_po or request_purchase_line_ids</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/list/field[@name='price_unit']" position="after">
+                <field name="price_vendor" force_save="1" readonly="1" optional="hide" column_invisible="not parent.request_purchase_ids"/>
+                <field name="price_sale" force_save="1" readonly="1" optional="hide" column_invisible="not parent.request_purchase_ids"/>
+            </xpath>
+
+            <xpath expr="//header/button[@name='action_confirm'][1]" position="attributes">
+                <attribute name="invisible">state not in ['draft', 'sent'] or not can_confirm_so</attribute>
+            </xpath>
+            <xpath expr="//header/button[@name='action_confirm'][2]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//header/button[@name='action_quotation_send'][1]" position="attributes">
+                <attribute name="invisible">not can_confirm_so</attribute>
+            </xpath>
+            <xpath expr="//header/button[@name='action_quotation_send'][2]" position="attributes">
+                <attribute name="invisible">not can_confirm_so or invoice_count &gt;= 1</attribute>
+            </xpath>
+            <xpath expr="//header/button[@name='action_quotation_send'][3]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//header/button[@name='action_preview_sale_order']" position="attributes">
+                <attribute name="invisible">state not in ['sent', 'sale']</attribute>
+            </xpath>
+
+            <xpath expr="//header/button[@name='action_cancel']" position="attributes">
+                <attribute name="invisible">state not in ['draft', 'sent', 'sale'] or not id or locked</attribute>
+            </xpath>
+
+        </field>
+    </record>
+
+    <!-- ##################################################################### -->
+    <!-- #####################  purchase.order  ############################## -->
+
+    <record id="view_custom_purchase_order_form" model="ir.ui.view">
+        <field name="name">purchase.order.view.form.inherit.custom</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <field name="date_order" position="before">
+                <field name="request_sale_id" force_save="1" options="{'no_open': 1, 'no_create': 1}"
+                       invisible="not request_sale_id" readonly="1"/>
+            </field>
+            <xpath expr="//page[@name='products']/field[@name='order_line']/list/field[@name='qty_invoiced']" position="after">
+                <field name="request_sale_line_id" force_save="1" options="{'no_open': 1, 'no_create': 1}" optional="hide"
+                       column_invisible="not parent.request_sale_id" readonly="1"/>
+            </xpath>
+            <field name="partner_id" position="attributes">
+                <attribute name="required">not request_sale_id or state not in ['draft']</attribute>
+            </field>
+
+            <xpath expr="//header/button[@name='action_rfq_send']" position="after">
+                <button name="action_confirm_price" string="Confirm Price" class="oe_highlight" type="object"
+                        invisible="not partner_id or state not in ['draft', 'sent']" groups="purchase.group_purchase_user"/>
+            </xpath>
+
+            <xpath expr="//header/button[@name='action_rfq_send'][1]" position="attributes">
+                <attribute name="invisible">not partner_id or state != 'draft'</attribute>
+            </xpath>
+            <xpath expr="//header/button[@name='action_rfq_send'][2]" position="attributes">
+                <attribute name="invisible">request_sale_id or state != 'sent'</attribute>
+            </xpath>
+
+            <xpath expr="//header/button[@name='button_confirm'][1]" position="attributes">
+                <attribute name="invisible">not partner_id or request_sale_id or state != 'vendor_price_confirmed'</attribute>
+            </xpath>
+            <xpath expr="//header/button[@name='button_confirm'][2]" position="attributes">
+                <attribute name="invisible">not partner_id or request_sale_id or state != 'draft'</attribute>
+            </xpath>
+
+            <xpath expr="//header/button[@name='button_cancel']" position="attributes">
+                <attribute name="invisible">request_sale_id or state not in ('draft', 'to approve', 'sent', 'purchase', 'vendor_price_confirmed') or locked</attribute>
+            </xpath>
+
+            <xpath expr="//page/field[@name='order_line']/list/field[@name='product_id']" position="after">
+                <field name="request_sale_line_id" force_save="1" readonly="1" optional="hide" column_invisible="not parent.request_sale_id"/>
+            </xpath>
+            <xpath expr="//page/field[@name='order_line']/list/field[@name='price_unit']" position="attributes">
+                <attribute name="readonly">qty_invoiced != 0 or (parent.state not in ['draft', 'sent'] and request_sale_line_id) or parent.locked</attribute>
+            </xpath>
+
+        </field>
+    </record>
+
+    <!-- ##################################################################### -->
+    <!-- #####################  product.template  ############################## -->
+
+    <record id="view_custom_product_template_form" model="ir.ui.view">
+        <field name="name">product.template.view.form.inherit.custom</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="priority">6</field>
+        <field name="arch" type="xml">
+            <field name="service_tracking" position="after">
+                <field name="is_request_po" force_save="1"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
