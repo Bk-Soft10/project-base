@@ -80,8 +80,8 @@ class SaleRfqWizard(models.TransientModel):
                 # 'date_order': sale_rec and sale_rec.date_order or None,
             }
             po_rec = self.env['purchase.order'].sudo().create(po_values) if order_lines and len(order_lines) > 0 else None
-            if po_rec and sale_rec:
-                sale_rec.action_price_pending()
+            # if po_rec and sale_rec:
+            #     sale_rec.action_price_pending()
 
             res_message = _("Request Purchase Created Successfully!") if po_rec else _("Request Purchase Creation Failed!")
             res_type = 'success' if po_rec else 'warning'

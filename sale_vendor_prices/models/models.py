@@ -15,9 +15,9 @@ class SaleOrder(models.Model):
                                            domain=[('state', 'not in', ['cancel'])])
     request_purchase_count = fields.Integer("Count of RFQs", compute='_compute_request_purchase_count')
     can_confirm_so = fields.Integer("Can Confirm Order", compute='_compute_can_confirm_sale')
-    state = fields.Selection(selection_add=[
-        ('draft',), ('price_pending', 'Pending for Pricing'), ('sent',),
-    ], ondelete={'price_pending': 'set default'})
+    po_price_state = fields.Selection([
+        ('price_pending', 'Pending for Pricing'), ('price_ready', 'Ready for Confirmation'),
+    ], copy=False, compute='_compute_price_po_status', store=True)
     is_need_po = fields.Boolean(string="Is Need PO", default=False, compute='_compute_is_need_po', store=True)
 
     def _compute_can_confirm_sale(self):
@@ -25,6 +25,16 @@ class SaleOrder(models.Model):
             rec_su = rec.sudo()
             order_lines = rec_su.order_line
             rec_su.can_confirm_so = True if order_lines and all(line._is_valid_price() for line in order_lines) else False
+
+    @api.depends('request_purchase_ids', 'request_purchase_ids.order_line', 'request_purchase_ids.is_confirmed_price', 'order_line.request_purchase_line_ids')
+    def _compute_price_po_status(self):
+        for rec in self:
+            rec_su = rec.sudo()
+            rec_su.po_price_state = None
+            order_lines = rec_su.order_line.filtered(lambda x: x.is_request_po and x.request_purchase_line_ids)
+            if order_lines and len(order_lines) > 0:
+                is_valid_price_lines = True if order_lines and all(line.is_price_valid for line in order_lines) else False
+                rec_su.po_price_state = 'price_ready' if is_valid_price_lines else 'price_pending'
 
     @api.depends('request_purchase_ids', 'request_purchase_ids.state', 'order_line', 'order_line.product_id', 'order_line.is_request_po', 'order_line.request_purchase_line_ids')
     def _compute_is_need_po(self):
@@ -74,11 +84,6 @@ class SaleOrder(models.Model):
             return action
         return {'type': 'ir.actions.act_window_close'}
 
-    def action_price_pending(self):
-        self.ensure_one()
-        rec_su = self.sudo()
-        rec_su.state = 'price_pending'
-
     def action_cancel(self):
         res = super().action_cancel()
         for rec in self:
@@ -94,19 +99,20 @@ class SaleOrder(models.Model):
         res = super().action_confirm()
         for rec in self:
             rec_su = rec.sudo()
-            po_recs = rec_su.request_purchase_ids.filtered(lambda x: x.state in ['vendor_price_confirmed'])
-            if po_recs and len(po_recs) == 1:
-                po_recs.button_confirm()
+            po_recs = rec_su.request_purchase_ids.filtered(lambda x: x.state in ['draft', 'sent'] and x.is_confirmed_price)
+            if po_recs and len(po_recs) > 0:
+                for po_rec in po_recs:
+                    po_rec.button_confirm()
         return res
 
-    def action_validate_price(self):
-        self.ensure_one()
-        rec_su = self.sudo()
-        order_lines = rec_su.order_line and rec_su.order_line.filtered(lambda x: x._is_valid_price()) or None
-        if order_lines and all(line._is_valid_price() for line in order_lines):
-            rec_su.state = 'draft'
-        else:
-            raise UserError(_("No purchase order found for validation."))
+    # def action_validate_price(self):
+    #     self.ensure_one()
+    #     rec_su = self.sudo()
+    #     order_lines = rec_su.order_line and rec_su.order_line.filtered(lambda x: x._is_valid_price()) or None
+    #     if order_lines and all(line._is_valid_price() for line in order_lines):
+    #         rec_su.state = 'draft'
+    #     else:
+    #         raise UserError(_("No purchase order found for validation."))
 
 #################################################################################################################
 # sale.order.line model
@@ -122,6 +128,7 @@ class SaleOrderLine(models.Model):
     price_sale = fields.Float(string="Sale Price", compute='_compute_price_sale_unit', digits='Product Price',
                               store=True, readonly=True)
     is_request_po = fields.Boolean(related='product_id.is_request_po', string="Request PO", store=True)
+    is_price_valid = fields.Boolean(string="Price Valid", store=True, compute='_compute_price_valid')
 
     def _get_request_po_lines(self):
         self.ensure_one()
@@ -152,6 +159,12 @@ class SaleOrderLine(models.Model):
         purchase_lines = rec_su._get_request_po_lines()
         po_lines = purchase_lines and purchase_lines.filtered(lambda x: x.order_id.is_confirmed_price) or None
         return po_lines and len(po_lines) > 0 or False
+
+    @api.depends('product_id.is_request_po', 'request_purchase_line_ids', 'request_purchase_line_ids.price_unit', 'request_purchase_line_ids.order_id.state', 'request_purchase_line_ids.order_id.is_confirmed_price')
+    def _compute_price_valid(self):
+        for rec in self:
+            rec_su = rec.sudo()
+            rec_su.is_price_valid = True if rec_su._is_valid_price() else False
 
     @api.depends('product_id', 'product_uom_id', 'product_uom_qty')
     def _compute_price_unit(self):
@@ -205,19 +218,12 @@ class PurchaseOrder(models.Model):
 
     partner_id = fields.Many2one(required=False)
     request_sale_id = fields.Many2one('sale.order', string='Request Sale', copy=False, domain=[('state', 'not in', ['cancel'])])
-    state = fields.Selection(selection_add=[
-        ('sent',), ('vendor_price_confirmed', 'Vendor Price Confirmed'), ('to approve',),
-    ], ondelete={'vendor_price_confirmed': 'set default'})
     is_confirmed_price = fields.Boolean(string="Is Confirmed Price", default=False)
 
     def action_confirm_price(self):
         self.ensure_one()
         rec_su = self.sudo()
-        rec_su.state = 'vendor_price_confirmed'
         rec_su.is_confirmed_price = True
-        sale_rec = rec_su.request_sale_id
-        if sale_rec and sale_rec.state in ['price_pending']:
-            sale_rec.action_validate_price()
 
     def button_approve(self, force=False):
         for rec in self:
@@ -233,8 +239,6 @@ class PurchaseOrder(models.Model):
             sale_rec = rec_su.request_sale_id
             if sale_rec and sale_rec.state not in ['sale']:
                 raise UserError(_("You cannot confirm purchase order before sale order is confirmed."))
-            if sale_rec and rec_su.state in ['vendor_price_confirmed']:
-                rec_su.state = 'draft'
         return super().button_confirm()
 
 #################################################################################################################

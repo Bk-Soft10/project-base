@@ -13,6 +13,7 @@
                 <field name="request_purchase_ids" force_save="1" invisible="1"/>
                 <field name="is_need_po" force_save="1" invisible="1"/>
                 <field name="can_confirm_so" force_save="1" invisible="1"/>
+                <field name="po_price_state" force_save="1" invisible="1"/>
             </header>
             <header position="inside">
                 <button string="Get Price From Vendor" name="action_create_rfq_purchase" type="object"
@@ -24,12 +25,19 @@
                     <field name="request_purchase_count" string="RFQs" widget="statinfo"/>
                 </button>
             </div>
+            <div name="button_box" position="before">
+                <widget name="web_ribbon" title="Pending for Pricing" bg_color="text-bg-info"
+                    invisible="po_price_state not in ['price_pending'] or not request_purchase_ids or state not in ['draft', 'sent']"/>
+                <widget name="web_ribbon" title="Ready for Confirmation" bg_color="text-bg-info"
+                    invisible="po_price_state not in ['price_ready'] or not request_purchase_ids or state not in ['draft', 'sent']"/>
+            </div>
             <field name="order_line" position="attributes">
                 <attribute name="readonly">state not in ['draft', 'sent'] or locked or request_purchase_ids</attribute>
             </field>
             <xpath expr="//field[@name='order_line']/list/field[@name='product_id']" position="before">
                 <field name="request_purchase_line_ids" force_save="1" readonly="1" optional="hide" column_invisible="0"/>
                 <field name="is_request_po" force_save="1" readonly="1" optional="hide" column_invisible="0"/>
+                <field name="is_price_valid" force_save="1" readonly="1" optional="hide" column_invisible="0"/>
             </xpath>
             <xpath expr="//field[@name='order_line']/list/field[@name='product_id']" position="attributes">
                 <attribute name="force_save">1</attribute>
@@ -45,28 +53,28 @@
             </xpath>
 
             <xpath expr="//header/button[@name='action_confirm'][1]" position="attributes">
-                <attribute name="invisible">state not in ['draft', 'sent'] or not can_confirm_so</attribute>
+                <attribute name="invisible">not can_confirm_so or state != 'sent'</attribute>
             </xpath>
             <xpath expr="//header/button[@name='action_confirm'][2]" position="attributes">
-                <attribute name="invisible">1</attribute>
+                <attribute name="invisible">not can_confirm_so or state != 'draft'</attribute>
             </xpath>
 
             <xpath expr="//header/button[@name='action_quotation_send'][1]" position="attributes">
-                <attribute name="invisible">not can_confirm_so</attribute>
+                <attribute name="invisible">not can_confirm_so or state != 'draft' or invoice_count &gt;= 1</attribute>
             </xpath>
             <xpath expr="//header/button[@name='action_quotation_send'][2]" position="attributes">
-                <attribute name="invisible">not can_confirm_so or invoice_count &gt;= 1</attribute>
+                <attribute name="invisible">not can_confirm_so or state == 'draft' or invoice_count &gt;= 1</attribute>
             </xpath>
             <xpath expr="//header/button[@name='action_quotation_send'][3]" position="attributes">
-                <attribute name="invisible">1</attribute>
+                <attribute name="invisible">not can_confirm_so or state not in ('sent', 'sale')</attribute>
             </xpath>
 
             <xpath expr="//header/button[@name='action_preview_sale_order']" position="attributes">
-                <attribute name="invisible">state not in ['sent', 'sale']</attribute>
+                <attribute name="invisible">not can_confirm_so or state not in ['draft', 'sent', 'sale']</attribute>
             </xpath>
 
             <xpath expr="//header/button[@name='action_cancel']" position="attributes">
-                <attribute name="invisible">state not in ['draft', 'sent', 'sale'] or not id or locked</attribute>
+                <attribute name="invisible">request_purchase_ids or state not in ['draft', 'sent', 'sale'] or not id or locked</attribute>
             </xpath>
 
         </field>
@@ -80,6 +88,13 @@
         <field name="model">purchase.order</field>
         <field name="inherit_id" ref="purchase.purchase_order_form"/>
         <field name="arch" type="xml">
+            <header position="before">
+                <field name="is_confirmed_price" force_save="1" invisible="1"/>
+            </header>
+            <div name="button_box" position="before">
+                <widget name="web_ribbon" title="Confirmed Pricing" bg_color="text-bg-info"
+                    invisible="not is_confirmed_price or state not in ['draft', 'sent']"/>
+            </div>
             <field name="date_order" position="before">
                 <field name="request_sale_id" force_save="1" options="{'no_open': 1, 'no_create': 1}"
                        invisible="not request_sale_id" readonly="1"/>
@@ -94,25 +109,19 @@
 
             <xpath expr="//header/button[@name='action_rfq_send']" position="after">
                 <button name="action_confirm_price" string="Confirm Price" class="oe_highlight" type="object"
-                        invisible="not partner_id or state not in ['draft', 'sent']" groups="purchase.group_purchase_user"/>
-            </xpath>
-
-            <xpath expr="//header/button[@name='action_rfq_send'][1]" position="attributes">
-                <attribute name="invisible">not partner_id or state != 'draft'</attribute>
-            </xpath>
-            <xpath expr="//header/button[@name='action_rfq_send'][2]" position="attributes">
-                <attribute name="invisible">request_sale_id or state != 'sent'</attribute>
+                        invisible="not partner_id or not request_sale_id or is_confirmed_price or state not in ['draft', 'sent']"
+                        groups="purchase.group_purchase_user"/>
             </xpath>
 
             <xpath expr="//header/button[@name='button_confirm'][1]" position="attributes">
-                <attribute name="invisible">not partner_id or request_sale_id or state != 'vendor_price_confirmed'</attribute>
+                <attribute name="invisible">not partner_id or request_sale_id or state != 'sent'</attribute>
             </xpath>
             <xpath expr="//header/button[@name='button_confirm'][2]" position="attributes">
                 <attribute name="invisible">not partner_id or request_sale_id or state != 'draft'</attribute>
             </xpath>
 
             <xpath expr="//header/button[@name='button_cancel']" position="attributes">
-                <attribute name="invisible">request_sale_id or state not in ('draft', 'to approve', 'sent', 'purchase', 'vendor_price_confirmed') or locked</attribute>
+                <attribute name="invisible">request_sale_id or state not in ('draft', 'to approve', 'sent', 'purchase') or locked</attribute>
             </xpath>
 
             <xpath expr="//page/field[@name='order_line']/list/field[@name='product_id']" position="after">
