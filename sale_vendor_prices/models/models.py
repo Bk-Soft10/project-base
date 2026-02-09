@@ -26,7 +26,7 @@ class SaleOrder(models.Model):
             order_lines = rec_su.order_line
             rec_su.can_confirm_so = True if order_lines and all(line._is_valid_price() for line in order_lines) else False
 
-    @api.depends('request_purchase_ids', 'request_purchase_ids.order_line', 'request_purchase_ids.is_confirmed_price', 'order_line.request_purchase_line_ids')
+    @api.depends('request_purchase_ids', 'request_purchase_ids.order_line', 'request_purchase_ids.state', 'request_purchase_ids.is_confirmed_price', 'order_line.request_purchase_line_ids')
     def _compute_price_po_status(self):
         for rec in self:
             rec_su = rec.sudo()
@@ -36,7 +36,7 @@ class SaleOrder(models.Model):
                 is_valid_price_lines = True if order_lines and all(line.is_price_valid for line in order_lines) else False
                 rec_su.po_price_state = 'price_ready' if is_valid_price_lines else 'price_pending'
 
-    @api.depends('request_purchase_ids', 'request_purchase_ids.state', 'order_line', 'order_line.product_id', 'order_line.is_request_po', 'order_line.request_purchase_line_ids')
+    @api.depends('request_purchase_ids', 'request_purchase_ids.order_line', 'request_purchase_ids.state', 'order_line', 'order_line.product_id', 'order_line.is_request_po', 'order_line.request_purchase_line_ids')
     def _compute_is_need_po(self):
         for rec in self:
             rec_su = rec.sudo()
@@ -138,6 +138,7 @@ class SaleOrderLine(models.Model):
     def can_create_request_po(self):
         self.ensure_one()
         rec_su = self.sudo()
+        print(f"can_create_request_po: product_id={rec_su.product_id}, is_valid_price={rec_su._is_valid_price()}, is_need_request_price={rec_su._is_need_request_price()}")
         return True if rec_su.product_id and not rec_su._is_valid_price() and rec_su._is_need_request_price() else False
 
     def _is_need_request_price(self):
