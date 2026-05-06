@@ -98,7 +98,7 @@ class Sale(models.Model):
                         do_cpy.state = 'assigned' # Change state to ready
                         do_copied = True
                         #Assign done qtties in order to validate automatically  
-                        for move in do_cpy.move_ids_without_package:
+                        for move in do_cpy.move_ids:
                             move.quantity = move.product_uom_qty
                     else:
                         if line.product_id.invoice_policy == 'order':
@@ -110,7 +110,7 @@ class Sale(models.Model):
                 if line.product_id.invoice_policy == 'order':
                     qty = False
                     if do_cpy:
-                        for do_cpy_line in do_cpy.move_ids_without_package:
+                        for do_cpy_line in do_cpy.move_ids:
                             if do_cpy_line.product_id == line.product_id:
                                 qty = do_cpy_line.product_uom_qty
 
