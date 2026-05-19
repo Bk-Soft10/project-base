@@ -1,3 +1,5 @@
+import base64
+import binascii
 import json
 import logging
 import operator
@@ -46,12 +48,61 @@ class JsonExportFormat(ExportFormat, http.Controller):
         return ".json"
 
     @api.model
+    def _detect_image_mime_type(self, value: bytes) -> str:
+        if not value:
+            return "application/octet-stream"
+
+        # Cas 1 : les bytes contiennent du base64 ASCII
+        try:
+            as_text = value.decode("utf-8").strip()
+            decoded = base64.b64decode(as_text, validate=True)
+            value = decoded
+        except (UnicodeDecodeError, binascii.Error, ValueError):
+            pass
+
+        # Cas 2 : détection par signature binaire
+        if value.startswith(b"\xff\xd8\xff"):
+            return "image/jpeg"
+        if value.startswith(b"\x89PNG\r\n\x1a\n"):
+            return "image/png"
+        if value.startswith(b"GIF87a") or value.startswith(b"GIF89a"):
+            return "image/gif"
+        if value.startswith(b"RIFF") and len(value) >= 12 and value[8:12] == b"WEBP":
+            return "image/webp"
+        if value.startswith(b"BM"):
+            return "image/bmp"
+        if value.startswith(b"II*\x00") or value.startswith(b"MM\x00*"):
+            return "image/tiff"
+        if value.startswith(b"\x00\x00\x01\x00"):
+            return "image/x-icon"
+
+        return "application/octet-stream"
+
+    @api.model
+    def _transform_json_value(self, value):
+        if isinstance(value, bytes):
+            mime_type = self._detect_image_mime_type(value)
+
+            try:
+                as_text = value.decode("utf-8").strip()
+                encoded = base64.b64encode(base64.b64decode(as_text, validate=True)).decode("utf-8")
+            except (UnicodeDecodeError, binascii.Error, ValueError):
+                encoded = base64.b64encode(value).decode("utf-8")
+
+            return f"data:{mime_type};base64,{encoded}"
+
+        if isinstance(value, dict):
+            return {key: self._transform_json_value(val) for key, val in value.items()}
+
+        if isinstance(value, list):
+            return [self._transform_json_value(item) for item in value]
+
+        return value
+
+    @api.model
     def format_data(self, fields) -> str:
-        for field in fields:
-            for key, value in field.items():
-                if type(value) is bytes:
-                    field.update({key: "data:image/png;base64," + value.decode("utf-8")})
-        return json.dumps(fields, indent=4, default=json_default)
+        transformed_fields = self._transform_json_value(fields)
+        return json.dumps(transformed_fields, indent=4, default=json_default)
 
     @api.model
     def _insert_simple_field(self, fields_name: list, field_groups: dict, parser: list[dict]):
@@ -413,6 +464,7 @@ class JsonExportFormat(ExportFormat, http.Controller):
         if not model._is_an_ordinary_table():
             field_names = [field for field in field_names if field != "id"]
         field_names = self._convert_simple_list(field_names)
+        field_paths = [field.get("name") for field in field_names if isinstance(field, dict) and field.get("name")]
 
         records = model.browse(ids) if ids else model.search(domain, offset=0, limit=False, order=False)
         parser = self.define_parser(field_names)
@@ -422,11 +474,90 @@ class JsonExportFormat(ExportFormat, http.Controller):
         tz = request.env.context.get("tz") or request.env.user.tz
         if len(langs_code) == 1:
             result = records.with_context(lang=langs_code[0], tz=tz).jsonify(parser)
+            self._add_selection_tech_fields_to_json(result, records, field_paths)
             return self.format_data(result)
 
         result = {}
         for lang in langs_code:
             result[lang] = records.with_context(lang=lang, tz=tz).jsonify(parser)
         merged_list = self.merge_multilingual_dicts(result)
+        self._add_selection_tech_fields_to_json(merged_list, records, field_paths)
         response_data = self.format_data(merged_list)
         return response_data
+
+    def _add_selection_tech_fields_to_json(self, data_list, records, field_paths):
+        """Inject tech_<field> keys with selection raw values (single-lang export only)."""
+        if not isinstance(data_list, list) or not records or not field_paths:
+            return
+        for data_node, record in zip(data_list, records, strict=False):
+            if not isinstance(data_node, dict):
+                continue
+            for field_path in field_paths:
+                self._inject_selection_tech_for_path(data_node, record, field_path)
+
+    def _inject_selection_tech_for_path(self, data_node: dict, record_node: models.BaseModel, field_path: str):
+        """Walk a field path and inject selection tech keys at the right level."""
+        if not field_path or not record_node or not isinstance(data_node, dict):
+            return
+        parts = field_path.split("/")
+        self._inject_selection_tech_in_nodes(data_node, record_node, parts)
+
+    def _inject_selection_tech_in_nodes(self, data_node: dict, record_node: models.BaseModel, parts: list[str]):
+        """Dispatch selection tech injection based on field type and path."""
+        if not parts or not record_node or not isinstance(data_node, dict):
+            return
+        field_name = parts[0]
+        if field_name not in record_node._fields:
+            return
+
+        field = record_node._fields[field_name]
+        value = record_node[field_name]
+
+        if len(parts) == 1:
+            self._inject_selection_tech_leaf(data_node, field_name, field, value, record_node)
+            return
+
+        self._inject_selection_tech_relation(data_node, field_name, field, value, parts)
+
+    def _inject_selection_tech_leaf(
+        self, data_node: dict, field_name: str, field, value, record_node: models.BaseModel
+    ):
+        """Inject tech key for a leaf selection field."""
+        tech_field_name = f"tech_{field_name}"
+        if field.type != "selection" or not isinstance(data_node, dict) or tech_field_name in record_node._fields:
+            return
+        elif tech_field_name in record_node._fields:
+            _logger.info(
+                f"Unable to add the technical field 'tech_{{field_name}}' for field {field.name}; "
+                "this name already exists for a field in the current model."
+            )
+            return
+        data_node[tech_field_name] = None if value in (False, None) else value
+
+    def _inject_selection_tech_relation(self, data_node, field_name: str, field, value, parts: list[str]):
+        """Traverse relations and inject tech keys into nested structures."""
+        if field.type in ("many2one", "reference"):
+            self._inject_selection_tech_many2one(data_node, field_name, value, parts)
+            return
+        if field.type in ("one2many", "many2many"):
+            self._inject_selection_tech_x2many(data_node, field_name, value, parts)
+            return
+
+    def _inject_selection_tech_many2one(self, data_node: dict, field_name: str, value, parts: list[str]):
+        """Inject tech keys inside a many2one/reference subtree."""
+        if not value or not isinstance(data_node, dict):
+            return
+        sub_data = data_node.get(field_name)
+        if isinstance(sub_data, dict):
+            self._inject_selection_tech_in_nodes(sub_data, value, parts[1:])
+
+    def _inject_selection_tech_x2many(self, data_node: dict, field_name: str, value, parts: list[str]):
+        """Inject tech keys inside a one2many/many2many subtree."""
+        if not value or not isinstance(data_node, dict):
+            return
+        sub_data_list = data_node.get(field_name)
+        if not isinstance(sub_data_list, list):
+            return
+        for sub_data, sub_record in zip(sub_data_list, value, strict=False):
+            if isinstance(sub_data, dict):
+                self._inject_selection_tech_in_nodes(sub_data, sub_record, parts[1:])

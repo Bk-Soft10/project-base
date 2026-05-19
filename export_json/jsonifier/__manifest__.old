@@ -3,7 +3,7 @@
 # Raphaël Reverdy <raphael.reverdy@akretion.com>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 
-# Integrated pending PR validation https://github.com/mangono-fr/server-tools/pull/1
+# Integrated pending PR validation https://github.com/OCA/server-tools/actions/runs/21240237637/job/61116370844?pr=3499
 {
     "name": "JSONifier",
     "summary": "JSON-ify data for all models",

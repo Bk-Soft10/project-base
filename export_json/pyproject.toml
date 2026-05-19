@@ -2,19 +2,9 @@
 requires = ["addon-odoo-wheel>=0.4"]
 build-backend = "addon_odoo_wheel.builder"
 
-[tool.addon-odoo-wheel]
-allow_no_odoo_version = true
-classifiers = [
-    "Programming Language :: Python :: 3",
-    'Programming Language :: Python :: 3.11',
-    'Programming Language :: Python :: 3.12',
-    "Programming Language :: Python :: 3 :: Only",
-    "Framework :: Odoo :: 19.0",
-]
-
+# Pour éviter que pypi essaye d'utiliser le README.rst en tant que description (ce qui plante), on force le nom du
+# readme minimaliste pour pypi, du coup, on est obligé de créer une section [projet], donc de fixer le name.
 [project]
-name = "export_json"
-description = "Odoo module to add json type to native export feature"
-authors = [
-    { name = "mangono", email = "stephane.fromont@mangono.fr" },
-]
+readme = "README_PYPI.md"
+name = "mangono-addon-export_json"
+dynamic = ["version"]

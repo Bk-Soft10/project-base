@@ -110,9 +110,7 @@ class TestParser(TransactionCase):
         self.assertEqual(parser, expected_full_parser)
 
         # modify an ir.exports_line to put a target for a field
-        self.env.ref("jsonifier.category_id_name").write(
-            {"target": "category_id:category/name"}
-        )
+        self.env.ref("jsonifier.category_id_name").write({"target": "category_id:category/name"})
         expected_parser[4] = ("category_id:category", ["name"])
         parser = exporter.get_json_parser()
         expected_full_parser = convert_simple_to_full_parser(expected_parser)
@@ -260,12 +258,8 @@ class TestParser(TransactionCase):
         }
         json_partner = self.partner.jsonify(parser)
         self.assertDictEqual(json_partner[0], expected_json)
-        json_partner_with_fieldname = self.partner.jsonify(
-            parser=parser, with_fieldname=True
-        )
-        self.assertDictEqual(
-            json_partner_with_fieldname[0], expected_json_with_fieldname
-        )
+        json_partner_with_fieldname = self.partner.jsonify(parser=parser, with_fieldname=True)
+        self.assertDictEqual(json_partner_with_fieldname[0], expected_json_with_fieldname)
         # Check that only boolean fields have boolean values into json
         # By default if a field is not set into Odoo, the value is always False
         # This value is not the expected one into the json
@@ -312,17 +306,13 @@ class TestParser(TransactionCase):
         json = self.category.jsonify(parser)[0]
         json_fr = self.category_lang.jsonify(parser)[0]
 
-        self.assertEqual(
-            json, json_fr
-        )  # starting from different languages should not change anything
+        self.assertEqual(json, json_fr)  # starting from different languages should not change anything
         self.assertEqual(json[self.translated_target], self.translated_target)
         self.assertEqual(json["name_resolved"], "name_pidgin")  # field resolver
         self.assertEqual(json["X"], "X")  # added by global resolver
 
     def test_full_parser_resolver_json_key_override(self):
-        self.resolver.write(
-            {"python_code": """result = {"_json_key": "foo", "_value": record.id}"""}
-        )
+        self.resolver.write({"python_code": """result = {"_json_key": "foo", "_value": record.id}"""})
         parser = self.category_export.get_json_parser()
         json = self.category.jsonify(parser)[0]
         self.assertNotIn("name_resolved", json)
@@ -436,9 +426,7 @@ class TestParser(TransactionCase):
         bad_function_name = {"fields": [{"name": "name", "function": "notafunction"}]}
         with self.assertLogs(logger=logger_name, level="WARNING") as capt:
             rec.jsonify(bad_function_name, one=True)
-            self.assertIn(
-                "res.partner.category.notafunction not available", capt.output[0]
-            )
+            self.assertIn("res.partner.category.notafunction not available", capt.output[0])
 
         bad_subparser = {"fields": [({"name": "name"}, [{"name": "subparser_name"}])]}
         with self.assertLogs(logger=logger_name, level="WARNING") as capt:

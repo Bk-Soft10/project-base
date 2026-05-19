@@ -52,9 +52,7 @@ class TestIrExportsLine(TransactionCase):
         self.assertTrue(line)
 
     def test_resolver_function_constrains(self):
-        resolver = self.env["ir.exports.resolver"].create(
-            {"python_code": "result = value", "type": "field"}
-        )
+        resolver = self.env["ir.exports.resolver"].create({"python_code": "result = value", "type": "field"})
         ir_export_lines_model = self.env["ir.exports.line"]
         with self.assertRaises(ValidationError):
             # the callable should be an existing model function, but it's not checked

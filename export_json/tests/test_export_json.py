@@ -61,21 +61,25 @@ class TestExportJson(common.HttpCase):
             },
             "import_compat": True,
         }
+        child_records = self.partner.child_ids.sorted("id")
         self.basic_expect_dict = {
             "id": self.partner.id,
             "name": "TEST",
             "email": "test@test.fr",
-            "type": "contact",
+            "type": self.partner.type,
+            "tech_type": self.partner.type,
             "child_ids": [
                 {
-                    "name": "test child 1",
-                    "email": "test_child_1@test.fr",
-                    "type": "delivery",
+                    "name": child_records[0].name,
+                    "email": child_records[0].email,
+                    "type": child_records[0].type,
+                    "tech_type": child_records[0].type,
                 },
                 {
-                    "name": "test child 2",
-                    "email": "test_child_2@test.fr",
-                    "type": "invoice",
+                    "name": child_records[1].name,
+                    "email": child_records[1].email,
+                    "type": child_records[1].type,
+                    "tech_type": child_records[1].type,
                 },
             ],
         }
@@ -169,27 +173,30 @@ class TestExportJson(common.HttpCase):
             dict_result_json[0],
             "Check if json export is equal to expected data",
         )
+        self.assertIn("tech_type", dict_result_json[0])
+        self.assertIn("tech_type", dict_result_json[0]["child_ids"][0])
 
     def test_perform_json_export_with_lang(self):
         self.env["res.lang"]._activate_lang("fr_FR")
 
-        self.data_dict["fields"].append({"name": "title/name", "label": "Title"})
+        # category_id is a M2M, not a M2O
+        self.data_dict["fields"].append({"name": "category_id/name", "label": "Tags"})
         self.data_dict["fields"].append({"name": "country_id/name", "label": "Country"})
         fields = [field["name"] for field in self.data_dict["fields"]]
         model = self.env[self.data_dict["model"]]
 
         # Ajouts de traductions
-        title = (
-            self.env["res.partner.title"]
+        category = (
+            self.env["res.partner.category"]
             .with_context(lang="en_US")
             .create(
                 {
-                    "name": "Doctor",
+                    "name": "Customer",
                 }
             )
         )
-        title.with_context(lang="fr_FR").name = "Docteur"
-        self.partner.title = title
+        category.with_context(lang="fr_FR").name = "Client"
+        self.partner.category_id = category
 
         self.env.ref("base.es").with_context(lang="fr_FR").name = "Espagne"
         self.partner.country_id = self.env.ref("base.es")
@@ -204,16 +211,20 @@ class TestExportJson(common.HttpCase):
             )
 
         dict_result_json = json.loads(result_json)
+        child_records = self.partner.child_ids.sorted("id")
         expected_dict = {
             "id": self.partner.id,
             "name": "TEST",
             "email": "test@test.fr",
-            "type": "contact",
-            "title": {
-                "name": "title/name",
-                "name_FR": "Docteur",
-                "name_US": "Doctor",
-            },
+            "type": self.partner.type,
+            "tech_type": self.partner.type,
+            "category_id": [
+                {
+                    "name": "category_id/name",
+                    "name_FR": "Client",
+                    "name_US": "Customer",
+                }
+            ],
             "country_id": {
                 "name": "country_id/name",
                 "name_FR": "Espagne",
@@ -221,18 +232,22 @@ class TestExportJson(common.HttpCase):
             },
             "child_ids": [
                 {
-                    "name": "test child 1",
-                    "email": "test_child_1@test.fr",
-                    "type": "delivery",
+                    "name": child_records[0].name,
+                    "email": child_records[0].email,
+                    "type": child_records[0].type,
+                    "tech_type": child_records[0].type,
                 },
                 {
-                    "name": "test child 2",
-                    "email": "test_child_2@test.fr",
-                    "type": "invoice",
+                    "name": child_records[1].name,
+                    "email": child_records[1].email,
+                    "type": child_records[1].type,
+                    "tech_type": child_records[1].type,
                 },
             ],
         }
         self.assertDictEqual(expected_dict, dict_result_json[0], "Le json doit contenir les traductions")
+        self.assertNotIn("tech_type_FR", dict_result_json[0])
+        self.assertNotIn("tech_type_US", dict_result_json[0])
 
     def test_convert_simple_list(self):
         """La fonction _convert_simple_list prend en entrée une liste de clée, correspondant
@@ -671,9 +686,9 @@ class TestExportJson(common.HttpCase):
         list_dict_from_json = json.loads(res_json)
         bytes_key = list_dict_from_json[0].get("mock_bytes_key")
         self.assertEqual(
-            "data:image/png;base64,mock_bytes_value",
+            "data:application/octet-stream;base64,bW9ja19ieXRlc192YWx1ZQ==",
             bytes_key,
-            "La présence d'une clé contenant une valeur en bytes, dans les champs d'entrée, doit obligatoirement"
+            "La présence d'une clé contenant une valeur en bytes, dans les champs d'entrée, doit obligatoirement "
             "être modifié en sorti dans le json, pour y inclure un préfixe.",
         )
 

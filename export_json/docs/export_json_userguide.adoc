@@ -23,3 +23,16 @@ image::images/export_json3_popup_export.png[]
 image::images/export_json_popup_export2.png[]
 
 - Cliquer sur _Exporter_ , le fichier en format JSON est téléchargé.
+
+== Autres
+
+Des champs techniques nommés _tech_nom_du_champ_ seront automatiquement ajoutés pour chaque champ de type Selection. Ces entrées supplémentaires contiennent la clé python du champ.
+
+Par exemple, pour un devis avec un champ Selection
+
+`state = fields.Selection([('draft', 'Brouillon', 'sale', 'Bon de commande')])`
+
+Exporter le champ `state` ajoutera automatiquement dans le JSON _tech_state : "draft"_
+
+Cet ajout est effectivement uniquement si un champ _tech_nom_du_champ_ n'existe pas déjà pour le modèle dont on veut exporter les données.
+Pour le moment, on log l'information.

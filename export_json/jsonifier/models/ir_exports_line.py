@@ -9,8 +9,7 @@ class IrExportsLine(models.Model):
     _inherit = "ir.exports.line"
 
     target = fields.Char(
-        help="The complete path to the field where you can specify a "
-        "target on the step as field:target",
+        help="The complete path to the field where you can specify a target on the step as field:target",
     )
     active = fields.Boolean(default=True)
     lang_id = fields.Many2one(
@@ -43,9 +42,7 @@ class IrExportsLine(models.Model):
             names = rec.name.split("/")
             names_with_target = rec.target.split("/")
             if len(names) != len(names_with_target):
-                raise ValidationError(
-                    _("Name and Target must have the same hierarchy depth")
-                )
+                raise ValidationError(_("Name and Target must have the same hierarchy depth"))
             for name, name_with_target in zip(names, names_with_target, strict=True):
                 field_name = name_with_target.split(":")[0]
                 if name != field_name:

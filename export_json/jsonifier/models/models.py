@@ -85,16 +85,12 @@ class Base(models.AbstractModel):
             json_key = field_dict.get("target", field_dict["name"])
             if function:
                 try:
-                    value = self._jsonify_record_handle_function(
-                        rec, field_dict, strict
-                    )
+                    value = self._jsonify_record_handle_function(rec, field_dict, strict)
                 except SwallableException:
                     continue
             elif subparser:
                 try:
-                    value = self._jsonify_record_handle_subparser(
-                        rec, field_dict, strict, subparser
-                    )
+                    value = self._jsonify_record_handle_subparser(rec, field_dict, strict, subparser)
                 except SwallableException:
                     continue
             else:
@@ -105,9 +101,7 @@ class Base(models.AbstractModel):
                     if isinstance(resolver, int):
                         # cached versions of the parser are stored as integer
                         resolver = self.env["ir.exports.resolver"].browse(resolver)
-                    value, json_key = self._jsonify_record_handle_resolver(
-                        rec, field, resolver, json_key
-                    )
+                    value, json_key = self._jsonify_record_handle_resolver(rec, field, resolver, json_key)
             # whatever json value we have found in subparser or not ass a sister key
             # on the same level _fieldname_{json_key}
             if rec.env.context.get("with_fieldname"):

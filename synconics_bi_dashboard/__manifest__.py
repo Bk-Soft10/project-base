@@ -96,12 +96,12 @@ Visual Analytics
 Data Dashboard
 Business Reports
 Summary Reports
-Overview Dashboard
+Overview Dashboard | Search Keywords: Odoo BI Dashboard, Synconics Dashboard, Business Intelligence, KPI Dashboard, Interactive Dashboards, Sales Dashboard, Inventory Dashboard, Finance Dashboard, Project Dashboard, HR Dashboard, Executive Dashboard, Real-Time Analytics, Data Visualization, Performance Tracking, Custom Dashboard, Role-Based Dashboard, Multi-User Dashboard, Drill-Down Reports, Visual Analytics, Strategic Planning, Management Dashboard, Odoo Analytics, Decision-Making Tool, Dashboard, Analytics, Reporting, Business Intelligence, Metrics, Charts, Graphs, Data Insights, Visual Reports, Performance Monitoring, KPI Tracking, Custom Widgets, Interactive Visualization, Odoo App, Executive Reports, Data-Driven Decisions, Dynamic Dashboard, Multi-Dashboard Support, ERP Analytics, Business Performance
     """,
     "author": "Synconics Technologies Pvt. Ltd.",
     "website": "https://www.synconics.com",
     "category": "web",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "depends": ["web", "mail"],
     "external_dependencies": {"python": ["imgkit"]},
     "assets": {

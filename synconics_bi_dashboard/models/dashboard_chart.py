@@ -1749,9 +1749,19 @@ class DashboardChart(models.Model):
             domain = extra_action.get("prev_domains", domain)
             if extra_action.get("current_group_by"):
                 group_by_id = group_by_id.browse(extra_action["current_group_by"])
-            domain.append(
-                (group_by_id.name, "=", extra_action["domain"].get("record_id"))
-            )
+            if group_by_id and group_by_id.ttype == "selection":
+                value_name = False
+                if isinstance(group_by_id.selection, str):
+                    selections = safe_eval(group_by_id.selection)
+                    for selection in selections:
+                        if selection[1] == extra_action["domain"].get("record_id"):
+                            value_name = selection[0]
+                            break
+                domain.append((group_by_id.name, "=", value_name))
+            else:
+                domain.append(
+                    (group_by_id.name, "=", extra_action["domain"].get("record_id"))
+                )
         return domain
 
     def get_tile_data(self, conf_obj, previous=0):
