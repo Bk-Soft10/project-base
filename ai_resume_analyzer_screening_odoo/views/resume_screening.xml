@@ -164,9 +164,9 @@
                         </page>
                         <page string="Keywords">
                             <field name="keyword_ids" widget="many2many_tags" placeholder="Add Keywords"/>
-                            <!-- <tree editable="bottom" create="true">
+                            <!-- <list editable="bottom" create="true">
                                 <field name="name"/>
-                            </tree> -->
+                            </list> -->
                         </page>
                         <page string="Applicants">
                             <field name="applicant_ids">
